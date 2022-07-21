@@ -13,10 +13,14 @@ onready var shooting : Node = $Shooting
 
 var pilot_man : PilotManager
 
+# var is_player := false
+# var is_ai := false
+
 var dead := false
 
 
-func init():
+func init(new_pilot_man : PilotManager):
+	pilot_man = new_pilot_man
 	set_team_color()
 
 

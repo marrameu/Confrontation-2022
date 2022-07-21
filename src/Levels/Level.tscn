@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/materials/grid.tres" type="Material" id=1]
 [ext_resource path="res://src/Levels/Box.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://src/Levels/Level.gd" type="Script" id=5]
 [ext_resource path="res://PlayerShip.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ShipCamera.gd" type="Script" id=7]
+[ext_resource path="res://PilotManager.gd" type="Script" id=8]
 
 [sub_resource type="PlaneMesh" id=1]
 size = Vector2( 400, 400 )
@@ -42,6 +43,17 @@ transform = Transform( 1, 0, 0, 0, 0.509342, 0.860564, 0, -0.860564, 0.509342, 0
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.46511, 19.8909, 6.25403 )
+pilot_man_path = NodePath("../PlayerManagers/PlayerMan")
+
+[node name="TextureProgress" parent="Player/PlayerHUD" index="0"]
+margin_left = 1035.0
+margin_top = 611.0
+margin_right = 1091.0
+margin_bottom = 667.0
+value = 25.0
+fill_mode = 4
+tint_under = Color( 1, 1, 1, 1 )
+tint_progress = Color( 1, 0.882353, 0.254902, 1 )
 
 [node name="PlayerTroopCam" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9301, 12.6019 )
@@ -54,6 +66,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9301, 12.6019 )
 script = ExtResource( 7 )
 
 [node name="PlayerShip" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 0.984427, -0.175796, 0, 0.175796, 0.984427, -9.18065, 18.0049, 96.4903 )
+transform = Transform( 1, 0, 0, 0, 0.984427, -0.175796, 0, 0.175796, 0.984427, -9.18065, 5.72074, 96.4903 )
+
+[node name="PlayerManagers" type="Node" parent="."]
+
+[node name="PlayerMan" type="Node" parent="PlayerManagers"]
+script = ExtResource( 8 )
 
 [editable path="Player"]

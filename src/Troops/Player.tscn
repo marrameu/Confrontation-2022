@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/models/ybot/ybot.dae" type="PackedScene" id=1]
 [ext_resource path="res://src/Troops/Player.gd" type="Script" id=2]
 [ext_resource path="res://src/Troops/CameraBase.gd" type="Script" id=3]
 [ext_resource path="res://src/Troops/Weapons/Riffle.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Troops/Interact.gd" type="Script" id=5]
+[ext_resource path="res://assets/interface/ship_cursor.png" type="Texture" id=6]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.6
@@ -38,3 +40,23 @@ cast_to = Vector3( 0, -0.4, 0 )
 
 [node name="Riffle" parent="Shooting/Weapons" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.638867, 0.703561, 0.777542 )
+
+[node name="Interact" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="Timer" type="Timer" parent="Interact"]
+one_shot = true
+
+[node name="PlayerHUD" type="CanvasLayer" parent="."]
+
+[node name="TextureProgress" type="TextureProgress" parent="PlayerHUD"]
+margin_right = 40.0
+margin_bottom = 40.0
+value = 50.0
+texture_under = ExtResource( 6 )
+texture_progress = ExtResource( 6 )
+tint_under = Color( 1, 1, 1, 0.541176 )
+tint_progress = Color( 1, 0.882353, 0.254902, 0.541176 )
+nine_patch_stretch = true
+
+[connection signal="timeout" from="Interact/Timer" to="Interact" method="_on_Timer_timeout"]
