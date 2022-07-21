@@ -27,6 +27,7 @@ var mouse_movement : Vector2
 
 
 func _ready() -> void:
+	make_visible(false)
 	"""
 	if LocalMultiplayer.number_of_players > 1:
 		# Canviar l'escala d'alguns objectes
@@ -47,9 +48,7 @@ func _process(delta : float) -> void:
 				return
 	
 	if owner.dead:
-		for child in get_children():
-			if child.has_method("hide"):
-				child.hide()
+		make_visible(false)
 		$DieInfo.show()
 		return
 	
@@ -243,3 +242,9 @@ func _on_HealthSystem_damage_taken(attacker : Spatial):
 	var damage_indicator = damage_indicator_scene.instance()
 	damage_indicator.attacker = attacker
 	damage_indicators.add_child(damage_indicator)
+
+
+func make_visible(value) -> void:
+	for child in get_children():
+		if child.get("visible"):
+			child.visible = value

@@ -11,16 +11,18 @@ onready var input : Node = $Input # class per a linput i el physics
 onready var physics : Node = $Physics
 onready var shooting : Node = $Shooting
 
-var  pilot_man : PilotManager
+var pilot_man : PilotManager
 
 var dead := false
 
 
-func troop_entered():
+func init():
 	set_team_color()
 
 
 func _process(delta):
+	if not pilot_man:
+		mode = RigidBody.MODE_STATIC
 	input_to_physics(delta)
 	check_collisions(delta)
 	update_thruster_flame()
