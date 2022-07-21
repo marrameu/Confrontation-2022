@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/textures/ground/Ground25_col.jpg" type="Texture" id=1]
+[ext_resource path="res://src/Levels/Box.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Troops/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Levels/PlayerTroopCam.gd" type="Script" id=4]
+[ext_resource path="res://src/Levels/Level.gd" type="Script" id=5]
+
+[sub_resource type="PlaneMesh" id=1]
+size = Vector2( 400, 400 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_texture = ExtResource( 1 )
+uv1_scale = Vector3( 100, 100, 1 )
+
+[sub_resource type="ConcavePolygonShape" id=2]
+data = PoolVector3Array( 200, 0, 200, -200, 0, 200, 200, 0, -200, -200, 0, 200, -200, 0, -200, 200, 0, -200 )
+
+[node name="Level" type="Spatial"]
+script = ExtResource( 5 )
+
+[node name="Map" type="Spatial" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Map"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 3 )
+
+[node name="StaticBody" type="StaticBody" parent="Map/MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Map/MeshInstance/StaticBody"]
+shape = SubResource( 2 )
+
+[node name="Box" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 0.509342, 0.860564, 0, -0.860564, 0.509342, 0, 11.3708, 0 )
+
+[node name="Box2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 0.509342, 0.860564, 0, -0.860564, 0.509342, 0, 11.3708, -13.4142 )
+
+[node name="Box3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 0.509342, 0.860564, 0, -0.860564, 0.509342, 0, 16.1443, -9.14729 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.509342, 0.860564, 0, -0.860564, 0.509342, 0, 18.9153, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.46511, 19.8909, 6.25403 )
+
+[node name="PlayerTroopCam" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9301, 12.6019 )
+current = true
+script = ExtResource( 4 )
+cam_pos_path = NodePath("../Player/CameraBase/CameraPosition")
+
+[node name="PlayerShipCam" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9301, 12.6019 )
+
+[editable path="Player"]
