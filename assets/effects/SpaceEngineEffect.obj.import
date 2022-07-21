@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/SpaceEngineEffect.obj-2eda7f361e2474971ab8be265f7eece7.mesh"
+
+[deps]
+
+files=[ "res://.import/SpaceEngineEffect.obj-2eda7f361e2474971ab8be265f7eece7.mesh" ]
+
+source_file="res://assets/effects/SpaceEngineEffect.obj"
+dest_files=[ "res://.import/SpaceEngineEffect.obj-2eda7f361e2474971ab8be265f7eece7.mesh", "res://.import/SpaceEngineEffect.obj-2eda7f361e2474971ab8be265f7eece7.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

@@ -1,0 +1,124 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://BigShip.tscn" type="PackedScene" id=1]
+[ext_resource path="res://AttackShip.gd" type="Script" id=2]
+[ext_resource path="res://assets/models/corvette_temporal/scene.gltf" type="PackedScene" id=3]
+
+[sub_resource type="PrismMesh" id=1]
+size = Vector3( 79.2, 199.2, 39.6 )
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 16, 16, 16 )
+subdivide_width = 16
+
+[node name="AttackShip" groups=["AttackShips"] instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="HealthSystem" parent="." index="0"]
+MAX_SHIELD = 10000
+time_before_shield_repair = 25.0
+shield_repair_per_sec = 250.0
+
+[node name="Mesh" parent="." index="1"]
+visible = false
+mesh = SubResource( 1 )
+
+[node name="ShieldMesh" parent="." index="2"]
+mesh = SubResource( 1 )
+
+[node name="scene" parent="." index="3" instance=ExtResource( 3 )]
+transform = Transform( 1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, -69.2753 )
+
+[node name="CollisionShape" parent="." index="4"]
+transform = Transform( -0.4, 6.03983e-08, 2.64009e-15, 0, -1.74846e-08, 0.4, 6.03983e-08, 0.4, 1.74846e-08, 0, 0, 0 )
+
+[node name="Turret" parent="Turrets" index="0"]
+transform = Transform( 0.999981, 0.000351488, -0.00624821, 0.00624759, 0.00169171, 0.999979, 0.000362055, -0.999998, 0.00168949, -2.84822, -21.1853, -0.865275 )
+
+[node name="Turret3" parent="Turrets" index="1"]
+transform = Transform( 0.978807, 0, -0.204786, 0, 1, 0, 0.204786, 0, 0.978807, 15.823, 0, -17.6114 )
+
+[node name="Turret4" parent="Turrets" index="2"]
+transform = Transform( 0.978807, 0, -0.204786, 0, 1, 0, 0.204786, 0, 0.978807, -72.8638, 0, -35.1117 )
+
+[node name="Turret5" parent="Turrets" index="3"]
+transform = Transform( -0.977966, 0, -0.208765, 0, 1, 0, 0.208765, 0, -0.977966, -63.3559, 0, 32.0696 )
+
+[node name="Turret6" parent="Turrets" index="4"]
+transform = Transform( -0.976613, 0, -0.215008, 0, 1, 0, 0.215008, 0, -0.976613, 14.8844, 0, 17.5297 )
+
+[node name="Turret2" parent="Turrets" index="5"]
+transform = Transform( -0.999949, -0.00291753, -0.00965753, 0.00960916, 0.0161616, -0.999823, 0.00307309, -0.999865, -0.0161327, -2.84822, 20.259, -0.111311 )
+
+[node name="Turret7" parent="Turrets" index="6"]
+transform = Transform( -0.00408395, 0, -0.999992, 0, 1, 0, 0.999992, 0, -0.00408395, 100.427, 0, 0.20091 )
+
+[node name="ColDetectRays" type="Spatial" parent="." index="7"]
+
+[node name="ColDetectLeft" type="RayCast" parent="ColDetectRays" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 0 )
+enabled = true
+cast_to = Vector3( 225, 0, 450 )
+
+[node name="ColDetectRight" type="RayCast" parent="ColDetectRays" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, 0 )
+enabled = true
+cast_to = Vector3( -225, 0, 450 )
+
+[node name="ColDetectForward" type="RayCast" parent="ColDetectRays" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.33 )
+enabled = true
+cast_to = Vector3( 0, 0, 450 )
+
+[node name="ColDetectUp" type="RayCast" parent="ColDetectRays" index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+enabled = true
+cast_to = Vector3( 0, 225, 450 )
+
+[node name="ColDetectDown" type="RayCast" parent="ColDetectRays" index="4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0 )
+enabled = true
+cast_to = Vector3( 0, -225, 450 )
+
+[node name="DesiredRot" type="Spatial" parent="." index="8"]
+
+[node name="ColDetectLeft" type="RayCast" parent="." index="9"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 0 )
+enabled = true
+cast_to = Vector3( 75, 0, 150 )
+
+[node name="ColDetectRight" type="RayCast" parent="." index="10"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, 0 )
+enabled = true
+cast_to = Vector3( -75, 0, 150 )
+
+[node name="ColDetectForward" type="RayCast" parent="." index="11"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.33 )
+enabled = true
+cast_to = Vector3( 0, 0, 150 )
+
+[node name="ColDetectUp" type="RayCast" parent="." index="12"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+enabled = true
+cast_to = Vector3( 0, 75, 150 )
+
+[node name="ColDetectDown" type="RayCast" parent="." index="13"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0 )
+enabled = true
+cast_to = Vector3( 0, -75, 150 )
+
+[node name="ChangePosTimer" type="Timer" parent="." index="14"]
+one_shot = true
+
+[node name="CollisionShape2" parent="DamageArea" index="0"]
+transform = Transform( -0.4, 6.03983e-08, 2.64009e-15, 0, -1.74846e-08, 0.4, 6.03983e-08, 0.4, 1.74846e-08, 0, 0, 0 )
+
+[node name="ShieldGenerator" parent="." index="16"]
+visible = false
+
+[node name="TeamIndicator" type="MeshInstance" parent="." index="18"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.976, -22.3935 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[connection signal="timeout" from="ChangePosTimer" to="." method="_on_ChangePosTimer_timeout"]

@@ -13,9 +13,99 @@ _global_script_classes=[ {
 "class": "Gun",
 "language": "GDScript",
 "path": "res://src/Troops/Weapons/Gun.gd"
+}, {
+"base": "Node",
+"class": "HealthSystem",
+"language": "GDScript",
+"path": "res://src/HealthSystem/HealthSystem.gd"
+}, {
+"base": "CPUParticles",
+"class": "LODCPUParticles",
+"language": "GDScript",
+"path": "res://addons/lod/lod_cpu_particles.gd"
+}, {
+"base": "OmniLight",
+"class": "LODOmniLight",
+"language": "GDScript",
+"path": "res://addons/lod/lod_omni_light.gd"
+}, {
+"base": "Particles",
+"class": "LODParticles",
+"language": "GDScript",
+"path": "res://addons/lod/lod_particles.gd"
+}, {
+"base": "Spatial",
+"class": "LODSpatial",
+"language": "GDScript",
+"path": "res://addons/lod/lod_spatial.gd"
+}, {
+"base": "SpotLight",
+"class": "LODSpotLight",
+"language": "GDScript",
+"path": "res://addons/lod/lod_spot_light.gd"
+}, {
+"base": "ShipBullet",
+"class": "MissileBullet",
+"language": "GDScript",
+"path": "res://src/Bullets/Ships/MissileBullet.gd"
+}, {
+"base": "Node",
+"class": "PilotManager",
+"language": "GDScript",
+"path": "res://PilotManager.gd"
+}, {
+"base": "RigidBody",
+"class": "Ship",
+"language": "GDScript",
+"path": "res://Ship.gd"
+}, {
+"base": "Spatial",
+"class": "ShipBullet",
+"language": "GDScript",
+"path": "res://src/Bullets/Ships/ShipBullet.gd"
+}, {
+"base": "Node",
+"class": "ShipPhysics",
+"language": "GDScript",
+"path": "res://src/Ships/ShipPhysics.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": "VisualShaderFBMWarpTexture",
+"language": "GDScript",
+"path": "res://addons/Shader Nodes/custom/nodes/fBm_warp_texture.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": "VisualShaderMapSteppedLinear",
+"language": "GDScript",
+"path": "res://addons/Shader Nodes/custom/nodes/map_stepped_linear.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": "VisualShaderVoronoiTexture",
+"language": "GDScript",
+"path": "res://addons/Shader Nodes/custom/nodes/voronoi_texture.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": "VisualShaderWaveTexture",
+"language": "GDScript",
+"path": "res://addons/Shader Nodes/custom/nodes/wave_texture.gd"
 } ]
 _global_script_class_icons={
-"Gun": ""
+"Gun": "",
+"HealthSystem": "",
+"LODCPUParticles": "res://addons/lod/lod_cpu_particles.svg",
+"LODOmniLight": "res://addons/lod/lod_omni_light.svg",
+"LODParticles": "res://addons/lod/lod_particles.svg",
+"LODSpatial": "res://addons/lod/lod_spatial.svg",
+"LODSpotLight": "res://addons/lod/lod_spot_light.svg",
+"MissileBullet": "",
+"PilotManager": "",
+"Ship": "",
+"ShipBullet": "",
+"ShipPhysics": "",
+"VisualShaderFBMWarpTexture": "",
+"VisualShaderMapSteppedLinear": "",
+"VisualShaderVoronoiTexture": "",
+"VisualShaderWaveTexture": ""
 }
 
 [application]
@@ -27,6 +117,15 @@ config/icon="res://icon.png"
 [autoload]
 
 Settings="*res://src/Autoload/Settings.gd"
+
+[display]
+
+window/size/width=1920
+window/size/height=1080
+window/size/test_width=1280
+window/size/test_height=720
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
 
 [input]
 

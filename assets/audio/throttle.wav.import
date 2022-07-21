@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/throttle.wav-a06775c72a6c493d9d21880fc02366dc.sample"
+
+[deps]
+
+source_file="res://assets/audio/throttle.wav"
+dest_files=[ "res://.import/throttle.wav-a06775c72a6c493d9d21880fc02366dc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

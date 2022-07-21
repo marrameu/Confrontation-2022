@@ -1,0 +1,11 @@
+Model Information:
+* title:	Star Wars; CR90 Corvette(FIXED)
+* source:	https://sketchfab.com/3d-models/star-wars-cr90-corvettefixed-6356d19e87494ad8b6f55d0f0e9ec8a7
+* author:	Heataker (https://sketchfab.com/Heataker)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Star Wars; CR90 Corvette(FIXED)" (https://sketchfab.com/3d-models/star-wars-cr90-corvettefixed-6356d19e87494ad8b6f55d0f0e9ec8a7) by Heataker (https://sketchfab.com/Heataker) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

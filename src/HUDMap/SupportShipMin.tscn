@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/interface/deffend_ship_min.png" type="Texture" id=1]
+[ext_resource path="res://src/HUDMap/BigShipMin.tscn" type="PackedScene" id=2]
+
+[node name="SupportShipMin" instance=ExtResource( 2 )]
+
+[node name="TextureRect" parent="." index="0"]
+margin_left = 59.125
+margin_top = -79.1757
+margin_right = 228.125
+margin_bottom = 51.8243
+texture = ExtResource( 1 )

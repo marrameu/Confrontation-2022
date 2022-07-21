@@ -1,0 +1,116 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Ship.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ShipAIInput.gd" type="Script" id=2]
+[ext_resource path="res://AIShipShooting.gd" type="Script" id=3]
+[ext_resource path="res://AIShipStateMachine.gd" type="Script" id=4]
+[ext_resource path="res://src/StateMachine/ChooseObjective.gd" type="Script" id=5]
+[ext_resource path="res://src/StateMachine/AttackEnemy.gd" type="Script" id=6]
+[ext_resource path="res://assets/cone.tres" type="Shape" id=7]
+[ext_resource path="res://src/StateMachine/AttackCS.gd" type="Script" id=9]
+[ext_resource path="res://AIShip.gd" type="Script" id=10]
+[ext_resource path="res://src/StateMachine/Escape.gd" type="Script" id=11]
+[ext_resource path="res://src/StateMachine/DefendCS.gd" type="Script" id=12]
+[ext_resource path="res://src/StateMachine/AttackBigShip.gd" type="Script" id=13]
+[ext_resource path="res://src/StateMachine/PatrolMiddlePoint.gd" type="Script" id=14]
+[ext_resource path="res://src/StateMachine/PushForward.gd" type="Script" id=15]
+
+[sub_resource type="SphereShape" id=2]
+radius = 1000.0
+
+[node name="AIShip" instance=ExtResource( 1 )]
+script = ExtResource( 10 )
+
+[node name="Input" parent="." index="3"]
+script = ExtResource( 2 )
+MIN_THROTTLE = 0.2
+
+[node name="StateMachine" type="Node" parent="." index="4"]
+script = ExtResource( 4 )
+START_STATE = NodePath("ChooseObjective")
+
+[node name="ChooseObjective" type="Node" parent="StateMachine" index="0"]
+script = ExtResource( 5 )
+
+[node name="AttackEnemy" type="Node" parent="StateMachine" index="1"]
+script = ExtResource( 6 )
+
+[node name="AttackCS" type="Node" parent="StateMachine" index="2"]
+script = ExtResource( 9 )
+
+[node name="DefendBS" type="Node" parent="StateMachine" index="3"]
+script = ExtResource( 12 )
+
+[node name="Escape" type="Node" parent="StateMachine" index="4"]
+script = ExtResource( 11 )
+
+[node name="AttackBigShip" type="Node" parent="StateMachine" index="5"]
+script = ExtResource( 13 )
+
+[node name="PatrolMiddlePoint" type="Node" parent="StateMachine" index="6"]
+script = ExtResource( 14 )
+
+[node name="PushForward" type="Node" parent="StateMachine" index="7"]
+script = ExtResource( 15 )
+
+[node name="Shooting" parent="." index="9"]
+script = ExtResource( 3 )
+
+[node name="Audio" parent="Shooting" index="0"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+emission_angle_degrees = 46.0
+
+[node name="Audio2" parent="Shooting" index="1"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+
+[node name="RayCast" type="RayCast" parent="Shooting" index="2"]
+enabled = true
+cast_to = Vector3( 0, 0, 1500 )
+debug_shape_custom_color = Color( 1, 0, 0, 1 )
+debug_shape_thickness = 5
+
+[node name="ShootingArea" type="Area" parent="Shooting" index="3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Shooting/ShootingArea" index="0"]
+transform = Transform( 300, 0, 0, 0, -6.55671e-05, 300, 0, -1500, -1.31134e-05, 0, 0, 1500 )
+shape = ExtResource( 7 )
+__meta__ = {
+"_editor_description_": "Fer-la més petita"
+}
+
+[node name="ColDetectLeft" type="RayCast" parent="." index="10"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 0 )
+enabled = true
+cast_to = Vector3( 150, 0, 300 )
+
+[node name="ColDetectRight" type="RayCast" parent="." index="11"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, 0 )
+enabled = true
+cast_to = Vector3( -150, 0, 300 )
+
+[node name="ColDetectForward" type="RayCast" parent="." index="12"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.33 )
+enabled = true
+cast_to = Vector3( 0, 0, 300 )
+
+[node name="ColDetectUp" type="RayCast" parent="." index="13"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+enabled = true
+cast_to = Vector3( 0, 150, 300 )
+
+[node name="ColDetectDown" type="RayCast" parent="." index="14"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0 )
+enabled = true
+cast_to = Vector3( 0, -150, 300 )
+
+[node name="EnemyDetectArea" type="Area" parent="." index="18"]
+
+[node name="CollisionShape" type="CollisionShape" parent="EnemyDetectArea" index="0"]
+shape = SubResource( 2 )
+
+[connection signal="big_ship_shields_down" from="." to="StateMachine/ChooseObjective" method="_on_big_ship_shields_down"]
+[connection signal="big_ship_shields_down" from="." to="StateMachine/PushForward" method="_on_big_ship_shields_down"]
+[connection signal="body_entered" from="Shooting/ShootingArea" to="Shooting" method="_on_ShootingArea_body_entered"]
+[connection signal="body_entered" from="Shooting/ShootingArea" to="StateMachine/AttackEnemy" method="_on_ShootingArea_body_entered"]
+[connection signal="body_exited" from="Shooting/ShootingArea" to="Shooting" method="_on_ShootingArea_body_exited"]
+[connection signal="body_entered" from="EnemyDetectArea" to="StateMachine/PatrolMiddlePoint" method="_on_EnemyDetectArea_body_entered"]

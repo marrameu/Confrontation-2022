@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/gustav_holst_mercury.ogg-79cb8af4d6d071b98243cfdfc4157796.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/gustav_holst_mercury.ogg"
+dest_files=[ "res://.import/gustav_holst_mercury.ogg-79cb8af4d6d071b98243cfdfc4157796.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,305 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/Turret.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/star_trek_space_station/space_sation.dae" type="PackedScene" id=2]
+[ext_resource path="res://src/SpaceStation.gd" type="Script" id=3]
+[ext_resource path="res://assets/Materials/blue_big_ship_mat.tres" type="Material" id=4]
+
+[node name="SpaceStation" groups=["SpaceStation"] instance=ExtResource( 2 )]
+script = ExtResource( 3 )
+
+[node name="SketchUp001" parent="." index="0"]
+transform = Transform( 0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.16, -1483, 0, 1274.24 )
+
+[node name="skp_camera_Last_Saved_SketchUp_View001" parent="SketchUp001" index="0"]
+visible = false
+
+[node name="instance_0001" parent="SketchUp001" index="1"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0002" parent="SketchUp001" index="2"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0003" parent="SketchUp001" index="3"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0004" parent="SketchUp001" index="4"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0005" parent="SketchUp001" index="5"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0006" parent="SketchUp001" index="6"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0007" parent="SketchUp001" index="7"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0008" parent="SketchUp001" index="8"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0009" parent="SketchUp001" index="9"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0010" parent="SketchUp001" index="10"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0011" parent="SketchUp001" index="11"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0012" parent="SketchUp001" index="12"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0013" parent="SketchUp001" index="13"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0014" parent="SketchUp001" index="14"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0015" parent="SketchUp001" index="15"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0016" parent="SketchUp001" index="16"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0017" parent="SketchUp001" index="17"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0018" parent="SketchUp001" index="18"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0019" parent="SketchUp001" index="19"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0020" parent="SketchUp001" index="20"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0021" parent="SketchUp001" index="21"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0022" parent="SketchUp001" index="22"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0023" parent="SketchUp001" index="23"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0024" parent="SketchUp001" index="24"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0025" parent="SketchUp001" index="25"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0026" parent="SketchUp001" index="26"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0027" parent="SketchUp001" index="27"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0028" parent="SketchUp001" index="28"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0029" parent="SketchUp001" index="29"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0030" parent="SketchUp001" index="30"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0031" parent="SketchUp001" index="31"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0032" parent="SketchUp001" index="32"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0033" parent="SketchUp001" index="33"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0034" parent="SketchUp001" index="34"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0035" parent="SketchUp001" index="35"]
+material_override = ExtResource( 4 )
+
+[node name="instance_0036" parent="SketchUp001" index="36"]
+material_override = ExtResource( 4 )
+
+[node name="instance_1" parent="SketchUp001" index="37"]
+material_override = ExtResource( 4 )
+
+[node name="instance_1001" parent="SketchUp001" index="38"]
+material_override = ExtResource( 4 )
+
+[node name="instance_1002" parent="SketchUp001" index="39"]
+material_override = ExtResource( 4 )
+
+[node name="instance_1003" parent="SketchUp001" index="40"]
+material_override = ExtResource( 4 )
+
+[node name="instance_1004" parent="SketchUp001" index="41"]
+material_override = ExtResource( 4 )
+
+[node name="instance_1005" parent="SketchUp001" index="42"]
+material_override = ExtResource( 4 )
+
+[node name="instance_2" parent="SketchUp001" index="43"]
+material_override = ExtResource( 4 )
+
+[node name="instance_2001" parent="SketchUp001" index="44"]
+material_override = ExtResource( 4 )
+
+[node name="instance_2002" parent="SketchUp001" index="45"]
+material_override = ExtResource( 4 )
+
+[node name="instance_2003" parent="SketchUp001" index="46"]
+material_override = ExtResource( 4 )
+
+[node name="instance_2004" parent="SketchUp001" index="47"]
+material_override = ExtResource( 4 )
+
+[node name="instance_2005" parent="SketchUp001" index="48"]
+material_override = ExtResource( 4 )
+
+[node name="instance_2006" parent="SketchUp001" index="49"]
+material_override = ExtResource( 4 )
+
+[node name="instance_2007" parent="SketchUp001" index="50"]
+material_override = ExtResource( 4 )
+
+[node name="instance_2008" parent="SketchUp001" index="51"]
+material_override = ExtResource( 4 )
+
+[node name="instance_2009" parent="SketchUp001" index="52"]
+material_override = ExtResource( 4 )
+
+[node name="instance_2010" parent="SketchUp001" index="53"]
+material_override = ExtResource( 4 )
+
+[node name="instance_2011" parent="SketchUp001" index="54"]
+material_override = ExtResource( 4 )
+
+[node name="instance_2012" parent="SketchUp001" index="55"]
+material_override = ExtResource( 4 )
+
+[node name="instance_2013" parent="SketchUp001" index="56"]
+material_override = ExtResource( 4 )
+
+[node name="instance_2014" parent="SketchUp001" index="57"]
+material_override = ExtResource( 4 )
+
+[node name="instance_2015" parent="SketchUp001" index="58"]
+material_override = ExtResource( 4 )
+
+[node name="instance_2016" parent="SketchUp001" index="59"]
+material_override = ExtResource( 4 )
+
+[node name="instance_2017" parent="SketchUp001" index="60"]
+material_override = ExtResource( 4 )
+
+[node name="instance_3" parent="SketchUp001" index="61"]
+material_override = ExtResource( 4 )
+
+[node name="instance_3001" parent="SketchUp001" index="62"]
+material_override = ExtResource( 4 )
+
+[node name="instance_3002" parent="SketchUp001" index="63"]
+material_override = ExtResource( 4 )
+
+[node name="instance_3003" parent="SketchUp001" index="64"]
+material_override = ExtResource( 4 )
+
+[node name="instance_3004" parent="SketchUp001" index="65"]
+material_override = ExtResource( 4 )
+
+[node name="instance_3005" parent="SketchUp001" index="66"]
+material_override = ExtResource( 4 )
+
+[node name="instance_3006" parent="SketchUp001" index="67"]
+material_override = ExtResource( 4 )
+
+[node name="instance_3007" parent="SketchUp001" index="68"]
+material_override = ExtResource( 4 )
+
+[node name="instance_3008" parent="SketchUp001" index="69"]
+material_override = ExtResource( 4 )
+
+[node name="instance_3009" parent="SketchUp001" index="70"]
+material_override = ExtResource( 4 )
+
+[node name="instance_3010" parent="SketchUp001" index="71"]
+material_override = ExtResource( 4 )
+
+[node name="instance_3011" parent="SketchUp001" index="72"]
+material_override = ExtResource( 4 )
+
+[node name="instance_3012" parent="SketchUp001" index="73"]
+material_override = ExtResource( 4 )
+
+[node name="instance_3013" parent="SketchUp001" index="74"]
+material_override = ExtResource( 4 )
+
+[node name="instance_3014" parent="SketchUp001" index="75"]
+material_override = ExtResource( 4 )
+
+[node name="instance_3015" parent="SketchUp001" index="76"]
+material_override = ExtResource( 4 )
+
+[node name="instance_5" parent="SketchUp001" index="77"]
+material_override = ExtResource( 4 )
+
+[node name="instance_6" parent="SketchUp001" index="78"]
+material_override = ExtResource( 4 )
+
+[node name="instance_6001" parent="SketchUp001" index="79"]
+material_override = ExtResource( 4 )
+
+[node name="instance_6002" parent="SketchUp001" index="80"]
+material_override = ExtResource( 4 )
+
+[node name="instance_6003" parent="SketchUp001" index="81"]
+material_override = ExtResource( 4 )
+
+[node name="instance_6004" parent="SketchUp001" index="82"]
+material_override = ExtResource( 4 )
+
+[node name="instance_6005" parent="SketchUp001" index="83"]
+material_override = ExtResource( 4 )
+
+[node name="instance_6006" parent="SketchUp001" index="84"]
+material_override = ExtResource( 4 )
+
+[node name="instance_6007" parent="SketchUp001" index="85"]
+material_override = ExtResource( 4 )
+
+[node name="instance_6008" parent="SketchUp001" index="86"]
+material_override = ExtResource( 4 )
+
+[node name="instance_6009" parent="SketchUp001" index="87"]
+material_override = ExtResource( 4 )
+
+[node name="instance_6010" parent="SketchUp001" index="88"]
+material_override = ExtResource( 4 )
+
+[node name="instance_6011" parent="SketchUp001" index="89"]
+material_override = ExtResource( 4 )
+
+[node name="instance_6012" parent="SketchUp001" index="90"]
+material_override = ExtResource( 4 )
+
+[node name="instance_6013" parent="SketchUp001" index="91"]
+material_override = ExtResource( 4 )
+
+[node name="instance_6014" parent="SketchUp001" index="92"]
+material_override = ExtResource( 4 )
+
+[node name="instance_6015" parent="SketchUp001" index="93"]
+material_override = ExtResource( 4 )
+
+[node name="instance_6016" parent="SketchUp001" index="94"]
+material_override = ExtResource( 4 )
+
+[node name="instance_6017" parent="SketchUp001" index="95"]
+material_override = ExtResource( 4 )
+
+[node name="Turrets" type="Spatial" parent="." index="2"]
+
+[node name="Turret" parent="Turrets" index="0" instance=ExtResource( 1 )]
+transform = Transform( 0.792779, -2.66425e-08, -0.609509, -0.609509, -3.46535e-08, -0.792779, 0, 1, -4.37114e-08, -792.622, 440.639, 555.21 )

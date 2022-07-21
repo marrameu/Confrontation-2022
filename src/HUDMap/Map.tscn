@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/HUDMap/Map.gd" type="Script" id=3]
+
+[sub_resource type="Gradient" id=10]
+offsets = PoolRealArray( 0, 0.442623, 0.967213 )
+colors = PoolColorArray( 0.839216, 0.65098, 0.470588, 1, 0.403922, 0.2, 0.145098, 1, 0.152941, 0.0627451, 0.101961, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 10 )
+
+[node name="Map" type="CanvasLayer"]
+layer = 4
+script = ExtResource( 3 )
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="BG" type="TextureRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1920.0
+margin_right = 1080.0
+margin_bottom = 840.0
+rect_rotation = 90.0
+texture = SubResource( 5 )
+expand = true
+__meta__ = {
+"_editor_description_": ""
+}
