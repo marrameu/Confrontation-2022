@@ -58,15 +58,18 @@ tint_progress = Color( 1, 0.882353, 0.254902, 1 )
 [node name="PlayerTroopCam" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9301, 12.6019 )
 current = true
+far = 1000.0
 script = ExtResource( 4 )
 cam_pos_path = NodePath("../Player/CameraBase/CameraPosition")
 
 [node name="PlayerShipCam" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9301, 12.6019 )
+far = 1000.0
 script = ExtResource( 7 )
 
 [node name="PlayerShip" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 0.984427, -0.175796, 0, 0.175796, 0.984427, -9.18065, 5.72074, 96.4903 )
+transform = Transform( 1, 0, 0, 0, 0.968839, 0.247692, 0, -0.247692, 0.968839, -9.19466, 10.1731, 95.1892 )
+mode = 1
 
 [node name="PlayerManagers" type="Node" parent="."]
 

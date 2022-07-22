@@ -47,9 +47,9 @@ func _process(delta : float) -> void:
 			if get_parent().player_id != get_tree().get_network_unique_id():
 				return
 	
+	$DieInfo.visible = owner.dead
 	if owner.dead:
 		make_visible(false)
-		$DieInfo.show()
 		return
 	
 	#Utilities.canvas_scaler(get_parent().number_of_player, self)
@@ -116,10 +116,6 @@ func _process(delta : float) -> void:
 			$LockingTarget.hide()
 			$AnimationPlayer.stop(true)
 	
-	
-	#$LifeBar.show()
-	#$LifeBar.value = float(get_node("../HealthSystem").health) / float(get_node("../HealthSystem").MAX_HEALTH) * 100
-	$ShieldLifeBar.show()
 	$ShieldLifeBar.value = float(get_node("../HealthSystem").shield) / float(get_node("../HealthSystem").MAX_SHIELD) * 100
 	$ShieldLifeBar/LifeBar.value = float(get_node("../HealthSystem").health) / float(get_node("../HealthSystem").MAX_HEALTH) * 100
 	
@@ -244,7 +240,7 @@ func _on_HealthSystem_damage_taken(attacker : Spatial):
 	damage_indicators.add_child(damage_indicator)
 
 
-func make_visible(value) -> void:
+func make_visible(value : bool) -> void:
 	for child in get_children():
-		if child.get("visible"):
+		if "visible" in child:
 			child.visible = value

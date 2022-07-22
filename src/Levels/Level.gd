@@ -10,9 +10,14 @@ extends Spatial
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	$PlayerTroopCam.make_current()
-	# $PlayerShipCam.ship = $PlayerShip
-	# ship.pilot_man = $PilotManager
-	# ship.cam = $Camera
 	
-	# $Camera.make_current()
-	# $Camera.init_cam()
+	"""cam en lloc de self"""
+	$Player.connect("entered_ship", self, "_on_player_entered_ship")
+
+
+func _on_player_entered_ship(ship : Spatial):
+	$PlayerShipCam.ship = ship
+	ship.cam = $PlayerShipCam # no hauria de caldre
+	$PlayerShipCam.make_current()
+	$PlayerShipCam.init_cam()
+	

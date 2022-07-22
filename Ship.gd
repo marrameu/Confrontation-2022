@@ -18,6 +18,10 @@ var pilot_man : PilotManager
 
 var dead := false
 
+enum States { LANDED, FLYING, LEAVING, LANDING }
+var landing_areas := 0
+var state := 0
+
 
 func init(new_pilot_man : PilotManager):
 	pilot_man = new_pilot_man
@@ -25,8 +29,6 @@ func init(new_pilot_man : PilotManager):
 
 
 func _process(delta):
-	if not pilot_man:
-		mode = RigidBody.MODE_STATIC
 	input_to_physics(delta)
 	check_collisions(delta)
 	update_thruster_flame()
@@ -61,7 +63,7 @@ func input_to_physics(delta):
 
 
 func check_collisions(delta):
-	if get_colliding_bodies().size() > 0:
+	if state == States.FLYING and get_colliding_bodies().size() > 0:
 		for body in get_colliding_bodies():
 			#if not body.is_in_group("Bullets"):
 			#Input.start_joy_vibration(0, 0, 1, 1)
@@ -93,3 +95,17 @@ func _on_damagable_hit():
 func _on_enemy_died(attacker : Node): # passar tmb l'enemic
 	if attacker == self:
 		emit_signal("killed_enemy")
+
+
+func leave() -> void:
+	set_mode(RigidBody.MODE_RIGID)
+	state = States.LEAVING
+	$LeaveTimer.start()
+
+
+func _on_LeaveTimer_timeout():
+	state = States.FLYING
+
+
+func land():
+	state = States.LANDING

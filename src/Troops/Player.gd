@@ -1,5 +1,7 @@
 extends KinematicBody
 
+signal entered_ship
+
 export var pilot_man_path : NodePath
 onready var pilot_man : PilotManager = get_node(pilot_man_path)
 

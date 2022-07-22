@@ -32,3 +32,9 @@ func _on_HealthSystem_die(attacker : Node):
 	t.start()
 	t.connect("timeout", self, "die")
 
+
+func init(new_pilot_man : PilotManager):
+	pilot_man = new_pilot_man
+	set_team_color()
+	$PlayerHUD.make_visible(true)
+	mode = 0

@@ -107,4 +107,5 @@ sync func change_ship_player(ship_path : NodePath, status : bool, id : int) -> v
 
 func _on_Timer_timeout():
 	target_collider.init(owner.pilot_man)
+	owner.emit_signal("entered_ship", target_collider)
 	target_collider = null

@@ -24,6 +24,15 @@ var zooming := false
 
 
 func _process(delta : float) -> void:
+	if not owner.pilot_man: # ferho amb input.set_active(true)
+		return
+	
+	if Input.is_action_just_pressed("jump"):
+		if owner.state == owner.States.LANDED:
+			owner.leave()
+		elif owner.state == owner.States.FLYING and owner.landing_areas > 0:
+			owner.land()
+	
 	roll = clamp(lerp(roll, (Input.get_action_strength(move_right_action) - 
 		Input.get_action_strength(move_left_action)), delta * ROLL_SPEED), -1, 1)
 	

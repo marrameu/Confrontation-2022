@@ -151,9 +151,14 @@ script = ExtResource( 17 )
 [node name="SpectateCamPos" type="Position3D" parent="SpectateCamPivot"]
 transform = Transform( -0.982648, 0.0210385, -0.184281, -9.91625e-09, 0.993546, 0.113429, 0.185478, 0.11146, -0.976307, -5.0953, 10.1634, -29.3627 )
 
+[node name="LeaveTimer" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
 [connection signal="timeout" from="Input/ReloadTurboTimer" to="Input" method="_on_ReloadTurboTimer_timeout"]
 [connection signal="timeout" from="Input/DrainTurboTimer" to="Input" method="_on_DrainTurboTimer_timeout"]
 [connection signal="timeout" from="Input/DriftTimer" to="Input" method="_on_DriftTimer_timeout"]
 [connection signal="tween_all_completed" from="Physics/Tween" to="Physics" method="_on_Tween_tween_all_completed"]
 [connection signal="timeout" from="Shooting/LockMissileTimer" to="Shooting" method="_on_LockMissileTimer_timeout"]
+[connection signal="timeout" from="LeaveTimer" to="." method="_on_LeaveTimer_timeout"]

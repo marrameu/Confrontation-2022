@@ -29,24 +29,49 @@ var descense_vel := 0.0
 var DESIRED_DESCENSE_VEL := 5.0
 
 
-
 func _process(delta : float) -> void:
-	if owner.dead:
-		add_torque(Vector3(0, 0, 10), delta)
-		return
+	var state : int = owner.state
+	var States = owner.States
 	
-	drifting = ship.input.drifting
-	
-	linear_drag = NORMAL_LINEAR_DRAG if !drifting else DRIFTING_LINEAR_DRAG
-	# es canvia car aquí els motors "s'apaguen", en l'altre cas se suposa q quan els motors estan a zero
-	# fan força per a frenar (aquí en egeuixen fent (si no, no pararia), però més a poc a poc)
-	
-	if not drifting:
-		add_force(applied_linear_force, delta)
-	else:
-		add_force(Vector3.ZERO, delta) # apaga els motors del tot, sols roman la inèrcia
-	
-	add_torque(applied_angular_force, delta)
+	match state:
+		States.FLYING:
+			if owner.dead:
+				add_torque(Vector3(0, 0, 10), delta)
+				return
+			
+			drifting = ship.input.drifting
+			
+			linear_drag = NORMAL_LINEAR_DRAG if !drifting else DRIFTING_LINEAR_DRAG
+			# es canvia car aquí els motors "s'apaguen", en l'altre cas se suposa q quan els motors estan a zero
+			# fan força per a frenar (aquí en egeuixen fent (si no, no pararia), però més a poc a poc)
+			
+			if not drifting:
+				add_force(applied_linear_force, delta)
+			else:
+				add_force(Vector3.ZERO, delta) # apaga els motors del tot, sols roman la inèrcia
+			
+			add_torque(applied_angular_force, delta)
+		
+		States.LEAVING:
+			ship.set_linear_velocity(Vector3(0, 2.5, 0)) 
+		
+		States.LANDING:
+			ship.set_mode(RigidBody.MODE_KINEMATIC)
+			if not stabilized and not stabilizing:
+				_stabilize_rotation()
+				
+			elif stabilized:
+				descense_vel = lerp(descense_vel, DESIRED_DESCENSE_VEL, 0.1)
+				ship.translation += Vector3(0, -descense_vel * delta, 0)
+				
+				if get_node("../Tail").is_colliding():
+					state = States.LANDED
+					
+					stabilizing = false
+					stabilized = false
+		
+		States.LANDED:
+			ship.set_mode(RigidBody.MODE_KINEMATIC)
 
 
 func set_physics_input(linear_input : Vector3, angular_input : Vector3, delta):
