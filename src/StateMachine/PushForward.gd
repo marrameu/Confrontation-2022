@@ -9,7 +9,6 @@ func enter():
 
 func update(delta):
 	# turbo, si en té
-	
 	enemy_big_ships_wo_shields = clean_bigships_w_shields(enemy_big_ships_wo_shields)
 	my_team_big_ships_wo_shields = clean_bigships_w_shields(my_team_big_ships_wo_shields)
 	if enemy_big_ships_wo_shields or my_team_big_ships_wo_shields:
@@ -48,6 +47,6 @@ func update(delta):
 
 func update_destination():
 	if owner.pilot_man.blue_team:
-		owner.input.target = Vector3(-1500, rand_range(-350, 350), rand_range(-700, 700))
+		owner.input.target = Vector3(-1500, 2000 + rand_range(-350, 350), rand_range(-700, 700))
 	else:
-		owner.input.target = Vector3(1500, rand_range(-350, 350), rand_range(-700, 700))
+		owner.input.target = Vector3(1500, 2000 + rand_range(-350, 350), rand_range(-700, 700))

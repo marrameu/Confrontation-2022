@@ -32,11 +32,12 @@ func init(new_pilot_man : PilotManager):
 	is_player_or_ai = 1 if pilot_man.is_player else 2
 	if is_player_or_ai == 1:
 		$PlayerHUD.make_visible(true)
-		$Input.set_script(preload("res://PlayerInput.gd"))
-		$Shooting.set_script(preload("res://PlayerShipShooting.gd"))
+		input.set_script(preload("res://PlayerInput.gd"))
+		shooting.set_script(preload("res://PlayerShipShooting.gd"))
 	elif is_player_or_ai == 2:
-		$Input.set_script(preload("res://ShipAIInput.gd"))
-		$Shooting.set_script(preload("res://AIShipShooting.gd"))
+		input.set_script(preload("res://ShipAIInput.gd"))
+		input.set_physics_process(true) # WTF pq cal?
+		shooting.set_script(preload("res://AIShipShooting.gd"))
 		$StateMachine.set_active(true)
 
 
@@ -158,8 +159,8 @@ func exit_ship():
 	pilot_man = null
 	is_player_or_ai = 0
 	$PlayerHUD.make_visible(false)
-	$Input.set_script(preload("res://ShipInput.gd"))
-	$Shooting.set_script(preload("res://src/Ships/ShipShooting.gd"))
+	input.set_script(preload("res://ShipInput.gd"))
+	shooting.set_script(preload("res://src/Ships/ShipShooting.gd"))
 	$StateMachine.set_active(false)
 	set_team_color()
 	

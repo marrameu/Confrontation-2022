@@ -7,7 +7,6 @@ var yaw := 0.0
 var roll := 0.0
 var strafe := 0.0
 var throttle := 0.5
-export(float, -1, 1) var MIN_THROTTLE := 0.3
 
 # TURBO
 var TURBO_RECHARGE_TIME := 3.0
@@ -59,7 +58,7 @@ func _process(delta):
 
 
 func update_throttle(des_value : float, delta : float) -> void:
-	des_value = clamp(des_value, MIN_THROTTLE, 1.0)
+	des_value = clamp(des_value, 0.0, 1.0)
 	
 	var target := throttle
 	var turbo_clamp := 2.0
@@ -81,7 +80,7 @@ func update_throttle(des_value : float, delta : float) -> void:
 			target -= delta / 2
 			target = min(throttle, target) # per si es passa
 	
-	target = clamp(target, MIN_THROTTLE, turbo_clamp) # TURBO_THROTTLE
+	target = clamp(target, 0.0, turbo_clamp) # TURBO_THROTTLE
 	
 	turboing = target > 1
 	if target > 1 and throttle <= 1: # s'acaba d'activar el turbo

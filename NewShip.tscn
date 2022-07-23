@@ -256,7 +256,7 @@ enabled = true
 cast_to = Vector3( -150, 0, 300 )
 
 [node name="ColDetectForward" type="RayCast" parent="ColDetects"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.33 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.5584 )
 enabled = true
 cast_to = Vector3( 0, 0, 300 )
 
