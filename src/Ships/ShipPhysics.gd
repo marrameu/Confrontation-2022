@@ -27,6 +27,8 @@ var stabilized := false
 
 var descense_vel := 0.0
 var DESIRED_DESCENSE_VEL := 5.0
+var ascense_vel := 0.0
+var DESIRED_ASCENSE_VEL := 2.0
 
 
 func _process(delta : float) -> void:
@@ -59,6 +61,8 @@ func _process(delta : float) -> void:
 			# ship.set_mode(RigidBody.MODE_KINEMATIC)
 			if not stabilized and not stabilizing:
 				_stabilize_rotation()
+				ascense_vel = lerp(ascense_vel, DESIRED_ASCENSE_VEL, 0.1)
+				ship.translation += Vector3(0, ascense_vel * delta, 0)
 				
 			elif stabilized:
 				descense_vel = lerp(descense_vel, DESIRED_DESCENSE_VEL, 0.1)

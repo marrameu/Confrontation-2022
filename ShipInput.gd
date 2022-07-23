@@ -19,21 +19,24 @@ var do_turbo = false
 var drifting := false
 var wants_turbo := false
 var wants_drift := false
+var can_turbo := false
 
 
 func _process(delta):
 	_recover_turbo()
 	
+	can_turbo = avaliable_turbos and owner.landing_areas < 1
+	
 	# BLOC 1
 	if drifting:
-		if wants_turbo and avaliable_turbos:
+		if wants_turbo and can_turbo:
 			drifting = false
 			$DriftTimer.stop() # per evitar possibles problemes
 			do_turbo = true
 	
 	# BLOC 2 (ha d'anar sempre després, si no amb el comandament s'activa el turbo immediatament)
 	if not turboing:
-		if wants_turbo and avaliable_turbos:
+		if wants_turbo and can_turbo:
 			do_turbo = true
 			$TurboAudio.play()
 	else:
@@ -70,7 +73,7 @@ func update_throttle(des_value : float, delta : float) -> void:
 		target -= delta
 		# emit_signal("activated_turboing", false)
 	else:
-		turbo_clamp = 1.0
+		turbo_clamp = 0.25 if owner.landing_areas >= 1 else 1.0
 		if des_value > throttle:
 			target += delta / 2
 			target = max(throttle, target) # per si es passa
@@ -105,7 +108,8 @@ func _recover_turbo():
 func _on_DrainTurboTimer_timeout():
 	#$TurboSwitchAudio.play()
 	avaliable_turbos = clamp(avaliable_turbos - 1, 0, MAX_AVALIABLE_TURBOS)
-	do_turbo = wants_turbo and avaliable_turbos
+	can_turbo = avaliable_turbos and owner.landing_areas < 1
+	do_turbo = wants_turbo and can_turbo
 
 
 func _on_DriftTimer_timeout():
