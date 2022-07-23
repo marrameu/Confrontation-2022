@@ -123,7 +123,7 @@ func add_force(force : Vector3, delta : float):
 	vel.z = b.z.dot(v_nor) * v_len
 	vel.x = b.x.dot(v_nor) * v_len
 	vel.y = b.y.dot(v_nor) * v_len
-	get_node("../Pito").translation = vel
+	get_node("../Debug/Pito").translation = vel
 
 
 func add_torque(torque : Vector3, delta : float):

@@ -42,7 +42,7 @@ func set_active(value):
 	set_process_input(value)
 	if _active:
 		initialize(START_STATE)
-	else:
+	elif current_state:
 		current_state.exit()
 		states_stack = []
 		current_state = null

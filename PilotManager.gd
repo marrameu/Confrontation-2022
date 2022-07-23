@@ -2,7 +2,8 @@ extends Node
 class_name PilotManager
 
 
-var blue_team = false
+export var blue_team = false
+export var is_player := false
 
 
 # Called when the node enters the scene tree for the first time.

@@ -19,6 +19,8 @@ func _ready():
 		"escape" : $Escape
 		#"dead": $Dead
 	}
+	
+	set_active(false)
 
 
 func capital_ship_shield_died(own_team : bool):

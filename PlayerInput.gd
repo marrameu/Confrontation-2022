@@ -33,12 +33,6 @@ func _process(delta : float) -> void:
 		elif owner.state == owner.States.FLYING and owner.landing_areas > 0:
 			owner.land()
 	
-	if Input.is_action_just_pressed("interact") and owner.state == owner.States.LANDED:
-		owner.pilot_man = null
-		owner.get_node("PlayerHUD").make_visible(false)
-		get_tree().current_scene.spawn_player(owner.translation) # senyals
-		return
-	
 	roll = clamp(lerp(roll, (Input.get_action_strength(move_right_action) - 
 		Input.get_action_strength(move_left_action)), delta * ROLL_SPEED), -1, 1)
 	

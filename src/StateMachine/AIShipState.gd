@@ -1,8 +1,6 @@
 tool
 extends "res://src/StateMachine/State.gd"
 
-onready var own_cs : Spatial = get_node("/root/Level/BigShips/CapitalShipBlue") if owner.pilot_man.blue_team else get_node("/root/Level/BigShips/CapitalShipRed")
-
 var my_team_big_ships_wo_shields : Array
 var enemy_big_ships_wo_shields : Array
 
@@ -32,6 +30,7 @@ func closest_enemy(min_dist : float = 750.0) -> Ship:
 
 
 func closest_enemy_to_cs(plus_dist : float = 500.0) -> Ship:
+	var own_cs : Spatial = get_node("/root/Level/BigShips/CapitalShipBlue") if owner.pilot_man.blue_team else get_node("/root/Level/BigShips/CapitalShipRed")
 	var closest_dsit : float = owner.translation.distance_to(own_cs.translation) + plus_dist
 	var clos_enemy : Ship
 	for ship in get_tree().get_nodes_in_group("Ships"):
@@ -45,6 +44,7 @@ func closest_enemy_to_cs(plus_dist : float = 500.0) -> Ship:
 
 
 func closest_big_ship(type : String):
+	var own_cs : Spatial = get_node("/root/Level/BigShips/CapitalShipBlue") if owner.pilot_man.blue_team else get_node("/root/Level/BigShips/CapitalShipRed")
 	var closest_dsit := INF
 	var clos_enemy : Spatial
 	for ship in get_tree().get_nodes_in_group(type):

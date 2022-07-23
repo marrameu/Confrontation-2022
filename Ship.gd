@@ -3,9 +3,11 @@ class_name Ship
 
 signal ship_died
 signal killed_enemy
+signal big_ship_shields_down
 
 export var red_mat : Material
 export var blue_mat : Material
+export var grey_mat : Material
 
 onready var input : Node = $Input # class per a linput i el physics
 onready var physics : Node = $Physics
@@ -13,8 +15,9 @@ onready var shooting : Node = $Shooting
 
 var pilot_man : PilotManager
 
-# var is_player := false
-# var is_ai := false
+var is_player_or_ai := 0 # 1 player, 2 ia
+
+var cam : Camera
 
 var dead := false
 
@@ -26,9 +29,28 @@ var state := 0
 func init(new_pilot_man : PilotManager):
 	pilot_man = new_pilot_man
 	set_team_color()
+	is_player_or_ai = 1 if pilot_man.is_player else 2
+	if is_player_or_ai == 1:
+		$PlayerHUD.make_visible(true)
+		$Input.set_script(preload("res://PlayerInput.gd"))
+		$Shooting.set_script(preload("res://PlayerShipShooting.gd"))
+	elif is_player_or_ai == 2:
+		$StateMachine.set_active(true)
+		$Input.set_script(preload("res://ShipAIInput.gd"))
+		$Shooting.set_script(preload("res://AIShipShooting.gd"))
 
 
 func _process(delta):
+	# no es pot fer des de l'input pq el godot peta si treus l'script des del mateix script
+	if state == States.LANDED and is_player_or_ai == 1:
+		if Input.is_action_just_pressed("interact"):
+			$ExitTimer.start()
+		elif Input.is_action_just_released("interact"):
+			$ExitTimer.stop()
+	
+	$ShipMesh.visible = !Settings.first_person or dead or is_player_or_ai != 1
+	$PlayerShipInterior.visible = Settings.first_person and not dead and is_player_or_ai == 1
+	
 	if state == States.FLYING:
 		input_to_physics(delta)
 		check_collisions(delta)
@@ -36,7 +58,10 @@ func _process(delta):
 
 
 func set_team_color():
-	if pilot_man.blue_team:
+	if not pilot_man:
+		$ShipMesh/Cube.material_override = grey_mat
+		$ShipMesh/Cube001.material_override = grey_mat
+	elif pilot_man.blue_team:
 		$ShipMesh/Cube.material_override = blue_mat
 		$ShipMesh/Cube001.material_override = blue_mat
 	else:
@@ -71,9 +96,11 @@ func check_collisions(delta):
 			$HealthSystem.take_damage(delta * 8 * linear_velocity.length(), true) # s'hauria de fer la velocitat respecte el punt de col·lisió i no la total
 
 
-func _on_HealthSystem_die(attacker : Node):
+func _on_HealthSystem_die(attacker : Spatial):
 	dead = true
 	print(name + "died")
+	if attacker and is_player_or_ai == 1:
+		cam.killer = (attacker)
 	
 	# animacions
 	
@@ -90,12 +117,15 @@ func die():
 
 
 func _on_damagable_hit():
-	pass
+	if is_player_or_ai == 1:
+		$PlayerHUD.on_damagable_hit()
 
 
 func _on_enemy_died(attacker : Node): # passar tmb l'enemic
 	if attacker == self:
 		emit_signal("killed_enemy")
+		if is_player_or_ai == 1:
+			$PlayerHUD.on_enemy_died()
 
 
 func leave() -> void:
@@ -113,3 +143,20 @@ func land():
 	# ferho millor
 	physics.desired_linear_force = Vector3()
 	physics.desired_angular_force = Vector3()
+
+
+func _on_BigShip_shields_down(ship):
+	emit_signal("big_ship_shields_down", ship)
+
+
+func exit_ship():
+	pilot_man = null
+	is_player_or_ai = 0
+	$PlayerHUD.make_visible(false)
+	$Input.set_script(preload("res://ShipInput.gd"))
+	$Shooting.set_script(preload("res://src/Ships/ShipShooting.gd"))
+	$StateMachine.set_active(false)
+	set_team_color()
+	
+	# spawn troop
+	get_tree().current_scene.spawn_player(translation) # senyals

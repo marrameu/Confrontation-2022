@@ -62,8 +62,7 @@ value = 25.0
 texture_under = ExtResource( 6 )
 texture_progress = ExtResource( 6 )
 fill_mode = 4
-tint_under = Color( 1, 1, 1, 0.541176 )
-tint_progress = Color( 1, 0.882353, 0.254902, 0.541176 )
+tint_progress = Color( 1, 0.882353, 0.254902, 1 )
 nine_patch_stretch = true
 
 [connection signal="timeout" from="Interact/Timer" to="Interact" method="_on_Timer_timeout"]
