@@ -40,6 +40,7 @@ func set_active(value):
 	_active = value
 	set_physics_process(value)
 	set_process_input(value)
+	set_process(value)
 	if _active:
 		initialize(START_STATE)
 	elif current_state:

@@ -47,7 +47,7 @@ func _process(delta : float) -> void:
 
 
 sync func shoot_bullet(current_bullet : int, shoot_target := Vector3.ZERO) -> void:
-	if owner.dead:
+	if owner.dead or owner.state != owner.States.FLYING:
 		return
 	
 	emit_signal("shot")

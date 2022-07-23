@@ -390,33 +390,6 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 
-[node name="LifeBar" parent="." instance=ExtResource( 6 )]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -93.75
-margin_top = 435.0
-margin_right = 93.75
-margin_bottom = 465.0
-rect_pivot_offset = Vector2( 93.75, 15 )
-tint_over = Color( 1, 1, 1, 0 )
-tint_progress = Color( 1, 1, 1, 1 )
-nine_patch_stretch = true
-
-[node name="ColorRect" type="ColorRect" parent="LifeBar"]
-modulate = Color( 0.290196, 0.290196, 0.290196, 0.588235 )
-show_behind_parent = true
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -99.75
-margin_top = -21.0
-margin_right = 99.75
-margin_bottom = 21.0
-
 [node name="ShieldLifeBar" parent="." instance=ExtResource( 9 )]
 anchor_left = 0.5
 anchor_top = 1.0

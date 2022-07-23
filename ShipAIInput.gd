@@ -31,6 +31,9 @@ func _ready():
 func _process(delta):
 	pass
 	#DebugDraw.draw_line_3d(owner.global_transform.origin, target, Color(1, 1, 0))
+	
+	if owner.state == owner.States.LANDED:
+		owner.leave()
 
 
 func _physics_process(delta):

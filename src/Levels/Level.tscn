@@ -144,4 +144,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5635, 3.68058, 11.2187 )
 [node name="Ship2" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 54.6233, 3.68058, 11.2187 )
 
+[node name="Ship3" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 81.2231, 3.68058, 11.2187 )
+
+[node name="Ship4" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 103.494, 3.68058, 11.2187 )
+
+[node name="Ship5" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 126.173, 3.68058, 11.2187 )
+
 [editable path="Map/LandingArea"]

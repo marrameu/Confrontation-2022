@@ -35,12 +35,17 @@ func init(new_pilot_man : PilotManager):
 		$Input.set_script(preload("res://PlayerInput.gd"))
 		$Shooting.set_script(preload("res://PlayerShipShooting.gd"))
 	elif is_player_or_ai == 2:
-		$StateMachine.set_active(true)
 		$Input.set_script(preload("res://ShipAIInput.gd"))
 		$Shooting.set_script(preload("res://AIShipShooting.gd"))
+		$StateMachine.set_active(true)
 
 
 func _process(delta):
+	# DEBUG
+	if Input.is_action_just_pressed("test"):
+		if randi() % 2:
+			init(PilotManager.new())
+	
 	# no es pot fer des de l'input pq el godot peta si treus l'script des del mateix script
 	if state == States.LANDED and is_player_or_ai == 1:
 		if Input.is_action_just_pressed("interact"):
