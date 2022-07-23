@@ -26,6 +26,8 @@ onready var tail : RayCast = $Tail
 # Slope
 const MAX_SLOPE_ANGLE := 35
 
+var dead := false
+
 
 func _physics_process(delta):
 	var joystick_movement := 0.0

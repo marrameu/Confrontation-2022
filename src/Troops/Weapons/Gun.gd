@@ -46,7 +46,6 @@ var shooting := false
 
 var time := 0.0
 
-
 func _ready() -> void:
 	m_team = 0
 	if get_tree().has_network_peer():
@@ -60,15 +59,10 @@ func _process(delta : float) -> void:
 			return
 	
 	time += delta
-	var shooting = Input.is_action_pressed("shoot")
+	
 	if shooting and time >= _next_time_to_fire:
 		_next_time_to_fire = time + 1.0 / fire_rate
 		_shoot()
-	
-	var cam := get_viewport().get_camera()
-	var cam_basis : Basis = cam.global_transform.basis
-	$RayCast.global_transform.origin = cam.global_transform.origin
-	global_transform.basis = cam_basis.get_euler() + Vector3(deg2rad(180), 0, 0)
 	
 	
 	

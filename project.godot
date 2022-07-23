@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Spatial",
+"class": "CommandPost",
+"language": "GDScript",
+"path": "res://src/CommandPost/CommandPost.gd"
+}, {
+"base": "Spatial",
 "class": "Gun",
 "language": "GDScript",
 "path": "res://src/Troops/Weapons/Gun.gd"
@@ -69,6 +74,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Ships/ShipPhysics.gd"
 }, {
+"base": "StaticBody",
+"class": "Troop",
+"language": "GDScript",
+"path": "res://src/Troops/AI/Troop.gd"
+}, {
 "base": "VisualShaderNodeCustom",
 "class": "VisualShaderFBMWarpTexture",
 "language": "GDScript",
@@ -90,6 +100,7 @@ _global_script_classes=[ {
 "path": "res://addons/Shader Nodes/custom/nodes/wave_texture.gd"
 } ]
 _global_script_class_icons={
+"CommandPost": "",
 "Gun": "",
 "HealthSystem": "",
 "LODCPUParticles": "res://addons/lod/lod_cpu_particles.svg",
@@ -102,6 +113,7 @@ _global_script_class_icons={
 "Ship": "",
 "ShipBullet": "",
 "ShipPhysics": "",
+"Troop": "",
 "VisualShaderFBMWarpTexture": "",
 "VisualShaderMapSteppedLinear": "",
 "VisualShaderVoronoiTexture": "",
