@@ -51,12 +51,15 @@ blue_team = true
 
 [node name="SuportShip" parent="BigShips" instance=ExtResource( 1 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2000, 0, 715.452 )
+blue_team = false
 
 [node name="SuportShip2" parent="BigShips" instance=ExtResource( 1 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2000, 0, -790.848 )
+blue_team = false
 
 [node name="AttackShip2" parent="BigShips" instance=ExtResource( 20 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2696.04, 431.208, -726.323 )
+blue_team = false
 
 [node name="SuportShip3" parent="BigShips" instance=ExtResource( 1 )]
 transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 2000, 0, -643.399 )
@@ -281,10 +284,6 @@ text = "MIDDLE_POINT = "
 
 [node name="Map" parent="." instance=ExtResource( 15 )]
 
-[connection signal="battle_started" from="." to="BigShips/AttackShip2" method="start"]
-[connection signal="battle_started" from="." to="BigShips/AttackShip3" method="start"]
-[connection signal="match_msg" from="." to="MatchUI" method="add_match_message"]
-[connection signal="ship_added" from="." to="Map" method="add_normal_ship"]
 [connection signal="finished" from="BGMusic" to="BGMusic" method="_on_BGMusic_finished"]
 [connection signal="change_spectate" from="SpawnHUD" to="WaitingCam" method="_on_SpawnHUD_change_spectate"]
 [connection signal="respawn" from="SpawnHUD" to="." method="spawn_player"]

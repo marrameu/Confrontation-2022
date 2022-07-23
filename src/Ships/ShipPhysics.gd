@@ -1,4 +1,4 @@
-extends Node
+extends Spatial
 
 class_name ShipPhysics
 
@@ -56,7 +56,7 @@ func _process(delta : float) -> void:
 			ship.set_linear_velocity(Vector3(0, 2.5, 0)) 
 		
 		States.LANDING:
-			ship.set_mode(RigidBody.MODE_KINEMATIC)
+			# ship.set_mode(RigidBody.MODE_KINEMATIC)
 			if not stabilized and not stabilizing:
 				_stabilize_rotation()
 				
@@ -64,14 +64,14 @@ func _process(delta : float) -> void:
 				descense_vel = lerp(descense_vel, DESIRED_DESCENSE_VEL, 0.1)
 				ship.translation += Vector3(0, -descense_vel * delta, 0)
 				
-				if get_node("../Tail").is_colliding():
-					state = States.LANDED
+				if get_node("Tail").is_colliding():
+					owner.state = States.LANDED
 					
 					stabilizing = false
 					stabilized = false
 		
 		States.LANDED:
-			ship.set_mode(RigidBody.MODE_KINEMATIC)
+			ship.set_mode(RigidBody.MODE_STATIC)
 
 
 func set_physics_input(linear_input : Vector3, angular_input : Vector3, delta):

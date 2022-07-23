@@ -64,7 +64,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Bullets/Ships/ShipBullet.gd"
 }, {
-"base": "Node",
+"base": "Spatial",
 "class": "ShipPhysics",
 "language": "GDScript",
 "path": "res://src/Ships/ShipPhysics.gd"
@@ -117,6 +117,8 @@ config/icon="res://icon.png"
 [autoload]
 
 Settings="*res://src/Autoload/Settings.gd"
+PlayerInfo="*res://src/Autoload/PlayerInfo.gd"
+DebugDraw="*res://addons/zylann.debug_draw/debug_draw.gd"
 
 [display]
 

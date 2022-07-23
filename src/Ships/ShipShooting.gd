@@ -94,8 +94,9 @@ func most_frontal_enenmy(big_ships := false) -> Spatial: # poder rutllar es +o- 
 	
 	var enemies := []
 	for ship in get_tree().get_nodes_in_group("Ships"):
-		if ship.pilot_man.blue_team != owner.pilot_man.blue_team:
-			enemies.append(ship)
+		if ship.pilot_man:
+			if ship.pilot_man.blue_team != owner.pilot_man.blue_team:
+				enemies.append(ship)
 	if big_ships:
 		for big_ship in get_tree().get_nodes_in_group("BigShips"):
 			if big_ship.blue_team != owner.pilot_man.blue_team:

@@ -29,9 +29,10 @@ func init(new_pilot_man : PilotManager):
 
 
 func _process(delta):
-	input_to_physics(delta)
-	check_collisions(delta)
-	update_thruster_flame()
+	if state == States.FLYING:
+		input_to_physics(delta)
+		check_collisions(delta)
+		update_thruster_flame()
 
 
 func set_team_color():
@@ -109,3 +110,6 @@ func _on_LeaveTimer_timeout():
 
 func land():
 	state = States.LANDING
+	# ferho millor
+	physics.desired_linear_force = Vector3()
+	physics.desired_angular_force = Vector3()

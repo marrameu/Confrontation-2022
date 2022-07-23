@@ -85,10 +85,17 @@ bus = "Sounds"
 stream = ExtResource( 15 )
 pitch_scale = 0.7
 
-[node name="Physics" type="Node" parent="."]
+[node name="Physics" type="Spatial" parent="."]
 script = ExtResource( 2 )
 
 [node name="Tween" type="Tween" parent="Physics"]
+
+[node name="Tail" type="RayCast" parent="Physics"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.7079, 0 )
+enabled = true
+cast_to = Vector3( 0, -1.5, 0 )
+debug_shape_custom_color = Color( 1, 0, 0, 1 )
+debug_shape_thickness = 5
 
 [node name="CameraPosition" type="Position3D" parent="."]
 transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 6, -30 )
