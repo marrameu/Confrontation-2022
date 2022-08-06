@@ -22,10 +22,6 @@ var going_to_cs = false
 var des_throttle := 1.0
 
 
-func _ready():
-	pass
-
-
 func _process(delta):
 	pass
 	#DebugDraw.draw_line_3d(owner.global_transform.origin, target, Color(1, 1, 0))

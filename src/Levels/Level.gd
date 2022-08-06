@@ -1,15 +1,28 @@
 extends Spatial
 
+signal battle_started
+signal ship_added
 
 var player_scene : PackedScene = preload("res://src/Troops/Player.tscn")
+var ai_troop_scene : PackedScene = preload("res://src/Troops/AI/Troop.tscn")
+
 var middle_point = 0.0
 
+var battle_started := false
+
+var num_of_players : int = 16
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	for big_ship in $BigShips.get_children():
+		emit_signal("ship_added", big_ship)
+		big_ship.connect("shields_down", self, "_on_BigShip_shields_down")
+		big_ship.connect("destroyed", self, "_on_BigShip_destroyed")
 	
-	var _player = spawn_player()
+	$PilotManagers/PlayerMan.blue_team = PlayerInfo.player_blue_team
+	
+	$WaitingCam.make_current()
+
 
 
 func _on_player_entered_ship(ship : Spatial):
@@ -30,3 +43,47 @@ func spawn_player(pos := Vector3(0, 2, 0)) -> Spatial:
 	new_player.connect("entered_ship", self, "_on_player_entered_ship")
 	$PlayerTroopCam.make_current()
 	return new_player
+
+
+func spawn_troop(ai_num : int, blue_team := false, pos := Vector3(0, 2, 0)) -> Spatial:
+	var new_troop_man := PilotManager.new()
+	new_troop_man.blue_team = blue_team
+	$PilotManagers.add_child(new_troop_man)
+	
+	var new_troop = ai_troop_scene.instance()
+	new_troop.translation = pos
+	new_troop.pilot_man = new_troop_man
+	add_child(new_troop)
+	
+	return new_troop
+
+
+func start_battle():
+	if battle_started:
+		return
+	
+	battle_started = true
+	emit_signal("battle_started")
+	
+	spawn_player()
+	
+	var blue_ais : int = num_of_players
+	var red_ais : int = num_of_players
+	var ai_num : int = 0
+	
+	if PlayerInfo.player_blue_team:
+		blue_ais -= 1
+	else:
+		red_ais -= 1
+	
+	var x : int = 0
+	while x < blue_ais:
+		x += 1 
+		spawn_troop(ai_num, true)
+		ai_num += 1
+	
+	var y : int = 0
+	while y < red_ais:
+		y += 1
+		spawn_troop(ai_num, false)
+		ai_num += 1

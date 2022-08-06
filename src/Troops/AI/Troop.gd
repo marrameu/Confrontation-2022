@@ -5,7 +5,7 @@ class_name Troop
 # Materials
 export var body : NodePath
 
-onready var pilot_man := PilotManager.new()
+var pilot_man : PilotManager
 
 # Atack
 var current_enemie : Spatial
@@ -33,6 +33,13 @@ puppet var slave_rotation : = 0.0
 # temproal
 var wait_a_fcking_moment := false
 var wait_to_init := true
+
+export var red_mat : Material
+export var blue_mat : Material
+
+
+func _ready():
+	$TeamIndicator.material_override = blue_mat if pilot_man.blue_team else red_mat
 
 
 # Client
@@ -84,20 +91,20 @@ func _process(delta):
 	
 	# Shoot
 	if current_enemie:
-		if current_enemie.get_node("TroopManager"):
-			if current_enemie.get_node("TroopManager").is_alive:
+		if current_enemie.pilot_man:
+			if not current_enemie.translation == translation:
 				look_at(current_enemie.translation, Vector3(0, 1, 0))
-				rotation = Vector3(0, rotation.y + deg2rad(180), 0)
-				if not $Weapons/AIGun.shooting:
-					$Weapons/AIGun.shooting = true
-				return
-			else:
-				for i in range(0, $EnemyDetection.enemies.size()):
-					if not $EnemyDetection.enemies.size() > i:
-						return
-					if $EnemyDetection.enemies[i] == current_enemie:
-						$EnemyDetection.enemies.remove(i)
-				current_enemie = null
+			rotation = Vector3(0, rotation.y + deg2rad(180), 0)
+			if not $Weapons/AIGun.shooting:
+				$Weapons/AIGun.shooting = true
+			return
+		else:
+			for i in range(0, $EnemyDetection.enemies.size()):
+				if not $EnemyDetection.enemies.size() > i:
+					return
+				if $EnemyDetection.enemies[i] == current_enemie:
+					$EnemyDetection.enemies.remove(i)
+			current_enemie = null
 	if $Weapons/AIGun.shooting:
 		$Weapons/AIGun.shooting = false
 

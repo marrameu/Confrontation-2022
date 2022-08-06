@@ -48,7 +48,7 @@ func _process(delta : float) -> void:
 				return
 	
 	$DieInfo.visible = owner.dead
-	if owner.dead:
+	if owner.dead or owner.is_player_or_ai != 1:
 		make_visible(false)
 		return
 	

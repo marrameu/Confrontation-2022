@@ -43,7 +43,8 @@ sync func take_damage(amount : int, obviar_shield : bool = false, attacker : Nod
 			health -= amount
 			health = max(0, health)
 			if health <= 0:
-				emit_signal("die", attacker)
+				pass
+				#emit_signal("die", attacker)
 
 
 sync func heal(amount : float) -> void:

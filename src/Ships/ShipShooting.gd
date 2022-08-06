@@ -25,15 +25,11 @@ var wants_shoots := { 0: false, 1: false }
 var can_shoots := { 0: true, 1: true }
 
 
-onready var lock_missile_timer : Timer = $LockMissileTimer
+var lock_missile_timer : Timer # no onready pq lscript canvia
 var locking_target_to_missile := false
 var target_locked := false
 var locking_time : float = 1/fire_rates[1]
 var lock_target : Spatial
-
-
-func _ready() -> void:
-	pass
 
 
 func _process(delta : float) -> void:
@@ -67,7 +63,7 @@ sync func shoot_bullet(current_bullet : int, shoot_target := Vector3.ZERO) -> vo
 	bullet.ship = owner
 	
 	get_tree().current_scene.add_child(bullet)
-	var shoot_from : Vector3 = get_parent().global_transform.origin # Canons
+	var shoot_from : Vector3 = owner.global_transform.origin # Canons
 	bullet.global_transform.origin = shoot_from
 	bullet.connect("damagable_hit", owner, "_on_damagable_hit")
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/Troops/AI/Troop.gd" type="Script" id=1]
 [ext_resource path="res://assets/models/ybot/TroopModel.tscn" type="PackedScene" id=2]
@@ -6,7 +6,9 @@
 [ext_resource path="res://src/Troops/AI/TroopEnemyDetection.gd" type="Script" id=4]
 [ext_resource path="res://src/Troops/AI/TroopPathMaker.gd" type="Script" id=5]
 [ext_resource path="res://src/HealthSystem/HealthSystem.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/materials/command_post/red.tres" type="Material" id=7]
 [ext_resource path="res://src/Troops/AI/TroopNetwork.gd" type="Script" id=8]
+[ext_resource path="res://assets/materials/command_post/blue.tres" type="Material" id=9]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.6
@@ -15,12 +17,17 @@ height = 2.4
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 7, 3, 11 )
 
+[sub_resource type="CubeMesh" id=3]
+size = Vector3( 0.5, 0.5, 0.05 )
+
 [node name="Troop" type="StaticBody" groups=["AI", "Troops"]]
 pause_mode = 1
 collision_layer = 2
 collision_mask = 25
 script = ExtResource( 1 )
 body = NodePath("PlayerMesh/rig/body")
+red_mat = ExtResource( 7 )
+blue_mat = ExtResource( 9 )
 
 [node name="PlayerMesh" parent="." instance=ExtResource( 2 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.8, 0 )
@@ -62,6 +69,11 @@ one_shot = true
 [node name="InitTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[node name="TeamIndicator" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.769547, 0.321415 )
+mesh = SubResource( 3 )
+material/0 = null
 
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_RespawnTimer_timeout"]

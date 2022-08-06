@@ -44,6 +44,8 @@ func _on_StartButton_pressed():
 	# if battle_state.battle_started # NO CAL
 	emit_signal("start_battle")
 	emit_signal("respawn")
+	$Control.hide()
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 func enable_spawn(enable : bool):
