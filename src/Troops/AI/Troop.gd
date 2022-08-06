@@ -2,6 +2,8 @@ extends StaticBody
 
 class_name Troop
 
+signal died
+
 # Materials
 export var body : NodePath
 
@@ -90,7 +92,7 @@ func _process(delta):
 						$ConquestTimer.start() # SI MOR CONQUERINT, REPAEREIX CONQUERINT? AL DISABLE CCOMPONENTS S'HAURIA DE RESTABLIR TMB
 	
 	# Shoot
-	if current_enemie:
+	if current_enemie and weakref(current_enemie).get_ref():
 		if current_enemie.pilot_man:
 			if not current_enemie.translation == translation:
 				look_at(current_enemie.translation, Vector3(0, 1, 0))
@@ -121,14 +123,16 @@ func _physics_process(delta : float) -> void:
 			rotation = Vector3(0, slave_rotation, 0)
 
 
-func _on_HealthSystem_die() -> void:
+func _on_HealthSystem_die(attacker) -> void:
 	if get_tree().has_network_peer():
 		if get_tree().is_network_server():
 			($RespawnTimer as Timer).start()
 			rpc("die")
 	else:
-		($RespawnTimer as Timer).start()
-		die()
+		emit_signal("died")
+		queue_free()
+		# ($RespawnTimer as Timer).start()
+		# die()
 
 
 func _on_RespawnTimer_timeout():

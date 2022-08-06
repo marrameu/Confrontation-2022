@@ -45,14 +45,20 @@ func spawn_player(pos := Vector3(0, 2, 0)) -> Spatial:
 	return new_player
 
 
-func spawn_troop(ai_num : int, blue_team := false, pos := Vector3(0, 2, 0)) -> Spatial:
-	var new_troop_man := PilotManager.new()
-	new_troop_man.blue_team = blue_team
-	$PilotManagers.add_child(new_troop_man)
+func spawn_ai_troop(ai_num : int, blue_team := false, pos := Vector3(0, 2, 0)) -> Spatial:
+	var new_troop_man : PilotManager = get_node_or_null("PilotManagers/AIManager" + str(ai_num))
+	# crea'n un de nou
+	if not new_troop_man:
+		new_troop_man = PilotManager.new()
+		new_troop_man.name = ("AIManager" + str(ai_num))
+		new_troop_man.blue_team = blue_team
+		$PilotManagers.add_child(new_troop_man)
+	
 	
 	var new_troop = ai_troop_scene.instance()
-	new_troop.translation = pos
+	new_troop.translation = Vector3(rand_range(-250, 250), 2, rand_range(-250, 250))
 	new_troop.pilot_man = new_troop_man
+	new_troop.connect("died", self, "_on_ai_troop_died", [ai_num])
 	add_child(new_troop)
 	
 	return new_troop
@@ -79,11 +85,24 @@ func start_battle():
 	var x : int = 0
 	while x < blue_ais:
 		x += 1 
-		spawn_troop(ai_num, true)
+		spawn_ai_troop(ai_num, true)
 		ai_num += 1
 	
 	var y : int = 0
 	while y < red_ais:
 		y += 1
-		spawn_troop(ai_num, false)
+		spawn_ai_troop(ai_num, false)
 		ai_num += 1
+
+
+func _on_ai_troop_died(ai_num : int):
+	var t = Timer.new()
+	t.set_wait_time(5) # 20 o més
+	t.set_one_shot(true)
+	self.add_child(t)
+	t.start()
+	t.connect("timeout", self, "spawn_ai_troop", [ai_num])
+	t.connect("timeout", t, "queue_free")
+	
+	# var msg_blue : bool = !get_node_or_null("PilotManagers/AIManager" + str(num)).blue_team
+	# emit_signal("match_msg", "SHIP " + str(num) + " HA ESTAT ELIMINADA", msg_blue)
