@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/models/ybot/ybot.dae" type="PackedScene" id=1]
 [ext_resource path="res://src/Troops/Player.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/HealthSystem/HealthSystem.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/Troops/Player/HUD/LifeBar.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Troops/PlayerHUD.gd" type="Script" id=9]
+[ext_resource path="res://src/Troops/Player/HUD/EnemyLifeBar.gd" type="Script" id=10]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.6
@@ -81,7 +82,30 @@ margin_bottom = -56.0
 value = 60.0
 nine_patch_stretch = true
 
+[node name="LifeBarEnemy" type="VBoxContainer" parent="PlayerHUD"]
+margin_right = 131.0
+margin_bottom = 31.0
+script = ExtResource( 10 )
+
+[node name="LifeBar" parent="PlayerHUD/LifeBarEnemy" instance=ExtResource( 8 )]
+margin_right = 131.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+value = 60.0
+nine_patch_stretch = true
+
+[node name="Nickname" type="Label" parent="PlayerHUD/LifeBarEnemy"]
+margin_top = 17.0
+margin_right = 131.0
+margin_bottom = 31.0
+text = "JUSEP"
+align = 1
+
+[node name="Timer" type="Timer" parent="PlayerHUD/LifeBarEnemy"]
+
 [node name="HealthSystem" parent="." instance=ExtResource( 7 )]
 
 [connection signal="timeout" from="Interact/Timer" to="Interact" method="_on_Timer_timeout"]
+[connection signal="timeout" from="PlayerHUD/LifeBarEnemy/Timer" to="PlayerHUD/LifeBarEnemy" method="_on_Timer_timeout"]
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
