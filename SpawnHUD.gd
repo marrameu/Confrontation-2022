@@ -44,7 +44,7 @@ func _on_StartButton_pressed():
 		return
 	
 	emit_signal("start_battle")
-	emit_signal("respawn", selected_cp.translation + Vector3.UP * 2)
+	emit_signal("respawn", selected_cp.global_transform.origin + Vector3.UP * 2)
 	$Control.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	selected_cp = null

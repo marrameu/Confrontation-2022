@@ -66,7 +66,7 @@ func spawn_ai_troop(ai_num : int, blue_team := false) -> Spatial:
 			own_cps.append(cp)
 	if own_cps:
 		var my_cp : CommandPost = own_cps[randi() % own_cps.size()]
-		new_troop.translation = my_cp.translation + Vector3(rand_range(-15, 15), 2, rand_range(-15, 15))
+		new_troop.translation = my_cp.global_transform.origin + Vector3(rand_range(-15, 15), 2, rand_range(-15, 15))
 	else:
 		pass
 	
