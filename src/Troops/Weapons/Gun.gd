@@ -97,7 +97,7 @@ sync func _hit(collider_path : NodePath, point : Vector3) -> void:
 	var current_scene = root.get_child(root.get_child_count() - 1)
 	
 	# Consumeix molt rendiment instanciar les particules
-	var hit : Particles = hit_scene.instance()
+	var hit : CPUParticles = hit_scene.instance()
 	current_scene.add_child(hit)
 	hit.global_transform.origin = point
 	

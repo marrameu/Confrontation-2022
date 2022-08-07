@@ -68,9 +68,6 @@ func start_battle():
 	if battle_started:
 		return
 	
-	battle_started = true
-	emit_signal("battle_started")
-	
 	spawn_player()
 	
 	var blue_ais : int = num_of_players
@@ -93,6 +90,9 @@ func start_battle():
 		y += 1
 		spawn_ai_troop(ai_num, false)
 		ai_num += 1
+	
+	battle_started = true
+	emit_signal("battle_started")
 
 
 func _on_ai_troop_died(ai_num : int):
