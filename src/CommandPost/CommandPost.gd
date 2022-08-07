@@ -25,12 +25,10 @@ var is_ground : bool = false
 
 func _ready() -> void:
 	#PQ 3 EQUIPS?
-	if start_team == 1:
-		team_count[0] = 10
-	elif start_team == 2:
-		team_count[1] = 10
-	elif start_team == 3:
-		team_count[2] = 10
+	for value in team_count:
+		value = 0
+	if start_team != 0:
+		team_count[start_team - 1] = 10
 
 
 func _process(delta : float) -> void:

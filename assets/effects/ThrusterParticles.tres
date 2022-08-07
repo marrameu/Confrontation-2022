@@ -168,7 +168,7 @@ default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 3, 3, 3 ) ]
 
 [resource]
 code = "shader_type spatial;
-render_mode depth_draw_alpha_prepass, cull_disabled, specular_schlick_ggx;
+render_mode depth_draw_alpha_prepass, cull_disabled, specular_schlick_ggx, async_visible;
 
 uniform sampler2D tex_vtx_3;
 uniform float Intensity;

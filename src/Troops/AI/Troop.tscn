@@ -71,7 +71,8 @@ autostart = true
 [node name="TeamIndicator" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.769547, 0.321415 )
 mesh = SubResource( 3 )
-material/0 = null
+
+[node name="NavigationAgent" type="NavigationAgent" parent="."]
 
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_RespawnTimer_timeout"]

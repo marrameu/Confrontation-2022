@@ -122,3 +122,8 @@ func _on_ai_troop_died(ai_num : int):
 	
 	# var msg_blue : bool = !get_node_or_null("PilotManagers/AIManager" + str(num)).blue_team
 	# emit_signal("match_msg", "SHIP " + str(num) + " HA ESTAT ELIMINADA", msg_blue)
+
+
+func _on_SpawnHUD_change_cam():
+	$WaitingCam.translation = Vector3(0, 5000, 0)
+	$WaitingCam.rotation_degrees = Vector3(-90, 0, 0)

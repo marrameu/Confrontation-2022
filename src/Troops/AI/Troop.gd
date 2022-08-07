@@ -13,7 +13,7 @@ var pilot_man : PilotManager
 var current_enemie : Spatial
 
 # States (State Machine)
-var space := false # canviar-ho depenent del CP
+onready var space := translation.y > 1500 # canviar-ho depenent del CP
 var my_cap_ship : Spatial # cal?
 
 var dead := false
@@ -75,8 +75,9 @@ func _process(delta):
 		idle = false # nse q ve a compondre això
 		
 		if space:
-			if not searching_ship:
-				search_ship()
+			return
+			#if not searching_ship:
+			#	search_ship()
 		else:
 			if not conquering_a_cp:
 				if not going_to_cp_to_conquer:

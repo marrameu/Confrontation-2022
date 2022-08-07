@@ -4,6 +4,7 @@ extends CanvasLayer
 signal respawn
 signal start_battle
 signal change_spectate
+signal change_cam
 
 export var battle_state_path : NodePath 
 onready var battle_state = get_node(battle_state_path)
@@ -85,3 +86,7 @@ func _on_spectate_pressed(ship_type : int, new_index : int = 0):
 	new_buttons.get_node("Right").show()
 	current_location_index += new_index
 	emit_signal("change_spectate", current_specting_location, current_location_index)
+
+
+func _on_ChangeCamButton_pressed():
+	emit_signal("change_cam")

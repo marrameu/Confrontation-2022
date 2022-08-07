@@ -218,6 +218,17 @@ margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 4 )
 
+[node name="ChangeCamButton" type="Button" parent="Control"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -202.0
+margin_top = -253.0
+margin_right = -43.0
+margin_bottom = -216.0
+text = "Espai"
+
 [node name="PlayerRespawnTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
@@ -237,4 +248,5 @@ autostart = true
 [connection signal="pressed" from="Control/Spectate/HBoxContainer4/Left" to="." method="_on_spectate_pressed" binds= [ 4, -1 ]]
 [connection signal="pressed" from="Control/Spectate/HBoxContainer4/Button4" to="." method="_on_spectate_pressed" binds= [ 4 ]]
 [connection signal="pressed" from="Control/Spectate/HBoxContainer4/Right" to="." method="_on_spectate_pressed" binds= [ 4, 1 ]]
+[connection signal="pressed" from="Control/ChangeCamButton" to="." method="_on_ChangeCamButton_pressed"]
 [connection signal="timeout" from="PlayerRespawnTimer" to="." method="enable_spawn" binds= [ true ]]
