@@ -17,4 +17,5 @@ func update():
 		new_button.rect_position = get_viewport().get_camera().unproject_position(cp.translation)
 		new_button.rect_position -= Vector2(new_button.rect_size.x / 2, new_button.rect_size.y / 2)
 		new_button.cp = cp
+		new_button.connect("pressed", owner, "_on_cp_button_pressed", [cp])
 		add_child(new_button)

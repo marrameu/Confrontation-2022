@@ -13,6 +13,8 @@ var current_location_index : int = 0
 
 var waiting := false
 
+var selected_cp : CommandPost = null
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -38,10 +40,19 @@ func _on_Button_pressed():
 
 func _on_StartButton_pressed():
 	# if battle_state.battle_started # NO CAL
+	if not selected_cp:
+		return
+	
 	emit_signal("start_battle")
-	emit_signal("respawn")
+	emit_signal("respawn", selected_cp.translation + Vector3.UP * 2)
 	$Control.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	selected_cp = null
+
+
+func _on_cp_button_pressed(cp : CommandPost):
+	if (cp.m_team == 1 and not PlayerInfo.player_blue_team) or (cp.m_team == 2 and PlayerInfo.player_blue_team):
+		selected_cp = cp
 
 
 func enable_spawn(enable : bool):
