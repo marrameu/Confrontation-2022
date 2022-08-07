@@ -113,18 +113,21 @@ sync func _hit(collider_path : NodePath, point : Vector3) -> void:
 	var collider : CollisionObject = get_node(collider_path)
 	var damage := shot_damage
 	
-	if collider.is_in_group("Troops"):
-		if collider.pilot_man.blue_team != owner.pilot_man.blue_team:
-			if point.y > collider.get_global_transform().origin.y + 1.2:
-				damage = headshot_damage
-				emit_signal("headshot", collider_path)
-			else:
-				emit_signal("shot", collider_path)
-			
-			if get_tree().has_network_peer():
-				collider.get_node("HealthSystem").rpc("take_damage", damage)
-			else:
-				collider.get_node("HealthSystem").take_damage(damage)
+	if collider.is_in_group("Damagable"):
+		if collider.is_in_group("Troops"):
+			if collider.pilot_man.blue_team != owner.pilot_man.blue_team:
+				if point.y > collider.get_global_transform().origin.y + 1.2:
+					damage = headshot_damage
+					emit_signal("headshot", collider_path)
+				else:
+					emit_signal("shot", collider_path)
+		else:
+			emit_signal("shot", collider_path)
+		
+		if get_tree().has_network_peer():
+			collider.get_node("HealthSystem").rpc("take_damage", damage)
+		else:
+			collider.get_node("HealthSystem").take_damage(damage)
 		
 	elif collider.is_in_group("Ships"):
 		emit_signal("shot", collider_path)
