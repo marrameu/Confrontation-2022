@@ -19,7 +19,6 @@ func _process(delta):
 	if ship_health_percentage < core_health_percentage:
 		$Core/HealthSystem.take_damage((core_health_percentage - ship_health_percentage)/100 * $Core/HealthSystem.MAX_HEALTH)
 	elif core_health_percentage < ship_health_percentage:
-		print("uwu")
 		$HealthSystem.take_damage((ship_health_percentage - core_health_percentage)/100 * $HealthSystem.MAX_HEALTH)
 	print(ship_health_percentage, "  ", core_health_percentage)
 	
