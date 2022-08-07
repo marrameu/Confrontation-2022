@@ -1,6 +1,7 @@
 extends KinematicBody
 
 signal entered_ship
+signal died
 
 var pilot_man : PilotManager
 
@@ -114,3 +115,8 @@ func walk(delta : float) -> void:
 	
 	# Move
 	velocity = move_and_slide(velocity, Vector3(0, 1, 0), false, 4, deg2rad(MAX_SLOPE_ANGLE))
+
+
+func _on_HealthSystem_die(attacker):
+	queue_free()
+	emit_signal("died")

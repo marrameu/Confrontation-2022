@@ -39,8 +39,8 @@ func spawn_player(pos := Vector3(0, 2, 0)) -> Spatial:
 	new_player.pilot_man = $PilotManagers/PlayerMan
 	add_child(new_player)
 	$PlayerTroopCam.cam_pos_path = new_player.get_node("CameraBase/CameraPosition").get_path()
-	"""cam en lloc de self"""
-	new_player.connect("entered_ship", self, "_on_player_entered_ship")
+	new_player.connect("entered_ship", self, "_on_player_entered_ship") #cam en lloc de self
+	new_player.connect("died", self, "_on_player_died")
 	$PlayerTroopCam.make_current()
 	return new_player
 
@@ -68,8 +68,6 @@ func start_battle():
 	if battle_started:
 		return
 	
-	spawn_player()
-	
 	var blue_ais : int = num_of_players
 	var red_ais : int = num_of_players
 	var ai_num : int = 0
@@ -93,6 +91,11 @@ func start_battle():
 	
 	battle_started = true
 	emit_signal("battle_started")
+
+
+func _on_player_died():
+	$WaitingCam.make_current()
+	$SpawnHUD.show()
 
 
 func _on_ai_troop_died(ai_num : int):
