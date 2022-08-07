@@ -58,15 +58,19 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.68073, 0 )
 
 [node name="CommandPost" parent="Map/CommandPosts" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 150, 0.219, 150 )
+start_team = 1
 
 [node name="CommandPost5" parent="Map/CommandPosts" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 150, 0.219, -150 )
+start_team = 1
 
 [node name="CommandPost3" parent="Map/CommandPosts" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -150, 0.219, 150 )
+start_team = 2
 
 [node name="CommandPost4" parent="Map/CommandPosts" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -150, 0.219, -150 )
+start_team = 2
 
 [node name="CommandPost2" parent="Map/CommandPosts" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.174745, 0 )

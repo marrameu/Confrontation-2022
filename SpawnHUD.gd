@@ -14,11 +14,6 @@ var current_location_index : int = 0
 var waiting := false
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	show()
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if waiting:
@@ -27,6 +22,7 @@ func _process(delta):
 
 func show():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	$Control/CPButtons.update()
 	$Control.show()
 	$Control/StartButton.hide()
 	$Control/HBoxContainer.show()

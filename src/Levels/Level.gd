@@ -22,6 +22,7 @@ func _ready():
 	$PilotManagers/PlayerMan.blue_team = PlayerInfo.player_blue_team
 	
 	$WaitingCam.make_current()
+	$SpawnHUD.show()
 
 
 
@@ -45,7 +46,7 @@ func spawn_player(pos := Vector3(0, 2, 0)) -> Spatial:
 	return new_player
 
 
-func spawn_ai_troop(ai_num : int, blue_team := false, pos := Vector3(0, 2, 0)) -> Spatial:
+func spawn_ai_troop(ai_num : int, blue_team := false) -> Spatial:
 	var new_troop_man : PilotManager = get_node_or_null("PilotManagers/AIManager" + str(ai_num))
 	# crea'n un de nou
 	if not new_troop_man:
@@ -56,7 +57,19 @@ func spawn_ai_troop(ai_num : int, blue_team := false, pos := Vector3(0, 2, 0)) -
 	
 	
 	var new_troop = ai_troop_scene.instance()
-	new_troop.translation = Vector3(rand_range(-250, 250), 2, rand_range(-250, 250))
+	
+	var own_cps : Array
+	for cp in get_tree().get_nodes_in_group("CommandPosts"):
+		if cp.m_team == 1 and not new_troop_man.blue_team:
+			own_cps.append(cp)
+		elif cp.m_team == 2 and new_troop_man.blue_team:
+			own_cps.append(cp)
+	if own_cps:
+		var my_cp : CommandPost = own_cps[randi() % own_cps.size()]
+		new_troop.translation = my_cp.translation + Vector3(rand_range(-15, 15), 2, rand_range(-15, 15))
+	else:
+		pass
+	
 	new_troop.pilot_man = new_troop_man
 	new_troop.connect("died", self, "_on_ai_troop_died", [ai_num])
 	add_child(new_troop)
@@ -79,7 +92,7 @@ func start_battle():
 	
 	var x : int = 0
 	while x < blue_ais:
-		x += 1 
+		x += 1
 		spawn_ai_troop(ai_num, true)
 		ai_num += 1
 	
