@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Ship.gd" type="Script" id=1]
 [ext_resource path="res://src/Ships/ShipPhysics.gd" type="Script" id=2]
@@ -31,7 +31,6 @@
 [ext_resource path="res://src/StateMachine/PatrolMiddlePoint.gd" type="Script" id=29]
 [ext_resource path="res://src/StateMachine/AttackCS.gd" type="Script" id=30]
 [ext_resource path="res://src/StateMachine/AttackBigShip.gd" type="Script" id=31]
-[ext_resource path="res://assets/cone.tres" type="Shape" id=32]
 [ext_resource path="res://assets/Materials/grey_ship_mat.tres" type="Material" id=33]
 [ext_resource path="res://assets/materials/command_post/grey.tres" type="Material" id=34]
 
@@ -46,9 +45,6 @@ extents = Vector3( 7.10742, 4.44127, 10.355 )
 
 [sub_resource type="GradientTexture" id=8]
 gradient = ExtResource( 16 )
-
-[sub_resource type="SphereShape" id=9]
-radius = 1000.0
 
 [sub_resource type="CubeMesh" id=4]
 
@@ -181,17 +177,6 @@ cast_to = Vector3( 0, 0, 1500 )
 debug_shape_custom_color = Color( 1, 0, 0, 1 )
 debug_shape_thickness = 5
 
-[node name="ShootingArea" type="Area" parent="Shooting"]
-monitoring = false
-monitorable = false
-
-[node name="CollisionShape" type="CollisionShape" parent="Shooting/ShootingArea"]
-transform = Transform( 300, 0, 0, 0, -6.55671e-05, 300, 0, -1500, -1.31134e-05, 0, 0, 1500 )
-shape = ExtResource( 32 )
-__meta__ = {
-"_editor_description_": "Fer-la més petita"
-}
-
 [node name="EnginesAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 11 )
 unit_size = 10.0
@@ -271,13 +256,6 @@ cast_to = Vector3( 0, 150, 300 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0 )
 enabled = true
 cast_to = Vector3( 0, -150, 300 )
-
-[node name="EnemyDetectArea" type="Area" parent="."]
-monitoring = false
-monitorable = false
-
-[node name="CollisionShape" type="CollisionShape" parent="EnemyDetectArea"]
-shape = SubResource( 9 )
 
 [node name="Debug" type="Spatial" parent="."]
 

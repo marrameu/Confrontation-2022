@@ -17,7 +17,8 @@ func update(_delta):
 		attack_current_enemy()
 		t.stop()
 	else:
-		if t.is_stopped():
+		check_for_close_enemies()
+		if t.is_stopped(): # CAL QUE SIGUI TIMER? NI IDEA
 			t.start()
 
 
@@ -37,12 +38,3 @@ func check_for_close_enemies(min_dist : float = 750.0):
 				clos_enemy = ship
 	if clos_enemy:
 		set_enemy()
-
-
-func _on_EnemyDetectArea_body_entered(body):
-	if enemy_wr and enemy_wr.get_ref():
-		return
-	
-	if body is Ship:
-		if body.pilot_man.blue_team != owner.pilot_man.blue_team:
-			set_enemy()

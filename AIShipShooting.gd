@@ -23,9 +23,12 @@ func _process(delta):
 	# cal la weakref? si pot ser evitat millor
 	# si ho faig amb body_entered/exited el problema esq si canvia d'enemic i l'anterior no ha sortit de l'àrea...
 	if weakref(target).get_ref():
-		for body in $ShootingArea.get_overlapping_bodies():
-			if body == target:
-				enemy_in_range = true
+		var direction := Vector3(target.translation - owner.translation).normalized()
+		var x = direction.dot(owner.global_transform.basis.x)
+		var y = direction.dot(owner.global_transform.basis.y)
+		var prova = Vector2(-x, -y).length()
+		if prova < 0.2:
+			enemy_in_range = true
 	
 		if wants_shoots[1] and ammos[1]: # for cada wantsshoot comprovar si és míssil
 			if not target_locked:
