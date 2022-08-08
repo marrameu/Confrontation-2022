@@ -40,13 +40,14 @@ skeleton = NodePath("../..")
 material/0 = ExtResource( 3 )
 
 [node name="RayCast" type="RayCast" parent="Spatial"]
-enabled = true
 cast_to = Vector3( 0, 0, -800 )
 debug_shape_custom_color = Color( 0.992157, 0, 1, 1 )
 debug_shape_thickness = 5
 
 [node name="Area" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( -500, 7.54979e-05, 0, -7.54979e-05, -500, 0, 0, 0, 500, 0, 397.521, 1.5358e-05 )

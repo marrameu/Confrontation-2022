@@ -60,7 +60,7 @@ func update_yaw_and_ptich() -> void:
 
 
 func _on_DrainTurboTimer_timeout():
-	$TurboSwitchAudio.play()
+	#$TurboSwitchAudio.play()
 	avaliable_turbos = clamp(avaliable_turbos - 1, 0, MAX_AVALIABLE_TURBOS)
 	wants_turbo = Input.is_action_pressed(turbo_action)
 	can_turbo = avaliable_turbos and owner.landing_areas < 1

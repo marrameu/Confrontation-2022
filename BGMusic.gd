@@ -16,7 +16,7 @@ func _ready():
 			stream = audio_sfx2
 		2:
 			stream = audio_sfx3
-	play()
+	# play()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

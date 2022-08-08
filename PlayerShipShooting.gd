@@ -36,16 +36,16 @@ func _process(delta):
 			if can_shoots[1]:
 				shoot_bullet(1)
 	elif wants_shoots[1] and ammos[1] < 1 and not $NoAmmoAudio.playing:
-		$NoAmmoAudio.play()
+		pass #$NoAmmoAudio.play()
 	
 	if wants_shoots[0] and can_shoots[0]:
 		shoot_bullet(0, shoot_target())
 	elif wants_shoots[0] and ammos[0] < 1 and not $NoAmmoAudio.playing:
-		$NoAmmoAudio.play()
+		pass#$NoAmmoAudio.play()
 	
 	if locking_target_to_missile:
 		if not $LockingAudio.playing:
-			$LockingAudio.play()
+			pass#$LockingAudio.play()
 	else:
 		$LockingAudio.stop()
 

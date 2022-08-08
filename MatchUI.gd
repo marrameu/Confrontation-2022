@@ -31,7 +31,7 @@ func _process(delta):
 
 
 func update_lifebars(ship_path : NodePath, shield_life_bar):
-	var ship = get_node(ship_path)
+	var ship = get_node_or_null(ship_path)
 	
 	if not ship:
 		return

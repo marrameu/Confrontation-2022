@@ -17,8 +17,9 @@ func _process(delta):
 	var ship_health_percentage : float = float($HealthSystem.health)/$HealthSystem.MAX_HEALTH*100
 	var core_health_percentage : float = float($Core/HealthSystem.health)/$Core/HealthSystem.MAX_HEALTH*100
 	if ship_health_percentage < core_health_percentage:
-		$Core/HealthSystem.take_damage((core_health_percentage - ship_health_percentage)/100 * $Core/HealthSystem.MAX_HEALTH)
+		var amount : float = (core_health_percentage - ship_health_percentage)/100 * $Core/HealthSystem.MAX_HEALTH
+		if amount > 1:
+			$Core/HealthSystem.take_damage(amount)
 	elif core_health_percentage < ship_health_percentage:
-		$HealthSystem.take_damage((ship_health_percentage - core_health_percentage)/100 * $HealthSystem.MAX_HEALTH)
-	print(ship_health_percentage, "  ", core_health_percentage)
+		$HealthSystem.take_damage((ship_health_percentage - core_health_percentage)/100 * $HealthSystem.MAX_HEALTH, true)
 	

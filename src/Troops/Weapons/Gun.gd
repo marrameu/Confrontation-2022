@@ -76,7 +76,7 @@ func _shoot() -> void:
 	if not continuous:
 		shooting = false
 	
-	$Audio.play()
+	#$Audio.play()
 	
 	# zoom /2
 	var x = rand_range(-offset.x, offset.x)

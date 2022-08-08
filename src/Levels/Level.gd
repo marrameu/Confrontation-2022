@@ -2,11 +2,17 @@ extends Spatial
 
 signal battle_started
 signal ship_added
+signal big_ship_shields_down
+signal match_msg
 
 var player_scene : PackedScene = preload("res://src/Troops/Player.tscn")
 var ai_troop_scene : PackedScene = preload("res://src/Troops/AI/Troop.tscn")
 
 var middle_point = 0.0
+
+var blue_points = 0
+var red_points = 0
+var MAX_POINTS = 1000
 
 var battle_started := false
 
@@ -23,6 +29,12 @@ func _ready():
 	
 	$WaitingCam.make_current()
 	$SpawnHUD.show()
+
+
+func _process(delta):
+	$MatchUI.middle_point_value = middle_point * 1/30 # 
+	$MatchUI/Label.text = "PUNTS VERMELLS: " + str(red_points) + "\nPUNTS BLAUS: " + str(blue_points)
+
 
 
 
@@ -78,6 +90,7 @@ func spawn_ai_troop(ai_num : int, blue_team := false) -> Spatial:
 
 
 func start_battle():
+	return
 	if battle_started:
 		return
 	
@@ -120,10 +133,39 @@ func _on_ai_troop_died(ai_num : int):
 	t.connect("timeout", self, "spawn_ai_troop", [ai_num])
 	t.connect("timeout", t, "queue_free")
 	
-	# var msg_blue : bool = !get_node_or_null("PilotManagers/AIManager" + str(num)).blue_team
-	# emit_signal("match_msg", "SHIP " + str(num) + " HA ESTAT ELIMINADA", msg_blue)
+	var is_blue : bool = get_node_or_null("PilotManagers/AIManager" + str(ai_num)).blue_team
+	if is_blue:
+		red_points += 10
+	else:
+		blue_points += 10
+	# emit_signal("match_msg", "SHIP " + str(num) + " HA ESTAT ELIMINADA", !is_blue)
 
 
 func _on_SpawnHUD_change_cam():
 	$WaitingCam.translation = Vector3(0, 5000, 0)
 	$WaitingCam.rotation_degrees = Vector3(-90, 0, 0)
+
+
+func _on_BigShip_shields_down(ship):
+	emit_signal("big_ship_shields_down", ship)
+	var msg_blue : bool = !ship.blue_team
+	emit_signal("match_msg", ship.name + " HA PERDUT ELS ESCUTS", msg_blue)
+
+
+func _on_BigShip_destroyed(ship : Spatial):
+	emit_signal("match_msg", ship.name + " HA ESTAT DESTRUÏDA", !ship.blue_team)
+	if ship.is_in_group("CapitalShips"):
+		if not ship.blue_team:
+			red_points += 200
+		else:
+			blue_points += 200
+	elif ship.is_in_group("SupportShips"):
+		if not ship.blue_team:
+			red_points += 100
+		else:
+			blue_points += 100
+	elif ship.is_in_group("AttackShips"):
+		if not ship.blue_team:
+			red_points += 30
+		else:
+			blue_points += 30

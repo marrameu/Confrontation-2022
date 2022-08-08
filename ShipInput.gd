@@ -37,12 +37,12 @@ func _process(delta):
 	if not turboing:
 		if wants_turbo and can_turbo:
 			do_turbo = true
-			$TurboAudio.play()
+			#$TurboAudio.play()
 	else:
 		if wants_drift:
 			drifting = true
 			do_turbo = false
-			$DriftAudio.play()
+			#$DriftAudio.play()
 		# drifting = Input.is_action_pressed(drift_action) # just?
 	
 	if not drifting: # aquesta comprovació potser sorba una mica
@@ -75,10 +75,10 @@ func update_throttle(des_value : float, delta : float) -> void:
 		turbo_clamp = 0.25 if owner.landing_areas >= 1 else 1.0
 		if des_value > throttle:
 			target += delta / 2
-			target = max(throttle, target) # per si es passa
+			target = max(throttle, target) # per si es passa (NO FUNCIONA QUAN BAIXEN ELS FPS!!!!)
 		elif des_value < throttle:
 			target -= delta / 2
-			target = min(throttle, target) # per si es passa
+			target = min(throttle, target) # per si es passa (NO FUNCIONA QUAN BAIXEN ELS FPS!!!!)
 	
 	target = clamp(target, 0.0, turbo_clamp) # TURBO_THROTTLE
 	

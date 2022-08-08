@@ -52,7 +52,7 @@ func check_collisions():
 				translation = ray.get_collision_point()
 				$HitParticles.hide()
 				$Explosion.show()
-				$AudioStreamPlayer3D2.play()
+				# $AudioStreamPlayer3D2.play()
 				$AnimationPlayer.play("explode")
 				_hit = true
 		ray.cast_to = Vector3(0, 0, -long)
