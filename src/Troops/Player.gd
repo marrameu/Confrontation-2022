@@ -13,6 +13,7 @@ var direction := Vector3()
 
 # Walk
 var can_run := true
+var running := false
 var gravity := -9.8 * 4
 const MAX_SPEED := 6.75
 const MAX_RUNNING_SPEED := 10
@@ -32,7 +33,7 @@ var dead := false
 
 func _physics_process(delta):
 	var joystick_movement := 0.0
-	var yaw_strenght := joystick_movement + mouse_movement.x
+	var yaw_strenght : float = (joystick_movement + mouse_movement.x) * $CameraBase.rotate_speed_multipiler
 	if yaw_strenght:
 		rotate_yaw(yaw_strenght, delta)
 	mouse_movement = Vector2.ZERO
@@ -81,10 +82,8 @@ func walk(delta : float) -> void:
 	temp_velocity.y = 0
 	
 	var speed : float
-	if Input.is_action_pressed("run") and can_run:
-		speed = MAX_RUNNING_SPEED
-	else:
-		speed = MAX_SPEED
+	running = Input.is_action_pressed("run") and can_run
+	speed = MAX_RUNNING_SPEED if running else MAX_SPEED
 	
 	# Max velocity
 	var target = direction * speed

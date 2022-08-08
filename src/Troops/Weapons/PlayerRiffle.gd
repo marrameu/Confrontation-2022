@@ -1,7 +1,16 @@
 extends Gun
 
+var init_offset : Vector2
+
+
+func _ready():
+	init_offset = offset
+	connect("shoot", owner.get_node("CameraBase"), "shake_camera", [self])
+
 
 func _process(delta):
+	offset = init_offset/2 if  owner.get_node("CameraBase").zooming else init_offset
+	
 	shooting = Input.is_action_pressed("shoot")
 	var cam := get_viewport().get_camera()
 	var cam_basis : Basis = cam.global_transform.basis

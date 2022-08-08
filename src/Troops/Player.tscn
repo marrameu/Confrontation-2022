@@ -29,6 +29,10 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.3244
 
 [node name="Tween" type="Tween" parent="CameraBase"]
 
+[node name="StabilizeTimer" type="Timer" parent="CameraBase"]
+wait_time = 0.3
+one_shot = true
+
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 1 )
@@ -106,6 +110,7 @@ align = 1
 
 [node name="HealthSystem" parent="." instance=ExtResource( 7 )]
 
+[connection signal="timeout" from="CameraBase/StabilizeTimer" to="CameraBase" method="_on_StabilizeTimer_timeout"]
 [connection signal="timeout" from="Interact/Timer" to="Interact" method="_on_Timer_timeout"]
 [connection signal="timeout" from="PlayerHUD/LifeBarEnemy/Timer" to="PlayerHUD/LifeBarEnemy" method="_on_Timer_timeout"]
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]

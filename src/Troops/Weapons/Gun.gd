@@ -20,7 +20,7 @@ té lloc amb el dany especial o dany 'headshot'.
 
 S'hauria de crear una variable per a determinar el retrocés.
 
-Com fer per a que el só es sincronitzi online? Senyals?
+Com fer que el so se sincronitzi online? Senyals?
 """
 
 signal shoot
@@ -34,10 +34,12 @@ export var continuous := true
 export var fire_rate := 5.0
 
 export var shoot_range := 500
-export var offset := Vector2(60, 60)
+export var offset := Vector2(30, 30)
 
 export var shot_damage := 25
 export var headshot_damage := 50
+
+export var recoil_force := Vector2.ONE
 
 var _next_time_to_fire := 0.0
 
@@ -64,8 +66,6 @@ func _process(delta : float) -> void:
 		_next_time_to_fire = time + 1.0 / fire_rate
 		_shoot()
 	
-	
-	
 	#if not shooting:
 	#	cam.get_parent().stop_shake_camera()
 
@@ -78,10 +78,9 @@ func _shoot() -> void:
 	
 	#$Audio.play()
 	
-	# zoom /2
-	var x = rand_range(-offset.x, offset.x)
-	var y = rand_range(-offset.y, offset.y)
-	$RayCast.cast_to = Vector3(x, y, shoot_range)
+	var vector := Vector2(rand_range(-offset.x, offset.x), rand_range(-offset.y, offset.y))
+	vector = vector.length() * vector.normalized()
+	$RayCast.cast_to = Vector3(vector.x, vector.y, shoot_range)
 	
 	var collider = $RayCast.get_collider()
 	var point = $RayCast.get_collision_point()
@@ -115,7 +114,9 @@ sync func _hit(collider_path : NodePath, point : Vector3) -> void:
 	
 	if collider.is_in_group("Damagable"):
 		if collider.is_in_group("Troops"):
-			if collider.pilot_man.blue_team != owner.pilot_man.blue_team:
+			if collider.pilot_man.blue_team == owner.pilot_man.blue_team:
+				return
+			else:
 				if point.y > collider.get_global_transform().origin.y + 1.2:
 					damage = headshot_damage
 					emit_signal("headshot", collider_path)

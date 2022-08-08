@@ -10,7 +10,7 @@ export var body : NodePath
 var pilot_man : PilotManager
 
 # Atack
-var current_enemie : Spatial
+var current_enemy : Spatial
 
 # States (State Machine)
 onready var space := translation.y > 1500 # canviar-ho depenent del CP
@@ -93,10 +93,10 @@ func _process(delta):
 						$ConquestTimer.start() # SI MOR CONQUERINT, REPAEREIX CONQUERINT? AL DISABLE CCOMPONENTS S'HAURIA DE RESTABLIR TMB
 	
 	# Shoot
-	if current_enemie and weakref(current_enemie).get_ref():
-		if current_enemie.pilot_man:
-			if not current_enemie.translation == translation:
-				look_at(current_enemie.translation, Vector3(0, 1, 0))
+	if current_enemy and weakref(current_enemy).get_ref():
+		if current_enemy.pilot_man:
+			if not current_enemy.translation == translation:
+				look_at(current_enemy.translation, Vector3(0, 1, 0))
 			rotation = Vector3(0, rotation.y + deg2rad(180), 0)
 			if not $Weapons/AIGun.shooting:
 				$Weapons/AIGun.shooting = true
@@ -105,9 +105,9 @@ func _process(delta):
 			for i in range(0, $EnemyDetection.enemies.size()):
 				if not $EnemyDetection.enemies.size() > i:
 					return
-				if $EnemyDetection.enemies[i] == current_enemie:
+				if $EnemyDetection.enemies[i] == current_enemy:
 					$EnemyDetection.enemies.remove(i)
-			current_enemie = null
+			current_enemy = null
 	if $Weapons/AIGun.shooting:
 		$Weapons/AIGun.shooting = false
 
@@ -243,9 +243,9 @@ func search_cp_and_conquer(): # àlies terra
 	# Update Path: Command Posts
 	# Cercar els CP enemics
 	var enemy_command_posts := []
-	for command_post in get_tree().get_nodes_in_group("CommandPosts"):
+	for command_post in get_tree().current_scene.get_node("%CommandPosts").get_children(): # get_tree().get_nodes_in_group("CommandPosts"): així no pq tmb busca els de les cs
 		if command_post.capturable:
-			if command_post.m_team == 0 or (command_post.m_team == 1 and not pilot_man.blue_team) or (command_post.m_team == 2 and pilot_man.blue_team):
+			if command_post.m_team == 0 or (command_post.m_team == 1 and pilot_man.blue_team) or (command_post.m_team == 2 and not pilot_man.blue_team):
 				enemy_command_posts.push_back(command_post)
 	
 	# Hi ha CP

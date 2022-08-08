@@ -90,7 +90,6 @@ func spawn_ai_troop(ai_num : int, blue_team := false) -> Spatial:
 
 
 func start_battle():
-	return
 	if battle_started:
 		return
 	

@@ -3,7 +3,7 @@ extends Node
 signal bloom_toggled(value)
 signal set_brightness(value)
 
-var player_mouse_sensitivity := 0.6
+var player_mouse_sensitivity := 0.2
 
 
 # NAUS
