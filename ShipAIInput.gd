@@ -55,7 +55,7 @@ func move_forward(delta):
 # Ja no va ebri!, però li costa de centrar-se del tot al voltant de l'eix Y, segurament és deu a fer-ho d'aquesta manera, amb físiques i amb un Slerp aproxiament
 # no obstant això, aquest és el millor mètode que he trobat i val a dir que n'estic prou orgullós
 func turn(delta):
-	#return
+	# return
 	
 	var desired_oirent : Transform = owner.global_transform.looking_at(target, Vector3.UP)
 	desired_oirent = desired_oirent.basis.rotated(desired_oirent.basis.y, deg2rad(180))

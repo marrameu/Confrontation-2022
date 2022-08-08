@@ -182,6 +182,8 @@ debug_shape_custom_color = Color( 1, 0, 0, 1 )
 debug_shape_thickness = 5
 
 [node name="ShootingArea" type="Area" parent="Shooting"]
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Shooting/ShootingArea"]
 transform = Transform( 300, 0, 0, 0, -6.55671e-05, 300, 0, -1500, -1.31134e-05, 0, 0, 1500 )
@@ -271,6 +273,8 @@ enabled = true
 cast_to = Vector3( 0, -150, 300 )
 
 [node name="EnemyDetectArea" type="Area" parent="."]
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="EnemyDetectArea"]
 shape = SubResource( 9 )
