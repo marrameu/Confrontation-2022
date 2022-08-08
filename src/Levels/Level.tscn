@@ -123,11 +123,13 @@ is_player = true
 [node name="BigShips" type="Spatial" parent="."]
 
 [node name="CapitalShipRed" parent="BigShips" instance=ExtResource( 11 )]
+unique_name_in_owner = true
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3000, 2019.41, 0 )
 red_mat = ExtResource( 16 )
 blue_mat = ExtResource( 15 )
 
 [node name="CapitalShipBlue" parent="BigShips" instance=ExtResource( 11 )]
+unique_name_in_owner = true
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2996, 2019.41, 0 )
 red_mat = ExtResource( 16 )
 blue_mat = ExtResource( 15 )
@@ -206,6 +208,7 @@ script = ExtResource( 14 )
 
 [node name="GroundToSpaceCannon" parent="." instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -58.8866, 0, 0 )
+cp_path = NodePath("../Map/CommandPosts/CommandPost2")
 
 [connection signal="change_cam" from="SpawnHUD" to="." method="_on_SpawnHUD_change_cam"]
 [connection signal="respawn" from="SpawnHUD" to="." method="spawn_player"]

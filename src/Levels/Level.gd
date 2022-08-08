@@ -25,6 +25,9 @@ func _ready():
 		big_ship.connect("shields_down", self, "_on_BigShip_shields_down")
 		big_ship.connect("destroyed", self, "_on_BigShip_destroyed")
 	
+	for cp in $"%CommandPosts".get_children():
+		cp.connect("add_points", self, "_on_cp_add_points")
+	
 	$PilotManagers/PlayerMan.blue_team = PlayerInfo.player_blue_team
 	
 	$WaitingCam.make_current()
@@ -134,9 +137,9 @@ func _on_ai_troop_died(ai_num : int):
 	
 	var is_blue : bool = get_node_or_null("PilotManagers/AIManager" + str(ai_num)).blue_team
 	if is_blue:
-		red_points += 10
+		red_points += 1 # potser una mica més
 	else:
-		blue_points += 10
+		blue_points += 1
 	# emit_signal("match_msg", "SHIP " + str(num) + " HA ESTAT ELIMINADA", !is_blue)
 
 
@@ -168,3 +171,10 @@ func _on_BigShip_destroyed(ship : Spatial):
 			red_points += 30
 		else:
 			blue_points += 30
+
+
+func _on_cp_add_points(blue_team : bool) -> void:
+	if blue_team:
+		blue_points += 10
+	else:
+		red_points += 10

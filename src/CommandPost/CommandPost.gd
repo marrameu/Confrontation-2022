@@ -2,6 +2,8 @@ extends Spatial
 
 class_name CommandPost
 
+signal add_points
+
 export var capturable := true
 export(int, 0, 2) var start_team := 0
 
@@ -72,11 +74,17 @@ func _process(delta : float) -> void:
 func _physics_process(delta : float) -> void:
 	if team_count[0] > 7:
 		m_team = 1 # vermell
+		if $Timer.is_stopped():
+			$Timer.start()
 	elif team_count[1] > 7:
 		m_team = 2 # blau
+		if $Timer.is_stopped():
+			$Timer.start()
 	elif team_count[2] > 7:
 		m_team = 3
 	elif team_count[0] + team_count[1] + team_count[2] < 7:
+		if not $Timer.is_stopped():
+			$Timer.stop()
 		m_team = 0
 	
 	update_material()
@@ -164,3 +172,8 @@ func update_material() -> void:
 		$MeshInstance.set_material_override(materials[1])
 	elif m_team == 1:
 		$MeshInstance.set_material_override(materials[2])
+
+
+func _on_Timer_timeout():
+	var blue_team = m_team == 2
+	emit_signal("add_points", blue_team)

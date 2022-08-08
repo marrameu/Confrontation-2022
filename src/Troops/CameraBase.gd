@@ -94,7 +94,7 @@ func shake_camera(gun : Gun) -> void:
 
 func process_shake() -> void:
 	# Si es mou el ratolí, talla-ho tot (reinicia), deixa de shake
-	if mouse_movement.length() > 1:#input_movement.length() > 0: # menor que 1 pq així cal un gir prou gran per tallar el shake
+	if abs(mouse_movement.y) > 2:#if mouse_movement.length() > 1:#input_movement.length() > 0: # menor que 1 pq així cal un gir prou gran per tallar el shake
 		wants_to_stabilize = false
 		shaking = false
 	
@@ -108,6 +108,9 @@ func process_shake() -> void:
 		original_cam_rot.y = owner.rotation.y - shake_amount.y
 		shake_amount.y = lerp(shake_amount.y, 0, 0.15)
 	elif wants_to_stabilize: 
+		if recoil_amount.x < 0.001: # ja s'ha estabilitzat
+			wants_to_stabilize = false
+			return
 		var to = rotation.x + recoil_amount.x
 		rotation.x = lerp(rotation.x, to, 0.15)
 		owner.rotation.y = lerp(owner.rotation.y, owner.rotation.y - recoil_amount.y, 0.15)
