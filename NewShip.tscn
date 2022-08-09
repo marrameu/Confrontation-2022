@@ -258,16 +258,15 @@ enabled = true
 cast_to = Vector3( 0, -150, 300 )
 
 [node name="Debug" type="Spatial" parent="."]
+visible = false
 
 [node name="Pito" type="MeshInstance" parent="Debug"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.75062, 0 )
-visible = false
 mesh = SubResource( 4 )
 skeleton = NodePath("../..")
 
 [node name="CPUParticles" type="CPUParticles" parent="Debug"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.85104 )
-visible = false
 local_coords = false
 mesh = SubResource( 5 )
 gravity = Vector3( 0, 0, 0 )

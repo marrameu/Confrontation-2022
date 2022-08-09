@@ -1,7 +1,7 @@
 extends Spatial
 
 var enemies = []
-const bullet_scene : PackedScene = preload("res://src/Bullets/TurretBullet.tscn")
+export var bullet_scene : PackedScene = preload("res://src/Bullets/TurretBullet.tscn")
 
 var wants_shoot := false
 

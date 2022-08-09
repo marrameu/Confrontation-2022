@@ -26,6 +26,8 @@ var is_ground : bool = false
 
 
 func _ready() -> void:
+	$TextureProgress.hide()
+	
 	#PQ 3 EQUIPS?
 	for value in team_count:
 		value = 0
@@ -57,10 +59,13 @@ func _process(delta : float) -> void:
 	bodies[0] = 0
 	bodies[1] = 0
 	bodies[2] = 0
+	var texture_progress_visible := false
 	for body in $Area.get_overlapping_bodies():
 		if body.is_in_group("Troops"):
 			if body.dead:
 				return
+			if body.is_in_group("Players"):
+				texture_progress_visible = true
 			var body_team : int = 1 if not body.pilot_man.blue_team else 2
 			match body_team:
 				1:
@@ -69,6 +74,7 @@ func _process(delta : float) -> void:
 					bodies[1] += 1 # blau
 				3:
 					bodies[2] += 1
+	$TextureProgress.visible = texture_progress_visible
 
 
 func _physics_process(delta : float) -> void:
@@ -123,6 +129,16 @@ func _physics_process(delta : float) -> void:
 			team_count[1] = clamp(team_count[1] - delta * bodies[2], 0, 10)
 		else:
 			team_count[2] = clamp(team_count[2] + delta * bodies[2], 0, 10)
+	
+	var max_value = 0
+	for value in team_count:
+		if value > max_value:
+			max_value = value
+			if value == team_count[0]:
+				$TextureProgress.tint_progress = Color.red
+			elif value == team_count[1]:
+				$TextureProgress.tint_progress = Color.blue
+	$TextureProgress.value = max_value
 
 
 func update_button_color(button : Button) -> void:

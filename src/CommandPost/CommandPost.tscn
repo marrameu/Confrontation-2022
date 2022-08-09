@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/CommandPost/CommandPost.gd" type="Script" id=1]
+[ext_resource path="res://assets/interface/life_bar.png" type="Texture" id=2]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.478431, 0.478431, 0.478431, 1 )
@@ -29,5 +30,25 @@ shape = SubResource( 3 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 15.0
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -77.0
+margin_top = -94.0
+margin_right = -61.0
+margin_bottom = 94.0
+max_value = 10.0
+step = 0.0
+value = 5.0
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 2 )
+fill_mode = 3
+tint_under = Color( 0.705882, 0.705882, 0.705882, 0.380392 )
+tint_over = Color( 1, 1, 1, 0.505882 )
+tint_progress = Color( 1, 0, 0, 1 )
+nine_patch_stretch = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

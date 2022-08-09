@@ -23,7 +23,7 @@ func _process(delta : float) -> void:
 	# Walk
 	if path.size() > 1:
 		# Distance to stop
-		if get_parent().global_transform.origin.distance_to(navigation_node.to_global(end)) < min_distance:
+		if get_parent().global_transform.origin.distance_to(end) < min_distance:
 			path = []
 			finished = true
 			emit_signal("arrived")

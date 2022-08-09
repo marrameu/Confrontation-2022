@@ -1,10 +1,6 @@
 extends "res://src/StateMachine/StateMachine.gd"
 
 
-var enemy_cs_shields_dead := false
-var own_cs_shields_dead := false
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# si no és el servidor que es desactivi l'state machine (active) o crear un estat Client
@@ -21,13 +17,6 @@ func _ready():
 	}
 	
 	set_active(false)
-
-
-func capital_ship_shield_died(own_team : bool):
-	if own_team:
-		own_cs_shields_dead = true
-	else:
-		enemy_cs_shields_dead = true
 
 
 func _process(_delta):

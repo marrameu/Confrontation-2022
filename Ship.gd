@@ -42,11 +42,6 @@ func init(new_pilot_man : PilotManager):
 
 
 func _process(delta):
-	# DEBUG
-	if Input.is_action_just_pressed("test"):
-		if randi() % 2:
-			init(PilotManager.new())
-	
 	# no es pot fer des de l'input pq el godot peta si treus l'script des del mateix script
 	if state == States.LANDED and is_player_or_ai == 1:
 		if Input.is_action_just_pressed("interact"):
@@ -97,9 +92,12 @@ func input_to_physics(delta):
 func check_collisions(delta):
 	if state == States.FLYING and get_colliding_bodies().size() > 0:
 		for body in get_colliding_bodies():
-			#if not body.is_in_group("Bullets"):
-			#Input.start_joy_vibration(0, 0, 1, 1)
-			$HealthSystem.take_damage(delta * 8 * linear_velocity.length(), true) # s'hauria de fer la velocitat respecte el punt de col·lisió i no la total
+			if not dead:
+				#if not body.is_in_group("Bullets"):
+				#Input.start_joy_vibration(0, 0, 1, 1)
+				$HealthSystem.take_damage(delta * 8 * linear_velocity.length(), true) # s'hauria de fer la velocitat respecte el punt de col·lisió i no la total
+			else:
+				die() # Així si xoca quan fa voltes, en lloc de seguir fent voltes (que queda fatal), explota directament
 
 
 func _on_HealthSystem_die(attacker : Spatial):

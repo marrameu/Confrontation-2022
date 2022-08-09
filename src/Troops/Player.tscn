@@ -15,7 +15,7 @@
 radius = 0.6
 height = 2.4
 
-[node name="Player" type="KinematicBody" groups=["Troops"]]
+[node name="Player" type="KinematicBody" groups=["Players", "Troops"]]
 script = ExtResource( 2 )
 
 [node name="Model" parent="." instance=ExtResource( 1 )]

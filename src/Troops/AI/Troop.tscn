@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/Troops/AI/Troop.gd" type="Script" id=1]
 [ext_resource path="res://assets/models/ybot/TroopModel.tscn" type="PackedScene" id=2]
@@ -9,6 +9,10 @@
 [ext_resource path="res://assets/materials/command_post/red.tres" type="Material" id=7]
 [ext_resource path="res://src/Troops/AI/TroopNetwork.gd" type="Script" id=8]
 [ext_resource path="res://assets/materials/command_post/blue.tres" type="Material" id=9]
+[ext_resource path="res://src/Troops/AI/AITroopStateMachine.gd" type="Script" id=10]
+[ext_resource path="res://src/Troops/AI/ChooseObjective.gd" type="Script" id=11]
+[ext_resource path="res://src/Troops/AI/ConquerGroundCPs.gd" type="Script" id=12]
+[ext_resource path="res://src/Troops/AI/EnterShip.gd" type="Script" id=13]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.6
@@ -60,10 +64,6 @@ script = ExtResource( 8 )
 wait_time = 5.0
 one_shot = true
 
-[node name="ConquestTimer" type="Timer" parent="."]
-wait_time = 10.0
-one_shot = true
-
 [node name="InitTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
@@ -74,7 +74,26 @@ mesh = SubResource( 3 )
 
 [node name="NavigationAgent" type="NavigationAgent" parent="."]
 
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 10 )
+START_STATE = NodePath("ChooseObjective")
+
+[node name="ChooseObjective" type="Node" parent="StateMachine"]
+script = ExtResource( 11 )
+
+[node name="ConquerGroundCPs" type="Node" parent="StateMachine"]
+script = ExtResource( 12 )
+
+[node name="ConquestTimer" type="Timer" parent="StateMachine/ConquerGroundCPs"]
+wait_time = 10.0
+one_shot = true
+
+[node name="EnterShip" type="Node" parent="StateMachine"]
+script = ExtResource( 13 )
+
+[connection signal="arrived" from="PathMaker" to="StateMachine/ConquerGroundCPs" method="_on_PathMaker_arrived"]
+[connection signal="arrived" from="PathMaker" to="StateMachine/EnterShip" method="_on_PathMaker_arrived"]
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_RespawnTimer_timeout"]
-[connection signal="timeout" from="ConquestTimer" to="." method="_on_ConquestTimer_timeout"]
 [connection signal="timeout" from="InitTimer" to="." method="_on_InitTimer_timeout"]
+[connection signal="timeout" from="StateMachine/ConquerGroundCPs/ConquestTimer" to="StateMachine/ConquerGroundCPs" method="_on_ConquestTimer_timeout"]
