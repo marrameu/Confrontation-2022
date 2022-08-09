@@ -36,6 +36,7 @@ script = ExtResource( 2 )
 damage = 500
 bullet_velocity = 400.0
 _time_alive = 15.0
+rotate_speed = 50
 
 [node name="HitParticles" parent="." index="0"]
 lifetime = 20.0
@@ -61,4 +62,3 @@ scale_amount_curve = SubResource( 8 )
 [node name="MeshInstance" type="MeshInstance" parent="." index="8"]
 visible = false
 mesh = SubResource( 6 )
-material/0 = null

@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Ship.gd" type="Script" id=1]
 [ext_resource path="res://src/Ships/ShipPhysics.gd" type="Script" id=2]
@@ -29,7 +29,6 @@
 [ext_resource path="res://src/StateMachine/DefendCS.gd" type="Script" id=27]
 [ext_resource path="res://src/StateMachine/PushForward.gd" type="Script" id=28]
 [ext_resource path="res://src/StateMachine/PatrolMiddlePoint.gd" type="Script" id=29]
-[ext_resource path="res://src/StateMachine/AttackCS.gd" type="Script" id=30]
 [ext_resource path="res://src/StateMachine/AttackBigShip.gd" type="Script" id=31]
 [ext_resource path="res://assets/Materials/grey_ship_mat.tres" type="Material" id=33]
 [ext_resource path="res://assets/materials/command_post/grey.tres" type="Material" id=34]
@@ -211,9 +210,6 @@ script = ExtResource( 23 )
 
 [node name="AttackEnemy" type="Node" parent="StateMachine"]
 script = ExtResource( 24 )
-
-[node name="AttackCS" type="Node" parent="StateMachine"]
-script = ExtResource( 30 )
 
 [node name="DefendBS" type="Node" parent="StateMachine"]
 script = ExtResource( 27 )

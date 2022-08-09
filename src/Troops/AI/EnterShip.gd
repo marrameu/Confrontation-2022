@@ -1,6 +1,7 @@
 extends AITroopState
 
 var desired_ship : Ship
+var wait := false
 
 
 func enter():
@@ -38,9 +39,13 @@ func search_ship(): # comprovar que no hi hagi ningú a la nau
 				new_ship_pos = ship.global_transform.origin
 				desired_ship =  ship
 	if desired_ship:
-		end = owner.get_node("PathMaker").navigation_node.get_closest_point(new_ship_pos)
+		var closest_point_to_ship : Vector3 = owner.get_node("PathMaker").navigation_node.get_closest_point(new_ship_pos)
+		if closest_point_to_ship.distance_to(new_ship_pos) < 15:
+			end = closest_point_to_ship
+		else:
+			$WaitTimer.start()
 	else:
-		print("kk")
+		$WaitTimer.start()
 	
 	owner.get_node("PathMaker").update_path(begin, end)
 
@@ -51,3 +56,7 @@ func _on_PathMaker_arrived():
 	elif desired_ship.is_player_or_ai == 0:
 		desired_ship.init(owner.pilot_man)
 		owner.queue_free()
+
+
+func _on_WaitTimer_timeout():
+	search_ship()

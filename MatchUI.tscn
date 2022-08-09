@@ -16,7 +16,6 @@ blue_ship = NodePath("../BigShips/CapitalShipBlue")
 red_ship = NodePath("../BigShips/CapitalShipRed")
 
 [node name="Control" type="Control" parent="."]
-visible = false
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -276.0

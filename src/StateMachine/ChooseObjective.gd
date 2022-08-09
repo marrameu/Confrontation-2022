@@ -72,7 +72,7 @@ func enter():
 			if closest_attack_ship.translation.distance_to(owner.translation) < 1000:
 				owner.shooting.target = closest_attack_ship
 				emit_signal("finished", "attack_big_ship")
-				print("atacemlahiun4")
+				print("ataca la nau d'atac!")
 				return
 		
 		var closest_support_ship : Spatial = closest_big_ship("SupportShips")
@@ -81,7 +81,13 @@ func enter():
 			print("support ship, fora!!")
 			emit_signal("finished", "attack_big_ship")
 		else:
-			emit_signal("finished", "attack_cs")
+			print("capital ship, fora!!")
+			for cship in get_tree().get_nodes_in_group("CapitalShips"):
+				if cship.blue_team != owner.pilot_man.blue_team:
+					owner.shooting.target = cship
+					emit_signal("finished", "attack_big_ship")
+			if not closest_support_ship:
+				print("MALAMENT RAI, LA CSHIP JA HA ESTAT DESTRUÏDA")
 	else:
 		# DIFERÈNCIA < 1500
 		

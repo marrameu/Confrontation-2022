@@ -8,8 +8,6 @@ signal match_msg
 var player_scene : PackedScene = preload("res://src/Troops/Player.tscn")
 var ai_troop_scene : PackedScene = preload("res://src/Troops/AI/Troop.tscn")
 
-var middle_point = 0.0
-
 var blue_points = 0
 var red_points = 0
 var MAX_POINTS = 1000
@@ -18,6 +16,18 @@ var battle_started := false
 
 var num_of_players : int = 16
 
+# middle point
+var middle_point := 0.0
+var blue_point := 0.0
+var num_of_blues : int = 0
+var red_point := 0.0
+var num_of_reds : int = 0
+
+var RED_LIMIT = -3000
+var BLUE_LIMIT = 3000
+
+var blue_take_over := false
+var red_take_over := false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for big_ship in $BigShips.get_children():
@@ -39,6 +49,48 @@ func _process(delta):
 	$MatchUI/Label.text = "PUNTS VERMELLS: " + str(red_points) + "\nPUNTS BLAUS: " + str(blue_points)
 
 
+func _physics_process(delta):
+	update_middle_point(delta)
+
+
+func update_middle_point(delta): 
+	blue_point = 0.0
+	red_point = 0.0
+	
+	for ship in get_tree().get_nodes_in_group("Ships"):
+		if ship.pilot_man:
+			if not ship.pilot_man.blue_team:
+				red_point += (ship.translation.x - RED_LIMIT + 2000) # la distància des de la seva nau capital
+			else:
+				blue_point += (ship.translation.x - BLUE_LIMIT - 2000) # el 2000 és la penalització dels morts, potser és massa alta
+		
+	red_point /= 5#num_of_players + num_of_temp_ai
+	blue_point /= 5#num_of_players + num_of_temp_ai
+	
+	for attack_ship in get_tree().get_nodes_in_group("AttackShips"):
+		if attack_ship.blue_team:
+			pass
+			blue_point -= 650
+		else:
+			pass
+			red_point += 650
+	
+	var des_middle_point = (red_point + blue_point) / 2
+	middle_point = lerp(middle_point, des_middle_point, 0.3 * delta)
+	#$RedPoint.translation.x = red_point
+	#$BluePoint.translation.x = blue_point
+	#$MiddlePoint.translation.x = clamp(middle_point, RED_LIMIT, BLUE_LIMIT)
+	#$Label.text = "MIDDLE_POINT = " + str(int(middle_point), "    ", str(int(des_middle_point)))
+	
+	if middle_point > 1250 and not red_take_over:
+		red_take_over = true
+		emit_signal("match_msg", "ELS BLAUS SÓN REPRIMITS", false)
+	elif middle_point < -1250 and not blue_take_over:
+		blue_take_over = true
+		emit_signal("match_msg", "ELS VERMELLS SÓN REPRIMITS", true)
+	elif middle_point < 1250 and middle_point > -1250:
+		blue_take_over = false
+		red_take_over = false
 
 
 func _on_player_entered_ship(ship : Spatial):

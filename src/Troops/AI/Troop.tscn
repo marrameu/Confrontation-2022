@@ -91,9 +91,14 @@ one_shot = true
 [node name="EnterShip" type="Node" parent="StateMachine"]
 script = ExtResource( 13 )
 
+[node name="WaitTimer" type="Timer" parent="StateMachine/EnterShip"]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="arrived" from="PathMaker" to="StateMachine/ConquerGroundCPs" method="_on_PathMaker_arrived"]
 [connection signal="arrived" from="PathMaker" to="StateMachine/EnterShip" method="_on_PathMaker_arrived"]
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_RespawnTimer_timeout"]
 [connection signal="timeout" from="InitTimer" to="." method="_on_InitTimer_timeout"]
 [connection signal="timeout" from="StateMachine/ConquerGroundCPs/ConquestTimer" to="StateMachine/ConquerGroundCPs" method="_on_ConquestTimer_timeout"]
+[connection signal="timeout" from="StateMachine/EnterShip/WaitTimer" to="StateMachine/EnterShip" method="_on_WaitTimer_timeout"]
