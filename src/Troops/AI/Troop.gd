@@ -58,7 +58,7 @@ func _process(delta):
 		return
 	
 	# Rotate, hauria de mirar al següent punt del camí i no pas al final de tot
-	if $PathMaker.navigation_node:
+	if weakref($PathMaker.navigation_node).get_ref():
 		look_at($PathMaker.navigation_node.to_global($PathMaker.end), Vector3(0, 1, 0))
 		rotation = Vector3(0, rotation.y + deg2rad(180), 0)
 	

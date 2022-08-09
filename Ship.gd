@@ -39,6 +39,7 @@ func init(new_pilot_man : PilotManager):
 		input.set_physics_process(true) # WTF pq cal?
 		shooting.set_script(preload("res://AIShipShooting.gd"))
 		$StateMachine.set_active(true)
+	connect("ship_died", get_tree().current_scene, "_on_ship_died", [pilot_man])
 
 
 func _process(delta):
@@ -161,6 +162,7 @@ func exit_ship():
 	shooting.set_script(preload("res://src/Ships/ShipShooting.gd"))
 	$StateMachine.set_active(false)
 	set_team_color()
+	disconnect("ship_died", get_tree().current_scene, "_on_ship_died")
 	
 	# spawn troop
 	get_tree().current_scene.spawn_player(translation) # senyals

@@ -65,8 +65,8 @@ shape = SubResource( 1 )
 
 [node name="DamageArea" type="Area" parent="."]
 collision_layer = 8
+collision_mask = 128
 monitoring = false
-monitorable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="DamageArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51836 )

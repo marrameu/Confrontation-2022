@@ -20,6 +20,7 @@ func enter():
 func update(_delta):
 	if not weakref(target_support_ship).get_ref():
 		emit_signal("finished", "choose_objective")
+		return
 	owner.input.target = target_support_ship.get_node("SupportArea").global_transform.origin
 	owner.input.wants_turbo = owner.translation.distance_to(owner.input.target) > 700
 	if owner.get_node("HealthSystem").health > 700:

@@ -68,8 +68,8 @@ transform = Transform( -0.00408395, 0, -0.999992, 0, 1, 0, 0.999992, 0, -0.00408
 
 [node name="DamageArea" type="Area" parent="."]
 collision_layer = 8
+collision_mask = 128
 monitoring = false
-monitorable = false
 
 [node name="CollisionShape2" type="CollisionShape" parent="DamageArea"]
 transform = Transform( -1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0 )

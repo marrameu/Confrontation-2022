@@ -58,7 +58,7 @@ func update_middle_point(delta):
 	red_point = 0.0
 	
 	for ship in get_tree().get_nodes_in_group("Ships"):
-		if ship.pilot_man:
+		if ship.pilot_man and ship.translation.y > 700:
 			if not ship.pilot_man.blue_team:
 				red_point += (ship.translation.x - RED_LIMIT + 2000) # la distància des de la seva nau capital
 			else:
@@ -176,6 +176,16 @@ func start_battle():
 func _on_player_died():
 	$WaitingCam.make_current()
 	$SpawnHUD.show()
+
+
+func _on_ship_died(pilot_man : PilotManager) -> void:
+	if pilot_man: # no caldria, però per si un cas
+		if pilot_man.blue_team:
+			red_point += 5
+		else:
+			blue_points += 5
+		if pilot_man.is_player:
+			_on_player_died()
 
 
 func _on_ai_troop_died(ai_num : int):

@@ -3,7 +3,7 @@ extends "res://BigShip.gd"
 
 onready var target : Vector3
 
-var can_move := false
+var can_move := true#false
 
 var rel_position := Vector3.ZERO
 
@@ -183,7 +183,7 @@ func _on_ChangePosTimer_timeout():
 	else:
 	"""
 	# si la dif és menor o major, que ataqui la nau capital (voltants)
-	rel_position = Vector3(rand_range(-500, 500), rand_range(-350, 350), rand_range(-700, 700))
+	rel_position = Vector3(rand_range(-500, 500), rand_range(-350, 350) + 2000, rand_range(-700, 700))
 
 
 func start():
