@@ -8,10 +8,6 @@ var target : Spatial
 var enemy_in_range := false
 
 
-func _init():
-	lock_missile_timer = $LockMissileTimer
-
-
 func _physics_process(delta):
 	pass
 	#if $RayCast.is_colliding():

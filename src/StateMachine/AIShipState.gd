@@ -46,12 +46,12 @@ func closest_enemy_to_cs(plus_dist : float = 500.0) -> Ship:
 
 
 func closest_big_ship(type : String):
-	var own_cs : Spatial = get_node("/root/Level/BigShips/CapitalShipBlue") if owner.pilot_man.blue_team else get_node("/root/Level/BigShips/CapitalShipRed")
+	# var own_cs : Spatial = get_node("/root/Level/BigShips/CapitalShipBlue") if owner.pilot_man.blue_team else get_node("/root/Level/BigShips/CapitalShipRed")
 	var closest_dsit := INF
 	var clos_enemy : Spatial
 	for ship in get_tree().get_nodes_in_group(type):
 		if ship.blue_team != owner.pilot_man.blue_team:
-			var dist = ship.translation.distance_to(own_cs.translation)
+			var dist = ship.translation.distance_to(owner.translation)
 			if dist < closest_dsit:
 				closest_dsit = dist
 				clos_enemy = ship

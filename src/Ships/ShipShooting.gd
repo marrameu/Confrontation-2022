@@ -32,6 +32,10 @@ var locking_time : float = 1/fire_rates[1]
 var lock_target : Spatial
 
 
+func _init():
+	lock_missile_timer = $LockMissileTimer
+
+
 func _process(delta : float) -> void:
 	time_now += delta
 	
@@ -119,7 +123,7 @@ func lock_target_to_missile():
 			lock_missile_timer.wait_time = locking_time
 			lock_missile_timer.start()
 	
-	check_to_cancel_locking() # q decideixi ja si és darrere
+	check_to_cancel_locking() # decideix ja si és darrere
 
 
 func check_to_cancel_locking():

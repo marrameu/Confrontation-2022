@@ -5,6 +5,7 @@
 [node name="ShipSpawn" type="Position3D"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -89.3984, 0, -67.1562 )
 script = ExtResource( 1 )
+simultaneous_ships = 1
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
