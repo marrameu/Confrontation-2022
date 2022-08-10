@@ -89,6 +89,8 @@ func _shoot() -> void:
 			rpc("_hit", collider.get_path(), point)
 		else:
 			_hit(collider.get_path(), point)
+	
+	$RayCast.cast_to = Vector3(0, 0, shoot_range)
 
 
 sync func _hit(collider_path : NodePath, point : Vector3) -> void:

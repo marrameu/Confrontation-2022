@@ -8,7 +8,7 @@ var pilot_man : PilotManager
 var mouse_movement := Vector2()
 
 # var running := false
-var can_shoot := false
+var can_shoot := true
 
 var dead := false
 

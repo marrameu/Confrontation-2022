@@ -102,7 +102,7 @@ func process_shake() -> void:
 	
 	if shaking:
 		var to = rotation.x + shake_amount.x
-		rotation.x = clamp(lerp(rotation.x, to, 0.05), deg2rad(CAMERA_X_ROT_MIN - 10), deg2rad(CAMERA_X_ROT_MAX - 10))
+		rotation.x = clamp(lerp(rotation.x, to, 0.05), deg2rad(CAMERA_X_ROT_MIN), deg2rad(CAMERA_X_ROT_MAX))
 		shake_amount.x = lerp(shake_amount.x, 0, 0.15)
 		owner.rotation.y = lerp(owner.rotation.y, owner.rotation.y + shake_amount.y, 0.15)
 		original_cam_rot.y = owner.rotation.y - shake_amount.y
