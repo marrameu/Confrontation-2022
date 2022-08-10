@@ -14,8 +14,9 @@ func enter():
 	
 	if !roll_direction: # potser q no hagi rpemut cal teclat, es a dir, no canvia de direcció
 		roll_direction = aim.z
+	print(Vector2(roll_direction.x, roll_direction.z))
 	# animació
-	owner.get_node("Model").rotation.y = Vector2(roll_direction.z, roll_direction.x).angle()
+	owner.get_node("Model").rotation.y = Vector2(roll_direction.z, roll_direction.x).angle() - owner.rotation.y
 	velocity = roll_direction * 25 # impuls
 	
 	owner.get_node("AnimationPlayer").play("Roll")

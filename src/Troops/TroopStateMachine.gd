@@ -21,7 +21,3 @@ func _change_state(state_name):
 	if state_name == "jump" and current_state is MoveState:
 		$Jump.MAX_SPEED = current_state.MAX_SPEED
 	._change_state(state_name)
-
-
-func _process(delta):
-	print(current_state)
