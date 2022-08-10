@@ -88,7 +88,7 @@ start_team = 2
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.174745, 0 )
 
 [node name="Box" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 0.509342, 0.860564, 0, -0.860564, 0.509342, 0, 11.3708, 0 )
+transform = Transform( 1, 0, 0, 0, 0.509342, 0.860564, 0, -0.860564, 0.509342, -8.77946, 8.46034, 0 )
 
 [node name="Box2" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 0.509342, 0.860564, 0, -0.860564, 0.509342, 0, 11.3708, -13.4142 )

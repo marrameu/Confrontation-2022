@@ -59,6 +59,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Bullets/Ships/MissileBullet.gd"
 }, {
+"base": "State",
+"class": "MoveState",
+"language": "GDScript",
+"path": "res://src/Troops/Move.gd"
+}, {
+"base": "MoveState",
+"class": "OnGroundState",
+"language": "GDScript",
+"path": "res://src/Troops/OnGroundState.gd"
+}, {
 "base": "Node",
 "class": "PilotManager",
 "language": "GDScript",
@@ -120,6 +130,8 @@ _global_script_class_icons={
 "LODSpatial": "res://addons/lod/lod_spatial.svg",
 "LODSpotLight": "res://addons/lod/lod_spot_light.svg",
 "MissileBullet": "",
+"MoveState": "",
+"OnGroundState": "",
 "PilotManager": "",
 "Ship": "",
 "ShipBullet": "",
