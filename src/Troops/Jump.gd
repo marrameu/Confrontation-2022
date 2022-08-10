@@ -2,6 +2,7 @@ extends MoveState
 
 
 func enter():
+	owner.can_shoot = false
 	velocity.y = jump_height
 	has_contact = false
 	owner.move_and_slide(velocity, Vector3(0, 1, 0), false, 4, deg2rad(MAX_SLOPE_ANGLE))
@@ -21,3 +22,7 @@ func update(delta):
 	direction = direction.normalized()
 	
 	move(delta, MAX_SPEED, direction)
+
+
+func exit():
+	owner.can_shoot = true

@@ -36,7 +36,7 @@ func _physics_process(delta):
 	if pitch_strenght:
 		rotate_pitch(pitch_strenght, delta)
 	
-	zooming = Input.is_action_pressed("zoom") and not owner.running
+	zooming = Input.is_action_pressed("zoom") and owner.can_shoot #owner.running
 	update_zoom()
 	
 	process_shake()

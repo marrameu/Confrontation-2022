@@ -2,7 +2,8 @@ extends OnGroundState
 
 
 func enter():
-	owner.running = true
+	#owner.running = true
+	owner.can_shoot = false
 
 
 func update(delta):
@@ -20,4 +21,5 @@ func update(delta):
 
 
 func exit():
-	owner.running = false
+	# owner.running = false
+	owner.can_shoot = true

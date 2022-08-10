@@ -11,7 +11,7 @@ func _ready():
 func _process(delta):
 	offset = init_offset/2 if  owner.get_node("CameraBase").zooming else init_offset
 	
-	shooting = Input.is_action_pressed("shoot")
+	shooting = Input.is_action_pressed("shoot") and owner.can_shoot
 	var cam := get_viewport().get_camera()
 	var cam_basis : Basis = cam.global_transform.basis
 	$RayCast.global_transform.origin = cam.global_transform.origin

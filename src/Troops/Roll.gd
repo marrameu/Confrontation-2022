@@ -3,6 +3,8 @@ extends MoveState
 var roll_direction : Vector3
 
 func enter():
+	owner.can_shoot = false
+	
 	var aim : Basis = owner.get_global_transform().basis
 	roll_direction = aim.x * (Input.get_action_strength("move_left") - Input.get_action_strength("move_right"))
 	roll_direction += aim.z * (Input.get_action_strength("move_forward") - Input.get_action_strength("move_backward"))
@@ -31,5 +33,6 @@ func _on_animation_finished(anim_name):
 
 
 func exit():
+	owner.can_shoot = true
 	velocity = Vector3(0, velocity.y, 0) # em penso q pot causar errors
 	owner.get_node("Model").rotation.y = 0
