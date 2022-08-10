@@ -26,14 +26,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if Input.is_action_just_pressed("change_view"):
+	if Input.is_action_just_pressed("change_view") and owner.can_aim:
 		move_camera()
 
 
 func _physics_process(delta):
 	var joystick_movement := 0.0
 	var pitch_strenght := (joystick_movement + mouse_movement.y) * rotate_speed_multipiler
-	if pitch_strenght:
+	if pitch_strenght and owner.can_aim:
 		rotate_pitch(pitch_strenght, delta)
 	
 	zooming = Input.is_action_pressed("zoom") and owner.can_shoot #owner.running

@@ -4,6 +4,7 @@ var roll_direction : Vector3
 
 func enter():
 	owner.can_shoot = false
+	owner.can_rotate = false
 	
 	var aim : Basis = owner.get_global_transform().basis
 	roll_direction = aim.x * (Input.get_action_strength("move_left") - Input.get_action_strength("move_right"))
@@ -35,5 +36,6 @@ func _on_animation_finished(anim_name):
 
 func exit():
 	owner.can_shoot = true
+	owner.can_rotate = true
 	velocity = Vector3(0, velocity.y, 0) # em penso q pot causar errors
 	owner.get_node("Model").rotation.y = 0

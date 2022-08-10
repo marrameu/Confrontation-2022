@@ -7,7 +7,7 @@ export var damage := 100
 export var bullet_velocity := 700.0
 
 var direction : Vector3
-var ship # : Ship
+var shooter # : Ship
 
 var _hit := false
 export var _time_alive := 3.5 #7.0
@@ -38,16 +38,16 @@ func check_collisions():
 	for ray in $RayCasts.get_children():
 		if ray.is_colliding():
 			var body = ray.get_collider().owner
-			if body != ship:
+			if body != shooter:
 				if body.is_in_group("Damagable"):
 					emit_signal("damagable_hit") # s'ha de fer abans, si no es menja l'animació "killed"
-					if not body.get_node("HealthSystem").is_connected("die", ship, "_on_enemy_died"):
-						body.get_node("HealthSystem").connect("die", ship, "_on_enemy_died")
+					if not body.get_node("HealthSystem").is_connected("die", shooter, "_on_enemy_died"):
+						body.get_node("HealthSystem").connect("die", shooter, "_on_enemy_died")
 					if get_tree().has_network_peer():
 						if get_tree().is_network_server():
-							body.get_node("HealthSystem").rpc("take_damage", damage, false, ship)
+							body.get_node("HealthSystem").rpc("take_damage", damage, false, shooter)
 					else:
-						body.get_node("HealthSystem").take_damage(damage, false, ship)
+						body.get_node("HealthSystem").take_damage(damage, false, shooter)
 				
 				translation = ray.get_collision_point()
 				$HitParticles.hide()

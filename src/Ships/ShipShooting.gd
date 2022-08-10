@@ -64,12 +64,13 @@ sync func shoot_bullet(current_bullet : int, shoot_target := Vector3.ZERO) -> vo
 	var bullet : ShipBullet
 	bullet = bullets_scenes[current_bullet].instance()
 	
-	bullet.ship = owner
+	bullet.shooter = owner
 	
-	get_tree().current_scene.add_child(bullet)
 	var shoot_from : Vector3 = owner.global_transform.origin # Canons
 	bullet.global_transform.origin = shoot_from
 	bullet.connect("damagable_hit", owner, "_on_damagable_hit")
+	
+	get_tree().current_scene.add_child(bullet)
 	
 	# dir
 	if bullet is MissileBullet:

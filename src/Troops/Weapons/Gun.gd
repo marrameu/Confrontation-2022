@@ -28,7 +28,8 @@ signal hit
 signal shot
 signal headshot
 
-const hit_scene = preload("res://src/Troops/Weapons/Particles/HitParticles.tscn")
+export var bullet_scene : PackedScene = preload("res://src/Bullets/Bullet.tscn")
+const hit_scene : PackedScene = preload("res://src/Troops/Weapons/Particles/HitParticles.tscn")
 
 export var continuous := true
 export var fire_rate := 5.0
@@ -82,13 +83,25 @@ func _shoot() -> void:
 	vector = vector.length() * vector.normalized()
 	$RayCast.cast_to = Vector3(vector.x, vector.y, shoot_range)
 	
-	var collider = $RayCast.get_collider()
-	var point = $RayCast.get_collision_point()
-	if collider:
-		if get_tree().has_network_peer():
-			rpc("_hit", collider.get_path(), point)
-		else:
-			_hit(collider.get_path(), point)
+	var bullet : ShipBullet
+	bullet = bullet_scene.instance()
+	bullet.shooter = owner
+	
+	get_tree().current_scene.add_child(bullet)
+	
+	var shoot_from : Vector3 = global_transform.origin # Pistola
+	bullet.global_transform.origin = shoot_from
+	bullet.connect("damagable_hit", owner, "_on_damagable_hit")
+	
+	if $RayCast.is_colliding():
+		var shoot_target = $RayCast.get_collision_point()
+		
+		bullet.direction = (shoot_target - shoot_from).normalized()
+		bullet.look_at(shoot_target, Vector3.UP)
+	else:
+		bullet.direction = -get_viewport().get_camera().global_transform.basis.z
+		bullet.look_at(global_transform.origin - get_viewport().get_camera().global_transform.basis.z, Vector3.UP)
+	
 	
 	$RayCast.cast_to = Vector3(0, 0, shoot_range)
 

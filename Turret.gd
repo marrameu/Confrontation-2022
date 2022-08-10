@@ -52,7 +52,7 @@ sync func shoot() -> void:
 	bullet.global_transform.origin = shoot_from
 	bullet.direction = -$Spatial.global_transform.basis.z
 	bullet.look_at($Spatial.global_transform.origin + -$Spatial.global_transform.basis.z, Vector3.UP)
-	bullet.ship = owner
+	bullet.shooter = owner
 
 
 func _on_HealthSystem_die(attacker):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/Troops/AI/Troop.gd" type="Script" id=1]
 [ext_resource path="res://assets/models/ybot/TroopModel.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://src/Troops/AI/ChooseObjective.gd" type="Script" id=11]
 [ext_resource path="res://src/Troops/AI/ConquerGroundCPs.gd" type="Script" id=12]
 [ext_resource path="res://src/Troops/AI/EnterShip.gd" type="Script" id=13]
+[ext_resource path="res://src/Bullets/Ships/ShipBullet.tscn" type="PackedScene" id=14]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.6
@@ -42,6 +43,7 @@ shape = SubResource( 1 )
 
 [node name="AIGun" parent="Weapons" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.8, 0.3 )
+bullet_scene = ExtResource( 14 )
 
 [node name="EnemyDetection" type="Spatial" parent="."]
 script = ExtResource( 4 )
