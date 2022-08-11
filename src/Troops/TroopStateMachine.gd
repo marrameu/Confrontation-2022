@@ -8,7 +8,8 @@ func _ready():
 		"walk": $Walk,
 		"run": $Run,
 		"jump": $Jump,
-		"roll": $Roll
+		"roll": $Roll,
+		"melee": $Melee,
 	}
 	set_active(true)
 

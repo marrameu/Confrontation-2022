@@ -42,3 +42,9 @@ func _on_HealthSystem_die(attacker):
 
 func _on_damagable_hit():
 	pass
+
+
+func _on_MeleeHitBox_area_entered(area):
+	if area == $HurtBox:
+		return
+	area.owner.get_node("HealthSystem").take_damage(15)

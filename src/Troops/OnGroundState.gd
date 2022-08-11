@@ -10,3 +10,5 @@ func handle_input(event : InputEvent):
 		emit_signal("finished", "jump")
 	elif event.is_action_pressed("roll"):
 		emit_signal("finished", "roll")
+	elif event.is_action_pressed("melee"):
+		emit_signal("finished", "melee")
