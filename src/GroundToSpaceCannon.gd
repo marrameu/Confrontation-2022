@@ -37,3 +37,7 @@ func update_target(blue : bool) -> Spatial:
 
 func _on_Timer_timeout():
 	wants_shoot = true
+
+
+func set_bullets_shooter(bullet : Bullet):
+	bullet.shooter = self

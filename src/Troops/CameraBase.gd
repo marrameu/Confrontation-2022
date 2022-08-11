@@ -17,7 +17,9 @@ var wants_to_stabilize := false
 var shake_amount := Vector2()
 var recoil_amount := Vector2()
 var original_cam_rot := Vector2()
+var cam_yaw_at_last_shot := 0.0
 var current_gun : Gun
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -89,12 +91,14 @@ func shake_camera(gun : Gun) -> void:
 		shake_amount.y = 0
 	recoil_amount.y += shake_amount.y
 	wants_to_stabilize = true
+	cam_yaw_at_last_shot = rotation.x
 	$StabilizeTimer.start()
 
 
 func process_shake() -> void:
 	# Si es mou el ratolí, talla-ho tot (reinicia), deixa de shake
-	if abs(mouse_movement.y) > 2:#if mouse_movement.length() > 1:#input_movement.length() > 0: # menor que 1 pq així cal un gir prou gran per tallar el shake
+	# hi ha hagut un moviment fort? o, si no, s'ha mogut molt però a poc a poc des que va deixar de siparar (sorbetot per no haver de canviar el valor del timer, cosa q segurament caldrà fer per a les armes com snipers i llançamíssils)
+	if abs(mouse_movement.y) > 0.5:# or abs(cam_yaw_at_last_shot - rotation.x) > deg2rad(5):#if mouse_movement.length() > 1:#input_movement.length() > 0: # menor que 1 pq així cal un gir prou gran per tallar el shake
 		wants_to_stabilize = false
 		shaking = false
 	

@@ -18,7 +18,7 @@
 [ext_resource path="res://src/Troops/Run.gd" type="Script" id=16]
 [ext_resource path="res://src/Troops/PlayerShooting.gd" type="Script" id=17]
 [ext_resource path="res://src/Troops/Weapons/Pistol.tscn" type="PackedScene" id=18]
-[ext_resource path="res://src/Bullets/Ships/ShipBullet.tscn" type="PackedScene" id=19]
+[ext_resource path="res://src/Troops/Weapons/MissileLauncher.tscn" type="PackedScene" id=19]
 
 [sub_resource type="CapsuleShape" id=3]
 radius = 0.6
@@ -77,6 +77,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "Roll"
+length = 1.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Model:scale")
 tracks/0/interp = 1
@@ -84,7 +85,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.8, 1 ),
+"times": PoolRealArray( 0, 0.2, 1, 1.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( 2, 2, 2 ), Vector3( 2, 1, 2 ), Vector3( 2, 1, 2 ), Vector3( 2, 2, 2 ) ]
@@ -96,7 +97,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.8, 1 ),
+"times": PoolRealArray( 0, 0.2, 1, 1.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, -0.769913, 0 ), Vector3( 0, -0.769913, 0 ), Vector3( 0, 0, 0 ) ]
@@ -108,13 +109,15 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2, 0.8, 1 ),
+"times": PoolRealArray( 0, 0.2, 1, 1.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 2.4, 0.8, 0.8, 2.4 ]
 }
 
 [node name="Player" type="KinematicBody" groups=["Players", "Troops"]]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="Model" parent="." instance=ExtResource( 1 )]
@@ -148,10 +151,12 @@ script = ExtResource( 17 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.904556, 1.01394, 0.353571 )
 
 [node name="Riffle" parent="Shooting/Weapons" instance=ExtResource( 4 )]
-bullet_scene = ExtResource( 19 )
 
 [node name="Pistol" parent="Shooting/Weapons" instance=ExtResource( 18 )]
-bullet_scene = ExtResource( 19 )
+visible = false
+
+[node name="MissileLauncher" parent="Shooting/Weapons" instance=ExtResource( 19 )]
+visible = false
 
 [node name="Interact" type="Node" parent="."]
 script = ExtResource( 5 )
@@ -240,6 +245,15 @@ script = ExtResource( 12 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 4 )
 anims/Roll = SubResource( 2 )
+
+[node name="HurtBox" type="Area" parent="."]
+collision_layer = 512
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2" type="CollisionShape" parent="HurtBox"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 3 )
 
 [connection signal="timeout" from="CameraBase/StabilizeTimer" to="CameraBase" method="_on_StabilizeTimer_timeout"]
 [connection signal="timeout" from="Interact/Timer" to="Interact" method="_on_Timer_timeout"]

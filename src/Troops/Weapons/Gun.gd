@@ -31,14 +31,10 @@ signal headshot
 export var bullet_scene : PackedScene = preload("res://src/Bullets/Bullet.tscn")
 const hit_scene : PackedScene = preload("res://src/Troops/Weapons/Particles/HitParticles.tscn")
 
-export var continuous := true
 export var fire_rate := 5.0
 
 export var shoot_range := 500
 export var offset := Vector2(30, 30)
-
-export var shot_damage := 25
-export var headshot_damage := 50
 
 export var recoil_force := Vector2.ONE
 
@@ -74,16 +70,14 @@ func _process(delta : float) -> void:
 func _shoot() -> void:
 	emit_signal("shoot")
 	
-	if not continuous:
-		shooting = false
-	
 	#$Audio.play()
 	
 	var vector := Vector2(rand_range(-offset.x, offset.x), rand_range(-offset.y, offset.y))
 	vector = vector.length() * vector.normalized()
 	$RayCast.cast_to = Vector3(vector.x, vector.y, shoot_range)
+	$RayCast.force_raycast_update()
 	
-	var bullet : ShipBullet
+	var bullet : Bullet
 	bullet = bullet_scene.instance()
 	bullet.shooter = owner
 	
@@ -91,64 +85,15 @@ func _shoot() -> void:
 	
 	var shoot_from : Vector3 = global_transform.origin # Pistola
 	bullet.global_transform.origin = shoot_from
-	bullet.connect("damagable_hit", owner, "_on_damagable_hit")
 	
 	if $RayCast.is_colliding():
 		var shoot_target = $RayCast.get_collision_point()
 		
-		bullet.direction = (shoot_target - shoot_from).normalized()
+		#bullet.direction = (shoot_target - shoot_from).normalized()
 		bullet.look_at(shoot_target, Vector3.UP)
 	else:
-		bullet.direction = -get_viewport().get_camera().global_transform.basis.z
-		bullet.look_at(global_transform.origin - get_viewport().get_camera().global_transform.basis.z, Vector3.UP)
+		bullet.look_at($RayCast.to_global($RayCast.cast_to), Vector3.UP)
+	bullet.direction = -bullet.global_transform.basis.z
 	
 	
 	$RayCast.cast_to = Vector3(0, 0, shoot_range)
-
-
-sync func _hit(collider_path : NodePath, point : Vector3) -> void:
-	var root = get_tree().get_root()
-	var current_scene = root.get_child(root.get_child_count() - 1)
-	
-	# Consumeix molt rendiment instanciar les particules
-	var hit : CPUParticles = hit_scene.instance()
-	current_scene.add_child(hit)
-	hit.global_transform.origin = point
-	
-	emit_signal("hit", point)
-	
-	if not get_node(collider_path):
-		return
-	
-	if get_tree().has_network_peer():
-		if not get_tree().is_network_server():
-			return
-	
-	var collider : CollisionObject = get_node(collider_path)
-	var damage := shot_damage
-	
-	if collider.is_in_group("Damagable"):
-		if collider.is_in_group("Troops"):
-			if collider.pilot_man.blue_team == owner.pilot_man.blue_team:
-				return
-			else:
-				if point.y > collider.get_global_transform().origin.y + 1.2:
-					damage = headshot_damage
-					emit_signal("headshot", collider_path)
-				else:
-					emit_signal("shot", collider_path)
-		else:
-			emit_signal("shot", collider_path)
-		
-		if get_tree().has_network_peer():
-			collider.get_node("HealthSystem").rpc("take_damage", damage)
-		else:
-			collider.get_node("HealthSystem").take_damage(damage)
-		
-	elif collider.is_in_group("Ships"):
-		emit_signal("shot", collider_path)
-		
-		if get_tree().has_network_peer():
-			collider.get_node("HealthSystem").rpc("take_damage", damage)
-		else:
-			collider.get_node("HealthSystem").take_damage(damage)

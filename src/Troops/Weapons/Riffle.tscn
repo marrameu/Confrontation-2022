@@ -4,5 +4,9 @@
 [ext_resource path="res://assets/models/weapons/Rifle/RifleModel.tscn" type="PackedScene" id=2]
 
 [node name="Riffle" instance=ExtResource( 1 )]
+offset = Vector2( 10, 10 )
 
 [node name="Rifle" parent="Mesh" index="0" instance=ExtResource( 2 )]
+
+[node name="RayCast" parent="." index="1"]
+cast_to = Vector3( 0, 0, 500 )

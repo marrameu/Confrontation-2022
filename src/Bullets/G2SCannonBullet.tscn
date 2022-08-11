@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://src/Bullets/Ships/ShipBullet.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Bullets/ShipBullet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/particles/myst_bw.png" type="Texture" id=2]
 [ext_resource path="res://assets/materials/TurretBullet.tres" type="Material" id=3]
 

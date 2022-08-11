@@ -19,6 +19,8 @@ radius = 30.0
 height = 20.0
 
 [node name="BigShip" type="KinematicBody" groups=["BigShips", "Damagable"]]
+collision_layer = 8
+collision_mask = 0
 script = ExtResource( 1 )
 red_mat = ExtResource( 4 )
 blue_mat = ExtResource( 5 )
@@ -66,12 +68,12 @@ transform = Transform( -0.982336, 0, -0.187124, 0, 1, 0, 0.187124, 0, -0.982336,
 [node name="Turret7" parent="Turrets" instance=ExtResource( 3 )]
 transform = Transform( -0.00408395, 0, -0.999992, 0, 1, 0, 0.999992, 0, -0.00408395, 250.262, 0, 0.200912 )
 
-[node name="DamageArea" type="Area" parent="."]
-collision_layer = 8
-collision_mask = 128
+[node name="HurtBox" type="Area" parent="."]
+collision_layer = 2048
+collision_mask = 0
 monitoring = false
 
-[node name="CollisionShape2" type="CollisionShape" parent="DamageArea"]
+[node name="CollisionShape2" type="CollisionShape" parent="HurtBox"]
 transform = Transform( -1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0 )
 shape = SubResource( 2 )
 

@@ -50,6 +50,7 @@ gradient = ExtResource( 16 )
 [sub_resource type="SphereMesh" id=5]
 
 [node name="Ship" type="RigidBody" groups=["Damagable", "Ships"]]
+collision_layer = 4
 mass = 5000.0
 physics_material_override = SubResource( 6 )
 contacts_reported = 1
@@ -63,12 +64,12 @@ grey_mat = ExtResource( 33 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51836 )
 shape = SubResource( 1 )
 
-[node name="DamageArea" type="Area" parent="."]
-collision_layer = 8
-collision_mask = 128
+[node name="HurtBox" type="Area" parent="." groups=["HurtBox"]]
+collision_layer = 256
+collision_mask = 0
 monitoring = false
 
-[node name="CollisionShape" type="CollisionShape" parent="DamageArea"]
+[node name="CollisionShape" type="CollisionShape" parent="HurtBox"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51836 )
 shape = SubResource( 7 )
 

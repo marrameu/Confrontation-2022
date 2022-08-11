@@ -46,14 +46,18 @@ sync func shoot() -> void:
 	
 	var bullet : Spatial
 	bullet = bullet_scene.instance()
+	set_bullets_shooter(bullet)
 	
 	get_tree().current_scene.add_child(bullet)
 	var shoot_from : Vector3 = global_transform.origin # Canons
 	bullet.global_transform.origin = shoot_from
 	bullet.direction = -$Spatial.global_transform.basis.z
 	bullet.look_at($Spatial.global_transform.origin + -$Spatial.global_transform.basis.z, Vector3.UP)
-	bullet.shooter = owner
 
 
 func _on_HealthSystem_die(attacker):
 	queue_free()
+
+
+func set_bullets_shooter(bullet : Bullet):
+	bullet.shooter = owner

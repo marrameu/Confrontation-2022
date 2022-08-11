@@ -4,6 +4,8 @@ var init_offset : Vector2
 
 var active := false
 
+export var continuous := true
+
 
 func _ready():
 	init_offset = offset
@@ -16,7 +18,10 @@ func _process(delta):
 	
 	offset = init_offset/2 if  owner.get_node("CameraBase").zooming else init_offset
 	
-	shooting = Input.is_action_pressed("shoot") and owner.can_shoot
+	if Input.is_action_just_pressed("shoot") and owner.can_shoot:
+		shooting = true
+	elif not Input.is_action_pressed("shoot"):
+		shooting = false
 	var cam := get_viewport().get_camera()
 	var cam_basis : Basis = cam.global_transform.basis
 	
@@ -25,7 +30,7 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	$RayCast.cast_to = Vector3(0, 0, shoot_range)
+	$RayCast.force_raycast_update()
 	if $RayCast.is_colliding():
 		$Mesh.look_at($RayCast.get_collision_point(), Vector3.UP)
 		# $Mesh.rotate($Mesh.transform.basis.y, 180)
@@ -44,3 +49,9 @@ func set_active(value : bool) -> void:
 	active = value
 	visible = value
 	$HUD/Crosshair.visible = value
+
+
+func _shoot() -> void:
+	if not continuous:
+		shooting = false
+	._shoot()

@@ -6,7 +6,7 @@ var shoot_range := 1500
 
 
 # Bullets
-var bullets_scenes := { 0 : preload("res://src/Bullets/Ships/ShipBullet.tscn"), 1 : preload("res://src/Bullets/Ships/ShipBullet2.tscn")}
+var bullets_scenes := { 0 : preload("res://src/Bullets/ShipBullet.tscn"), 1 : preload("res://src/Bullets/Ships/ShipBullet2.tscn")}
 
 # Timers, fer-ho amb arrays?
 var fire_rates := { 0 : 4.0, 1 : 1.0 }
@@ -61,14 +61,13 @@ sync func shoot_bullet(current_bullet : int, shoot_target := Vector3.ZERO) -> vo
 	next_times_to_fire[current_bullet] = time_now + 1.0 / fire_rates[current_bullet]
 	
 	# instance
-	var bullet : ShipBullet
+	var bullet : Bullet
 	bullet = bullets_scenes[current_bullet].instance()
 	
 	bullet.shooter = owner
 	
 	var shoot_from : Vector3 = owner.global_transform.origin # Canons
 	bullet.global_transform.origin = shoot_from
-	bullet.connect("damagable_hit", owner, "_on_damagable_hit")
 	
 	get_tree().current_scene.add_child(bullet)
 	

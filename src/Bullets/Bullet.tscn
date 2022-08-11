@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://src/Bullets/Ships/ShipBullet.gd" type="Script" id=1]
+[ext_resource path="res://src/Bullets/Ships/Bullet.gd" type="Script" id=1]
 [ext_resource path="res://assets/missilebullet_spatialmaterial.tres" type="Material" id=2]
 [ext_resource path="res://assets/audio/air.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/particles/myst_bw.png" type="Texture" id=4]
@@ -76,7 +76,7 @@ tracks/0/keys = {
 script = ExtResource( 1 )
 damage = 20
 bullet_velocity = 500.0
-_time_alive = 5.0
+_time_alive = 3.0
 
 [node name="HitParticles" type="Particles" parent="."]
 pause_mode = 1
@@ -115,12 +115,11 @@ doppler_tracking = 2
 [node name="VisibilityNotifier" type="VisibilityNotifier" parent="."]
 aabb = AABB( -1, -1, -4.14208, 2, 2, 8.28415 )
 
-[node name="RayCasts" type="Spatial" parent="."]
-
-[node name="RayCast" type="RayCast" parent="RayCasts"]
+[node name="RayCast" type="RayCast" parent="."]
 enabled = true
+exclude_parent = false
 cast_to = Vector3( 0, 0, -25 )
-collision_mask = 8
+collision_mask = 3841
 collide_with_areas = true
 debug_shape_thickness = 5
 

@@ -1,4 +1,4 @@
-extends ShipBullet
+extends Bullet
 class_name MissileBullet
 
 export var rotate_speed := 50

@@ -46,23 +46,23 @@ debug_shape_thickness = 5
 
 [node name="Area" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
-collision_layer = 128
-collision_mask = 8
+collision_layer = 0
+collision_mask = 12
 monitorable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( -500, 7.54979e-05, 0, -7.54979e-05, -500, 0, 0, 0, 500, 0, 397.521, 1.5358e-05 )
 shape = ExtResource( 2 )
 
-[node name="DamageArea" type="Area" parent="."]
-collision_layer = 8
+[node name="HurtBox" type="Area" parent="." groups=["HurtBox"]]
+collision_layer = 1024
 collision_mask = 0
 monitoring = false
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="CollisionShape" type="CollisionShape" parent="DamageArea"]
+[node name="CollisionShape" type="CollisionShape" parent="HurtBox"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, -6.12968 )
 shape = SubResource( 3 )
 disabled = true
@@ -78,6 +78,6 @@ bus = "Sounds"
 script = ExtResource( 5 )
 MAX_HEALTH = 750
 
-[connection signal="area_entered" from="Area" to="." method="_on_Area_area_entered"]
-[connection signal="area_exited" from="Area" to="." method="_on_Area_area_exited"]
+[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
+[connection signal="body_exited" from="Area" to="." method="_on_Area_body_exited"]
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
