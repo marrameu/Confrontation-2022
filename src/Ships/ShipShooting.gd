@@ -64,7 +64,7 @@ sync func shoot_bullet(current_bullet : int, shoot_target := Vector3.ZERO) -> vo
 	var bullet : Bullet
 	bullet = bullets_scenes[current_bullet].instance()
 	
-	bullet.shooter = owner
+	bullet.init(owner, owner.pilot_man.blue_team)
 	
 	get_tree().current_scene.add_child(bullet)
 	

@@ -60,6 +60,7 @@ shape = ExtResource( 2 )
 collision_layer = 1024
 collision_mask = 0
 monitoring = false
+monitorable = false
 __meta__ = {
 "_editor_description_": ""
 }
@@ -67,7 +68,6 @@ __meta__ = {
 [node name="CollisionShape" type="CollisionShape" parent="HurtBox"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, -6.12968 )
 shape = SubResource( 3 )
-disabled = true
 
 [node name="Audio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 4 )

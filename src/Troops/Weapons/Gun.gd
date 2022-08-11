@@ -79,7 +79,7 @@ func _shoot() -> void:
 	
 	var bullet : Bullet
 	bullet = bullet_scene.instance()
-	bullet.shooter = owner
+	bullet.init(owner, owner.pilot_man.blue_team)
 	
 	get_tree().current_scene.add_child(bullet)
 	

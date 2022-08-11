@@ -94,7 +94,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/StateMachine/State.gd"
 }, {
-"base": "StaticBody",
+"base": "KinematicBody",
 "class": "Troop",
 "language": "GDScript",
 "path": "res://src/Troops/AI/Troop.gd"
@@ -304,6 +304,7 @@ melee={
 3d_physics/layer_10="TroopHurtBox"
 3d_physics/layer_11="TurretHurtBox"
 3d_physics/layer_12="BigShipHurtBox"
+3d_physics/layer_13="CoreHurtBox"
 
 [physics]
 

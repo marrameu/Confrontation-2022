@@ -62,19 +62,20 @@ func _process(delta : float) -> void:
 	var texture_progress_visible := false
 	for body in $Area.get_overlapping_bodies():
 		if body.is_in_group("Troops"):
-			if body.dead:
-				return
-			if body.is_in_group("Players"):
-				texture_progress_visible = true
-			var body_team : int = 1 if not body.pilot_man.blue_team else 2
-			match body_team:
-				1:
-					bodies[0] += 1 # vermell
-				2:
-					bodies[1] += 1 # blau
-				3:
-					bodies[2] += 1
+			if not body.dead:
+				if body.is_in_group("Players"):
+					texture_progress_visible = true
+				var body_team : int = 1 if not body.pilot_man.blue_team else 2
+				match body_team:
+					1:
+						bodies[0] += 1 # vermell
+					2:
+						bodies[1] += 1 # blau
+					3:
+						bodies[2] += 1
+	$Label.text = str(bodies)
 	$TextureProgress.visible = texture_progress_visible
+	$Label.visible = texture_progress_visible
 
 
 func _physics_process(delta : float) -> void:

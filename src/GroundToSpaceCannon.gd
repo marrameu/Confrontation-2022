@@ -40,4 +40,4 @@ func _on_Timer_timeout():
 
 
 func set_bullets_shooter(bullet : Bullet):
-	bullet.shooter = self
+	bullet.init(self, cp.m_team == 2)

@@ -77,3 +77,6 @@ omni_range = 25.0
 __meta__ = {
 "_editor_description_": ""
 }
+
+[node name="RayCast" parent="." index="6"]
+collision_mask = 3841

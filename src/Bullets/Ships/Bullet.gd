@@ -13,6 +13,13 @@ var _hit := false
 export var _time_alive := 3.5 #7.0
 var _old_translation : Vector3
 
+var m_blue_team := false
+
+
+func init(new_shooter, new_team):
+	shooter = new_shooter
+	m_blue_team = new_team
+
 
 func _ready():
 	if shooter.has_method("_on_hit"):
@@ -44,7 +51,7 @@ func check_collisions():
 	var long = translation.distance_to(_old_translation)
 	var ray := $RayCast
 	if ray.is_colliding():
-		var body : CollisionObject = ray.get_collider()
+		var body : Spatial = ray.get_collider()
 		if body.is_in_group("HurtBox"):
 			body = body.owner
 			_hit(body)
@@ -61,12 +68,6 @@ func check_collisions():
 
 func _hit(body):
 	# AIXÒ ES PODRIA FER MILLOR, HI HAURIA D'HAVER UNA MANERA MÉS FÀCIL (I IGUAL) PER A COMPROVAR L'EQUIP
-	var m_blue_team := false
-	if shooter.is_in_group("BigShips"):
-		m_blue_team = shooter.blue_team
-	else:
-		m_blue_team = shooter.pilot_man.blue_team
-	
 	if body.is_in_group("Troops") or body.is_in_group("Ships"):
 		if body.pilot_man:
 			if body.pilot_man.blue_team == m_blue_team:

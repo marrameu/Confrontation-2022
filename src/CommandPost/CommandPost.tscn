@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/CommandPost/CommandPost.gd" type="Script" id=1]
 [ext_resource path="res://assets/interface/life_bar.png" type="Texture" id=2]
+[ext_resource path="res://assets/interface/themes/new_theme.tres" type="Theme" id=3]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.478431, 0.478431, 0.478431, 1 )
@@ -14,7 +15,7 @@ bottom_radius = 0.8
 height = 0.3
 
 [sub_resource type="BoxShape" id=3]
-extents = Vector3( 10, 5, 10 )
+extents = Vector3( 15, 5, 15 )
 
 [node name="CommandPost" type="Spatial" groups=["CommandPosts"]]
 pause_mode = 1
@@ -26,9 +27,9 @@ mesh = SubResource( 2 )
 [node name="Area" type="Area" parent="."]
 collision_layer = 0
 collision_mask = 2
-monitorable = false
 
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
+[node name="CollisionShape3" type="CollisionShape" parent="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.62099, 0 )
 shape = SubResource( 3 )
 
 [node name="Timer" type="Timer" parent="."]
@@ -53,5 +54,13 @@ tint_under = Color( 0.705882, 0.705882, 0.705882, 0.380392 )
 tint_over = Color( 1, 1, 1, 0.505882 )
 tint_progress = Color( 1, 0, 0, 1 )
 nine_patch_stretch = true
+
+[node name="Label" type="Label" parent="."]
+margin_left = 414.0
+margin_top = 511.0
+margin_right = 623.0
+margin_bottom = 646.0
+theme = ExtResource( 3 )
+text = "dasdas"
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

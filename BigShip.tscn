@@ -68,13 +68,13 @@ transform = Transform( -0.982336, 0, -0.187124, 0, 1, 0, 0.187124, 0, -0.982336,
 [node name="Turret7" parent="Turrets" instance=ExtResource( 3 )]
 transform = Transform( -0.00408395, 0, -0.999992, 0, 1, 0, 0.999992, 0, -0.00408395, 250.262, 0, 0.200912 )
 
-[node name="HurtBox" type="Area" parent="."]
+[node name="HurtBox" type="Area" parent="." groups=["HurtBox"]]
 collision_layer = 2048
 collision_mask = 0
 monitoring = false
 
 [node name="CollisionShape2" type="CollisionShape" parent="HurtBox"]
-transform = Transform( -1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0 )
+transform = Transform( -1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0, 0, 0 )
 shape = SubResource( 2 )
 
 [node name="ShieldGenerator" type="MeshInstance" parent="."]
