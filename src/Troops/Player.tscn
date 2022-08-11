@@ -246,7 +246,7 @@ script = ExtResource( 12 )
 anims/RESET = SubResource( 4 )
 anims/Roll = SubResource( 2 )
 
-[node name="HurtBox" type="Area" parent="."]
+[node name="HurtBox" type="Area" parent="." groups=["HurtBox"]]
 collision_layer = 512
 collision_mask = 0
 monitoring = false

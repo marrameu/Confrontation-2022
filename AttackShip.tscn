@@ -110,15 +110,11 @@ cast_to = Vector3( 0, -75, 150 )
 [node name="ChangePosTimer" type="Timer" parent="." index="14"]
 one_shot = true
 
-[node name="CollisionShape2" parent="DamageArea" index="0"]
-transform = Transform( -0.4, 6.03983e-08, 2.64009e-15, 0, -1.74846e-08, 0.4, 6.03983e-08, 0.4, 1.74846e-08, 0, 0, 0 )
-
-[node name="ShieldGenerator" parent="." index="16"]
+[node name="ShieldGenerator" parent="." index="15"]
 visible = false
 
-[node name="TeamIndicator" type="MeshInstance" parent="." index="18"]
+[node name="TeamIndicator" type="MeshInstance" parent="." index="17"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.976, -22.3935 )
 mesh = SubResource( 2 )
-material/0 = null
 
 [connection signal="timeout" from="ChangePosTimer" to="." method="_on_ChangePosTimer_timeout"]

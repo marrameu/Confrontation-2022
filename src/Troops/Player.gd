@@ -38,3 +38,7 @@ func rotate_yaw(strenght, delta):
 func _on_HealthSystem_die(attacker):
 	queue_free()
 	emit_signal("died")
+
+
+func _on_damagable_hit():
+	pass

@@ -15,7 +15,8 @@ var _old_translation : Vector3
 
 
 func _ready():
-	connect("damagable_hit", shooter, "_on_damagable_hit")
+	if shooter.has_method("_on_hit"):
+		connect("damagable_hit", shooter, "_on_damagable_hit")
 	var m_hurtbox = shooter.get_node_or_null("HurtBox")
 	if m_hurtbox:
 		$RayCast.add_exception(m_hurtbox)
@@ -59,10 +60,20 @@ func check_collisions():
 
 
 func _hit(body):
+	# AIXÒ ES PODRIA FER MILLOR, HI HAURIA D'HAVER UNA MANERA MÉS FÀCIL (I IGUAL) PER A COMPROVAR L'EQUIP
+	var m_blue_team := false
+	if shooter.is_in_group("BigShips"):
+		m_blue_team = shooter.blue_team
+	else:
+		m_blue_team = shooter.pilot_man.blue_team
+	
 	if body.is_in_group("Troops") or body.is_in_group("Ships"):
 		if body.pilot_man:
-			if body.pilot_man.blue_team == shooter.pilot_man.blue_team:
+			if body.pilot_man.blue_team == m_blue_team:
 				return
+	elif body.is_in_group("BigShips"):
+		if body.blue_team == m_blue_team:
+			return
 	
 	emit_signal("damagable_hit") # s'ha de fer abans, si no es menja l'animació "killed"
 	if not body.get_node("HealthSystem").is_connected("die", shooter, "_on_enemy_died"):

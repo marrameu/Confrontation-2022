@@ -97,9 +97,6 @@ transform = Transform( 1, 0, 0, 0, 0.509342, 0.860564, 0, -0.860564, 0.509342, 0
 [node name="Box3" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 0.509342, 0.860564, 0, -0.860564, 0.509342, 0, 16.1443, -9.14729 )
 
-[node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.509342, 0.860564, 0, -0.860564, 0.509342, 0, 18.9153, 0 )
-
 [node name="PauseMenu" parent="." instance=ExtResource( 18 )]
 
 [node name="PlayerTroopCam" type="InterpolatedCamera" parent="."]
@@ -182,6 +179,10 @@ script = ExtResource( 14 )
 [node name="GroundToSpaceCannon" parent="." instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.39366, 41.1471 )
 cp_path = NodePath("../Map/CommandPosts/CommandPost2")
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -0.324842, 0.945768, 0, -0.945768, -0.324842, 0, 6.95766, 0 )
+shadow_enabled = true
 
 [connection signal="change_cam" from="SpawnHUD" to="." method="_on_SpawnHUD_change_cam"]
 [connection signal="respawn" from="SpawnHUD" to="." method="spawn_player"]
