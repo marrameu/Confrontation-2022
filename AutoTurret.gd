@@ -6,11 +6,10 @@ onready var ray : RayCast = $Spatial/RayCast
 func _process(delta):
 	# raycast
 	if enemies:
-		wants_shoot = true
 		if ray.is_colliding():
 			for enemy in enemies:
 				if ray.get_collider() == enemy:
-					pass
+					wants_shoot = true
 
 
 func _on_Area_body_entered(body):

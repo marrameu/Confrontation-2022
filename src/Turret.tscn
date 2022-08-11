@@ -40,7 +40,9 @@ skeleton = NodePath("../..")
 material/0 = ExtResource( 3 )
 
 [node name="RayCast" type="RayCast" parent="Spatial"]
+enabled = true
 cast_to = Vector3( 0, 0, -800 )
+collision_mask = 12
 debug_shape_custom_color = Color( 0.992157, 0, 1, 1 )
 debug_shape_thickness = 5
 

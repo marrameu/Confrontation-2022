@@ -9,3 +9,8 @@ func _ready():
 		"enter_ship": $EnterShip
 	}
 	set_active(true)
+
+
+func _change_state(state_name):
+	print(owner.name, " enters ", state_name)
+	._change_state(state_name)
