@@ -23,7 +23,7 @@ albedo_color = Color( 0.792157, 1, 0.705882, 0.196078 )
 script = ExtResource( 2 )
 
 [node name="HealthSystem" parent="." index="0"]
-MAX_SHIELD = 10000
+MAX_SHIELD = 15000
 time_before_shield_repair = 30.0
 shield_repair_per_sec = 500.0
 MAX_HEALTH = 25000
@@ -59,11 +59,7 @@ transform = Transform( -0.9998, 0, -0.0200001, 0, 1, 0, 0.0200001, 0, -0.9998, 7
 [node name="Turret7" parent="Turrets" index="6"]
 transform = Transform( -0.00408395, 0, -0.999992, 0, 1, 0, 0.999992, 0, -0.00408395, 123.398, 0, 0.200912 )
 
-[node name="DamageArea" parent="." index="5"]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
-
-[node name="CollisionShape2" parent="DamageArea" index="0"]
-transform = Transform( -0.5, 7.54979e-08, 3.30012e-15, 0, -2.18557e-08, 0.5, 7.54979e-08, 0.5, 2.18557e-08, 0, 0, 0 )
+[node name="CollisionShape2" parent="HurtBox" index="0"]
 shape = SubResource( 5 )
 
 [node name="ShieldGenerator" parent="." index="6"]

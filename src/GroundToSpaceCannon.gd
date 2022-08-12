@@ -26,9 +26,9 @@ func _process(delta):
 
 
 func update_target(blue : bool) -> Spatial:
-	for support_ship in get_tree().get_nodes_in_group("SupportShips"):
-		if support_ship.blue_team != blue:
-			return support_ship
+	#for support_ship in get_tree().get_nodes_in_group("SupportShips"):
+	#	if support_ship.blue_team != blue:
+	#		return support_ship
 	for capital_ship in get_tree().get_nodes_in_group("CapitalShips"):
 		if capital_ship.blue_team != blue:
 			return capital_ship

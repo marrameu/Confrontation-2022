@@ -68,6 +68,7 @@ func check_collisions():
 
 func _hit(body):
 	# AIXÒ ES PODRIA FER MILLOR, HI HAURIA D'HAVER UNA MANERA MÉS FÀCIL (I IGUAL) PER A COMPROVAR L'EQUIP
+	print(body)
 	if body.is_in_group("Troops") or body.is_in_group("Ships"):
 		if body.pilot_man:
 			if body.pilot_man.blue_team == m_blue_team:

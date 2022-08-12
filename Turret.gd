@@ -49,7 +49,7 @@ sync func shoot() -> void:
 	set_bullets_shooter(bullet)
 	
 	get_tree().current_scene.add_child(bullet)
-	var shoot_from : Vector3 = global_transform.origin # Canons
+	var shoot_from : Vector3 = $"%BulletOrigin".global_transform.origin # Canons
 	bullet.global_transform.origin = shoot_from
 	bullet.direction = -$Spatial.global_transform.basis.z
 	bullet.look_at($Spatial.global_transform.origin + -$Spatial.global_transform.basis.z, Vector3.UP)

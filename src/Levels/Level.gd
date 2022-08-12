@@ -57,15 +57,19 @@ func update_middle_point(delta):
 	blue_point = 0.0
 	red_point = 0.0
 	
+	var total_num_of_ships : int = 0
+	
 	for ship in get_tree().get_nodes_in_group("Ships"):
 		if ship.pilot_man and ship.translation.y > 700:
+			total_num_of_ships += 1
 			if not ship.pilot_man.blue_team:
 				red_point += (ship.translation.x - RED_LIMIT + 2000) # la distància des de la seva nau capital
 			else:
 				blue_point += (ship.translation.x - BLUE_LIMIT - 2000) # el 2000 és la penalització dels morts, potser és massa alta
-		
-	red_point /= 5#num_of_players + num_of_temp_ai
-	blue_point /= 5#num_of_players + num_of_temp_ai
+	
+	if total_num_of_ships != 0:
+		red_point /= total_num_of_ships
+		blue_point /= total_num_of_ships
 	
 	for attack_ship in get_tree().get_nodes_in_group("AttackShips"):
 		if attack_ship.blue_team:
@@ -77,9 +81,9 @@ func update_middle_point(delta):
 	
 	var des_middle_point = (red_point + blue_point) / 2
 	middle_point = lerp(middle_point, des_middle_point, 0.3 * delta)
-	#$RedPoint.translation.x = red_point
-	#$BluePoint.translation.x = blue_point
-	#$MiddlePoint.translation.x = clamp(middle_point, RED_LIMIT, BLUE_LIMIT)
+	$RedPoint.translation.x = red_point
+	$BluePoint.translation.x = blue_point
+	$MiddlePoint.translation.x = clamp(middle_point, RED_LIMIT, BLUE_LIMIT)
 	#$Label.text = "MIDDLE_POINT = " + str(int(middle_point), "    ", str(int(des_middle_point)))
 	
 	if middle_point > 1250 and not red_take_over:

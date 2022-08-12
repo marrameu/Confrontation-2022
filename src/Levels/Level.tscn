@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/materials/grid.tres" type="Material" id=1]
 [ext_resource path="res://src/Levels/Box.tscn" type="PackedScene" id=2]
@@ -29,6 +29,17 @@ size = Vector2( 400, 400 )
 
 [sub_resource type="ConcavePolygonShape" id=2]
 data = PoolVector3Array( 200, 0, 200, -200, 0, 200, 200, 0, -200, -200, 0, 200, -200, 0, -200, 200, 0, -200 )
+
+[sub_resource type="CubeMesh" id=4]
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0, 0.0745098, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_color = Color( 1, 0.0745098, 1, 1 )
 
 [node name="Level" type="Spatial"]
 script = ExtResource( 5 )
@@ -77,6 +88,9 @@ start_team = 1
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 150, 0.219, -150 )
 start_team = 1
 
+[node name="CommandPost2" parent="Map/CommandPosts" groups=["OrbitalCannonCP"] instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.174745, 0 )
+
 [node name="CommandPost3" parent="Map/CommandPosts" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -150, 0.219, 150 )
 start_team = 2
@@ -84,9 +98,6 @@ start_team = 2
 [node name="CommandPost4" parent="Map/CommandPosts" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -150, 0.219, -150 )
 start_team = 2
-
-[node name="CommandPost2" parent="Map/CommandPosts" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.174745, 0 )
 
 [node name="Box" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 0.509342, 0.860564, 0, -0.860564, 0.509342, -8.77946, 8.46034, 0 )
@@ -122,43 +133,43 @@ is_player = true
 
 [node name="CapitalShipRed" parent="BigShips" instance=ExtResource( 11 )]
 unique_name_in_owner = true
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3000, 2019.41, 0 )
+transform = Transform( -2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, -3000, 2019.41, 0.00088501 )
 collision_layer = 1
 red_mat = ExtResource( 16 )
 blue_mat = ExtResource( 15 )
 
 [node name="CapitalShipBlue" parent="BigShips" instance=ExtResource( 11 )]
 unique_name_in_owner = true
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2996, 2019.41, 0 )
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 2996, 2019.41, -0.000152588 )
 collision_layer = 1
 red_mat = ExtResource( 16 )
 blue_mat = ExtResource( 15 )
 blue_team = true
 
 [node name="SuportShip" parent="BigShips" instance=ExtResource( 10 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2000, 2019.41, 715.452 )
+transform = Transform( -2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, -2000, 2019.41, 715.453 )
 collision_layer = 1
 
 [node name="SuportShip2" parent="BigShips" instance=ExtResource( 10 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2000, 2019.41, -790.848 )
+transform = Transform( -2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, -2000, 2019.41, -790.847 )
 collision_layer = 1
 
 [node name="AttackShip2" parent="BigShips" instance=ExtResource( 12 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2696.04, 2450.62, -726.323 )
+transform = Transform( -2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, -2696.04, 2450.62, -726.322 )
 collision_layer = 1
 
 [node name="SuportShip3" parent="BigShips" instance=ExtResource( 10 )]
-transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 2000, 2019.41, -643.399 )
+transform = Transform( 3.0598e-07, 0, -1, 0, 1, 0, 1, 0, 3.0598e-07, 2000, 2019.41, -643.399 )
 collision_layer = 1
 blue_team = true
 
 [node name="SuportShip4" parent="BigShips" instance=ExtResource( 10 )]
-transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 2000, 2019.41, 787.622 )
+transform = Transform( 3.0598e-07, 0, -1, 0, 1, 0, 1, 0, 3.0598e-07, 2000, 2019.41, 787.622 )
 collision_layer = 1
 blue_team = true
 
 [node name="AttackShip3" parent="BigShips" instance=ExtResource( 12 )]
-transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 2748.31, 1718.9, -963.107 )
+transform = Transform( 3.0598e-07, 0, -1, 0, 1, 0, 1, 0, 3.0598e-07, 2748.31, 1718.9, -963.107 )
 collision_layer = 1
 blue_team = true
 
@@ -173,7 +184,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 80.3777, 4.90525, -67.1562 )
 
 [node name="WaitingCam" type="Camera" parent="."]
 transform = Transform( -1, -8.69695e-08, 8.89079e-09, -5.98572e-08, 0.755259, 0.655427, -6.3717e-08, 0.655427, -0.755259, 0, 86.332, -250.245 )
-far = 2000.0
+far = 5500.0
 script = ExtResource( 14 )
 
 [node name="GroundToSpaceCannon" parent="." instance=ExtResource( 19 )]
@@ -183,6 +194,24 @@ cp_path = NodePath("../Map/CommandPosts/CommandPost2")
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, -0.324842, 0.945768, 0, -0.945768, -0.324842, 0, 6.95766, 0 )
 shadow_enabled = true
+
+[node name="RedPoint" type="MeshInstance" parent="."]
+transform = Transform( 7.13262, 0, 0, 0, 0.3, 0, 0, 0, 3000, -21.9825, 2000, 0.0334425 )
+mesh = SubResource( 4 )
+skeleton = NodePath("")
+material/0 = SubResource( 5 )
+
+[node name="BluePoint" type="MeshInstance" parent="."]
+transform = Transform( 5.19245, 0, 0, 0, 0.3, 0, 0, 0, 3000, 2.29866, 2000, 0 )
+mesh = SubResource( 4 )
+skeleton = NodePath("")
+material/0 = SubResource( 6 )
+
+[node name="MiddlePoint" type="MeshInstance" parent="."]
+transform = Transform( 5.19245, 0, 0, 0, 0.3, 0, 0, 0, 3000, 46.9043, 2000, 0 )
+mesh = SubResource( 4 )
+skeleton = NodePath("")
+material/0 = SubResource( 7 )
 
 [connection signal="change_cam" from="SpawnHUD" to="." method="_on_SpawnHUD_change_cam"]
 [connection signal="respawn" from="SpawnHUD" to="." method="spawn_player"]

@@ -49,6 +49,10 @@ collision_mask = 8
 debug_shape_custom_color = Color( 0.992157, 0, 1, 1 )
 debug_shape_thickness = 5
 
+[node name="BulletOrigin" type="Position3D" parent="Spatial"]
+unique_name_in_owner = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.61363e-06, -82.6701 )
+
 [node name="Audio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 1 )
 unit_size = 80.0
