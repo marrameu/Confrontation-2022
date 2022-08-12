@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/not_a_drill.wav-f889a4cc3f49fd0523c1d016bc99d0fe.sample"
+
+[deps]
+
+source_file="res://assets/audio/not_a_drill.wav"
+dest_files=[ "res://.import/not_a_drill.wav-f889a4cc3f49fd0523c1d016bc99d0fe.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

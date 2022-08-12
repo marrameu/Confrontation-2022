@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Ship.gd" type="Script" id=1]
 [ext_resource path="res://src/Ships/ShipPhysics.gd" type="Script" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://assets/audio/ship_secondary_shoot.wav" type="AudioStream" id=8]
 [ext_resource path="res://src/HealthSystem/HealthSystem.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/HealthSystem/AutorepairHealthSystem.gd" type="Script" id=10]
-[ext_resource path="res://assets/audio/engines.ogg" type="AudioStream" id=11]
 [ext_resource path="res://assets/Materials/blue_ship_mat.tres" type="Material" id=12]
 [ext_resource path="res://assets/Materials/red_ship_mat.tres" type="Material" id=13]
 [ext_resource path="res://assets/audio/drift.wav" type="AudioStream" id=14]
@@ -178,10 +177,6 @@ debug_shape_custom_color = Color( 1, 0, 0, 1 )
 debug_shape_thickness = 5
 
 [node name="EnginesAudio" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource( 11 )
-unit_size = 10.0
-autoplay = true
-max_distance = 600.0
 doppler_tracking = 2
 
 [node name="SpectateCamPivot" type="Spatial" parent="."]

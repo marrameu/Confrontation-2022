@@ -69,7 +69,6 @@ func check_collisions():
 
 func _hit(body):
 	# AIXÒ ES PODRIA FER MILLOR, HI HAURIA D'HAVER UNA MANERA MÉS FÀCIL (I IGUAL) PER A COMPROVAR L'EQUIP
-	print(body)
 	if body.is_in_group("Troops") or body.is_in_group("Ships"):
 		if body.pilot_man:
 			if body.pilot_man.blue_team == m_blue_team:
@@ -79,8 +78,11 @@ func _hit(body):
 			return
 	
 	emit_signal("damagable_hit") # s'ha de fer abans, si no es menja l'animació "killed"
-	if not body.get_node("HealthSystem").is_connected("die", shooter, "_on_enemy_died"):
-		body.get_node("HealthSystem").connect("die", shooter, "_on_enemy_died")
+	if not weakref(shooter).get_ref():
+		return
+	if shooter.has_method("_on_enemy_died"):
+		if not body.get_node("HealthSystem").is_connected("die", shooter, "_on_enemy_died"):
+			body.get_node("HealthSystem").connect("die", shooter, "_on_enemy_died")
 	body.get_node("HealthSystem").take_damage(damage, false, shooter)
 
 

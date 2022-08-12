@@ -192,7 +192,7 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.39
 cp_path = NodePath("../Map/CommandPosts/CommandPost2")
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -0.324842, 0.945768, 0, -0.945768, -0.324842, 0, 6.95766, 0 )
+transform = Transform( 0.709767, -0.666233, -0.22883, 0, -0.324842, 0.945768, -0.704436, -0.671276, -0.230562, 0, 6.95766, 0 )
 shadow_enabled = true
 
 [node name="RedPoint" type="MeshInstance" parent="."]

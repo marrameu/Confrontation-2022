@@ -5,7 +5,8 @@ signal headshot
 export var headshot_damage : int = damage * 2
 
 func _ready():
-	connect("headshot", shooter, "_on_headshot")
+	if shooter.has_method("_on_headshot"):
+		connect("headshot", shooter, "_on_headshot")
 
 
 func _hit(body):

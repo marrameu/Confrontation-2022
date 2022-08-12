@@ -257,9 +257,9 @@ func _on_BigShip_destroyed(ship : Spatial):
 			blue_points += 100
 	elif ship.is_in_group("AttackShips"):
 		if not ship.blue_team:
-			red_points += 30
+			red_points += 50
 		else:
-			blue_points += 30
+			blue_points += 50
 
 
 func _on_cp_add_points(blue_team : bool) -> void:

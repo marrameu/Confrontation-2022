@@ -25,15 +25,11 @@ var wants_shoots := { 0: false, 1: false }
 var can_shoots := { 0: true, 1: true }
 
 
-var lock_missile_timer : Timer # no onready pq lscript canvia
+var lock_missile_timer : Timer # no va, pq onready pq lscript canvia
 var locking_target_to_missile := false
 var target_locked := false
 var locking_time : float = 1/fire_rates[1]
 var lock_target : Spatial
-
-
-func _init():
-	lock_missile_timer = $LockMissileTimer
 
 
 func _process(delta : float) -> void:
@@ -119,9 +115,9 @@ func lock_target_to_missile():
 	
 	if lock_target:
 		locking_target_to_missile = true
-		if lock_missile_timer.is_stopped():
-			lock_missile_timer.wait_time = locking_time
-			lock_missile_timer.start()
+		if $LockMissileTimer.is_stopped():
+			$LockMissileTimer.wait_time = locking_time
+			$LockMissileTimer.start()
 	
 	check_to_cancel_locking() # decideix ja si és darrere
 

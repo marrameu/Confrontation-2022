@@ -44,6 +44,14 @@ func _on_damagable_hit():
 	pass
 
 
+func _on_headshot():
+	pass
+
+
+func _on_enemy_died():
+	pass
+
+
 func _on_MeleeHitBox_area_entered(area):
 	if area == $HurtBox:
 		return
