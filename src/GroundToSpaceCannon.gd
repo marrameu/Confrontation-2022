@@ -25,6 +25,11 @@ func _process(delta):
 		wants_shoot = false
 
 
+func shoot():
+	$AnimationPlayer.play("Shoot")
+	.shoot()
+
+
 func update_target(blue : bool) -> Spatial:
 	#for support_ship in get_tree().get_nodes_in_group("SupportShips"):
 	#	if support_ship.blue_team != blue:

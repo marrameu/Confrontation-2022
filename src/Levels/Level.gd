@@ -117,13 +117,15 @@ func spawn_player(pos := Vector3(0, 2, 0)) -> Spatial:
 	return new_player
 
 
-func spawn_ai_troop(ai_num : int, blue_team := false) -> Spatial:
-	var new_troop_man : PilotManager = get_node_or_null("PilotManagers/AIManager" + str(ai_num))
+func spawn_ai_troop(ai_num : int, blue_team := false, spawn_in_space := false) -> Spatial:
+	var new_troop_man : AIPilotManager = get_node_or_null("PilotManagers/AIManager" + str(ai_num))
 	# crea'n un de nou
 	if not new_troop_man:
-		new_troop_man = PilotManager.new()
+		new_troop_man = AIPilotManager.new()
 		new_troop_man.name = ("AIManager" + str(ai_num))
 		new_troop_man.blue_team = blue_team
+		new_troop_man.spawn_in_space = spawn_in_space
+		
 		$PilotManagers.add_child(new_troop_man)
 	
 	
@@ -131,6 +133,12 @@ func spawn_ai_troop(ai_num : int, blue_team := false) -> Spatial:
 	
 	var own_cps : Array
 	for cp in get_tree().get_nodes_in_group("CommandPosts"):
+		if not new_troop_man.spawn_in_space:
+			if cp.is_in_group("SpaceCP"):
+				continue
+		elif not cp.is_in_group("SpaceCP"):
+			continue
+		
 		if cp.m_team == 1 and not new_troop_man.blue_team:
 			own_cps.append(cp)
 		elif cp.m_team == 2 and new_troop_man.blue_team:
@@ -162,15 +170,25 @@ func start_battle():
 		red_ais -= 1
 	
 	var x : int = 0
+	var x_spawn_in_space : int = 0
 	while x < blue_ais:
 		x += 1
-		spawn_ai_troop(ai_num, true)
+		var spawn_in_space := false
+		if x_spawn_in_space < 6:
+			spawn_in_space = true
+			x_spawn_in_space += 1
+		spawn_ai_troop(ai_num, true, spawn_in_space)
 		ai_num += 1
 	
 	var y : int = 0
+	var y_spawn_in_space : int = 0
 	while y < red_ais:
 		y += 1
-		spawn_ai_troop(ai_num, false)
+		var spawn_in_space := false
+		if y_spawn_in_space < 6:
+			spawn_in_space = true
+			y_spawn_in_space += 1
+		spawn_ai_troop(ai_num, false, spawn_in_space)
 		ai_num += 1
 	
 	battle_started = true
