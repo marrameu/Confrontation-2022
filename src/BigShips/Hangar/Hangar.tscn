@@ -54,23 +54,61 @@ shape = SubResource( 5 )
 
 [node name="ShipSpawn" parent="ShipSpawns" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -89.3984, -14.8672, -67.1562 )
+simultaneous_ships = 2
 
 [node name="ShipSpawn2" parent="ShipSpawns" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -89.3984, -14.8672, -29.6907 )
+simultaneous_ships = 2
 
 [node name="ShipSpawn3" parent="ShipSpawns" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -89.3984, -14.8672, 32.157 )
+simultaneous_ships = 2
 
 [node name="ShipSpawn4" parent="ShipSpawns" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -89.3984, -14.8672, 78.5429 )
+simultaneous_ships = 2
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.290264, 0 )
 stream = ExtResource( 3 )
-unit_db = 70.0
-unit_size = 17.6
-max_db = 6.0
+unit_size = 15.0
 autoplay = true
-max_distance = 200.0
+area_mask = 0
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 22.9746, 58.6921 )
+light_color = Color( 1, 0.886275, 0.741176, 1 )
+spot_range = 124.928
+spot_angle = 32.48
+
+[node name="SpotLight2" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 22.9746, -64.4787 )
+light_color = Color( 1, 0.886275, 0.741176, 1 )
+spot_range = 124.928
+spot_angle = 32.48
+
+[node name="SpotLight3" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 122.344, 22.9746, 58.6921 )
+light_color = Color( 1, 0.886275, 0.741176, 1 )
+spot_range = 124.928
+spot_angle = 32.48
+
+[node name="SpotLight4" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 122.344, 22.9746, -64.4787 )
+light_color = Color( 1, 0.886275, 0.741176, 1 )
+spot_range = 124.928
+spot_angle = 32.48
+
+[node name="SpotLight5" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -124.824, 22.9746, 58.6921 )
+light_color = Color( 1, 0.886275, 0.741176, 1 )
+spot_range = 124.928
+spot_angle = 32.48
+
+[node name="SpotLight6" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -124.824, 22.9746, -64.4787 )
+light_color = Color( 1, 0.886275, 0.741176, 1 )
+spot_range = 124.928
+spot_angle = 32.48
 
 [editable path="LandingArea"]

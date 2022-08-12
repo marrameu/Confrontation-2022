@@ -246,17 +246,17 @@ func _on_BigShip_shields_down(ship):
 func _on_BigShip_destroyed(ship : Spatial):
 	emit_signal("match_msg", ship.name + " HA ESTAT DESTRUÏDA", !ship.blue_team)
 	if ship.is_in_group("CapitalShips"):
-		if not ship.blue_team:
+		if ship.blue_team:
 			red_points += 200
 		else:
 			blue_points += 200
 	elif ship.is_in_group("SupportShips"):
-		if not ship.blue_team:
+		if ship.blue_team:
 			red_points += 100
 		else:
 			blue_points += 100
 	elif ship.is_in_group("AttackShips"):
-		if not ship.blue_team:
+		if ship.blue_team:
 			red_points += 50
 		else:
 			blue_points += 50
