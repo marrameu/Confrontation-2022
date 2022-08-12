@@ -46,6 +46,20 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector3( -0.00476074, 4.71044e-08, -10.9777 ), Vector3( -0.00476074, 1.85073e-07, -7.82134 ), Vector3( -0.00476074, 4.71044e-08, -10.9777 ) ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_anim"
+} ]
+}
 
 [node name="GroundToSpaceCannon" type="StaticBody"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )

@@ -31,3 +31,8 @@ func _on_Area_body_exited(body):
 			enemies.remove(a)
 			break
 		a += 1
+
+
+func set_bullets_shooter(bullet : Bullet):
+	bullet.init(owner, owner.blue_team)
+	bullet.add_exception($HurtBox)

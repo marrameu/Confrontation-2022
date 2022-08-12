@@ -25,6 +25,7 @@ func _ready():
 	if shooter.has_method("_on_hit"):
 		connect("damagable_hit", shooter, "_on_damagable_hit")
 	var m_hurtbox = shooter.get_node_or_null("HurtBox")
+	$RayCast.add_exception(shooter)
 	if m_hurtbox:
 		$RayCast.add_exception(m_hurtbox)
 
@@ -91,3 +92,7 @@ func _on_VisibilityNotifier_screen_entered():
 func _on_VisibilityNotifier_screen_exited():
 	pass
 	#visible = false
+
+
+func add_exception(body):
+	$RayCast.add_exception(body)

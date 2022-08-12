@@ -191,6 +191,9 @@ func start_battle():
 		spawn_ai_troop(ai_num, false, spawn_in_space)
 		ai_num += 1
 	
+	for attack_ship in get_tree().get_nodes_in_group("AttackShips"):
+		attack_ship.can_move = true
+	
 	battle_started = true
 	emit_signal("battle_started")
 
@@ -208,11 +211,13 @@ func _on_ship_died(pilot_man : PilotManager) -> void:
 			blue_points += 5
 		if pilot_man.is_player:
 			_on_player_died()
+		else:
+			_on_ai_troop_died(int(pilot_man.name.trim_prefix("AIManager")))
 
 
 func _on_ai_troop_died(ai_num : int):
 	var t = Timer.new()
-	t.set_wait_time(5) # 20 o més
+	t.set_wait_time(20)
 	t.set_one_shot(true)
 	self.add_child(t)
 	t.start()

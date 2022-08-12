@@ -26,13 +26,13 @@ func _on_HealthSystem_shield_die():
 	emit_signal("shields_down", self)
 	$ShieldMesh.hide()
 	for turret in $Turrets.get_children():
-		turret.get_node("HurtBox").monitorable = true
+		pass#turret.get_node("HurtBox").monitorable = true
 
 
 func _on_HealthSystem_shield_recovered():
 	$ShieldMesh.show()
 	for turret in $Turrets.get_children():
-		turret.get_node("HurtBox").monitorable = false
+		pass#turret.get_node("HurtBox").monitorable = false
 	emit_signal("shields_recovered", self)
 
 

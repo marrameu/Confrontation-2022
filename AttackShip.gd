@@ -3,7 +3,7 @@ extends "res://BigShip.gd"
 
 onready var target : Vector3
 
-var can_move := true#false
+var can_move := false
 
 var rel_position := Vector3.ZERO
 

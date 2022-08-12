@@ -27,6 +27,9 @@ func _process(delta):
 
 func shoot():
 	$AnimationPlayer.play("Shoot")
+
+
+func shoot_anim():
 	.shoot()
 
 

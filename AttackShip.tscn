@@ -59,61 +59,41 @@ transform = Transform( -0.00408395, 0, -0.999992, 0, 1, 0, 0.999992, 0, -0.00408
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 0 )
 enabled = true
 cast_to = Vector3( 225, 0, 450 )
+collision_mask = 8
 
 [node name="ColDetectRight" type="RayCast" parent="ColDetectRays" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, 0 )
 enabled = true
 cast_to = Vector3( -225, 0, 450 )
+collision_mask = 8
 
 [node name="ColDetectForward" type="RayCast" parent="ColDetectRays" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.33 )
 enabled = true
 cast_to = Vector3( 0, 0, 450 )
+collision_mask = 8
 
 [node name="ColDetectUp" type="RayCast" parent="ColDetectRays" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
 enabled = true
 cast_to = Vector3( 0, 225, 450 )
+collision_mask = 8
 
 [node name="ColDetectDown" type="RayCast" parent="ColDetectRays" index="4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0 )
 enabled = true
 cast_to = Vector3( 0, -225, 450 )
+collision_mask = 8
 
 [node name="DesiredRot" type="Spatial" parent="." index="8"]
 
-[node name="ColDetectLeft" type="RayCast" parent="." index="9"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 0 )
-enabled = true
-cast_to = Vector3( 75, 0, 150 )
-
-[node name="ColDetectRight" type="RayCast" parent="." index="10"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, 0 )
-enabled = true
-cast_to = Vector3( -75, 0, 150 )
-
-[node name="ColDetectForward" type="RayCast" parent="." index="11"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.33 )
-enabled = true
-cast_to = Vector3( 0, 0, 150 )
-
-[node name="ColDetectUp" type="RayCast" parent="." index="12"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
-enabled = true
-cast_to = Vector3( 0, 75, 150 )
-
-[node name="ColDetectDown" type="RayCast" parent="." index="13"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0 )
-enabled = true
-cast_to = Vector3( 0, -75, 150 )
-
-[node name="ChangePosTimer" type="Timer" parent="." index="14"]
+[node name="ChangePosTimer" type="Timer" parent="." index="9"]
 one_shot = true
 
-[node name="ShieldGenerator" parent="." index="15"]
+[node name="ShieldGenerator" parent="." index="10"]
 visible = false
 
-[node name="TeamIndicator" type="MeshInstance" parent="." index="17"]
+[node name="TeamIndicator" type="MeshInstance" parent="." index="12"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.976, -22.3935 )
 mesh = SubResource( 2 )
 

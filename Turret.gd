@@ -60,4 +60,4 @@ func _on_HealthSystem_die(attacker):
 
 
 func set_bullets_shooter(bullet : Bullet):
-	bullet.init(owner, owner.blue_team)
+	pass
