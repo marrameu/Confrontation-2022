@@ -117,7 +117,7 @@ func spawn_player(pos := Vector3(0, 2, 0)) -> Spatial:
 	return new_player
 
 
-func spawn_ai_troop(ai_num : int, blue_team := false, spawn_in_space := false) -> Spatial:
+func spawn_ai_troop(ai_num : int, blue_team := false, spawn_in_space := false, pos := Vector3()) -> Spatial:
 	var new_troop_man : AIPilotManager = get_node_or_null("PilotManagers/AIManager" + str(ai_num))
 	# crea'n un de nou
 	if not new_troop_man:
@@ -150,7 +150,11 @@ func spawn_ai_troop(ai_num : int, blue_team := false, spawn_in_space := false) -
 	var new_troop = ai_troop_scene.instance()
 	
 	new_troop.pilot_man = new_troop_man
-	new_troop.translation = my_cp.global_transform.origin + Vector3(rand_range(-15, 15), 2, rand_range(-15, 15))
+	# ES POT FER MILLOR, COM AMB EL PLAYER
+	if not pos:
+		new_troop.translation = my_cp.global_transform.origin + Vector3(rand_range(-15, 15), 2, rand_range(-15, 15))
+	else:
+		new_troop.translation = pos
 	new_troop.connect("died", self, "_on_ai_troop_died", [ai_num])
 	add_child(new_troop)
 	

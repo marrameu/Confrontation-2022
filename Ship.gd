@@ -26,7 +26,12 @@ var landing_areas := 0
 var state := 0
 
 
-func init(new_pilot_man : PilotManager):
+func init(new_pilot_man : PilotManager) -> bool:
+	if is_player_or_ai == 1:
+		return false
+	elif is_player_or_ai == 2:
+		exit_ship()
+	
 	pilot_man = new_pilot_man
 	set_team_color()
 	is_player_or_ai = 1 if pilot_man.is_player else 2
@@ -40,6 +45,7 @@ func init(new_pilot_man : PilotManager):
 		shooting.set_script(preload("res://AIShipShooting.gd"))
 		$StateMachine.set_active(true)
 	connect("ship_died", get_tree().current_scene, "_on_ship_died", [pilot_man])
+	return true
 
 
 func _process(delta):
@@ -155,15 +161,16 @@ func on_BigShip_shields_down(ship):
 
 
 func exit_ship(): # de moment, sols player
+	if is_player_or_ai == 1:
+		$PlayerHUD.make_visible(false)
+		get_viewport().get_camera().ship = null
+		get_tree().current_scene.spawn_player(translation) # senyals
+	elif is_player_or_ai == 2:
+		$StateMachine.set_active(false)
+		get_tree().current_scene.spawn_ai_troop(int(pilot_man.name.trim_prefix("AIManager")), false, false, translation) # senyals
 	pilot_man = null
-	is_player_or_ai = 0
-	$PlayerHUD.make_visible(false)
 	input.set_script(preload("res://ShipInput.gd"))
 	shooting.set_script(preload("res://src/Ships/ShipShooting.gd"))
-	$StateMachine.set_active(false)
 	set_team_color()
 	disconnect("ship_died", get_tree().current_scene, "_on_ship_died")
-	get_viewport().get_camera().ship = null
-	
-	# spawn troop
-	get_tree().current_scene.spawn_player(translation) # senyals
+	is_player_or_ai = 0

@@ -23,11 +23,12 @@ var des_throttle := 1.0
 
 
 func _process(delta):
-	pass
 	#DebugDraw.draw_line_3d(owner.global_transform.origin, target, Color(1, 1, 0))
 	
 	if owner.state == owner.States.LANDED:
-		owner.leave()
+		if $AILeaveTimer.is_stopped():
+			$AILeaveTimer.connect("timeout", self, "_on_AILeaveTimer_timeout")
+			$AILeaveTimer.start()
 
 
 func _physics_process(delta):
@@ -191,3 +192,7 @@ func turn(delta):
 	# COM AL JOC ANTERIOR
 	#owner.global_transform.basis = owner.global_transform.basis.slerp(desired_oirent.basis, 0.7 * delta)
 	#owner.translation += owner.global_transform.basis.z * 100 * delta
+
+
+func _on_AILeaveTimer_timeout():
+	owner.leave()

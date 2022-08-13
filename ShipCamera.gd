@@ -56,7 +56,7 @@ func _ready():
 
 
 func _process(delta):
-	if not ship_wr or not ship_wr.get_ref():
+	if not ship or not weakref(ship).get_ref():
 		return
 	
 	if ship.dead:
@@ -82,7 +82,7 @@ func _process(delta):
 
 
 func _physics_process(delta : float) -> void:
-	if not ship_wr or not ship_wr.get_ref() or ship.dead:
+	if not ship or not weakref(ship).get_ref() or ship.dead:
 		fov = 70
 		return
 	
@@ -97,10 +97,10 @@ func _physics_process(delta : float) -> void:
 
 
 func init_cam():
-	if not ship:
+	if not ship or not weakref(ship).get_ref():
 		return
 	
-	if ship_wr and ship_wr.get_ref(): # si no, l'starter position es va canviant tota l'estona
+	if target and weakref(target).get_ref(): # si no, l'starter position es va canviant tota l'estona
 		target.translation = starter_target_position
 	
 	# això es deu poder fer una mica millor
