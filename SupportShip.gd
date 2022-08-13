@@ -38,16 +38,15 @@ func _physics_process(delta):
 
 
 func _on_SupportArea_body_entered(body):
-	if body is Ship:
-		if body.pilot_man.blue_team == blue_team:
-			body.get_node("HealthSystem").heal(99999999)
-			body.get_node("HealthSystem").heal_shield(9999999)
-			var a : int = 0
-			for value in body.shooting.ammos:
-				body.shooting.ammos[a] = body.shooting.MAX_AMMOS[a]
-				if body.shooting.ease_ammos[a]:
-					body.shooting.not_eased_ammos[a] = body.shooting.MAX_AMMOS[a]
-				a += 1
+	if body.pilot_man.blue_team == blue_team:
+		body.get_node("HealthSystem").heal(99999999)
+		body.get_node("HealthSystem").heal_shield(9999999)
+		var a : int = 0
+		for value in body.shooting.ammos:
+			body.shooting.ammos[a] = body.shooting.MAX_AMMOS[a]
+			if body.shooting.ease_ammos[a]:
+				body.shooting.not_eased_ammos[a] = body.shooting.MAX_AMMOS[a]
+			a += 1
 
 
 func _on_SupportArea_body_exited(body):

@@ -1,8 +1,7 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/models/ybot/ybot.dae" type="PackedScene" id=1]
 [ext_resource path="res://src/Troops/Player.gd" type="Script" id=2]
-[ext_resource path="res://src/Troops/CameraBase.gd" type="Script" id=3]
 [ext_resource path="res://src/Troops/Weapons/Riffle.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Troops/Interact.gd" type="Script" id=5]
 [ext_resource path="res://assets/interface/ship_cursor.png" type="Texture" id=6]
@@ -191,18 +190,6 @@ script = ExtResource( 2 )
 [node name="Model" parent="." instance=ExtResource( 1 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.77705, 0 )
 
-[node name="CameraBase" type="Spatial" parent="."]
-script = ExtResource( 3 )
-
-[node name="CameraPosition" type="Position3D" parent="CameraBase"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.32448, 1.21886, -3.29704 )
-
-[node name="Tween" type="Tween" parent="CameraBase"]
-
-[node name="StabilizeTimer" type="Timer" parent="CameraBase"]
-wait_time = 0.5
-one_shot = true
-
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 3 )
@@ -338,7 +325,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.798786, 1.03381 )
 shape = SubResource( 6 )
 disabled = true
 
-[connection signal="timeout" from="CameraBase/StabilizeTimer" to="CameraBase" method="_on_StabilizeTimer_timeout"]
 [connection signal="timeout" from="Interact/Timer" to="Interact" method="_on_Timer_timeout"]
 [connection signal="timeout" from="PlayerHUD/LifeBarEnemy/Timer" to="PlayerHUD/LifeBarEnemy" method="_on_Timer_timeout"]
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]

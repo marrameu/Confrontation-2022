@@ -9,14 +9,14 @@ export var continuous := true
 
 func _ready():
 	init_offset = offset
-	connect("shoot", owner.get_node("CameraBase"), "shake_camera", [self])
+	connect("shoot", get_tree().current_scene.get_node("CameraBase"), "shake_camera", [self])
 
 
 func _process(delta):
 	if not active:
 		return
 	
-	offset = init_offset/2 if  owner.get_node("CameraBase").zooming else init_offset
+	offset = init_offset/2 if get_tree().current_scene.get_node("CameraBase").zooming else init_offset
 	
 	if Input.is_action_just_pressed("shoot") and owner.can_shoot:
 		shooting = true

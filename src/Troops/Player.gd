@@ -15,24 +15,9 @@ var dead := false
 
 
 func _physics_process(delta):
-	var joystick_movement := 0.0
-	var yaw_strenght : float = (joystick_movement + mouse_movement.x) * $CameraBase.rotate_speed_multipiler
-	if yaw_strenght and can_aim:
-		rotate_yaw(yaw_strenght, delta)
-	mouse_movement = Vector2.ZERO
 	if can_rotate:
-		pass
-
-
-func _input(event : InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		mouse_movement = event.relative * Settings.player_mouse_sensitivity
-
-
-func rotate_yaw(strenght, delta):
-	strenght *= delta
-	rotate_y(-strenght)
-	orthonormalize()
+		rotation.y = lerp(rotation.y, get_tree().current_scene.get_node("CameraBase").global_transform.basis.get_euler().y, 0.15 * delta * 60)
+		#inverse kinematics
 
 
 func _on_HealthSystem_die(attacker):

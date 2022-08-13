@@ -271,6 +271,8 @@ gravity = Vector3( 0, 0, 0 )
 [node name="ExitTimer" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="big_ship_shields_down" from="." to="StateMachine/ChooseObjective" method="_on_big_ship_shields_down"]
+[connection signal="big_ship_shields_down" from="." to="StateMachine/PushForward" method="_on_big_ship_shields_down"]
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
 [connection signal="timeout" from="Input/ReloadTurboTimer" to="Input" method="_on_ReloadTurboTimer_timeout"]
 [connection signal="timeout" from="Input/DrainTurboTimer" to="Input" method="_on_DrainTurboTimer_timeout"]

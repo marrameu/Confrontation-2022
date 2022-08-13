@@ -1,9 +1,8 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://assets/materials/grid.tres" type="Material" id=1]
 [ext_resource path="res://src/Levels/Box.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/CommandPost/CommandPost.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/Levels/PlayerTroopCam.gd" type="Script" id=4]
 [ext_resource path="res://src/Levels/Level.gd" type="Script" id=5]
 [ext_resource path="res://src/BigShips/Hangar/ShipSpawn.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ShipCamera.gd" type="Script" id=7]
@@ -14,8 +13,7 @@
 [ext_resource path="res://AttackShip.tscn" type="PackedScene" id=12]
 [ext_resource path="res://SpawnHUD.tscn" type="PackedScene" id=13]
 [ext_resource path="res://WaitingCam.gd" type="Script" id=14]
-[ext_resource path="res://assets/Materials/blue_big_ship_mat.tres" type="Material" id=15]
-[ext_resource path="res://assets/Materials/red_big_ship_mat.tres" type="Material" id=16]
+[ext_resource path="res://src/Troops/CameraBase.gd" type="Script" id=15]
 [ext_resource path="res://MatchUI.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/PauseMenu.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/GroundToSpaceCannon.tscn" type="PackedScene" id=19]
@@ -133,14 +131,6 @@ transform = Transform( 1, 0, 0, 0, 0.509342, 0.860564, 0, -0.860564, 0.509342, 0
 
 [node name="PauseMenu" parent="." instance=ExtResource( 18 )]
 
-[node name="PlayerTroopCam" type="InterpolatedCamera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9301, 12.6019 )
-current = true
-far = 5000.0
-speed = 25.0
-enabled = true
-script = ExtResource( 4 )
-
 [node name="PlayerShipCam" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9301, 12.6019 )
 far = 10000.0
@@ -160,15 +150,11 @@ is_player = true
 unique_name_in_owner = true
 transform = Transform( -2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, -3000, 2019.41, 0.00088501 )
 collision_layer = 1
-red_mat = ExtResource( 16 )
-blue_mat = ExtResource( 15 )
 
 [node name="CapitalShipBlue" parent="BigShips" instance=ExtResource( 11 )]
 unique_name_in_owner = true
 transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 2996, 2019.41, -0.000152588 )
 collision_layer = 1
-red_mat = ExtResource( 16 )
-blue_mat = ExtResource( 15 )
 blue_team = true
 
 [node name="SuportShip" parent="BigShips" instance=ExtResource( 10 )]
@@ -249,9 +235,29 @@ audio_sfx3 = ExtResource( 23 )
 transform = Transform( 0.832854, 0.418903, -0.361766, 0, 0.653606, 0.756835, 0.553493, -0.630333, 0.544358, 0, 19.4566, 0 )
 shadow_enabled = true
 
+[node name="CameraBase" type="Spatial" parent="."]
+script = ExtResource( 15 )
+
+[node name="CameraPosition" type="Position3D" parent="CameraBase"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.32448, 1.21886, -3.29704 )
+
+[node name="PlayerTroopCam" type="InterpolatedCamera" parent="CameraBase/CameraPosition"]
+unique_name_in_owner = true
+current = true
+far = 5000.0
+speed = 25.0
+enabled = true
+
+[node name="Tween" type="Tween" parent="CameraBase"]
+
+[node name="StabilizeTimer" type="Timer" parent="CameraBase"]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="change_cam" from="SpawnHUD" to="." method="_on_SpawnHUD_change_cam"]
 [connection signal="respawn" from="SpawnHUD" to="." method="spawn_player"]
 [connection signal="start_battle" from="SpawnHUD" to="." method="start_battle"]
 [connection signal="finished" from="BGMusic" to="BGMusic" method="_on_BGMusic_finished"]
+[connection signal="timeout" from="CameraBase/StabilizeTimer" to="CameraBase" method="_on_StabilizeTimer_timeout"]
 
 [editable path="Map/LandingArea"]

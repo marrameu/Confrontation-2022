@@ -150,7 +150,7 @@ func land():
 	physics.desired_angular_force = Vector3()
 
 
-func _on_BigShip_shields_down(ship):
+func on_BigShip_shields_down(ship):
 	emit_signal("big_ship_shields_down", ship)
 
 

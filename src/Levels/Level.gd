@@ -110,10 +110,10 @@ func spawn_player(pos := Vector3(0, 2, 0)) -> Spatial:
 	new_player.translation = pos
 	new_player.pilot_man = $PilotManagers/PlayerMan
 	add_child(new_player)
-	$PlayerTroopCam.cam_pos_path = new_player.get_node("CameraBase/CameraPosition").get_path()
+	$CameraBase.player_path = new_player.get_path()
 	new_player.connect("entered_ship", self, "_on_player_entered_ship") #cam en lloc de self
 	new_player.connect("died", self, "_on_player_died")
-	$PlayerTroopCam.make_current()
+	$CameraBase.get_node("%PlayerTroopCam").make_current()
 	return new_player
 
 
@@ -128,9 +128,7 @@ func spawn_ai_troop(ai_num : int, blue_team := false, spawn_in_space := false) -
 		
 		$PilotManagers.add_child(new_troop_man)
 	
-	
-	var new_troop = ai_troop_scene.instance()
-	
+	var my_cp : CommandPost
 	var own_cps : Array
 	for cp in get_tree().get_nodes_in_group("CommandPosts"):
 		if not new_troop_man.spawn_in_space:
@@ -144,12 +142,15 @@ func spawn_ai_troop(ai_num : int, blue_team := false, spawn_in_space := false) -
 		elif cp.m_team == 2 and new_troop_man.blue_team:
 			own_cps.append(cp)
 	if own_cps:
-		var my_cp : CommandPost = own_cps[randi() % own_cps.size()]
-		new_troop.translation = my_cp.global_transform.origin + Vector3(rand_range(-15, 15), 2, rand_range(-15, 15))
+		my_cp = own_cps[randi() % own_cps.size()]
 	else:
-		pass
+		get_tree().create_timer(5).connect("timeout", self, "spawn_ai_troop", [ai_num])
+		return null
+	
+	var new_troop = ai_troop_scene.instance()
 	
 	new_troop.pilot_man = new_troop_man
+	new_troop.translation = my_cp.global_transform.origin + Vector3(rand_range(-15, 15), 2, rand_range(-15, 15))
 	new_troop.connect("died", self, "_on_ai_troop_died", [ai_num])
 	add_child(new_troop)
 	
@@ -238,7 +239,9 @@ func _on_SpawnHUD_change_cam():
 
 
 func _on_BigShip_shields_down(ship):
-	emit_signal("big_ship_shields_down", ship)
+	for ship in get_tree().get_nodes_in_group("Ships"):
+		ship.on_BigShip_shields_down(ship)
+	#emit_signal("big_ship_shields_down", ship) # NO SÉ COM CONNECTAR-HO GUAI :/ -> QUAN LA BIGSHIP FA READY HO CONNECTA AMB TOTES LES NAUS? PERÒ I SI FAN SPAWN MÉS NAUS?
 	var msg_blue : bool = !ship.blue_team
 	emit_signal("match_msg", ship.name + " HA PERDUT ELS ESCUTS", msg_blue)
 

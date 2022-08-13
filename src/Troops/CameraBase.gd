@@ -20,6 +20,8 @@ var original_cam_rot := Vector2()
 var cam_yaw_at_last_shot := 0.0
 var current_gun : Gun
 
+export var player_path : NodePath
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,17 +30,29 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if Input.is_action_just_pressed("change_view") and owner.can_aim:
+	if not get_node_or_null(player_path):
+		$"%PlayerTroopCam".fov = 70.0
+		return
+	if Input.is_action_just_pressed("change_view") and get_node(player_path).can_aim:
 		move_camera()
+	#rotation = get_node(player_path).global_transform.basis.get_euler()
 
 
 func _physics_process(delta):
+	if not get_node_or_null(player_path):
+		return
+	
+	translation = translation.linear_interpolate(get_node(player_path).global_transform.origin, 0.25 * delta * 60)
+	
 	var joystick_movement := 0.0
 	var pitch_strenght := (joystick_movement + mouse_movement.y) * rotate_speed_multipiler
-	if pitch_strenght and owner.can_aim:
+	var yaw_strenght : float = (joystick_movement + mouse_movement.x) * rotate_speed_multipiler
+	if pitch_strenght and get_node(player_path).can_aim:
 		rotate_pitch(pitch_strenght, delta)
+	if yaw_strenght and get_node(player_path).can_aim:
+		rotate_yaw(yaw_strenght, delta)
 	
-	zooming = Input.is_action_pressed("zoom") and owner.can_shoot #owner.running
+	zooming = Input.is_action_pressed("zoom") and get_node(player_path).can_shoot #owner.running
 	update_zoom()
 	
 	process_shake()
@@ -62,6 +76,12 @@ func move_camera() -> void:
 func rotate_pitch(strenght, delta):
 	var camera_x_rot = clamp(rotation.x + strenght * delta, deg2rad(CAMERA_X_ROT_MIN), deg2rad(CAMERA_X_ROT_MAX))
 	rotation.x = camera_x_rot
+	orthonormalize()
+
+
+func rotate_yaw(strenght, delta):
+	strenght *= delta
+	rotate_y(-strenght)
 	orthonormalize()
 
 
@@ -108,8 +128,8 @@ func process_shake() -> void:
 		var to = rotation.x + shake_amount.x
 		rotation.x = clamp(lerp(rotation.x, to, 0.05), deg2rad(CAMERA_X_ROT_MIN), deg2rad(CAMERA_X_ROT_MAX))
 		shake_amount.x = lerp(shake_amount.x, 0, 0.15)
-		owner.rotation.y = lerp(owner.rotation.y, owner.rotation.y + shake_amount.y, 0.15)
-		original_cam_rot.y = owner.rotation.y - shake_amount.y
+		rotation.y = lerp(rotation.y, rotation.y + shake_amount.y, 0.15)
+		original_cam_rot.y = rotation.y - shake_amount.y
 		shake_amount.y = lerp(shake_amount.y, 0, 0.15)
 	elif wants_to_stabilize: 
 		if recoil_amount.x < 0.001: # ja s'ha estabilitzat
@@ -117,7 +137,7 @@ func process_shake() -> void:
 			return
 		var to = rotation.x + recoil_amount.x
 		rotation.x = lerp(rotation.x, to, 0.15)
-		owner.rotation.y = lerp(owner.rotation.y, owner.rotation.y - recoil_amount.y, 0.15)
+		rotation.y = lerp(rotation.y, rotation.y - recoil_amount.y, 0.15)
 		recoil_amount.y = lerp(recoil_amount.y, 0, 0.15)
 		recoil_amount.x = lerp(recoil_amount.x, 0, 0.15)
 
