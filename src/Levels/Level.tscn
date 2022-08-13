@@ -53,6 +53,10 @@ albedo_color = Color( 0, 0.0745098, 1, 1 )
 albedo_color = Color( 1, 0.0745098, 1, 1 )
 
 [sub_resource type="ProceduralSky" id=8]
+sky_top_color = Color( 0.827451, 0.819608, 0.952941, 1 )
+sky_horizon_color = Color( 1, 0.878431, 0.592157, 1 )
+sun_latitude = 20.15
+sun_longitude = -150.0
 
 [sub_resource type="Environment" id=9]
 background_mode = 2
@@ -269,7 +273,7 @@ audio_sfx2 = ExtResource( 24 )
 audio_sfx3 = ExtResource( 23 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 0.832854, 0.418903, -0.361766, 0, 0.653606, 0.756835, 0.553493, -0.630333, 0.544358, 0, 19.4566, 0 )
+transform = Transform( 0.832854, 0.135101, -0.536751, 0, 0.969753, 0.244089, 0.553493, -0.20329, 0.807663, 0, 19.4566, 0 )
 shadow_enabled = true
 
 [node name="CameraBase" type="Spatial" parent="."]
