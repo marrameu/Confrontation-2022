@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/models/ybot/ybot.dae" type="PackedScene" id=1]
 [ext_resource path="res://src/Troops/Player.gd" type="Script" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://src/Troops/Weapons/Pistol.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/Troops/Weapons/MissileLauncher.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/Troops/Melee.gd" type="Script" id=20]
+[ext_resource path="res://src/Troops/GranadeLauncher.gd" type="Script" id=21]
 
 [sub_resource type="CapsuleShape" id=3]
 radius = 0.6
@@ -214,6 +215,9 @@ visible = false
 [node name="MissileLauncher" parent="Shooting/Weapons" instance=ExtResource( 19 )]
 visible = false
 
+[node name="GranadeLauncher" type="Spatial" parent="Shooting"]
+script = ExtResource( 21 )
+
 [node name="Interact" type="Node" parent="."]
 script = ExtResource( 5 )
 
@@ -272,6 +276,44 @@ text = "JUSEP"
 align = 1
 
 [node name="Timer" type="Timer" parent="PlayerHUD/LifeBarEnemy"]
+
+[node name="SpeiclaWeapons" type="HBoxContainer" parent="PlayerHUD"]
+margin_left = 1570.0
+margin_top = 950.0
+margin_right = 1770.0
+margin_bottom = 1022.0
+
+[node name="Label" type="Label" parent="PlayerHUD/SpeiclaWeapons"]
+margin_right = 64.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "5
+GRANA-
+DES
+(F)"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="PlayerHUD/SpeiclaWeapons"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "---"
+align = 1
+valign = 1
+
+[node name="Label3" type="Label" parent="PlayerHUD/SpeiclaWeapons"]
+margin_left = 136.0
+margin_right = 200.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "---"
+align = 1
+valign = 1
 
 [node name="HealthSystem" parent="." instance=ExtResource( 7 )]
 

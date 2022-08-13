@@ -36,7 +36,7 @@ initial_velocity = 0.3
 angular_velocity = 35.0
 angular_velocity_random = 1.0
 
-[sub_resource type="SpatialMaterial" id=10]
+[sub_resource type="SpatialMaterial" id=14]
 flags_transparent = true
 flags_unshaded = true
 vertex_color_use_as_albedo = true
@@ -52,7 +52,7 @@ proximity_fade_enable = true
 proximity_fade_distance = 0.2
 
 [sub_resource type="QuadMesh" id=13]
-material = SubResource( 10 )
+material = SubResource( 14 )
 size = Vector2( 0.2, 0.2 )
 
 [sub_resource type="Animation" id=7]

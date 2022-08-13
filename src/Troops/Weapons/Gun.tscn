@@ -71,14 +71,12 @@ expand = true
 flip_h = true
 
 [node name="TextureProgress" type="TextureProgress" parent="HUD"]
-anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -90.0
-margin_top = -236.0
-margin_right = -67.0
-margin_bottom = -49.0
+margin_left = 56.0
+margin_top = -270.0
+margin_right = 79.0
+margin_bottom = -83.0
 value = 53.0
 texture_under = ExtResource( 4 )
 texture_progress = ExtResource( 4 )

@@ -2,6 +2,8 @@ extends Spatial
 
 var current_weapon_ind : int = 0
 
+# export var abilities : Dictionary
+
 
 func _ready():
 	for weapon in $Weapons.get_children():
