@@ -1,8 +1,9 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://assets/materials/grid.tres" type="Material" id=1]
 [ext_resource path="res://src/Levels/Box.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/CommandPost/CommandPost.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Vehicles/Walker.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Levels/Level.gd" type="Script" id=5]
 [ext_resource path="res://src/BigShips/Hangar/ShipSpawn.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ShipCamera.gd" type="Script" id=7]
@@ -55,8 +56,9 @@ albedo_color = Color( 1, 0.0745098, 1, 1 )
 [sub_resource type="ProceduralSky" id=8]
 sky_top_color = Color( 0.827451, 0.819608, 0.952941, 1 )
 sky_horizon_color = Color( 1, 0.878431, 0.592157, 1 )
-sun_latitude = 20.15
+sun_latitude = 15.0
 sun_longitude = -150.0
+sun_energy = 3.0
 
 [sub_resource type="Environment" id=9]
 background_mode = 2
@@ -294,6 +296,9 @@ enabled = true
 [node name="StabilizeTimer" type="Timer" parent="CameraBase"]
 wait_time = 0.5
 one_shot = true
+
+[node name="Walker" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26.809, 0, -138.817 )
 
 [connection signal="change_cam" from="SpawnHUD" to="." method="_on_SpawnHUD_change_cam"]
 [connection signal="respawn" from="SpawnHUD" to="." method="spawn_player"]

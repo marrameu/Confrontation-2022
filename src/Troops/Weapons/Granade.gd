@@ -9,6 +9,7 @@ export var damage := 300.0
 
 
 func _ready():
+	mode = RigidBody.MODE_RIGID
 	apply_central_impulse(-global_transform.basis.z * impulse)
 	$AnimationPlayer.play("explode")
 
