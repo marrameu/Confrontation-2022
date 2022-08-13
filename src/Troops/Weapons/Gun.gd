@@ -32,21 +32,34 @@ export var bullet_scene : PackedScene = preload("res://src/Bullets/Bullet.tscn")
 const hit_scene : PackedScene = preload("res://src/Troops/Weapons/Particles/HitParticles.tscn")
 
 export var fire_rate := 5.0
+var _next_time_to_fire := 0.0
+var time := 0.0
 
 export var shoot_range := 500
 export var offset := Vector2(30, 30)
 
 export var recoil_force := Vector2.ONE
 
-var _next_time_to_fire := 0.0
+export var MAX_AMMO := 50.0
+var ammo : float
+var not_eased_ammo : float
+export var reload_per_sec := 0.0 #  0.0 vol dir que no es recarrega automàticament
 
-var m_team := 0
+export var MAX_RELOAD_AMMO := 100.0 # només si no es recarrega auto (fer classes diferents?)
+var reload_ammo : float
+
+# var m_team := 0 wat?
 var shooting := false
 
-var time := 0.0
+var active := false
+
 
 func _ready() -> void:
-	m_team = 0
+	ammo = MAX_AMMO
+	not_eased_ammo = MAX_AMMO
+	reload_ammo = MAX_RELOAD_AMMO
+	
+	#m_team = 0
 	if get_tree().has_network_peer():
 		if not is_network_master():
 			$HUD/Crosshair.queue_free()
@@ -57,9 +70,14 @@ func _process(delta : float) -> void:
 		if not is_network_master():
 			return
 	
+	if not active:
+		return
+	
+	auto_reload_ammo(delta)
+	
 	time += delta
 	
-	if shooting and time >= _next_time_to_fire:
+	if shooting and time >= _next_time_to_fire and ammo >= 1:
 		_next_time_to_fire = time + 1.0 / fire_rate
 		_shoot()
 	
@@ -71,6 +89,8 @@ func _shoot() -> void:
 	emit_signal("shoot")
 	
 	#$Audio.play()
+	
+	ammo -= 1
 	
 	var vector := Vector2(rand_range(-offset.x, offset.x), rand_range(-offset.y, offset.y))
 	vector = vector.length() * vector.normalized()
@@ -97,3 +117,27 @@ func _shoot() -> void:
 	
 	
 	$RayCast.cast_to = Vector3(0, 0, shoot_range)
+
+
+func auto_reload_ammo(delta):
+	if not reload_per_sec:
+		return
+	
+	# el problema ara és que si fos continuous i deixés premut el botó, no es recarregaria per disparar ni una bala
+	if not shooting and time >= _next_time_to_fire:
+		not_eased_ammo += delta * reload_per_sec
+		ammo = clamp(pow(not_eased_ammo/MAX_AMMO, 3.0) * MAX_AMMO, 0, MAX_AMMO)
+	else:
+		var b = pow(ammo/MAX_AMMO, 1.0/3.0)
+		not_eased_ammo = clamp(b*MAX_AMMO, 0, MAX_AMMO)
+
+
+func reload_ammo():
+	var tranfered_ammo = MAX_AMMO
+	reload_ammo -= tranfered_ammo
+	ammo += min(tranfered_ammo, MAX_AMMO - ammo)
+
+
+func set_active(value : bool) -> void:
+	active = value
+	visible = value

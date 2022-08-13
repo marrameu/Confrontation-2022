@@ -78,6 +78,8 @@ func number_of_my_team_ships() -> int:
 
 
 func _on_big_ship_shields_down(ship):
+	if not owner.pilot_man:
+		return
 	if ship.blue_team == owner.pilot_man.blue_team:
 		my_team_big_ships_wo_shields.append(ship)
 	else:

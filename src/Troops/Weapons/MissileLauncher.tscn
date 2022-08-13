@@ -10,9 +10,11 @@ height = 0.75
 
 [node name="MissileLauncher" instance=ExtResource( 1 )]
 bullet_scene = ExtResource( 2 )
-fire_rate = 3.0
+fire_rate = 0.5
 offset = Vector2( 15, 15 )
 recoil_force = Vector2( 5, 1 )
+MAX_AMMO = 2.0
+MAX_RELOAD_AMMO = 8.0
 continuous = false
 
 [node name="MeshInstance" type="MeshInstance" parent="Mesh" index="0"]

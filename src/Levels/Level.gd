@@ -239,8 +239,8 @@ func _on_SpawnHUD_change_cam():
 
 
 func _on_BigShip_shields_down(ship):
-	for ship in get_tree().get_nodes_in_group("Ships"):
-		ship.on_BigShip_shields_down(ship)
+	for normal_ship in get_tree().get_nodes_in_group("Ships"):
+		normal_ship.on_BigShip_shields_down(ship)
 	#emit_signal("big_ship_shields_down", ship) # NO SÉ COM CONNECTAR-HO GUAI :/ -> QUAN LA BIGSHIP FA READY HO CONNECTA AMB TOTES LES NAUS? PERÒ I SI FAN SPAWN MÉS NAUS?
 	var msg_blue : bool = !ship.blue_team
 	emit_signal("match_msg", ship.name + " HA PERDUT ELS ESCUTS", msg_blue)

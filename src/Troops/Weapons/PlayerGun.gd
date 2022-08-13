@@ -2,8 +2,6 @@ extends Gun
 
 var init_offset : Vector2
 
-var active := false
-
 export var continuous := true
 
 
@@ -16,12 +14,21 @@ func _process(delta):
 	if not active:
 		return
 	
+	print(ammo)
+	
+	if not reload_per_sec:
+		if Input.is_action_just_pressed("reload"):
+			reload_ammo()
+	
+	$HUD/TextureProgress.value = ammo/MAX_AMMO*100
+	
 	offset = init_offset/2 if get_tree().current_scene.get_node("CameraBase").zooming else init_offset
 	
-	if Input.is_action_just_pressed("shoot") and owner.can_shoot:
-		shooting = true
-	elif not Input.is_action_pressed("shoot"):
-		shooting = false
+	if not continuous:
+		shooting = owner.can_shoot and Input.is_action_just_pressed("shoot")
+	else:
+		shooting = owner.can_shoot and Input.is_action_pressed("shoot")
+	
 	var cam := get_viewport().get_camera()
 	var cam_basis : Basis = cam.global_transform.basis
 	
@@ -46,12 +53,7 @@ func _physics_process(delta):
 
 
 func set_active(value : bool) -> void:
-	active = value
-	visible = value
 	$HUD/Crosshair.visible = value
+	$HUD/TextureProgress.visible = value
+	.set_active(value)
 
-
-func _shoot() -> void:
-	if not continuous:
-		shooting = false
-	._shoot()

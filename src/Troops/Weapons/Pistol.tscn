@@ -6,6 +6,9 @@
 [node name="Pistol" instance=ExtResource( 1 )]
 offset = Vector2( 15, 15 )
 recoil_force = Vector2( 1.5, 1.5 )
+MAX_AMMO = 20.0
+reload_per_sec = 2.0
+MAX_RELOAD_AMMO = 0.0
 continuous = false
 
 [node name="Pistol" parent="Mesh" index="0" instance=ExtResource( 2 )]

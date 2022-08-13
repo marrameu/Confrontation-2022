@@ -4,6 +4,8 @@ var current_weapon_ind : int = 0
 
 
 func _ready():
+	for weapon in $Weapons.get_children():
+		weapon.set_active(false)
 	$Weapons.get_child(current_weapon_ind).set_active(true)
 
 
