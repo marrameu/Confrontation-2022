@@ -124,7 +124,7 @@ func auto_reload_ammo(delta):
 		return
 	
 	# el problema ara és que si fos continuous i deixés premut el botó, no es recarregaria per disparar ni una bala
-	if not shooting and time >= _next_time_to_fire:
+	if not shooting and time >= _next_time_to_fire + 1:
 		not_eased_ammo += delta * reload_per_sec
 		ammo = clamp(pow(not_eased_ammo/MAX_AMMO, 3.0) * MAX_AMMO, 0, MAX_AMMO)
 	else:

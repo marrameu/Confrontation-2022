@@ -154,7 +154,7 @@ func on_BigShip_shields_down(ship):
 	emit_signal("big_ship_shields_down", ship)
 
 
-func exit_ship():
+func exit_ship(): # de moment, sols player
 	pilot_man = null
 	is_player_or_ai = 0
 	$PlayerHUD.make_visible(false)
@@ -163,6 +163,7 @@ func exit_ship():
 	$StateMachine.set_active(false)
 	set_team_color()
 	disconnect("ship_died", get_tree().current_scene, "_on_ship_died")
+	get_viewport().get_camera().ship = null
 	
 	# spawn troop
 	get_tree().current_scene.spawn_player(translation) # senyals

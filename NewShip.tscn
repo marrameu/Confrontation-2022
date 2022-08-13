@@ -52,6 +52,7 @@ gradient = ExtResource( 16 )
 collision_layer = 4
 mass = 5000.0
 physics_material_override = SubResource( 6 )
+continuous_cd = true
 contacts_reported = 1
 contact_monitor = true
 script = ExtResource( 1 )

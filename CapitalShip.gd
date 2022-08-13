@@ -22,4 +22,7 @@ func _process(delta):
 			$Core/HealthSystem.take_damage(amount)
 	elif core_health_percentage < ship_health_percentage:
 		$HealthSystem.take_damage((ship_health_percentage - core_health_percentage)/100 * $HealthSystem.MAX_HEALTH, true)
-	
+
+
+func _physics_process(delta):
+	pass#move_and_collide(Vector3(10 * delta, 0, 0))

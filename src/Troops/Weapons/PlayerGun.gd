@@ -14,8 +14,6 @@ func _process(delta):
 	if not active:
 		return
 	
-	print(ammo)
-	
 	if not reload_per_sec:
 		if Input.is_action_just_pressed("reload"):
 			reload_ammo()

@@ -317,10 +317,6 @@ reload={
 3d_physics/layer_12="BigShipHurtBox"
 3d_physics/layer_13="CoreHurtBox"
 
-[physics]
-
-3d/physics_engine="GodotPhysics"
-
 [rendering]
 
 environment/default_environment="res://default_env.tres"

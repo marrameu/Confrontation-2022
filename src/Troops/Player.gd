@@ -16,7 +16,9 @@ var dead := false
 
 func _physics_process(delta):
 	if can_rotate:
-		rotation.y = lerp(rotation.y, get_tree().current_scene.get_node("CameraBase").global_transform.basis.get_euler().y, 0.15 * delta * 60)
+		var des_transform := global_transform.basis.slerp(get_tree().current_scene.get_node("CameraBase").global_transform.basis, 0.15 * delta * 60)
+		rotation.y = des_transform.get_euler().y
+		orthonormalize()
 		#inverse kinematics
 
 

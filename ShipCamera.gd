@@ -61,7 +61,7 @@ func _process(delta):
 	
 	if ship.dead:
 		translation += transform.basis.z * 100 * delta
-		if killer:
+		if weakref(killer).get_ref():
 			var rot_transform = transform.looking_at(killer.translation, transform.basis.y)
 			transform.basis = Basis(Quat(transform.basis).slerp(rot_transform.basis, 3 * delta))
 		return
