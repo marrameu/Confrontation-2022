@@ -379,6 +379,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.798786, 1.03381 )
 shape = SubResource( 6 )
 disabled = true
 
+[node name="CamPos" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.603, 0 )
+__meta__ = {
+"_editor_description_": "Bones bonding pq segueixi la camera"
+}
+
 [connection signal="timeout" from="Interact/Timer" to="Interact" method="_on_Timer_timeout"]
 [connection signal="timeout" from="PlayerHUD/LifeBarEnemy/Timer" to="PlayerHUD/LifeBarEnemy" method="_on_Timer_timeout"]
 [connection signal="damage_taken" from="HealthSystem" to="PlayerHUD" method="_on_HealthSystem_damage_taken"]

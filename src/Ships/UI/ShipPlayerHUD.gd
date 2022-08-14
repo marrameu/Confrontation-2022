@@ -135,10 +135,10 @@ func _process(delta : float) -> void:
 		# q no faci salts (frenar)
 		if (old_throttle_bar_value > 70 and $SpeedBars/ThrottleBar.value <= 70 and $SpeedBars/ThrottleBar.value > 30) or (old_throttle_bar_value < 30 and $SpeedBars/ThrottleBar.value >= 30 and $SpeedBars/ThrottleBar.value < 70):
 			# hi entra
-			pass#$ThrottleInAudio.play()
+			$ThrottleInAudio.play()
 		if (old_throttle_bar_value < 70 and $SpeedBars/ThrottleBar.value >= 70 and $SpeedBars/ThrottleBar.value > 30) or (old_throttle_bar_value > 30 and $SpeedBars/ThrottleBar.value <= 30 and old_throttle_bar_value <= 70):
 			# en surt
-			pass#$ThrottleOutAudio.play()
+			$ThrottleOutAudio.play()
 	
 	"""
 	var b = owner.transform.basis
@@ -189,7 +189,7 @@ func _input(event : InputEvent) -> void:
 
 func update_center(delta):
 	if $Center.visible:
-		crosshair.visible = !owner.input.turboing
+		crosshair.get_node("Parts").visible = !owner.input.turboing
 		if not Settings.controller_input:
 			cursor.visible = true
 			cursor.rect_position += mouse_movement * delta * Settings.mouse_sensitivity
@@ -213,15 +213,13 @@ func _on_Shooting_shot():
 
 
 func on_damagable_hit():
-	pass
 	$Center/Crosshair/HitMarkerParts/AnimationPlayer.play("hit")
-	#$Center/Crosshair/HitMarkerParts/HitAudio.play()
+	$Center/Crosshair/HitMarkerParts/HitAudio.play()
 
 
 func on_enemy_died():
-	pass
 	$Center/Crosshair/HitMarkerParts/AnimationPlayer.play("killed")
-	#$Center/Crosshair/HitMarkerParts/KillAudio.play()
+	$Center/Crosshair/HitMarkerParts/KillAudio.play()
 
 
 func _on_HealthSystem_die(attacker):

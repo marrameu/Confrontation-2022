@@ -22,7 +22,7 @@ func init(new_shooter, new_team):
 
 
 func _ready():
-	if shooter.has_method("_on_hit"):
+	if shooter.has_method("_on_damagable_hit"):
 		connect("damagable_hit", shooter, "_on_damagable_hit")
 	var m_hurtbox = shooter.get_node_or_null("HurtBox")
 	$RayCast.add_exception(shooter)

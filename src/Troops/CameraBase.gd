@@ -1,6 +1,6 @@
 extends Spatial
 
-onready var init_cam_pos_x : float = -$CameraPosition.translation.x
+onready var init_h_offset : float = -$CameraPosition.translation.x
 onready var tween : Tween = $Tween
 
 var mouse_movement := Vector2()
@@ -11,6 +11,7 @@ const CAMERA_X_ROT_MIN := -60
 var zooming := false
 var rotate_speed_multipiler := 1.0
 
+
 # recoil
 var shaking := false
 var wants_to_stabilize := false
@@ -20,12 +21,15 @@ var original_cam_rot := Vector2()
 var cam_yaw_at_last_shot := 0.0
 var current_gun : Gun
 
+
 export var player_path : NodePath
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$PuppetCamPos.translation = $CameraPosition.translation
+	$RayCast.cast_to = $PuppetCamPos.translation
+	$RayCast.add_exception(get_node(player_path)) # pq no va?
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,6 +39,7 @@ func _process(_delta):
 		return
 	if Input.is_action_just_pressed("change_view") and get_node(player_path).can_aim:
 		move_camera()
+	check_collisions() # pot anar aquí en lloc de al physics pq el raycast sols sactualitza al physsics
 	#rotation = get_node(player_path).global_transform.basis.get_euler()
 
 
@@ -42,7 +47,7 @@ func _physics_process(delta):
 	if not get_node_or_null(player_path):
 		return
 	
-	translation = translation.linear_interpolate(get_node(player_path).global_transform.origin, 0.25 * delta * 60)
+	translation = translation.linear_interpolate(get_node(player_path).get_node("CamPos").global_translation, 0.25 * delta * 60)
 	
 	var joystick_movement := 0.0
 	var pitch_strenght := (joystick_movement + mouse_movement.y) * rotate_speed_multipiler
@@ -57,20 +62,13 @@ func _physics_process(delta):
 	
 	process_shake()
 	mouse_movement = Vector2.ZERO
+	
+	$RayCast.cast_to = $PuppetCamPos.translation
 
 
 func _input(event : InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		mouse_movement = event.relative * Settings.player_mouse_sensitivity
-
-
-func move_camera() -> void:
-	var current_x = $CameraPosition.translation.x
-	if current_x > 0:
-		var _new_x = tween.interpolate_property($CameraPosition, "translation:x", current_x, -init_cam_pos_x, 0.2, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	else:
-		var _new_x = tween.interpolate_property($CameraPosition, "translation:x", current_x, init_cam_pos_x, 0.2, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	var _start = tween.start()
 
 
 func rotate_pitch(strenght, delta):
@@ -146,3 +144,20 @@ func _on_StabilizeTimer_timeout():
 	shaking = false
 	# deixa de sacsejar, així doncs pot començar a estabilitzar-se
 
+
+func move_camera() -> void:
+	var current_h_offset = $PuppetCamPos.translation.x
+	if current_h_offset > 0:
+		var _new_x = tween.interpolate_property($PuppetCamPos, "translation:x", current_h_offset, -init_h_offset, 0.2, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	else:
+		var _new_x = tween.interpolate_property($PuppetCamPos, "translation:x", current_h_offset, init_h_offset, 0.2, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	var _start = tween.start()
+
+
+func check_collisions():
+	if $RayCast.is_colliding():
+		#print($RayCast.get_collider(), randi())
+		$CameraPosition.translation = $CameraPosition.translation.linear_interpolate(to_local($RayCast.get_collision_point()), 0.2)
+		$CameraPosition.global_translation += Vector3.ONE / 10 * $CameraPosition.global_translation.direction_to(translation)
+	else:
+		$CameraPosition.translation = $PuppetCamPos.translation
