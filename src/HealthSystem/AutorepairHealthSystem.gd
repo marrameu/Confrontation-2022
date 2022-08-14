@@ -14,6 +14,7 @@ func _process(delta):
 		heal_shield(shield_repair_per_sec * delta)
 
 
+# refer amb .take_damage()
 sync func take_damage(amount : int, obviar_shield : bool = false, attacker : Node = null) -> void:
 	if not health == 0: #pq si no moriria de nou, per evitar possibles bugs més q res -diria-
 		emit_signal("damage_taken", attacker)

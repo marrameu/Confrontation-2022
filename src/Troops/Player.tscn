@@ -315,6 +315,13 @@ text = "---"
 align = 1
 valign = 1
 
+[node name="DamageIndicators" type="Control" parent="PlayerHUD"]
+unique_name_in_owner = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
 [node name="HealthSystem" parent="." instance=ExtResource( 7 )]
 
 [node name="StateMachine" type="Node" parent="."]
@@ -374,6 +381,7 @@ disabled = true
 
 [connection signal="timeout" from="Interact/Timer" to="Interact" method="_on_Timer_timeout"]
 [connection signal="timeout" from="PlayerHUD/LifeBarEnemy/Timer" to="PlayerHUD/LifeBarEnemy" method="_on_Timer_timeout"]
+[connection signal="damage_taken" from="HealthSystem" to="PlayerHUD" method="_on_HealthSystem_damage_taken"]
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine" method="_on_animation_finished"]
 [connection signal="area_entered" from="MeleeHitBox" to="." method="_on_MeleeHitBox_area_entered"]

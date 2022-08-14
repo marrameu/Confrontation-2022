@@ -34,6 +34,7 @@ func _process(delta):
 
 sync func take_damage(amount : int, obviar_shield : bool = false, attacker : Node = null) -> void:
 	if not health == 0: #pq si no moriria de nou, per evitar possibles bugs més q res -diria-
+		emit_signal("damage_taken", attacker)
 		if shield > 0 and not obviar_shield:
 			shield -= amount
 			shield = max(0, shield)

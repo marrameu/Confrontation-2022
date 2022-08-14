@@ -4,6 +4,10 @@
 [ext_resource path="res://src/HUD/DamageIndicator.gd" type="Script" id=2]
 
 [node name="DamageIndicator" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 script = ExtResource( 2 )
 
 [node name="TexturePivot" type="Control" parent="."]

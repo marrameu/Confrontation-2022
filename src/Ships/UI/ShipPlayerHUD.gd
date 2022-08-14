@@ -13,7 +13,7 @@ onready var crosshair_center_pos : Vector2 = $Center.rect_size / 2 - crosshair.r
 
 onready var damage_indicators := $Center/DamageIndicators
 
-const damage_indicator_scene : PackedScene = preload("res://src/HUD/DamageIndicator.tscn")
+const damage_indicator_scene : PackedScene = preload("res://src/HUD/ShipDamageIndicator.tscn")
 
 # Tots els nodes de la nau agafen l'input des d'aquí, millor que l'agafin des del node PlayerInput
 var cursor_input := Vector2()
@@ -238,6 +238,7 @@ func _on_HealthSystem_damage_taken(attacker : Spatial):
 			return
 	
 	var damage_indicator = damage_indicator_scene.instance()
+	damage_indicator.myself = owner
 	damage_indicator.attacker = attacker
 	damage_indicators.add_child(damage_indicator)
 
