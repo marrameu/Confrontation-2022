@@ -1,0 +1,11 @@
+Model Information:
+* title:	Autumn Tree
+* source:	https://sketchfab.com/3d-models/autumn-tree-909a7fdcdd484f64836bd05f4da1c886
+* author:	Dominik Gierl (https://sketchfab.com/dominikgierl)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Autumn Tree" (https://sketchfab.com/3d-models/autumn-tree-909a7fdcdd484f64836bd05f4da1c886) by Dominik Gierl (https://sketchfab.com/dominikgierl) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
