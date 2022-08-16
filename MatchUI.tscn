@@ -114,21 +114,26 @@ margin_top = -25.0
 margin_right = 79.0
 
 [node name="CPIndicator" parent="Control/CPIndicators" instance=ExtResource( 10 )]
+margin_right = 23.0
 
 [node name="CPIndicator2" parent="Control/CPIndicators" instance=ExtResource( 10 )]
-margin_left = 32.0
-margin_right = 60.0
+margin_left = 27.0
+margin_right = 50.0
 
 [node name="CPIndicator3" parent="Control/CPIndicators" instance=ExtResource( 10 )]
-margin_left = 64.0
-margin_right = 93.0
+margin_left = 54.0
+margin_right = 77.0
 
 [node name="CPIndicator4" parent="Control/CPIndicators" instance=ExtResource( 10 )]
-margin_left = 97.0
-margin_right = 125.0
+margin_left = 81.0
+margin_right = 104.0
 
 [node name="CPIndicator5" parent="Control/CPIndicators" instance=ExtResource( 10 )]
-margin_left = 129.0
+margin_left = 108.0
+margin_right = 131.0
+
+[node name="CPIndicator6" parent="Control/CPIndicators" instance=ExtResource( 10 )]
+margin_left = 135.0
 margin_right = 158.0
 
 [node name="Control2" type="HBoxContainer" parent="."]

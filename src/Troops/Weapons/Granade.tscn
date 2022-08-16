@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/particles/myst_bw.png" type="Texture" id=4]
 
 [sub_resource type="PhysicsMaterial" id=14]
-friction = 8000.0
+bounce = 0.25
 
 [sub_resource type="SphereShape" id=3]
 radius = 11.0
@@ -189,9 +189,10 @@ size = Vector2( 2, 2 )
 [node name="Granade" type="RigidBody"]
 collision_layer = 0
 collision_mask = 13
-mass = 1.5
+mass = 1.25
 physics_material_override = SubResource( 14 )
 continuous_cd = true
+angular_damp = 0.5
 script = ExtResource( 2 )
 
 [node name="Area" type="Area" parent="."]
