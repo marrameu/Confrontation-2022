@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/Troops/AI/Troop.gd" type="Script" id=1]
-[ext_resource path="res://assets/models/ybot/TroopModel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/models/ybot/TroopModelNew.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Troops/Weapons/AIGun.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Troops/AI/TroopEnemyDetection.gd" type="Script" id=4]
 [ext_resource path="res://src/Troops/AI/TroopPathMaker.gd" type="Script" id=5]
@@ -38,8 +38,7 @@ body = NodePath("PlayerMesh/rig/body")
 red_mat = ExtResource( 7 )
 blue_mat = ExtResource( 9 )
 
-[node name="PlayerMesh" parent="." instance=ExtResource( 2 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.8, 0 )
+[node name="TroopModel" parent="." instance=ExtResource( 2 )]
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )

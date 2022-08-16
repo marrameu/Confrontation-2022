@@ -15,6 +15,10 @@ var dead := false
 
 
 func _physics_process(delta):
+	if get_viewport().get_camera().owner.zooming:
+		$Model/AnimationPlayer.current_animation = "rifleaim"
+	else:
+		$Model/AnimationPlayer.current_animation = "rifleidle"
 	if can_rotate:
 		var des_transform := global_transform.basis.slerp(get_tree().current_scene.get_node("CameraBase").global_transform.basis, 0.15 * delta * 60)
 		rotation.y = des_transform.get_euler().y

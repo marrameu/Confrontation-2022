@@ -14,7 +14,7 @@
 [ext_resource path="res://AttackShip.tscn" type="PackedScene" id=12]
 [ext_resource path="res://SpawnHUD.tscn" type="PackedScene" id=13]
 [ext_resource path="res://WaitingCam.gd" type="Script" id=14]
-[ext_resource path="res://src/Troops/CameraBase.gd" type="Script" id=15]
+[ext_resource path="res://src/Troops/Player/CameraBase.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/audio/five_armies.ogg" type="AudioStream" id=16]
 [ext_resource path="res://MatchUI.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/PauseMenu.tscn" type="PackedScene" id=18]
@@ -696,30 +696,7 @@ audio_sfx3 = ExtResource( 23 )
 transform = Transform( 0.832854, 0.135101, -0.536751, 0, 0.969753, 0.244089, 0.553493, -0.20329, 0.807663, 0, 19.4566, 0 )
 shadow_enabled = true
 
-[node name="CameraBase" type="Spatial" parent="."]
-script = ExtResource( 15 )
-
-[node name="CameraPosition" type="Position3D" parent="CameraBase"]
-transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -1.324, 0, -3.297 )
-
-[node name="PlayerTroopCam" type="Camera" parent="CameraBase/CameraPosition"]
-unique_name_in_owner = true
-current = true
-far = 5000.0
-
-[node name="PuppetCamPos" type="Spatial" parent="CameraBase"]
-
-[node name="RayCast" type="RayCast" parent="CameraBase"]
-enabled = true
-exclude_parent = false
-cast_to = Vector3( -1.324, 0, -3.297 )
-collision_mask = 13
-
-[node name="StabilizeTimer" type="Timer" parent="CameraBase"]
-wait_time = 0.5
-one_shot = true
-
-[node name="Tween" type="Tween" parent="CameraBase"]
+[node name="CameraBase" parent="." instance=ExtResource( 15 )]
 
 [node name="Walker" parent="." instance=ExtResource( 4 )]
 transform = Transform( -0.566651, 0, -0.823958, 0, 1, 0, 0.823958, 0, -0.566651, 250.424, -32.5138, 24.2776 )
@@ -777,6 +754,5 @@ transform = Transform( -0.034114, 0, -0.0365546, 0, 0.05, 0, 0.0365546, 0, -0.03
 [connection signal="respawn" from="SpawnHUD" to="." method="spawn_player"]
 [connection signal="start_battle" from="SpawnHUD" to="." method="start_battle"]
 [connection signal="finished" from="BGMusic" to="BGMusic" method="_on_BGMusic_finished"]
-[connection signal="timeout" from="CameraBase/StabilizeTimer" to="CameraBase" method="_on_StabilizeTimer_timeout"]
 
 [editable path="Map/LandingArea"]
