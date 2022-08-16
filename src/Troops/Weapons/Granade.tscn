@@ -197,7 +197,7 @@ script = ExtResource( 2 )
 
 [node name="Area" type="Area" parent="."]
 collision_layer = 0
-collision_mask = 1792
+collision_mask = 5888
 monitorable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
