@@ -8,10 +8,13 @@ func update(delta):
 	
 	# Check input and change the direction
 	var aim : Basis = owner.get_global_transform().basis
-	var direction : Vector3 = aim.x * (Input.get_action_strength("move_left") - Input.get_action_strength("move_right"))
+	direction = aim.x * (Input.get_action_strength("move_left") - Input.get_action_strength("move_right"))
 	direction += aim.z * (Input.get_action_strength("move_forward") - Input.get_action_strength("move_backward"))
 	
 	direction.y = 0
 	direction = direction.normalized()
 	
 	move(delta, MAX_SPEED, direction)
+	
+	var walk := Vector2(Input.get_action_strength("move_left") - Input.get_action_strength("move_right"), Input.get_action_strength("move_forward") - Input.get_action_strength("move_backward"))
+	owner.get_node("AnimationTree").set("parameters/walk/blend_position", lerp(owner.get_node("AnimationTree").get("parameters/walk/blend_position"), walk, 20 * delta))

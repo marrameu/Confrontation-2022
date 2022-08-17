@@ -4,6 +4,8 @@ Walk i córrer
 extends MoveState
 class_name OnGroundState
 
+var direction : Vector3
+
 
 func handle_input(event : InputEvent):
 	if not has_contact:

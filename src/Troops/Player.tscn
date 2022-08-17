@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://src/Troops/Player.gd" type="Script" id=2]
 [ext_resource path="res://src/Troops/Reloading.gd" type="Script" id=3]
@@ -120,6 +120,56 @@ tracks/1/keys = {
 "update": 0,
 "values": [ 2.4, 0.8, 0.8, 2.4 ]
 }
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "walkright"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "walkleft"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "walkbackward"
+
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "rifleidle"
+
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "rifleaim"
+
+[sub_resource type="AnimationNodeBlend2" id=21]
+
+[sub_resource type="AnimationNodeBlendTree" id=22]
+graph_offset = Vector2( -1.98596, -3.97195 )
+nodes/Animation/node = SubResource( 20 )
+nodes/Animation/position = Vector2( 294.014, 175.028 )
+"nodes/Animation 2/node" = SubResource( 19 )
+"nodes/Animation 2/position" = Vector2( 335.014, 350.028 )
+nodes/aim/node = SubResource( 21 )
+nodes/aim/position = Vector2( 520, 200 )
+nodes/output/position = Vector2( 780, 140 )
+node_connections = [ "output", 0, "aim", "aim", 0, "Animation 2", "aim", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeAnimation" id=23]
+animation = "walkforward"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=9]
+blend_point_0/node = SubResource( 11 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 12 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 13 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 22 )
+blend_point_3/pos = Vector2( 0, -0.01 )
+blend_point_4/node = SubResource( 23 )
+blend_point_4/pos = Vector2( 0, 1 )
+
+[sub_resource type="AnimationNodeBlendTree" id=8]
+graph_offset = Vector2( 65.4775, -35.0565 )
+nodes/output/position = Vector2( 1020, 140 )
+nodes/walk/node = SubResource( 9 )
+nodes/walk/position = Vector2( 560, 280 )
+node_connections = [ "output", 0, "walk" ]
 
 [sub_resource type="BoxShape" id=6]
 extents = Vector3( 1.0304, 0.268886, 0.609748 )
@@ -269,7 +319,6 @@ START_STATE = NodePath("Walk")
 
 [node name="Walk" type="Node" parent="StateMachine"]
 script = ExtResource( 14 )
-MAX_SPEED = null
 
 [node name="Run" type="Node" parent="StateMachine"]
 script = ExtResource( 16 )
@@ -295,9 +344,17 @@ script = ExtResource( 3 )
 MAX_SPEED = 3.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_default_blend_time = 0.26
 anims/Melee = SubResource( 5 )
 anims/RESET = SubResource( 4 )
 anims/Roll = SubResource( 2 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 8 )
+anim_player = NodePath("../Model/AnimationPlayer")
+active = true
+parameters/walk/blend_position = Vector2( 0, -0.812 )
+parameters/walk/3/aim/blend_amount = 0
 
 [node name="HurtBox" type="Area" parent="." groups=["HurtBox"]]
 collision_layer = 512
@@ -330,3 +387,5 @@ __meta__ = {
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine" method="_on_animation_finished"]
 [connection signal="area_entered" from="MeleeHitBox" to="." method="_on_MeleeHitBox_area_entered"]
+
+[editable path="Model"]
