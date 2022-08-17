@@ -17,7 +17,7 @@ func _on_Area_body_entered(body):
 	if body.is_in_group("Ships"):
 		if not body.pilot_man:
 			return
-		if body.pilot_man.blue_team != owner.blue_team:
+		if body.blue_team != owner.blue_team:
 			enemies.push_back(body)
 	elif body.is_in_group("BigShips"):
 		if body.blue_team != owner.blue_team:

@@ -11,12 +11,12 @@ func enter():
 	var aneu_guanyant := false
 	var us_van_guanyant := false
 	if get_node("/root/Level").middle_point < -get_parent().point_of_change:
-		if owner.pilot_man.blue_team:
+		if owner.blue_team:
 			aneu_guanyant = true
 		else:
 			us_van_guanyant = true
 	elif get_node("/root/Level").middle_point > get_parent().point_of_change:
-		if not owner.pilot_man.blue_team:
+		if not owner.blue_team:
 			aneu_guanyant = true
 		else:
 			us_van_guanyant = true
@@ -85,7 +85,7 @@ func enter():
 		else:
 			print("capital ship, fora!!")
 			for cship in get_tree().get_nodes_in_group("CapitalShips"):
-				if cship.blue_team != owner.pilot_man.blue_team:
+				if cship.blue_team != owner.blue_team:
 					owner.shooting.target = cship
 					emit_signal("finished", "attack_big_ship")
 			if not closest_support_ship:

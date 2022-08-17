@@ -14,6 +14,7 @@ onready var physics : Node = $Physics
 onready var shooting : Node = $Shooting
 
 var pilot_man : PilotManager
+var blue_team : bool
 
 var is_player_or_ai := 0 # 1 player, 2 ia
 
@@ -33,6 +34,7 @@ func init(new_pilot_man : PilotManager) -> bool:
 		exit_ship()
 	
 	pilot_man = new_pilot_man
+	blue_team = pilot_man.blue_team
 	set_team_color()
 	is_player_or_ai = 1 if pilot_man.is_player else 2
 	if is_player_or_ai == 1:
@@ -69,7 +71,7 @@ func set_team_color():
 	if not pilot_man:
 		$ShipMesh/Cube.material_override = grey_mat
 		$ShipMesh/Cube001.material_override = grey_mat
-	elif pilot_man.blue_team:
+	elif blue_team:
 		$ShipMesh/Cube.material_override = blue_mat
 		$ShipMesh/Cube001.material_override = blue_mat
 	else:

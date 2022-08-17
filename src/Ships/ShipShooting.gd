@@ -60,7 +60,7 @@ sync func shoot_bullet(current_bullet : int, shoot_target := Vector3.ZERO) -> vo
 	var bullet : Bullet
 	bullet = bullets_scenes[current_bullet].instance()
 	
-	bullet.init(owner, owner.pilot_man.blue_team)
+	bullet.init(owner, owner.blue_team)
 	
 	get_tree().current_scene.add_child(bullet)
 	
@@ -91,11 +91,11 @@ func most_frontal_enenmy(big_ships := false) -> Spatial: # poder rutllar es +o- 
 	var enemies := []
 	for ship in get_tree().get_nodes_in_group("Ships"):
 		if ship.pilot_man:
-			if ship.pilot_man.blue_team != owner.pilot_man.blue_team:
+			if ship.blue_team != owner.blue_team:
 				enemies.append(ship)
 	if big_ships:
 		for big_ship in get_tree().get_nodes_in_group("BigShips"):
-			if big_ship.blue_team != owner.pilot_man.blue_team:
+			if big_ship.blue_team != owner.blue_team:
 				enemies.append(big_ship)
 	
 	for body in enemies:

@@ -1,58 +1,34 @@
-extends Node
+extends Ship
+signal cp_added
 
-export var m_team := 0
-export var mesh : NodePath
+const cp_scene : PackedScene = preload("res://src/CommandPost/TransportCommandPost.tscn")
 
-var current_cp := ""
-
-
-func _ready() -> void:
-	pass
+var cp : Node = null
 
 
-func _process(delta : float) -> void:
-	# Cambiar quan les naus tinguin models propis
-	set_material()
-	
-	if get_parent().state == get_parent().State.LANDED and not current_cp:
+func _ready():
+	if blue_team:
+		$ShipMesh/Cube.material_override = blue_mat
+		$ShipMesh/Cube001.material_override = blue_mat
+	else:
+		$ShipMesh/Cube.material_override = red_mat
+		$ShipMesh/Cube001.material_override = red_mat
+	connect("cp_added", get_tree().current_scene, "_on_cp_added")
+
+
+func _process(delta):
+	if state == States.LANDED and not weakref(cp).get_ref():
 		instance_cp()
-	elif get_parent().state != get_parent().State.LANDED and current_cp:
-		delete_cp()
-	
-	"""
-	Em pens q açò ja no cal
-	if get_parent().state == get_parent().State.LANDED and current_cp:
-		if get_node(current_cp).global_transform.origin != get_parent().translation:
-			get_node(current_cp).translation = get_parent().translation
-	"""
+	elif state != States.LANDED and weakref(cp).get_ref():
+		cp.queue_free()
+
 
 
 func instance_cp() -> void:
-	var main : Main = get_node("/root/Main/") # hi ha cap manera millor?
-	var cp = main.instance_cp(Vector3.ZERO, false, m_team) # Pos. = 0 perquè ara serà fill nostre
-	
-	cp.get_parent().remove_child(cp)
-	get_parent().add_child(cp)
-	
-	cp.get_node("MeshInstance").hide()
-	connect("tree_exited", cp, "queue_free")
-	current_cp = cp.get_path()
-
-
-func delete_cp() -> void:
-	if not current_cp: #== "":
-		return
-	get_node(current_cp).queue_free()
-	current_cp = ""
-
-
-func set_material() -> void:
-	return
-	
-	if m_team == 0:
-		pass
-	elif m_team == get_node("/root/Main").local_players[0].get_node("TroopManager").m_team:
-		get_node(mesh).set_material_override(load("res://assets/materials/command_post/blue.tres"))
-	else:
-		get_node(mesh).set_material_override(load("res://assets/materials/command_post/red.tres"))
-	
+	var new_cp : CommandPost = cp_scene.instance()
+	new_cp.start_team = 2 if blue_team else 1
+	if translation.y > 1000:
+		new_cp.add_to_group("SpaceCP")
+	add_child(new_cp)
+	cp = new_cp
+	emit_signal("cp_added")

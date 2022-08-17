@@ -38,7 +38,7 @@ func _physics_process(delta):
 
 
 func _on_SupportArea_body_entered(body):
-	if body.pilot_man.blue_team == blue_team:
+	if body.blue_team == blue_team:
 		body.get_node("HealthSystem").heal(99999999)
 		body.get_node("HealthSystem").heal_shield(9999999)
 		var a : int = 0

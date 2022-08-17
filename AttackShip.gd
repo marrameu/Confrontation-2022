@@ -173,12 +173,12 @@ func turn(delta):
 func _on_ChangePosTimer_timeout():
 	"""
 	if get_node("/root/Level").middle_point < rand_range(-1750, -1250):
-			if owner.pilot_man.blue_team:
+			if owner.blue_team:
 				emit_signal("finished", "attack_cs")
 			else:
 				emit_signal("finished", "attack_enemy")
 	elif get_node("/root/Level").middle_point > rand_range(1250, 1750):
-		if not owner.pilot_man.blue_team:
+		if not owner.blue_team:
 			emit_signal("finished", "attack_cs")
 	else:
 	"""

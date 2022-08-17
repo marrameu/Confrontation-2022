@@ -31,7 +31,7 @@ func _physics_process(delta):
 				target = result.collider
 				if target.is_in_group("Troops"):
 					nickname.text = target.nickname
-					if target.pilot_man.blue_team:
+					if target.blue_team:
 						(life_bar as TextureProgress).tint_progress = Color("96006aff")
 						nickname.add_color_override("font_color", "72a9ff")
 					else:

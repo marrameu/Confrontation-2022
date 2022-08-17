@@ -14,5 +14,5 @@ func _ready():
 func update(_delta):
 	return
 	var push := 0.0
-	push = -200 if owner.pilot_man.blue_team else 200
+	push = -200 if owner.blue_team else 200
 	owner.input.target = Vector3()

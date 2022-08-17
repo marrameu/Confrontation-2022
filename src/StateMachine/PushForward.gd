@@ -46,7 +46,7 @@ func update(delta):
 
 
 func update_destination():
-	if owner.pilot_man.blue_team:
+	if owner.blue_team:
 		owner.input.target = Vector3(-1500, 2000 + rand_range(-350, 350), rand_range(-700, 700))
 	else:
 		owner.input.target = Vector3(1500, 2000 + rand_range(-350, 350), rand_range(-700, 700))

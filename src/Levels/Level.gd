@@ -63,7 +63,7 @@ func update_middle_point(delta):
 	for ship in get_tree().get_nodes_in_group("Ships"):
 		if ship.pilot_man and ship.translation.y > 700:
 			total_num_of_ships += 1
-			if not ship.pilot_man.blue_team:
+			if not ship.blue_team:
 				red_point += (ship.translation.x - RED_LIMIT + 2000) # la distància des de la seva nau capital
 			else:
 				blue_point += (ship.translation.x - BLUE_LIMIT - 2000) # el 2000 és la penalització dels morts, potser és massa alta
@@ -271,3 +271,7 @@ func _on_cp_add_points(blue_team : bool) -> void:
 		blue_points += 10
 	else:
 		red_points += 10
+
+
+func _on_cp_added():
+	$SpawnHUD.get_node("%CPButtons").update()

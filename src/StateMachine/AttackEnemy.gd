@@ -92,7 +92,7 @@ func change_rel_pos():
 func _on_ShootingArea_body_entered(body):
 	return
 	if body != enemy and body.is_in_group("Ships"):
-		if body.pilot_man.blue_team != owner.pilot_man.blue_team:
+		if body.blue_team != owner.blue_team:
 			set_enemy()
 
 

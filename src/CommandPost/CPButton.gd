@@ -11,11 +11,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	if cp.is_in_group("SpaceCP"):
-		visible = get_viewport().get_camera().translation.y > 2000
-	else:
-		visible = get_viewport().get_camera().translation.y < 2000
-	
 	if not is_visible_in_tree():
 		return # no calen els calculs
 	if cp and weakref(cp).get_ref():
@@ -23,8 +18,14 @@ func _physics_process(delta):
 		rect_position = get_viewport().get_camera().unproject_position(cp.global_transform.origin)
 		rect_position -= Vector2(rect_size.x / 2, rect_size.y / 2)
 		update_button_color()
-	#else:
-	#	queue_free()
+	else:
+		queue_free()
+		return
+	
+	if cp.is_in_group("SpaceCP"):
+		visible = get_viewport().get_camera().translation.y > 2000
+	else:
+		visible = get_viewport().get_camera().translation.y < 2000
 	
 	disabled = get_parent().owner.waiting
 

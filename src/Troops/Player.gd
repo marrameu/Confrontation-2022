@@ -4,6 +4,7 @@ signal entered_ship
 signal died
 
 var pilot_man : PilotManager
+var blue_team : bool
 
 var mouse_movement := Vector2()
 
@@ -12,6 +13,10 @@ var can_rotate := true
 var can_shoot := true
 
 var dead := false
+
+
+func _ready():
+	blue_team = pilot_man.blue_team
 
 
 func _physics_process(delta):

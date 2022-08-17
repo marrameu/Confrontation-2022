@@ -9,7 +9,7 @@ func _process(_delta):
 	enemies = []
 	for body in $Area.get_overlapping_bodies():
 		if body.is_in_group("Troops"):
-			if body.pilot_man.blue_team != owner.pilot_man.blue_team:
+			if body.blue_team != owner.blue_team:
 				var health_system : Node = body.get_node("HealthSystem")
 				if health_system.health > 0:
 					enemies.push_back(body)

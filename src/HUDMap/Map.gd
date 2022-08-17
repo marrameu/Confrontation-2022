@@ -22,7 +22,7 @@ func add_normal_ship(ship : Spatial, is_player := false):
 	var new_ship_min : Control
 	if ship.is_in_group("Ships"):
 		new_ship_min = ship_min_scene.instance()
-		new_ship_min.modulate = Color.cornflower if ship.pilot_man.blue_team else Color.indianred
+		new_ship_min.modulate = Color.cornflower if ship.blue_team else Color.indianred
 	elif ship.is_in_group("BigShips"):
 		if ship.is_in_group("AttackShips"):
 			new_ship_min = attack_ship_min_scene.instance()

@@ -31,7 +31,7 @@ func search_cp_and_conquer(): # àlies terra
 	var enemy_command_posts := []
 	for command_post in get_tree().current_scene.get_node("%CommandPosts").get_children(): # get_tree().get_nodes_in_group("CommandPosts"): així no pq tmb busca els de les cs
 		if command_post.capturable:
-			if command_post.m_team == 0 or (command_post.m_team == 1 and owner.pilot_man.blue_team) or (command_post.m_team == 2 and not owner.pilot_man.blue_team):
+			if command_post.m_team == 0 or (command_post.m_team == 1 and owner.blue_team) or (command_post.m_team == 2 and not owner.blue_team):
 				enemy_command_posts.push_back(command_post)
 	
 	# Hi ha CP

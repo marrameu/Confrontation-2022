@@ -65,7 +65,7 @@ func _process(delta : float) -> void:
 			if not body.dead:
 				if body.is_in_group("Players"):
 					texture_progress_visible = true
-				var body_team : int = 1 if not body.pilot_man.blue_team else 2
+				var body_team : int = 1 if not body.blue_team else 2
 				match body_team:
 					1:
 						bodies[0] += 1 # vermell

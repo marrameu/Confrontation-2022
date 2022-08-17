@@ -31,7 +31,7 @@ func check_for_close_enemies(min_dist : float = 750.0):
 	var clos_dist = min_dist
 	var clos_enemy : Ship
 	for ship in get_tree().get_nodes_in_group("Ships"):
-		if ship.pilot_man.blue_team != owner.pilot_man.blue_team:
+		if ship.blue_team != owner.blue_team:
 			var dist = owner.translation.distance_to(ship.translation)
 			if dist < clos_dist:
 				clos_dist = dist

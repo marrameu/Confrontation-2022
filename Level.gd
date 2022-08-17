@@ -58,7 +58,7 @@ func update_middle_point(delta):
 	red_point = 0.0
 	
 	for ship in $Ships.get_children():
-		if not ship.pilot_man.blue_team:
+		if not ship.blue_team:
 			red_point += (ship.translation.x - RED_LIMIT + 2000) # la distància des de la seva nau capital
 		else:
 			blue_point += (ship.translation.x - BLUE_LIMIT - 2000) # el 2000 és la penalització dels morts, potser és massa alta
@@ -128,8 +128,8 @@ func _on_AIShip_tree_exited(num):
 func spawn_player():
 	var ship = player_ship_scene.instance()
 	ship.pilot_man = $PilotManagers/PlayerManager
-	ship.translation = choose_spawn_position(ship.pilot_man.blue_team)
-	ship.rotation_degrees.y = -90 if ship.pilot_man.blue_team else 90
+	ship.translation = choose_spawn_position(ship.blue_team)
+	ship.rotation_degrees.y = -90 if ship.blue_team else 90
 	$Ships.add_child(ship)
 	
 	ship.connect("tree_exited", self, "_on_PlayerShip_tree_exited")
@@ -155,20 +155,20 @@ func spawn_AI(number, blue_team : bool = false):
 		pilot_man = PilotManager.new()
 		$PilotManagers.add_child(pilot_man)
 		pilot_man.name = ("AIManager" + str(number))
-		pilot_man.blue_team = blue_team
+		blue_team = blue_team
 	
 	ship.pilot_man = pilot_man
 	ship.battle_man = self
 	connect("big_ship_shields_down", ship, "_on_BigShip_shields_down")
 	
-	ship.translation = choose_spawn_position(pilot_man.blue_team)
-	ship.rotation_degrees.y = -90 if pilot_man.blue_team else 90
+	ship.translation = choose_spawn_position(blue_team)
+	ship.rotation_degrees.y = -90 if blue_team else 90
 	$Ships.add_child(ship)
 	
 	ship.connect("ship_died", self, "_on_AIShip_tree_exited", [number])
 	
-	var b = true if pilot_man.blue_team else false
-	var r = false if pilot_man.blue_team else true
+	var b = true if blue_team else false
+	var r = false if blue_team else true
 	#$BigShips/CapitalShipBlue/HealthSystem.connect("shield_die", ship.get_node("StateMachine"), "capital_ship_shield_died", [b])
 	#$BigShips/CapitalShipRed/HealthSystem.connect("shield_die", ship.get_node("StateMachine"), "capital_ship_shield_died", [r])
 	

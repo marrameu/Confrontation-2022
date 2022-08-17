@@ -8,6 +8,7 @@ signal died
 export var body : NodePath
 
 var pilot_man : PilotManager
+var blue_team : bool
 
 # Atack
 var current_enemy : Spatial
@@ -34,7 +35,8 @@ export var blue_mat : Material
 
 
 func _ready():
-	$TeamIndicator.material_override = blue_mat if pilot_man.blue_team else red_mat
+	blue_team = pilot_man.blue_team
+	$TeamIndicator.material_override = blue_mat if blue_team else red_mat
 
 
 # Client

@@ -7,7 +7,7 @@ func enter():
 	owner.input.wants_turbo = true
 	var clos_dist := INF
 	for support_ship in get_tree().get_nodes_in_group("SupportShips"):
-		if support_ship.blue_team == owner.pilot_man.blue_team:
+		if support_ship.blue_team == owner.blue_team:
 			var dist = support_ship.translation.distance_to(owner.translation)
 			if dist < clos_dist:
 				target_support_ship = support_ship
