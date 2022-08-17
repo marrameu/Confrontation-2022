@@ -205,6 +205,7 @@ func start_battle():
 
 func _on_player_died():
 	$WaitingCam.make_current()
+	$SpawnHUD.enable_spawn(false)
 	$SpawnHUD.show()
 
 
@@ -235,11 +236,6 @@ func _on_ai_troop_died(ai_num : int):
 	else:
 		blue_points += 1
 	# emit_signal("match_msg", "SHIP " + str(num) + " HA ESTAT ELIMINADA", !is_blue)
-
-
-func _on_SpawnHUD_change_cam():
-	$WaitingCam.translation = Vector3(0, 5000, 0)
-	$WaitingCam.rotation_degrees = Vector3(-90, 0, 0)
 
 
 func _on_BigShip_shields_down(ship):

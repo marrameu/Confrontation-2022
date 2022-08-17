@@ -11,6 +11,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	if cp.is_in_group("SpaceCP"):
+		visible = get_viewport().get_camera().translation.y > 2000
+	else:
+		visible = get_viewport().get_camera().translation.y < 2000
+	
 	if not is_visible_in_tree():
 		return # no calen els calculs
 	if cp and weakref(cp).get_ref():
@@ -20,6 +25,8 @@ func _physics_process(delta):
 		update_button_color()
 	#else:
 	#	queue_free()
+	
+	disabled = get_parent().owner.waiting
 
 
 func update_button_color() -> void:

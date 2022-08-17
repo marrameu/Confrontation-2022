@@ -21,22 +21,24 @@ var selected_cp : CommandPost = null
 func _process(delta):
 	if waiting:
 		$Control/WaitTime.text = "ESPEREU " + str(int($PlayerRespawnTimer.time_left)) + "\""
+	# $Control/StartButton.disabled = !selected_cp
 
 
 func show():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	$Control/CPButtons.update()
+	$"%CPButtons".update()
 	$Control.show()
-	$Control/StartButton.hide()
-	$Control/HBoxContainer.show()
-	
-	$Control/HBoxContainer/Button.grab_focus()
+	$"%ChooseClass".show()
+	$"%ChooseCP".hide()
+	$"%ClassesButtons".get_child(0).grab_focus()
 
 
-func _on_Button_pressed():
-	$Control/StartButton.show()
-	$Control/HBoxContainer.hide()
-	$Control/StartButton.grab_focus()
+func _on_ClassButton_pressed():
+	# $Control/StartButton.show()
+	$"%ChooseClass".hide()
+	$"%ChooseCP".show()
+	$"%CPButtons".get_child(0).grab_focus()
+	# $Control/StartButton.grab_focus()
 
 
 func _on_StartButton_pressed():
@@ -54,16 +56,15 @@ func _on_StartButton_pressed():
 func _on_cp_button_pressed(cp : CommandPost):
 	if (cp.m_team == 1 and not PlayerInfo.player_blue_team) or (cp.m_team == 2 and PlayerInfo.player_blue_team):
 		selected_cp = cp
+	_on_StartButton_pressed()
 
 
 func enable_spawn(enable : bool):
 	if enable:
-		$Control/StartButton.disabled = false
 		$Control/WaitTime.visible = false
 		waiting = false
 	else:
 		waiting = true
-		$Control/StartButton.disabled = true
 		$PlayerRespawnTimer.start()
 		$Control/WaitTime.visible = true
 
@@ -90,3 +91,8 @@ func _on_spectate_pressed(ship_type : int, new_index : int = 0):
 
 func _on_ChangeCamButton_pressed():
 	emit_signal("change_cam")
+	$"%ChangeCamButton".text = "Terra" if $"%ChangeCamButton".text == "Espai" else "Espai"
+
+
+func _on_ChangeClassButton_pressed():
+	show()

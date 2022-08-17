@@ -19,6 +19,7 @@ text = "POST"
 script = ExtResource( 2 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 modulate = Color( 0.313726, 0.639216, 0.321569, 0.580392 )
 show_behind_parent = true
 margin_left = -21.0

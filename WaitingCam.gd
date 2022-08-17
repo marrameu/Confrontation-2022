@@ -3,6 +3,10 @@ extends Camera
 # var current_location_index : int = 0
 var target : Spatial
 
+onready var original_pos := translation
+onready var original_rot := rotation
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -51,3 +55,12 @@ func _on_SpawnHUD_change_spectate(location : int, index : int = 0):
 			index %= target_ships.size()
 		target = target_ships[index].get_node("SpectateCamPivot/SpectateCamPos")
 		target.get_parent().rotation = Vector3.ZERO
+
+
+func _on_SpawnHUD_change_cam():
+	if translation == original_pos:
+		translation = Vector3(0, 5000, 0)
+		rotation_degrees = Vector3(-90, 180, 0)
+	else:
+		translation = original_pos
+		rotation = original_rot
