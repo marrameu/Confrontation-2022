@@ -11,6 +11,9 @@ func init(new_cp):
 
 
 func _process(delta):
+	if not cp: # debug espai
+		return
+	
 	if cp.m_team == 0:
 		tint_progress = Color.white
 		$TextureRect.modulate = Color.white

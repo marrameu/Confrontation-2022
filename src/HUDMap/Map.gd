@@ -1,10 +1,10 @@
 extends CanvasLayer
 
 
-const ship_min_scene : PackedScene = preload("res://src/Map/NormalShipMin.tscn")
-const attack_ship_min_scene : PackedScene = preload("res://src/Map/AttackShipMin.tscn")
-const cs_min_scene : PackedScene = preload("res://src/Map/CSMin.tscn")
-const support_ship_min_scene : PackedScene = preload("res://src/Map/SupportShipMin.tscn")
+const ship_min_scene : PackedScene = preload("res://src/HUDMap/NormalShipMin.tscn")
+const attack_ship_min_scene : PackedScene = preload("res://src/HUDMap/AttackShipMin.tscn")
+const cs_min_scene : PackedScene = preload("res://src/HUDMap/CSMin.tscn")
+const support_ship_min_scene : PackedScene = preload("res://src/HUDMap/SupportShipMin.tscn")
 
 
 

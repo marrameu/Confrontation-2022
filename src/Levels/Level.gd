@@ -35,9 +35,10 @@ func _ready():
 		big_ship.connect("shields_down", self, "_on_BigShip_shields_down")
 		big_ship.connect("destroyed", self, "_on_BigShip_destroyed")
 	
-	for cp in $"%CommandPosts".get_children():
-		cp.connect("add_points", self, "_on_cp_add_points")
-	
+	if get_node_or_null("%CommandPosts"): # debug espai
+		for cp in $"%CommandPosts".get_children():
+			cp.connect("add_points", self, "_on_cp_add_points")
+
 	$PilotManagers/PlayerMan.blue_team = PlayerInfo.player_blue_team
 	
 	$WaitingCam.make_current()

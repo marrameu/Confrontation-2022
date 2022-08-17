@@ -29,7 +29,7 @@ export var player_path : NodePath
 func _ready():
 	$PuppetCamPos.translation = $CameraPosition.translation
 	$RayCast.cast_to = $PuppetCamPos.translation
-	$RayCast.add_exception(get_node(player_path)) # pq no va?
+	$RayCast.add_exception(get_node(player_path)) # pq no va? -> mirar errors debug
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

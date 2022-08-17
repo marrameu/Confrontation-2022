@@ -17,9 +17,10 @@ var middle_point_value := 100.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var ind : int = 0
-	for cp in get_tree().current_scene.get_node("%CommandPosts").get_children():
-		$"%CPIndicators".get_child(ind).init(cp)
-		ind += 1
+	if get_tree().current_scene.get_node_or_null("%CommandPosts"): # debug espai
+		for cp in get_tree().current_scene.get_node("%CommandPosts").get_children():
+			$"%CPIndicators".get_child(ind).init(cp)
+			ind += 1
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
