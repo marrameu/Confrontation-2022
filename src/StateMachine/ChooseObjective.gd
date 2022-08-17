@@ -38,7 +38,8 @@ func enter():
 			emit_signal("finished", "attack_big_ship")
 			return
 		elif ship.is_in_group("CapitalShips"):
-			print("A PENETRAR-lA!!! ö")
+			_on_enemy_cs_wo_shields(ship)
+			return
 	
 	# TOTES LES NAUS GRANS TENEN ESCUTS
 	if us_van_guanyant:
@@ -124,3 +125,8 @@ func enter():
 			emit_signal("finished", "attack_big_ship")
 			print(owner.name, "attack big_ship")
 		"""
+
+
+func _on_enemy_cs_wo_shields(cs):
+	owner.shooting.target = cs
+	emit_signal("finished", "attack_big_ship")

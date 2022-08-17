@@ -2,8 +2,6 @@ extends Spatial
 
 class_name ShipPhysics
 
-onready var ship = get_parent()
-
 var linear_force := Vector3(0, 0, 140)
 var linear_force_turbo := Vector3(0, 0, 400)
 var angular_force := Vector3(120, 120, 175) / 100.0
@@ -41,7 +39,7 @@ func _process(delta : float) -> void:
 				add_torque(Vector3(0, 0, 10), delta)
 				return
 			
-			drifting = ship.input.drifting
+			drifting = owner.input.drifting
 			
 			linear_drag = NORMAL_LINEAR_DRAG if !drifting else DRIFTING_LINEAR_DRAG
 			# es canvia car aquí els motors "s'apaguen", en l'altre cas se suposa q quan els motors estan a zero
@@ -55,10 +53,18 @@ func _process(delta : float) -> void:
 			add_torque(applied_angular_force, delta)
 		
 		States.LEAVING:
-			ship.set_linear_velocity(Vector3(0, 2.5, 0)) 
+			owner.set_linear_velocity(Vector3(0, 2.5, 0)) 
 		
 		States.LANDING:
+			# primer que abaixi la velocitat
+			owner.linear_velocity = owner.linear_velocity.linear_interpolate(Vector3(0, -10, 0), 10 * delta)
+			var rot_y := Vector3(0, rotation.y, 0)
+			var rot_diff_y = rot_y - owner.rotation
+			var target_angular_velocity_y = rot_diff_y * 0.1
+			print(target_angular_velocity_y)
+			owner.angular_velocity = owner.angular_velocity.linear_interpolate(rot_diff_y, 10 * delta)
 			# ship.set_mode(RigidBody.MODE_KINEMATIC)
+			"""
 			if not stabilized and not stabilizing:
 				_stabilize_rotation()
 				ascense_vel = lerp(ascense_vel, DESIRED_ASCENSE_VEL, 0.1)
@@ -67,19 +73,19 @@ func _process(delta : float) -> void:
 			elif stabilized:
 				descense_vel = lerp(descense_vel, DESIRED_DESCENSE_VEL, 0.1)
 				ship.translation += Vector3(0, -descense_vel * delta, 0)
+			"""
+			if get_node("Tail").is_colliding():
+				owner.state = States.LANDED
 				
-				if get_node("Tail").is_colliding():
-					owner.state = States.LANDED
-					
-					stabilizing = false
-					stabilized = false
+				stabilizing = false
+				stabilized = false
 		
 		States.LANDED:
-			ship.set_mode(RigidBody.MODE_STATIC)
+			owner.set_mode(RigidBody.MODE_RIGID)
 
 
 func set_physics_input(linear_input : Vector3, angular_input : Vector3, delta):
-	var vel_length = ship.linear_velocity.length()
+	var vel_length = owner.linear_velocity.length()
 	
 	var multiplier := 1.0
 	
@@ -115,10 +121,10 @@ func set_physics_input(linear_input : Vector3, angular_input : Vector3, delta):
 
 func add_force(force : Vector3, delta : float):
 	# lerp per a derrapar
-	desired_linear_force = desired_linear_force.linear_interpolate(ship.global_transform.basis.xform(force), delta / linear_drag * 10)
+	desired_linear_force = desired_linear_force.linear_interpolate(owner.global_transform.basis.xform(force), delta / linear_drag * 10)
 	# lerp per a accelerar/frenar
 	# desired_linear_force = desired_linear_force.linear_interpolate(desired_linear_force, delta / linear_drag * 10)
-	ship.linear_velocity = desired_linear_force
+	owner.linear_velocity = desired_linear_force
 	
 	var b = owner.transform.basis
 	var v_len = owner.linear_velocity.length()
@@ -135,7 +141,7 @@ func add_torque(torque : Vector3, delta : float):
 	#	torque *= DRIFTING_TORQUE_MULTIPLIER
 	
 	desired_angular_force = desired_angular_force.linear_interpolate(torque, delta / angular_drag * 10)
-	ship.angular_velocity = ship.global_transform.basis.xform(desired_angular_force)
+	owner.angular_velocity = owner.global_transform.basis.xform(desired_angular_force)
 
 
 func _stabilize_rotation(time : float = 2.0) -> void:

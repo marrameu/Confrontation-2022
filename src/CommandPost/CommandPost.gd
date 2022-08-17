@@ -73,9 +73,8 @@ func _process(delta : float) -> void:
 						bodies[1] += 1 # blau
 					3:
 						bodies[2] += 1
-	$Label.text = str(bodies)
 	$TextureProgress.visible = texture_progress_visible
-	$Label.visible = texture_progress_visible
+	$Label.visible = texture_progress_visible and ((m_team == 2 and PlayerInfo.player_blue_team) or (m_team == 1 and not PlayerInfo.player_blue_team))
 
 
 func _physics_process(delta : float) -> void:

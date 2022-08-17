@@ -8,6 +8,8 @@ var target : Vector3 = Vector3(0, 0, 0)
 var raycast_offset = 6
 var detection_dist = 50
 
+var ignore_collisions := false
+
 var entered = false
 
 var distancia_per_comencar_a_frenat := 500.0
@@ -92,100 +94,100 @@ func turn(delta):
 	pitch = uwu.x
 	yaw = uwu.y
 	
-	
-	var fotut = false
-	
-	
-	var up = false
-	var down = false
-	var right = false
-	var left = false
-	
-	owner.get_node("ColDetects/ColDetectForward").cast_to = Vector3(0, 0, 150 * raycast_multiplier)
-	owner.get_node("ColDetects/ColDetectDown").cast_to = Vector3(0, -75 * raycast_multiplier, 150 * raycast_multiplier)
-	owner.get_node("ColDetects/ColDetectUp").cast_to = Vector3(0, 75 * raycast_multiplier, 150 * raycast_multiplier)
-	owner.get_node("ColDetects/ColDetectRight").cast_to = Vector3(-75 * raycast_multiplier, 0, 150 * raycast_multiplier)
-	owner.get_node("ColDetects/ColDetectLeft").cast_to = Vector3(75 * raycast_multiplier, 0, 150 * raycast_multiplier)
-	
-	"""
-	# fer-ho amb la velocitat?
-	var dist = owner.global_transform.origin.distance_to(target)
-	var multi = clamp(((dist - a_partir_daqui_min)/(distancia_per_comencar_a_frenat - a_partir_daqui_min)), min_raycast_longitude, 1)
-	#print(multi)
-	owner.get_node("ColDetectForward").cast_to = Vector3(0, 0, 300 * multi)
-	owner.get_node("ColDetectDown").cast_to = Vector3(0, -150 * multi, 300 * multi)
-	owner.get_node("ColDetectUp").cast_to = Vector3(0, 150 * multi, 300 * multi)
-	owner.get_node("ColDetectRight").cast_to = Vector3(-150 * multi, 0, 300 * multi)
-	owner.get_node("ColDetectLeft").cast_to = Vector3(150 * multi, 0, 300 * multi)
-	
-	#owner.get_node("ColDetectForward").force_raycast_update()
-	"""
-	
-	if (owner.get_node("ColDetects/ColDetectUp") as RayCast).is_colliding():
-		DebugDraw.draw_line_3d(owner.global_transform.origin, owner.global_transform.origin+(owner.global_transform.basis.xform(owner.get_node("ColDetects/ColDetectUp").cast_to)), Color.blue)
-		pitch = 1 # ves avall
-		up = true
-	if (owner.get_node("ColDetects/ColDetectDown") as RayCast).is_colliding():
-		DebugDraw.draw_line_3d(owner.global_transform.origin, owner.global_transform.origin+(owner.global_transform.basis.xform(owner.get_node("ColDetects/ColDetectDown").cast_to)), Color.blue)
-		pitch = -1 # vés amunt
-		down = true
-	# No elif pq si no, no es pot posar a true up i down
-	
-	# No toca ni a dalt ni a baix però si endavant
-	if not down and not up and (owner.get_node("ColDetects/ColDetectForward") as RayCast).is_colliding():
-		DebugDraw.draw_line_3d(owner.global_transform.origin, owner.global_transform.origin+(owner.global_transform.basis.xform(owner.get_node("ColDetects/ColDetectForward").cast_to)), Color.brown)
-		pitch = -1 # Tant se val si -1 o 1, pq no toca enlloc
-	elif down and up: # Toca a dalt i a baix
-		if not (owner.get_node("ColDetects/ColDetectForward") as RayCast).is_colliding(): # No toca endavant
-			pitch = 0
-			# vés endavant
-		else: # Toca per tot l'eix vertical
-			if (owner.get_node("ColDetects/ColDetectUp") as RayCast).get_collision_point().distance_to(owner.global_transform.origin) - (owner.get_node("ColDetects/ColDetectDown") as RayCast).get_collision_point().distance_to(owner.global_transform.origin) > 20:
-				if (owner.get_node("ColDetects/ColDetectUp") as RayCast).get_collision_point().distance_to(owner.global_transform.origin) > (owner.get_node("ColDetects/ColDetectDown") as RayCast).get_collision_point().distance_to(owner.global_transform.origin):
-					pitch = -1
-				else:
-					pitch = 1
-			else: # Si són a la mateixa distància, és a dir, una paret plana per exemple
-				pitch = uwu.x
-				
-			#pitch = uwu.x # Això o el punt que quedi més lluny (amunt o avall)
-			fotut = true
-			# Toca amunt avall i davant
-	
-	
-	# En un món ideal, la llargada dels RayCast dependria de la velocitat de la nau
-	# dreta esquerra
-	if (owner.get_node("ColDetects/ColDetectRight") as RayCast).is_colliding():
-		DebugDraw.draw_line_3d(owner.global_transform.origin, owner.global_transform.origin+(owner.global_transform.basis.xform(owner.get_node("ColDetects/ColDetectRight").cast_to)), Color.blue)
-		yaw = 1 # veé esquerra
-		right = true
-	# No elif pq si no, no es pot posar a true right i left
-	if (owner.get_node("ColDetects/ColDetectLeft") as RayCast).is_colliding():
-		DebugDraw.draw_line_3d(owner.global_transform.origin, owner.global_transform.origin+(owner.global_transform.basis.xform(owner.get_node("ColDetects/ColDetectLeft").cast_to)), Color.blue)
-		yaw = -1 # vés dreta
-		left = true
-	
-	# No toca ni a dreta ni a esq però si endavant
-	if not left and not right and (owner.get_node("ColDetects/ColDetectForward") as RayCast).is_colliding():
-		DebugDraw.draw_line_3d(owner.global_transform.origin, owner.global_transform.origin+(owner.global_transform.basis.xform(owner.get_node("ColDetects/ColDetectForward").cast_to)), Color.brown)
-		yaw = 1 # Tant se val si -1 o 1, pq no toca enlloc
-	elif right and left: # Toca dreta i esquerra
-		if not (owner.get_node("ColDetects/ColDetectForward") as RayCast).is_colliding(): # No toca endavant
-			yaw = 0
-			# vés endavant
-		else: # toca per tot arreu
-			# Com més baix el número amb què es compara millor anirà a dintre de la CS (menys xocarà), però, segurament, li costi més d'entar
-			if (owner.get_node("ColDetects/ColDetectRight") as RayCast).get_collision_point().distance_to(owner.global_transform.origin) - (owner.get_node("ColDetects/ColDetectLeft") as RayCast).get_collision_point().distance_to(owner.global_transform.origin) > 20:
-				if (owner.get_node("ColDetects/ColDetectRight") as RayCast).get_collision_point().distance_to(owner.global_transform.origin) > (owner.get_node("ColDetects/ColDetectLeft") as RayCast).get_collision_point().distance_to(owner.global_transform.origin):
-					yaw = -1
-				else:
-					yaw = 1
-			else: # Si són a la mateixa distància, és a dir, una paret plana per exemple
-				yaw = uwu.y
-			if fotut: # Toca amunt dreta, esquerra i, a més, amunt, avall i endevant
-				pass
-				#boost_multi = 0.25
-	
+	if not ignore_collisions:
+		var fotut = false
+		
+		
+		var up = false
+		var down = false
+		var right = false
+		var left = false
+		
+		owner.get_node("ColDetects/ColDetectForward").cast_to = Vector3(0, 0, 150 * raycast_multiplier)
+		owner.get_node("ColDetects/ColDetectDown").cast_to = Vector3(0, -75 * raycast_multiplier, 150 * raycast_multiplier)
+		owner.get_node("ColDetects/ColDetectUp").cast_to = Vector3(0, 75 * raycast_multiplier, 150 * raycast_multiplier)
+		owner.get_node("ColDetects/ColDetectRight").cast_to = Vector3(-75 * raycast_multiplier, 0, 150 * raycast_multiplier)
+		owner.get_node("ColDetects/ColDetectLeft").cast_to = Vector3(75 * raycast_multiplier, 0, 150 * raycast_multiplier)
+		
+		"""
+		# fer-ho amb la velocitat?
+		var dist = owner.global_transform.origin.distance_to(target)
+		var multi = clamp(((dist - a_partir_daqui_min)/(distancia_per_comencar_a_frenat - a_partir_daqui_min)), min_raycast_longitude, 1)
+		#print(multi)
+		owner.get_node("ColDetectForward").cast_to = Vector3(0, 0, 300 * multi)
+		owner.get_node("ColDetectDown").cast_to = Vector3(0, -150 * multi, 300 * multi)
+		owner.get_node("ColDetectUp").cast_to = Vector3(0, 150 * multi, 300 * multi)
+		owner.get_node("ColDetectRight").cast_to = Vector3(-150 * multi, 0, 300 * multi)
+		owner.get_node("ColDetectLeft").cast_to = Vector3(150 * multi, 0, 300 * multi)
+		
+		#owner.get_node("ColDetectForward").force_raycast_update()
+		"""
+		
+		if (owner.get_node("ColDetects/ColDetectUp") as RayCast).is_colliding():
+			DebugDraw.draw_line_3d(owner.global_transform.origin, owner.global_transform.origin+(owner.global_transform.basis.xform(owner.get_node("ColDetects/ColDetectUp").cast_to)), Color.blue)
+			pitch = 1 # ves avall
+			up = true
+		if (owner.get_node("ColDetects/ColDetectDown") as RayCast).is_colliding():
+			DebugDraw.draw_line_3d(owner.global_transform.origin, owner.global_transform.origin+(owner.global_transform.basis.xform(owner.get_node("ColDetects/ColDetectDown").cast_to)), Color.blue)
+			pitch = -1 # vés amunt
+			down = true
+		# No elif pq si no, no es pot posar a true up i down
+		
+		# No toca ni a dalt ni a baix però si endavant
+		if not down and not up and (owner.get_node("ColDetects/ColDetectForward") as RayCast).is_colliding():
+			DebugDraw.draw_line_3d(owner.global_transform.origin, owner.global_transform.origin+(owner.global_transform.basis.xform(owner.get_node("ColDetects/ColDetectForward").cast_to)), Color.brown)
+			pitch = -1 # Tant se val si -1 o 1, pq no toca enlloc
+		elif down and up: # Toca a dalt i a baix
+			if not (owner.get_node("ColDetects/ColDetectForward") as RayCast).is_colliding(): # No toca endavant
+				pitch = 0
+				# vés endavant
+			else: # Toca per tot l'eix vertical
+				if (owner.get_node("ColDetects/ColDetectUp") as RayCast).get_collision_point().distance_to(owner.global_transform.origin) - (owner.get_node("ColDetects/ColDetectDown") as RayCast).get_collision_point().distance_to(owner.global_transform.origin) > 20:
+					if (owner.get_node("ColDetects/ColDetectUp") as RayCast).get_collision_point().distance_to(owner.global_transform.origin) > (owner.get_node("ColDetects/ColDetectDown") as RayCast).get_collision_point().distance_to(owner.global_transform.origin):
+						pitch = -1
+					else:
+						pitch = 1
+				else: # Si són a la mateixa distància, és a dir, una paret plana per exemple
+					pitch = uwu.x
+					
+				#pitch = uwu.x # Això o el punt que quedi més lluny (amunt o avall)
+				fotut = true
+				# Toca amunt avall i davant
+		
+		
+		# En un món ideal, la llargada dels RayCast dependria de la velocitat de la nau
+		# dreta esquerra
+		if (owner.get_node("ColDetects/ColDetectRight") as RayCast).is_colliding():
+			DebugDraw.draw_line_3d(owner.global_transform.origin, owner.global_transform.origin+(owner.global_transform.basis.xform(owner.get_node("ColDetects/ColDetectRight").cast_to)), Color.blue)
+			yaw = 1 # veé esquerra
+			right = true
+		# No elif pq si no, no es pot posar a true right i left
+		if (owner.get_node("ColDetects/ColDetectLeft") as RayCast).is_colliding():
+			DebugDraw.draw_line_3d(owner.global_transform.origin, owner.global_transform.origin+(owner.global_transform.basis.xform(owner.get_node("ColDetects/ColDetectLeft").cast_to)), Color.blue)
+			yaw = -1 # vés dreta
+			left = true
+		
+		# No toca ni a dreta ni a esq però si endavant
+		if not left and not right and (owner.get_node("ColDetects/ColDetectForward") as RayCast).is_colliding():
+			DebugDraw.draw_line_3d(owner.global_transform.origin, owner.global_transform.origin+(owner.global_transform.basis.xform(owner.get_node("ColDetects/ColDetectForward").cast_to)), Color.brown)
+			yaw = 1 # Tant se val si -1 o 1, pq no toca enlloc
+		elif right and left: # Toca dreta i esquerra
+			if not (owner.get_node("ColDetects/ColDetectForward") as RayCast).is_colliding(): # No toca endavant
+				yaw = 0
+				# vés endavant
+			else: # toca per tot arreu
+				# Com més baix el número amb què es compara millor anirà a dintre de la CS (menys xocarà), però, segurament, li costi més d'entar
+				if (owner.get_node("ColDetects/ColDetectRight") as RayCast).get_collision_point().distance_to(owner.global_transform.origin) - (owner.get_node("ColDetects/ColDetectLeft") as RayCast).get_collision_point().distance_to(owner.global_transform.origin) > 20:
+					if (owner.get_node("ColDetects/ColDetectRight") as RayCast).get_collision_point().distance_to(owner.global_transform.origin) > (owner.get_node("ColDetects/ColDetectLeft") as RayCast).get_collision_point().distance_to(owner.global_transform.origin):
+						yaw = -1
+					else:
+						yaw = 1
+				else: # Si són a la mateixa distància, és a dir, una paret plana per exemple
+					yaw = uwu.y
+				if fotut: # Toca amunt dreta, esquerra i, a més, amunt, avall i endevant
+					pass
+					#boost_multi = 0.25
+		
 	
 	owner.get_node("ShipMesh").rotation = Vector3.ZERO
 	

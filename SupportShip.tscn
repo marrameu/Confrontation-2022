@@ -23,7 +23,7 @@ albedo_color = Color( 0.792157, 1, 0.705882, 0.196078 )
 script = ExtResource( 2 )
 
 [node name="HealthSystem" parent="." index="0"]
-MAX_SHIELD = 15000
+MAX_SHIELD = 25000
 time_before_shield_repair = 30.0
 shield_repair_per_sec = 500.0
 MAX_HEALTH = 25000

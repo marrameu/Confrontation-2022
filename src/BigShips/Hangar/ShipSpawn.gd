@@ -1,6 +1,6 @@
 extends Position3D
 
-const ship_scene : PackedScene = preload("res://NewShip.tscn")
+export var ship_scene : PackedScene = preload("res://NewShip.tscn")
 
 export var simultaneous_ships : int = 2
 var last_ship : Ship

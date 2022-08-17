@@ -28,7 +28,7 @@ func _process(delta : float) -> void:
 		return
 	
 	if Input.is_action_just_pressed("jump"):
-		if owner.state == owner.States.LANDED:
+		if owner.state == owner.States.LANDED or owner.state == owner.States.LANDING:
 			owner.leave()
 		elif owner.state == owner.States.FLYING and owner.landing_areas > 0:
 			owner.land()

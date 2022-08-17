@@ -142,7 +142,7 @@ func _on_enemy_died(attacker : Node): # passar tmb l'enemic
 
 
 func leave() -> void:
-	set_mode(RigidBody.MODE_RIGID)
+	#set_mode(RigidBody.MODE_RIGID)
 	state = States.LEAVING
 	$LeaveTimer.start()
 
@@ -152,10 +152,12 @@ func _on_LeaveTimer_timeout():
 
 
 func land():
+	#if linear_velocity.length() > 50:
+	#	return
 	state = States.LANDING
 	# ferho millor
-	physics.desired_linear_force = Vector3()
-	physics.desired_angular_force = Vector3()
+	# physics.desired_linear_force = Vector3()
+	# physics.desired_angular_force = Vector3()
 
 
 func on_BigShip_shields_down(ship):

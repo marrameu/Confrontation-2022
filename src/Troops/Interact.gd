@@ -41,14 +41,21 @@ func _process(delta : float) -> void:
 		var result = space_state.intersect_ray(ray_origin, ray_normal, [])
 		if result:
 			if not target_collider:
-				var ship = result.collider
-				if ship.is_in_group("Ships"):
-					if not ship.is_player_or_ai == 1:
+				var collider = result.collider
+				if collider.is_in_group("Ships"):
+					if not collider.is_player_or_ai == 1:
 						$Timer.start()
-						target_collider = ship
+						target_collider = collider
 						return
+				elif collider.is_in_group("CommandPosts"):
+					$Timer.start()
+					target_collider = collider
+					return
 			if result.collider == target_collider:
-				if not result.collider.is_player_or_ai == 1:
+				if target_collider.is_in_group("Ships"):
+					if not result.collider.is_player_or_ai == 1:
+						return
+				else:
 					return
 	
 	$Timer.stop()
@@ -56,7 +63,10 @@ func _process(delta : float) -> void:
 
 
 func _on_Timer_timeout():
-	if target_collider.init(owner.pilot_man):
-		owner.emit_signal("entered_ship", target_collider)
-		target_collider = null
-		owner.queue_free()
+	if target_collider.is_in_group("Ships"):
+		if target_collider.init(owner.pilot_man):
+			owner.emit_signal("entered_ship", target_collider)
+			target_collider = null
+			owner.queue_free()
+	elif target_collider.is_in_group("CommandPosts"):
+		owner.get_node("HealthSystem").heal(10000)

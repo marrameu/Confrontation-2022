@@ -91,6 +91,7 @@ func _on_spectate_pressed(ship_type : int, new_index : int = 0):
 
 func _on_ChangeCamButton_pressed():
 	emit_signal("change_cam")
+	$"%CPButtons".update()
 	$"%ChangeCamButton".text = "Terra" if $"%ChangeCamButton".text == "Espai" else "Espai"
 
 

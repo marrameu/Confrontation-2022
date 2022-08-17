@@ -5,6 +5,8 @@ class_name PilotManager
 export var blue_team = false
 export var is_player := false
 
+var points : int = 0
+var nickname := "Juseb"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
