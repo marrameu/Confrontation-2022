@@ -12,7 +12,11 @@ func _ready():
 
 func _process(delta):
 	if not active:
+		#$HUD/Crosshair/AnimationPlayer.current_animation = "RESET"
 		return
+	
+	$HUD/Crosshair/AnimationTree.set("parameters/conditions/!zooming", !get_viewport().get_camera().owner.zooming)
+	$HUD/Crosshair/AnimationTree.set("parameters/conditions/zooming", get_viewport().get_camera().owner.zooming)
 	
 	if not reload_per_sec:
 		if Input.is_action_just_pressed("reload"):

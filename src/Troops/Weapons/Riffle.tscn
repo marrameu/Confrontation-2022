@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/Troops/Weapons/Gun.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/models/weapons/Rifle/RifleModel.tscn" type="PackedScene" id=2]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
 [node name="Riffle" instance=ExtResource( 1 )]
 offset = Vector2( 10, 10 )
@@ -10,6 +12,17 @@ offset = Vector2( 10, 10 )
 
 [node name="RayCast" parent="." index="1"]
 cast_to = Vector3( 0, 0, 500 )
+
+[node name="Crosshair" parent="HUD" index="0"]
+margin_left = 940.0
+margin_top = 520.0
+margin_right = 980.0
+margin_bottom = 560.0
+
+[node name="AnimationTree" parent="HUD/Crosshair" index="4"]
+parameters/playback = SubResource( 1 )
+parameters/conditions/!zooming = false
+parameters/conditions/zooming = false
 
 [node name="HitMarkerParts" parent="HUD/Pivot" index="0"]
 modulate = Color( 1, 1, 1, 0 )
