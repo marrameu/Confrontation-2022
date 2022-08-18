@@ -67,23 +67,24 @@ func check_collisions():
 	ray.cast_to = Vector3(0, 0, -long)
 
 
-func _hit(body):
+func _hit(body) -> bool:
 	# AIXÒ ES PODRIA FER MILLOR, HI HAURIA D'HAVER UNA MANERA MÉS FÀCIL (I IGUAL) PER A COMPROVAR L'EQUIP
 	if body.is_in_group("Troops") or body.is_in_group("Ships"):
 		if body.pilot_man:
 			if body.blue_team == m_blue_team:
-				return
+				return false
 	elif body.is_in_group("BigShips"):
 		if body.blue_team == m_blue_team:
-			return
+			return false
 	
 	emit_signal("damagable_hit") # s'ha de fer abans, si no es menja l'animació "killed"
 	if not weakref(shooter).get_ref():
-		return
+		return false
 	if shooter.has_method("_on_enemy_died"):
 		if not body.get_node("HealthSystem").is_connected("die", shooter, "_on_enemy_died"):
 			body.get_node("HealthSystem").connect("die", shooter, "_on_enemy_died")
 	body.get_node("HealthSystem").take_damage(damage, false, shooter)
+	return true
 
 
 func _on_VisibilityNotifier_screen_entered():

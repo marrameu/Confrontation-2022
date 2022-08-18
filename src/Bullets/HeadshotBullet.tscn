@@ -5,4 +5,3 @@
 
 [node name="HeadshotBullet" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-headshot_damage = 0

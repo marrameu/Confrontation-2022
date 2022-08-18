@@ -45,8 +45,10 @@ func _on_headshot():
 	$Shooting/Weapons.get_child($Shooting.current_weapon_ind).get_node("HUD/Pivot/HitMarkerParts/AnimationPlayer").play("killed")
 
 
-func _on_enemy_died():
-	$Shooting/Weapons.get_child($Shooting.current_weapon_ind).get_node("HUD/Pivot/HitMarkerParts/AnimationPlayer").play("red_hitmarker")
+func _on_enemy_died(attacker):
+	if attacker == self:
+		yield(get_tree(), "idle_frame") # pq no se'l mengi el headshot
+		$Shooting/Weapons.get_child($Shooting.current_weapon_ind).get_node("HUD/Pivot/HitMarkerParts/AnimationPlayer").play("red_hitmarker")
 
 
 func _on_MeleeHitBox_area_entered(area):

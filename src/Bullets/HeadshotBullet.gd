@@ -2,7 +2,7 @@ extends Bullet
 
 signal headshot
 
-export var headshot_damage : int = damage * 2
+onready var headshot_damage : int = damage * 2
 
 func _ready():
 	if shooter.has_method("_on_headshot"):
@@ -10,9 +10,12 @@ func _ready():
 
 
 func _hit(body):
+	var headshot := false
 	if body.is_in_group("Troops"):
 		if $RayCast.get_collision_point().y > body.get_global_transform().origin.y + 1.2:
 			damage = headshot_damage
+			headshot = true
+	if ._hit(body):
+		if headshot:
 			emit_signal("headshot")
-	._hit(body)
 
