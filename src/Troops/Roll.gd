@@ -17,9 +17,10 @@ func enter():
 		roll_direction = aim.z
 	# animació
 	owner.get_node("Model").rotation.y = Vector2(roll_direction.z, roll_direction.x).angle() - owner.rotation.y
-	velocity = roll_direction * 25 # impuls
 	
 	owner.get_node("AnimationPlayer").play("Roll")
+	owner.get_node("AnimationTree").set("parameters/Roll/active", true)
+	owner.get_node("AnimationTree").set("parameters/Melee/active", true) # solució temporal, cal mirar state machines
 
 
 func update(delta):
@@ -31,6 +32,7 @@ func update(delta):
 func _on_animation_finished(anim_name):
 	if anim_name == "Roll":
 		emit_signal("finished", "walk")
+	owner.get_node("AnimationTree").set("parameters/Melee/active", false)
 
 
 func exit():
@@ -38,3 +40,7 @@ func exit():
 	owner.can_rotate = true
 	velocity = Vector3(0, velocity.y, 0) # em penso q pot causar errors
 	owner.get_node("Model").rotation.y = 0
+
+
+func impulse():
+	velocity = roll_direction * 25 # impuls
