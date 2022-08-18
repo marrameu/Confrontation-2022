@@ -60,11 +60,14 @@ func _process(delta : float) -> void:
 	bodies[1] = 0
 	bodies[2] = 0
 	var texture_progress_visible := false
+	var interact_label_visible := false
 	for body in $Area.get_overlapping_bodies():
 		if body.is_in_group("Troops"):
 			if not body.dead:
 				if body.is_in_group("Players"):
 					texture_progress_visible = true
+					if body.get_node("HealthSystem").health != body.get_node("HealthSystem").MAX_HEALTH:
+						interact_label_visible = true
 				var body_team : int = 1 if not body.blue_team else 2
 				match body_team:
 					1:
@@ -74,7 +77,7 @@ func _process(delta : float) -> void:
 					3:
 						bodies[2] += 1
 	$TextureProgress.visible = texture_progress_visible
-	$Label.visible = texture_progress_visible and ((m_team == 2 and PlayerInfo.player_blue_team) or (m_team == 1 and not PlayerInfo.player_blue_team))
+	$Label.visible = interact_label_visible and ((m_team == 2 and PlayerInfo.player_blue_team) or (m_team == 1 and not PlayerInfo.player_blue_team))
 
 
 func _physics_process(delta : float) -> void:

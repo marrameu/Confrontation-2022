@@ -54,4 +54,10 @@ func _on_enemy_died(attacker):
 func _on_MeleeHitBox_area_entered(area):
 	if area == $HurtBox:
 		return
-	area.owner.get_node("HealthSystem").take_damage(15)
+	if area.owner.blue_team == blue_team:
+		return
+	area.owner.get_node("HealthSystem").take_damage(25)
+	# connect healthsystem die _on_enemy_died
+	_on_damagable_hit()
+	if not $AudioStreamPlayer.playing:
+		$AudioStreamPlayer.play()

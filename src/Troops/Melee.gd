@@ -5,14 +5,21 @@ var attack_direction
 func enter():
 	owner.can_shoot = false
 	owner.can_rotate = false
+	
 	var aim : Basis = owner.get_global_transform().basis
-	attack_direction = aim.z
+	attack_direction = aim.x * (Input.get_action_strength("move_left") - Input.get_action_strength("move_right"))
+	attack_direction += aim.z * (Input.get_action_strength("move_forward") - Input.get_action_strength("move_backward"))
 	
 	attack_direction.y = 0
-
-	# animació
-	velocity = attack_direction * 5 # impuls
+	attack_direction = attack_direction.normalized()
 	
+	if !attack_direction: # potser q no hagi rpemut cal teclat, es a dir, no canvia de direcció
+		attack_direction = aim.z
+	
+	owner.get_node("Model").rotation.y = Vector2(attack_direction.z, attack_direction.x).angle() - owner.rotation.y
+	# més endavant fer que no giri el model, sinó que tingui animació per a les 4 direccions
+	
+	owner.get_node("AnimationTree").set("parameters/Melee/active", true)
 	owner.get_node("AnimationPlayer").play("Melee")
 
 
@@ -31,3 +38,8 @@ func exit():
 	owner.can_shoot = true
 	owner.can_rotate = true
 	velocity = Vector3(0, velocity.y, 0) # em penso q pot causar errors
+	owner.get_node("Model").rotation.y = 0
+
+
+func impulse():
+	velocity = attack_direction * 10 # impuls

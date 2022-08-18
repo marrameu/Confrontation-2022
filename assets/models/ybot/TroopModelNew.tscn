@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/models/ybot/Rifle Idle.dae" type="PackedScene" id=1]
 [ext_resource path="res://assets/animations/rifleidle.tres" type="Animation" id=2]
@@ -9,12 +9,14 @@
 [ext_resource path="res://assets/animations/walkleft.tres" type="Animation" id=7]
 [ext_resource path="res://assets/animations/walkbackward.tres" type="Animation" id=8]
 [ext_resource path="res://assets/animations/walking.tres" type="Animation" id=9]
+[ext_resource path="res://assets/animations/punch.tres" type="Animation" id=10]
 
 [node name="TroopModel" instance=ExtResource( 1 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.77, 0 )
 script = ExtResource( 3 )
 
 [node name="AnimationPlayer" parent="." index="1"]
+anims/punch = ExtResource( 10 )
 anims/rifleaim = ExtResource( 4 )
 anims/rifleidle = ExtResource( 2 )
 anims/walkbackward = ExtResource( 8 )
