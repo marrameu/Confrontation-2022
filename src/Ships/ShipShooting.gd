@@ -48,7 +48,8 @@ sync func shoot_bullet(current_bullet : int, shoot_target := Vector3.ZERO) -> vo
 	
 	emit_signal("shot")
 	# audio
-	#(get_node("Audio" + str(current_bullet + 1)) as AudioStreamPlayer).play()
+	var audio_name : String = "Audio" + str(current_bullet + 1)
+	get_node(audio_name).play()
 	
 	# ammo
 	ammos[current_bullet] -= 1

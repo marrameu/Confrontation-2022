@@ -1,8 +1,8 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/Ships/UI/ShipPlayerHUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/throttle.wav" type="AudioStream" id=2]
-[ext_resource path="res://assets/interface/hit_marker_part.png" type="Texture" id=3]
+[ext_resource path="res://src/HUD/HitMarkerParts.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/interface/point.png" type="Texture" id=4]
 [ext_resource path="res://assets/interface/circle.png" type="Texture" id=5]
 [ext_resource path="res://src/Troops/Player/HUD/LifeBar.tscn" type="PackedScene" id=6]
@@ -13,8 +13,6 @@
 [ext_resource path="res://assets/interface/locking.png" type="Texture" id=11]
 [ext_resource path="res://assets/interface/crosshair_part.png" type="Texture" id=12]
 [ext_resource path="res://assets/interface/crosshair_ammo.png" type="Texture" id=13]
-[ext_resource path="res://assets/audio/enemy_kill.wav" type="AudioStream" id=14]
-[ext_resource path="res://assets/audio/hitmarker.wav" type="AudioStream" id=15]
 [ext_resource path="res://assets/interface/life_bar.png" type="Texture" id=16]
 
 [sub_resource type="Animation" id=3]
@@ -72,112 +70,6 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 25, 40 ), Vector2( 31, 40 ), Vector2( 25, 40 ) ]
-}
-
-[sub_resource type="Animation" id=5]
-resource_name = "hit"
-length = 0.15
-step = 0.01
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 32, 32 ), Vector2( 38, 38 ), Vector2( 32, 32 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:rect_size")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 56, 56 ), Vector2( 44, 44 ), Vector2( 56, 56 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.15 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath(".:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.1, 0.15 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-
-[sub_resource type="Animation" id=6]
-resource_name = "killed"
-length = 0.15
-step = 0.01
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 32, 32 ), Vector2( 38, 38 ), Vector2( 32, 32 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:rect_size")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 56, 56 ), Vector2( 44, 44 ), Vector2( 56, 56 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.15 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath(".:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.1, 0.15 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 0, 1 ), Color( 1, 1, 0, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=1]
@@ -302,59 +194,7 @@ flip_h = true
 anims/Idle = SubResource( 3 )
 anims/Shoot = SubResource( 2 )
 
-[node name="HitMarkerParts" type="Control" parent="Center/Crosshair"]
-visible = false
-modulate = Color( 1, 1, 1, 0 )
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -28.0
-margin_top = -28.0
-margin_right = 28.0
-margin_bottom = 28.0
-
-[node name="TextureRect" type="TextureRect" parent="Center/Crosshair/HitMarkerParts"]
-margin_right = 18.0
-margin_bottom = 18.0
-texture = ExtResource( 3 )
-
-[node name="TextureRect2" type="TextureRect" parent="Center/Crosshair/HitMarkerParts"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -18.0
-margin_bottom = 18.0
-texture = ExtResource( 3 )
-flip_h = true
-
-[node name="TextureRect3" type="TextureRect" parent="Center/Crosshair/HitMarkerParts"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_top = -18.0
-margin_right = 18.0
-texture = ExtResource( 3 )
-flip_h = true
-
-[node name="TextureRect4" type="TextureRect" parent="Center/Crosshair/HitMarkerParts"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -18.0
-margin_top = -18.0
-texture = ExtResource( 3 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Center/Crosshair/HitMarkerParts"]
-anims/hit = SubResource( 5 )
-anims/killed = SubResource( 6 )
-
-[node name="KillAudio" type="AudioStreamPlayer" parent="Center/Crosshair/HitMarkerParts"]
-stream = ExtResource( 14 )
-volume_db = 10.0
-
-[node name="HitAudio" type="AudioStreamPlayer" parent="Center/Crosshair/HitMarkerParts"]
-stream = ExtResource( 15 )
-volume_db = 5.0
+[node name="HitMarkerParts" parent="Center/Crosshair" instance=ExtResource( 3 )]
 
 [node name="Cursor" type="TextureRect" parent="Center"]
 modulate = Color( 1, 1, 1, 0.615686 )

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/grenade_throw.ogg-a12fbbcb2ed2cfee4739dd0a23131db8.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/grenade_throw.ogg"
+dest_files=[ "res://.import/grenade_throw.ogg-a12fbbcb2ed2cfee4739dd0a23131db8.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

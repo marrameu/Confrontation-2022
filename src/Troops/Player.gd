@@ -37,15 +37,16 @@ func _on_HealthSystem_die(attacker):
 
 
 func _on_damagable_hit():
-	pass
+	# fer-ho millor amb senyals més ednavant i %
+	$Shooting/Weapons.get_child($Shooting.current_weapon_ind).get_node("HUD/Pivot/HitMarkerParts/AnimationPlayer").play("hit")
 
 
 func _on_headshot():
-	pass
+	$Shooting/Weapons.get_child($Shooting.current_weapon_ind).get_node("HUD/Pivot/HitMarkerParts/AnimationPlayer").play("killed")
 
 
 func _on_enemy_died():
-	pass
+	$Shooting/Weapons.get_child($Shooting.current_weapon_ind).get_node("HUD/Pivot/HitMarkerParts/AnimationPlayer").play("red_hitmarker")
 
 
 func _on_MeleeHitBox_area_entered(area):

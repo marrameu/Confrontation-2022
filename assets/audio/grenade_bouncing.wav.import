@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/grenade_bouncing.wav-e6021b7f5c98f903483dfa21f9dfde7c.sample"
+
+[deps]
+
+source_file="res://assets/audio/grenade_bouncing.wav"
+dest_files=[ "res://.import/grenade_bouncing.wav-e6021b7f5c98f903483dfa21f9dfde7c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

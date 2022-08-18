@@ -19,3 +19,4 @@ func launch_granade():
 	new_granade.rotation = get_viewport().get_camera().global_rotation
 	get_tree().current_scene.add_child(new_granade)
 	new_granade.translation = owner.translation
+	$Throw.play()

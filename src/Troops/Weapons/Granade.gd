@@ -17,3 +17,7 @@ func _ready():
 func _on_Area_area_entered(area):
 	# caldria feer un raycast per comprovar si no hi ha cap paret
 	area.owner.get_node("HealthSystem").take_damage(damage / (area.global_transform.origin.distance_to(translation) / 2))
+
+
+func _on_Granade_body_entered(body):
+	$BounceAudio.play()

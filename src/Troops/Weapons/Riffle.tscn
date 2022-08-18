@@ -10,3 +10,12 @@ offset = Vector2( 10, 10 )
 
 [node name="RayCast" parent="." index="1"]
 cast_to = Vector3( 0, 0, 500 )
+
+[node name="HitMarkerParts" parent="HUD/Pivot" index="0"]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = -28.0
+margin_top = -28.0
+margin_right = 28.0
+margin_bottom = 28.0
+
+[editable path="HUD/Pivot/HitMarkerParts"]

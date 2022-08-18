@@ -37,12 +37,12 @@ func _process(delta):
 	if not turboing:
 		if wants_turbo and can_turbo:
 			do_turbo = true
-			#$TurboAudio.play()
+			$TurboAudio.play()
 	else:
 		if wants_drift:
 			drifting = true
 			do_turbo = false
-			#$DriftAudio.play()
+			$DriftAudio.play()
 		# drifting = Input.is_action_pressed(drift_action) # just?
 	
 	if not drifting: # aquesta comprovació potser sorba una mica

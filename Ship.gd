@@ -39,6 +39,7 @@ func init(new_pilot_man : PilotManager) -> bool:
 	is_player_or_ai = 1 if pilot_man.is_player else 2
 	if is_player_or_ai == 1:
 		$PlayerHUD.make_visible(true)
+		$Listener.make_current() # temporal, a vera com va
 		input.set_script(preload("res://PlayerInput.gd"))
 		shooting.set_script(preload("res://PlayerShipShooting.gd"))
 	elif is_player_or_ai == 2:
@@ -145,6 +146,7 @@ func leave() -> void:
 	#set_mode(RigidBody.MODE_RIGID)
 	state = States.LEAVING
 	$LeaveTimer.start()
+	$EnginesAudio.play()
 
 
 func _on_LeaveTimer_timeout():
@@ -155,6 +157,7 @@ func land():
 	#if linear_velocity.length() > 50:
 	#	return
 	state = States.LANDING
+	$EnginesAudio.stop()
 	# ferho millor
 	# physics.desired_linear_force = Vector3()
 	# physics.desired_angular_force = Vector3()

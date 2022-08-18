@@ -88,7 +88,7 @@ func _process(delta : float) -> void:
 func _shoot() -> void:
 	emit_signal("shoot")
 	
-	#$Audio.play()
+	$ShootAudio.play()
 	
 	ammo -= 1
 	

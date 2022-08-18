@@ -214,12 +214,12 @@ func _on_Shooting_shot():
 
 func on_damagable_hit():
 	$Center/Crosshair/HitMarkerParts/AnimationPlayer.play("hit")
-	$Center/Crosshair/HitMarkerParts/HitAudio.play()
+	#$Center/Crosshair/HitMarkerParts/HitAudio.play()
 
 
 func on_enemy_died():
 	$Center/Crosshair/HitMarkerParts/AnimationPlayer.play("killed")
-	$Center/Crosshair/HitMarkerParts/KillAudio.play()
+	#$Center/Crosshair/HitMarkerParts/KillAudio.play()
 
 
 func _on_HealthSystem_die(attacker):

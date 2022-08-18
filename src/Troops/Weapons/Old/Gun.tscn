@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Troops/Weapons/Gun.gd" type="Script" id=1]
-[ext_resource path="res://assets/audio/shot.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/audio/laser.wav" type="AudioStream" id=2]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.507813, 0.507813, 0.507813, 1 )
@@ -23,7 +23,7 @@ enabled = true
 cast_to = Vector3( 0, 0, 500 )
 collision_mask = 23
 
-[node name="Audio" type="AudioStreamPlayer3D" parent="."]
+[node name="ShootAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 2 )
 unit_size = 15.0
 max_distance = 25.0
