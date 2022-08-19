@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Ship.gd" type="Script" id=1]
 [ext_resource path="res://src/Ships/ShipPhysics.gd" type="Script" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://src/StateMachine/DefendCS.gd" type="Script" id=27]
 [ext_resource path="res://src/StateMachine/PushForward.gd" type="Script" id=28]
 [ext_resource path="res://src/StateMachine/PatrolMiddlePoint.gd" type="Script" id=29]
+[ext_resource path="res://ShipInteraction.gd" type="Script" id=30]
 [ext_resource path="res://src/StateMachine/AttackBigShip.gd" type="Script" id=31]
 [ext_resource path="res://assets/Materials/grey_ship_mat.tres" type="Material" id=33]
 [ext_resource path="res://assets/materials/command_post/grey.tres" type="Material" id=34]
@@ -298,6 +299,16 @@ gravity = Vector3( 0, 0, 0 )
 
 [node name="ExitTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="InteractArea" type="Area" parent="."]
+collision_layer = 32768
+collision_mask = 0
+monitoring = false
+script = ExtResource( 30 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="InteractArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51836 )
+shape = SubResource( 1 )
 
 [connection signal="big_ship_shields_down" from="." to="StateMachine/ChooseObjective" method="_on_big_ship_shields_down"]
 [connection signal="big_ship_shields_down" from="." to="StateMachine/PushForward" method="_on_big_ship_shields_down"]

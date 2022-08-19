@@ -13,5 +13,6 @@ collision_mask = 769
 [node name="ShootAudio" parent="." index="2"]
 unit_db = 10.0
 unit_size = 100.0
-max_distance = 550.0
+max_db = 0.0
+max_distance = 150.0
 attenuation_filter_db = -5.0

@@ -29,7 +29,7 @@ func _process(delta : float) -> void:
 	get_node("../PlayerHUD/TextureProgress").value = ($Timer.wait_time - $Timer.time_left) / $Timer.wait_time * 100
 	get_node("../PlayerHUD/TextureProgress").visible = true if target_collider else false
 	
-	if Input.is_action_pressed("interact"):
+	if Input.is_action_just_pressed("interact") or (target_collider and Input.is_action_pressed("interact")): # pq no cicli
 		var viewport = get_viewport()
 		camera_width_center = viewport.get_visible_rect().size.x / 2
 		camera_height_center = viewport.get_visible_rect().size.y / 2
@@ -38,24 +38,16 @@ func _process(delta : float) -> void:
 		ray_normal = ray_origin + current_camera.project_ray_normal(Vector2(camera_width_center, camera_height_center)) * ray_range
 		
 		var space_state = current_camera.get_world().direct_space_state
-		var result = space_state.intersect_ray(ray_origin, ray_normal, [])
+		var result = space_state.intersect_ray(ray_origin, ray_normal, [], 32768, false, true)
 		if result:
+			var collider = result.collider
 			if not target_collider:
-				var collider = result.collider
-				if collider.is_in_group("Ships"):
-					if not collider.is_player_or_ai == 1:
-						$Timer.start()
-						target_collider = collider
-						return
-				elif collider.is_in_group("CommandPosts"):
+				if collider.can_interact(owner):
 					$Timer.start()
 					target_collider = collider
 					return
-			if result.collider == target_collider:
-				if target_collider.is_in_group("Ships"):
-					if not result.collider.is_player_or_ai == 1:
-						return
-				else:
+			elif collider == target_collider:
+				if target_collider.can_interact(owner):
 					return
 	
 	$Timer.stop()
@@ -63,10 +55,10 @@ func _process(delta : float) -> void:
 
 
 func _on_Timer_timeout():
-	if target_collider.is_in_group("Ships"):
-		if target_collider.init(owner.pilot_man):
-			owner.emit_signal("entered_ship", target_collider)
-			target_collider = null
-			owner.queue_free()
-	elif target_collider.is_in_group("CommandPosts"):
-		owner.get_node("HealthSystem").heal(10000)
+	target_collider.interact(owner)
+	
+	if target_collider.owner.is_in_group("Ships"):
+		owner.emit_signal("entered_ship", target_collider.owner)
+		owner.queue_free() # canvi estat
+	
+	target_collider = null

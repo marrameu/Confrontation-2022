@@ -136,7 +136,6 @@ one_shot = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.75062, 0 )
 visible = false
 mesh = SubResource( 4 )
-material/0 = null
 
 [node name="CPUParticles" type="CPUParticles" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.85104 )

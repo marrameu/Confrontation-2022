@@ -4,6 +4,7 @@ var init_offset : Vector2
 
 export var continuous := true
 
+onready var cam_base := get_tree().current_scene.get_node("%CameraBase")
 
 func _ready():
 	init_offset = offset
@@ -15,8 +16,8 @@ func _process(delta):
 		#$HUD/Crosshair/AnimationPlayer.current_animation = "RESET"
 		return
 	
-	$HUD/Crosshair/AnimationTree.set("parameters/conditions/!zooming", !get_viewport().get_camera().owner.zooming)
-	$HUD/Crosshair/AnimationTree.set("parameters/conditions/zooming", get_viewport().get_camera().owner.zooming)
+	$HUD/Crosshair/AnimationTree.set("parameters/conditions/!zooming", !cam_base.zooming)
+	$HUD/Crosshair/AnimationTree.set("parameters/conditions/zooming", cam_base.zooming)
 	
 	if not reload_per_sec:
 		if Input.is_action_just_pressed("reload"):
@@ -39,6 +40,8 @@ func _process(delta):
 
 
 func _physics_process(delta):
+	if not owner.can_shoot: #or not get_viewport().get_camera().owner.zooming:
+		return
 	$RayCast.force_raycast_update()
 	if $RayCast.is_colliding():
 		$Mesh.look_at($RayCast.get_collision_point(), Vector3.UP)

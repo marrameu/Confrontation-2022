@@ -33,6 +33,7 @@ func _on_animation_finished(anim_name):
 	if anim_name == "Roll":
 		emit_signal("finished", "walk")
 	owner.get_node("AnimationTree").set("parameters/Melee/active", false)
+	owner.get_node("AnimationTree").set("parameters/Roll/active", false)
 
 
 func exit():

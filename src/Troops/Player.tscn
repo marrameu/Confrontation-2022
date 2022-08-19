@@ -208,7 +208,7 @@ blend_point_4/node = SubResource( 23 )
 blend_point_4/pos = Vector2( 0, 1 )
 
 [sub_resource type="AnimationNodeBlendTree" id=8]
-graph_offset = Vector2( -180.847, 52.0705 )
+graph_offset = Vector2( 304.92, 79.2 )
 nodes/Animation/node = SubResource( 24 )
 nodes/Animation/position = Vector2( 560, 500 )
 "nodes/Animation 2/node" = SubResource( 26 )
@@ -228,6 +228,22 @@ collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="Model" parent="." instance=ExtResource( 22 )]
+
+[node name="BoneAttachment" type="BoneAttachment" parent="Model/Skeleton" index="2"]
+transform = Transform( -0.28642, -0.946422, -0.149162, -0.235963, -0.0812088, 0.968363, -0.928593, 0.312555, -0.200061, -0.213479, 1.13574, 0.174179 )
+bone_name = "mixamorig_RightHand"
+
+[node name="Weapons" type="Spatial" parent="Model/Skeleton/BoneAttachment"]
+unique_name_in_owner = true
+transform = Transform( 0.0679044, -0.0832143, 0.488329, 0.490528, -0.0574427, -0.0779988, 0.069083, 0.48967, 0.0738364, -0.267242, -0.00359118, 0.0118586 )
+
+[node name="Riffle" parent="Model/Skeleton/BoneAttachment/Weapons" instance=ExtResource( 4 )]
+
+[node name="Pistol" parent="Model/Skeleton/BoneAttachment/Weapons" instance=ExtResource( 18 )]
+visible = false
+
+[node name="MissileLauncher" parent="Model/Skeleton/BoneAttachment/Weapons" instance=ExtResource( 19 )]
+visible = false
 
 [node name="MeleeHitBox" type="Area" parent="Model"]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.885, 0 )
@@ -251,17 +267,6 @@ cast_to = Vector3( 0, -0.4, 0 )
 
 [node name="Shooting" type="Spatial" parent="."]
 script = ExtResource( 17 )
-
-[node name="Weapons" type="Spatial" parent="Shooting"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.286939, 0.683952, 0.619869 )
-
-[node name="Riffle" parent="Shooting/Weapons" instance=ExtResource( 4 )]
-
-[node name="Pistol" parent="Shooting/Weapons" instance=ExtResource( 18 )]
-visible = false
-
-[node name="MissileLauncher" parent="Shooting/Weapons" instance=ExtResource( 19 )]
-visible = false
 
 [node name="LaunchGrenade" type="Spatial" parent="Shooting"]
 script = ExtResource( 21 )
@@ -383,10 +388,11 @@ START_STATE = NodePath("Walk")
 
 [node name="Walk" type="Node" parent="StateMachine"]
 script = ExtResource( 14 )
+MAX_SPEED = 5.0
 
 [node name="Run" type="Node" parent="StateMachine"]
 script = ExtResource( 16 )
-MAX_SPEED = 10.0
+MAX_SPEED = 7.5
 
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource( 13 )

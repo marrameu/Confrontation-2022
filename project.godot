@@ -335,6 +335,7 @@ leaderboard={
 3d_physics/layer_11="TurretHurtBox"
 3d_physics/layer_12="BigShipHurtBox"
 3d_physics/layer_13="CoreHurtBox"
+3d_physics/layer_16="Interact"
 
 [rendering]
 
