@@ -827,7 +827,6 @@ physics_material_override = SubResource( 23 )
 [connection signal="respawn" from="SpawnHUD" to="." method="spawn_player"]
 [connection signal="start_battle" from="SpawnHUD" to="." method="start_battle"]
 [connection signal="finished" from="BGMusic" to="BGMusic" method="_on_BGMusic_finished"]
-[connection signal="big_ship_shields_down" from="ShipTransport" to="ShipTransport/StateMachine/ChooseObjective" method="_on_big_ship_shields_down"]
 
 [editable path="Map/LandingAreas/LandingArea"]
 [editable path="Map/LandingAreas/LandingArea2"]
