@@ -7,7 +7,7 @@ var velocity := Vector3()
 # Walk
 # var can_run := true
 var gravity := -9.8 * 4
-export var MAX_SPEED := 6.75
+export var MAX_SPEED : float = 5.0
 const ACCEL := 2
 const DEACCEL := 6
 
@@ -56,7 +56,7 @@ func move(delta : float, speed : float, direction : Vector3) -> void:
 	temp_velocity.y = 0
 	
 	# Max velocity
-	var target = direction * speed
+	var target = direction * speed #(owner.get_global_transform().basis.xform(speed)) # solució temporal
 	
 	var acceleration
 	if direction.dot(temp_velocity) > 0:

@@ -3,6 +3,8 @@ extends KinematicBody
 signal entered_ship
 signal died
 
+onready var shooting := $Shooting
+
 var pilot_man : PilotManager
 var blue_team : bool
 
@@ -11,6 +13,7 @@ var mouse_movement := Vector2()
 var can_aim := true # per a quan mori
 var can_rotate := true
 var can_shoot := true
+var can_change_weapon := true
 
 var dead := false
 
@@ -21,9 +24,9 @@ func _ready():
 
 func _physics_process(delta):
 	if get_viewport().get_camera().owner.zooming:
-		$AnimationTree.set("parameters/walk/3/aim/blend_amount", lerp($AnimationTree.get("parameters/walk/3/aim/blend_amount"), 1, 20 * delta))
+		$AnimationTree.set("parameters/StateMachine/walk/move/4/aim/blend_amount", lerp($AnimationTree.get("parameters/StateMachine/walk/move/4/aim/blend_amount"), 1, 20 * delta))
 	else:
-		$AnimationTree.set("parameters/walk/3/aim/blend_amount", lerp($AnimationTree.get("parameters/walk/3/aim/blend_amount"), 0, 20 * delta))
+		$AnimationTree.set("parameters/StateMachine/walk/move/4/aim/blend_amount", lerp($AnimationTree.get("parameters/StateMachine/walk/move/4/aim/blend_amount"), 0, 20 * delta))
 	if can_rotate:
 		var des_transform := global_transform.basis.slerp(get_tree().current_scene.get_node("CameraBase").global_transform.basis, 0.15 * delta * 60)
 		rotation.y = des_transform.get_euler().y

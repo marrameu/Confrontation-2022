@@ -31,7 +31,9 @@ func closest_enemy(min_dist : float = 750.0) -> Ship:
 
 
 func closest_enemy_to_cs(plus_dist : float = 500.0) -> Ship:
-	var own_cs : Spatial = get_node("/root/Level/BigShips/CapitalShipBlue") if owner.blue_team else get_node("/root/Level/BigShips/CapitalShipRed")
+	var own_cs : Spatial = get_node_or_null("/root/Level/BigShips/CapitalShipBlue") if owner.blue_team else get_node_or_null("/root/Level/BigShips/CapitalShipRed")
+	if not own_cs:
+		return null
 	var closest_dsit : float = owner.translation.distance_to(own_cs.translation) + plus_dist
 	var clos_enemy : Ship
 	for ship in get_tree().get_nodes_in_group("Ships"):

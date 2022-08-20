@@ -77,9 +77,12 @@ func _process(delta : float) -> void:
 	
 	time += delta
 	
-	if shooting and time >= _next_time_to_fire and ammo >= 1:
-		_next_time_to_fire = time + 1.0 / fire_rate
-		_shoot()
+	if shooting and time >= _next_time_to_fire:
+		if ammo >= 1:
+			_next_time_to_fire = time + 1.0 / fire_rate
+			_shoot()
+		else:
+			no_ammo()
 	
 	#if not shooting:
 	#	cam.get_parent().stop_shake_camera()
@@ -133,11 +136,20 @@ func auto_reload_ammo(delta):
 
 
 func reload_ammo():
-	var tranfered_ammo = MAX_AMMO
-	reload_ammo -= tranfered_ammo
-	ammo += min(tranfered_ammo, MAX_AMMO - ammo)
+	var target_ammo_to_transfer = min(MAX_AMMO, MAX_AMMO - ammo)
+	print("TARGET AMMO TO TRANFER   ",target_ammo_to_transfer)
+	var offset_ammo = min(reload_ammo - target_ammo_to_transfer, 0) # -10 -> t'has passat
+	print("offset_ammo   ",offset_ammo)
+	var transfered_ammo = target_ammo_to_transfer + offset_ammo
+	print("transfered_ammo  ", transfered_ammo)
+	reload_ammo -= transfered_ammo
+	ammo += transfered_ammo
 
 
 func set_active(value : bool) -> void:
 	active = value
 	visible = value
+
+
+func no_ammo() -> void:
+	pass

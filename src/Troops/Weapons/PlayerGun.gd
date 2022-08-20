@@ -6,7 +6,11 @@ export var continuous := true
 
 onready var cam_base := get_tree().current_scene.get_node("%CameraBase")
 
+onready var original_rot : Vector3 = $Mesh.rotation
+
+
 func _ready():
+	$"%Reload".visible = !reload_per_sec
 	init_offset = offset
 	connect("shoot", get_tree().current_scene.get_node("CameraBase"), "shake_camera", [self])
 
@@ -19,11 +23,9 @@ func _process(delta):
 	$HUD/Crosshair/AnimationTree.set("parameters/conditions/!zooming", !cam_base.zooming)
 	$HUD/Crosshair/AnimationTree.set("parameters/conditions/zooming", cam_base.zooming)
 	
-	if not reload_per_sec:
-		if Input.is_action_just_pressed("reload"):
-			reload_ammo()
-	
-	$HUD/TextureProgress.value = ammo/MAX_AMMO*100
+	$"%Ammo".value = ammo/MAX_AMMO*100
+	if !reload_per_sec:
+		$"%Reload".value = reload_ammo/MAX_RELOAD_AMMO*100
 	
 	offset = init_offset/2 if get_tree().current_scene.get_node("CameraBase").zooming else init_offset
 	
@@ -40,8 +42,11 @@ func _process(delta):
 
 
 func _physics_process(delta):
+	$HUD/Crosshair.modulate = Color("ffffff") if owner.can_shoot else Color("3fffffff")
 	if not owner.can_shoot: #or not get_viewport().get_camera().owner.zooming:
+		$Mesh.rotation = original_rot
 		return
+	
 	$RayCast.force_raycast_update()
 	if $RayCast.is_colliding():
 		$Mesh.look_at($RayCast.get_collision_point(), Vector3.UP)
@@ -58,7 +63,10 @@ func _physics_process(delta):
 
 
 func set_active(value : bool) -> void:
-	$HUD/Crosshair.visible = value
-	$HUD/TextureProgress.visible = value
+	$HUD.visible = value
 	.set_active(value)
 
+
+func no_ammo() -> void:
+	if not $NoAmmo.playing:
+		$NoAmmo.play()

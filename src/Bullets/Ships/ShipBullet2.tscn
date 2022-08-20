@@ -62,3 +62,7 @@ scale_amount_curve = SubResource( 8 )
 [node name="MeshInstance" type="MeshInstance" parent="." index="8"]
 visible = false
 mesh = SubResource( 6 )
+
+[node name="HitAudio" parent="." index="9"]
+max_db = -5.0
+max_distance = 250.0

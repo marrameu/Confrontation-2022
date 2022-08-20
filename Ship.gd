@@ -116,16 +116,19 @@ func _on_HealthSystem_die(attacker : Spatial):
 	if attacker and is_player_or_ai == 1:
 		cam.killer = (attacker)
 	
-	# animacions
-	
-	var t = Timer.new()
-	t.set_wait_time(2)
-	self.add_child(t)
-	t.start()
-	t.connect("timeout", self, "die")
+	if state == States.FLYING:
+		# marca de dany?
+		var t = Timer.new()
+		t.set_wait_time(2)
+		self.add_child(t)
+		t.start()
+		t.connect("timeout", self, "die")
+	else:
+		die()
 
 
 func die():
+	# explosió
 	emit_signal("ship_died")
 	queue_free()
 
@@ -146,6 +149,9 @@ func leave() -> void:
 	#set_mode(RigidBody.MODE_RIGID)
 	state = States.LEAVING
 	$LeaveTimer.start()
+	$EnginesAudio.pitch_scale = 0
+	var tween := create_tween()
+	tween.tween_property($EnginesAudio, "pitch_scale", 1, 2.5)
 	$EnginesAudio.play()
 
 

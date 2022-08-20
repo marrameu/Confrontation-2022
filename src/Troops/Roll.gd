@@ -19,8 +19,7 @@ func enter():
 	owner.get_node("Model").rotation.y = Vector2(roll_direction.z, roll_direction.x).angle() - owner.rotation.y
 	
 	owner.get_node("AnimationPlayer").play("Roll")
-	owner.get_node("AnimationTree").set("parameters/Roll/active", true)
-	owner.get_node("AnimationTree").set("parameters/Melee/active", true) # solució temporal, cal mirar state machines
+	owner.get_node("AnimationTree").get("parameters/StateMachine/playback").travel("roll")
 
 
 func update(delta):
@@ -32,8 +31,6 @@ func update(delta):
 func _on_animation_finished(anim_name):
 	if anim_name == "Roll":
 		emit_signal("finished", "walk")
-	owner.get_node("AnimationTree").set("parameters/Melee/active", false)
-	owner.get_node("AnimationTree").set("parameters/Roll/active", false)
 
 
 func exit():

@@ -26,3 +26,25 @@ func _process(delta):
 
 func _physics_process(delta):
 	pass#move_and_collide(Vector3(10 * delta, 0, 0))
+
+
+func _on_HealthSystem_die(attacker : Node):
+	$Alarm.play()
+	# animacions
+	
+	var t = Timer.new()
+	t.set_wait_time(20)
+	self.add_child(t)
+	t.start()
+	t.connect("timeout", self, "die")
+
+
+func die():
+	$ExplosionArea/CollisionShape.disabled = false
+	yield(get_tree().create_timer(1), "timeout")
+	emit_signal("destroyed")
+	queue_free()
+
+
+func _on_ExplosionArea_area_entered(area):
+	area.owner.get_node("HealthSystem").take_damage(999999, true)

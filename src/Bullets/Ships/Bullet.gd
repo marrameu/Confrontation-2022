@@ -60,7 +60,8 @@ func check_collisions():
 		translation = ray.get_collision_point()
 		$HitParticles.hide()
 		$Explosion.show()
-		$AudioStreamPlayer3D2.play()
+		$HitAudio.pitch_scale = rand_range(1, 1.7)
+		$HitAudio.play()
 		$AnimationPlayer.play("explode")
 		_hit = true
 		return

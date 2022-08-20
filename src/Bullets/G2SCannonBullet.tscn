@@ -41,3 +41,8 @@ draw_pass_1 = SubResource( 4 )
 
 [node name="RayCast" parent="." index="6"]
 collision_mask = 2304
+
+[node name="HitAudio" parent="." index="7"]
+max_db = -5.0
+pitch_scale = 1.0
+max_distance = 250.0

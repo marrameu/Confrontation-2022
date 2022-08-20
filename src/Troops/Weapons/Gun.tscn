@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/interface/crosshair_part.png" type="Texture" id=1]
 [ext_resource path="res://src/Troops/Weapons/PlayerGun.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/audio/laser.wav" type="AudioStream" id=5]
 [ext_resource path="res://src/HUD/HitMarkerParts.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/interface/red_hitmarker.tres" type="Animation" id=7]
+[ext_resource path="res://assets/audio/no_ammo.wav" type="AudioStream" id=8]
 
 [sub_resource type="AnimationNodeAnimation" id=7]
 animation = "zoom_in"
@@ -153,16 +154,55 @@ enabled = true
 cast_to = Vector3( 0, 0, -500 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 60.0
+margin_top = -221.0
+margin_right = 126.0
+margin_bottom = -49.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Reload" type="TextureProgress" parent="HUD/HBoxContainer"]
+unique_name_in_owner = true
+margin_right = 23.0
+margin_bottom = 172.0
+rect_min_size = Vector2( 23, 0 )
+value = 53.0
+texture_under = ExtResource( 4 )
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+tint_under = Color( 1, 1, 1, 0.215686 )
+tint_progress = Color( 0.533333, 0.870588, 0.458824, 1 )
+nine_patch_stretch = true
+
+[node name="Ammo" type="TextureProgress" parent="HUD/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 27.0
+margin_right = 50.0
+margin_bottom = 172.0
+rect_min_size = Vector2( 23, 0 )
+value = 53.0
+texture_under = ExtResource( 4 )
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+tint_under = Color( 1, 1, 1, 0.215686 )
+tint_progress = Color( 1, 0.8, 0.207843, 1 )
+nine_patch_stretch = true
 
 [node name="Crosshair" type="Control" parent="HUD"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 940.0
-margin_top = 520.0
-margin_right = 980.0
-margin_bottom = 560.0
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
 
 [node name="CrosshairPart" type="TextureRect" parent="HUD/Crosshair"]
 anchor_top = 0.5
@@ -222,21 +262,6 @@ anims/zoom_in = SubResource( 4 )
 anims/zoom_out = SubResource( 5 )
 anims/zoomed = SubResource( 9 )
 
-[node name="TextureProgress" type="TextureProgress" parent="HUD"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 56.0
-margin_top = -270.0
-margin_right = 79.0
-margin_bottom = -83.0
-value = 53.0
-texture_under = ExtResource( 4 )
-texture_progress = ExtResource( 4 )
-fill_mode = 3
-tint_under = Color( 1, 1, 1, 0.215686 )
-tint_progress = Color( 1, 0.8, 0.207843, 1 )
-nine_patch_stretch = true
-
 [node name="Pivot" type="Control" parent="HUD"]
 modulate = Color( 1, 1, 1, 0.615686 )
 anchor_left = 0.5
@@ -269,5 +294,8 @@ max_db = -5.0
 max_distance = 1000.0
 bus = "Sounds"
 attenuation_filter_db = 0.0
+
+[node name="NoAmmo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
 
 [editable path="HUD/Pivot/HitMarkerParts"]

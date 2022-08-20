@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://assets/audio/grenade_throw.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/Troops/Player.gd" type="Script" id=2]
@@ -23,6 +23,8 @@
 [ext_resource path="res://src/Troops/GranadeLauncher.gd" type="Script" id=21]
 [ext_resource path="res://assets/models/ybot/TroopModelNew.tscn" type="PackedScene" id=22]
 [ext_resource path="res://assets/audio/punch.wav" type="AudioStream" id=23]
+[ext_resource path="res://assets/audio/no_ammo.wav" type="AudioStream" id=24]
+[ext_resource path="res://assets/audio/reload.mp3" type="AudioStream" id=25]
 
 [sub_resource type="BoxShape" id=6]
 extents = Vector3( 1.0304, 0.268886, 0.609748 )
@@ -112,9 +114,27 @@ tracks/3/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="Animation" id=66]
+resource_name = "Reload"
+length = 4.2
+tracks/0/type = "method"
+tracks/0/path = NodePath("Shooting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 3.8 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "reload_current_weapon"
+} ]
+}
+
 [sub_resource type="Animation" id=2]
 resource_name = "Roll"
-length = 2.3
+length = 2.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("CollisionShape:translation")
 tracks/0/interp = 1
@@ -154,73 +174,114 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=26]
-animation = "roll"
-
-[sub_resource type="AnimationNodeAnimation" id=24]
+[sub_resource type="AnimationNodeAnimation" id=31]
 animation = "punch"
 
-[sub_resource type="AnimationNodeOneShot" id=25]
+[sub_resource type="AnimationNodeAnimation" id=33]
+animation = "roll"
 
-[sub_resource type="AnimationNodeOneShot" id=27]
+[sub_resource type="AnimationNodeAnimation" id=49]
+animation = "reload"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=56]
 animation = "walkright"
 
-[sub_resource type="AnimationNodeAnimation" id=12]
-animation = "walkleft"
-
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=57]
 animation = "walkbackward"
 
-[sub_resource type="AnimationNodeAnimation" id=19]
-animation = "rifleidle"
+[sub_resource type="AnimationNodeAnimation" id=58]
+animation = "walkleft"
 
-[sub_resource type="AnimationNodeAnimation" id=20]
-animation = "rifleaim"
-
-[sub_resource type="AnimationNodeBlend2" id=21]
-
-[sub_resource type="AnimationNodeBlendTree" id=22]
-graph_offset = Vector2( -1.98596, -3.97195 )
-nodes/Animation/node = SubResource( 20 )
-nodes/Animation/position = Vector2( 294.014, 175.028 )
-"nodes/Animation 2/node" = SubResource( 19 )
-"nodes/Animation 2/position" = Vector2( 335.014, 350.028 )
-nodes/aim/node = SubResource( 21 )
-nodes/aim/position = Vector2( 520, 200 )
-nodes/output/position = Vector2( 780, 140 )
-node_connections = [ "output", 0, "aim", "aim", 0, "Animation 2", "aim", 1, "Animation" ]
-
-[sub_resource type="AnimationNodeAnimation" id=23]
+[sub_resource type="AnimationNodeAnimation" id=59]
 animation = "walkforward"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=9]
-blend_point_0/node = SubResource( 11 )
+[sub_resource type="AnimationNodeAnimation" id=60]
+animation = "riflerun"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=61]
+blend_point_0/node = SubResource( 59 )
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource( 60 )
+blend_point_1/pos = 1.0
+min_space = 0.0
+
+[sub_resource type="AnimationNodeAnimation" id=62]
+animation = "rifleaim"
+
+[sub_resource type="AnimationNodeAnimation" id=63]
+animation = "rifleidle"
+
+[sub_resource type="AnimationNodeBlend2" id=64]
+
+[sub_resource type="AnimationNodeBlendTree" id=65]
+nodes/Animation/node = SubResource( 63 )
+nodes/Animation/position = Vector2( 226.08, 159.84 )
+"nodes/Animation 2/node" = SubResource( 62 )
+"nodes/Animation 2/position" = Vector2( 100, 320 )
+nodes/aim/node = SubResource( 64 )
+nodes/aim/position = Vector2( 380, 200 )
+nodes/output/position = Vector2( 680, 260 )
+node_connections = [ "output", 0, "aim", "aim", 0, "Animation", "aim", 1, "Animation 2" ]
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=47]
+resource_local_to_scene = true
+blend_point_0/node = SubResource( 56 )
 blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 12 )
-blend_point_1/pos = Vector2( 1, 0 )
-blend_point_2/node = SubResource( 13 )
-blend_point_2/pos = Vector2( 0, -1 )
-blend_point_3/node = SubResource( 22 )
-blend_point_3/pos = Vector2( 0, -0.01 )
-blend_point_4/node = SubResource( 23 )
-blend_point_4/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 57 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 58 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 61 )
+blend_point_3/pos = Vector2( 0, 1 )
+blend_point_4/node = SubResource( 65 )
+blend_point_4/pos = Vector2( 0, 0 )
+
+[sub_resource type="AnimationNodeOneShot" id=50]
+filter_enabled = true
+filters = [ "Skeleton:mixamorig_Head", "Skeleton:mixamorig_LeftArm", "Skeleton:mixamorig_LeftForeArm", "Skeleton:mixamorig_LeftHand", "Skeleton:mixamorig_LeftHandIndex1", "Skeleton:mixamorig_LeftHandIndex2", "Skeleton:mixamorig_LeftHandIndex3", "Skeleton:mixamorig_LeftHandMiddle1", "Skeleton:mixamorig_LeftHandMiddle2", "Skeleton:mixamorig_LeftHandMiddle3", "Skeleton:mixamorig_LeftHandPinky1", "Skeleton:mixamorig_LeftHandPinky2", "Skeleton:mixamorig_LeftHandPinky3", "Skeleton:mixamorig_LeftHandRing1", "Skeleton:mixamorig_LeftHandRing2", "Skeleton:mixamorig_LeftHandRing3", "Skeleton:mixamorig_LeftHandThumb1", "Skeleton:mixamorig_LeftHandThumb2", "Skeleton:mixamorig_LeftHandThumb3", "Skeleton:mixamorig_LeftShoulder", "Skeleton:mixamorig_Neck", "Skeleton:mixamorig_RightArm", "Skeleton:mixamorig_RightForeArm", "Skeleton:mixamorig_RightHand", "Skeleton:mixamorig_RightHandIndex1", "Skeleton:mixamorig_RightHandIndex2", "Skeleton:mixamorig_RightHandIndex3", "Skeleton:mixamorig_RightHandMiddle1", "Skeleton:mixamorig_RightHandMiddle2", "Skeleton:mixamorig_RightHandMiddle3", "Skeleton:mixamorig_RightHandPinky1", "Skeleton:mixamorig_RightHandPinky2", "Skeleton:mixamorig_RightHandPinky3", "Skeleton:mixamorig_RightHandRing1", "Skeleton:mixamorig_RightHandRing2", "Skeleton:mixamorig_RightHandRing3", "Skeleton:mixamorig_RightHandThumb1", "Skeleton:mixamorig_RightHandThumb2", "Skeleton:mixamorig_RightHandThumb3", "Skeleton:mixamorig_RightShoulder", "Skeleton:mixamorig_Spine", "Skeleton:mixamorig_Spine1", "Skeleton:mixamorig_Spine2" ]
+
+[sub_resource type="AnimationNodeBlendTree" id=48]
+graph_offset = Vector2( -230.758, 125.205 )
+nodes/Animation/node = SubResource( 49 )
+nodes/Animation/position = Vector2( -55.9759, 450.174 )
+nodes/move/node = SubResource( 47 )
+nodes/move/position = Vector2( -120, 240 )
+nodes/reload/node = SubResource( 50 )
+nodes/reload/position = Vector2( 120, 160 )
+node_connections = [ "reload", 0, "move", "reload", 1, "Animation", "output", 0, "reload" ]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=52]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=53]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=54]
+
+[sub_resource type="AnimationNodeStateMachine" id=45]
+states/punch/node = SubResource( 31 )
+states/punch/position = Vector2( 162, 95 )
+states/roll/node = SubResource( 33 )
+states/roll/position = Vector2( 190, 212 )
+states/walk/node = SubResource( 48 )
+states/walk/position = Vector2( 368, 118 )
+transitions = [ "punch", "walk", SubResource( 51 ), "walk", "punch", SubResource( 52 ), "roll", "walk", SubResource( 53 ), "walk", "roll", SubResource( 54 ) ]
+start_node = "walk"
+end_node = "walk"
+graph_offset = Vector2( -203, -16 )
 
 [sub_resource type="AnimationNodeBlendTree" id=8]
-graph_offset = Vector2( 304.92, 79.2 )
-nodes/Animation/node = SubResource( 24 )
-nodes/Animation/position = Vector2( 560, 500 )
-"nodes/Animation 2/node" = SubResource( 26 )
-"nodes/Animation 2/position" = Vector2( 580, 680 )
-nodes/Melee/node = SubResource( 25 )
-nodes/Melee/position = Vector2( 960, 180 )
-nodes/Roll/node = SubResource( 27 )
-nodes/Roll/position = Vector2( 780, 460 )
-nodes/output/position = Vector2( 1180, 200 )
-nodes/walk/node = SubResource( 9 )
-nodes/walk/position = Vector2( 560, 280 )
-node_connections = [ "output", 0, "Melee", "Roll", 0, "Animation", "Roll", 1, "Animation 2", "Melee", 0, "walk", "Melee", 1, "Roll" ]
+graph_offset = Vector2( 50.9874, 222.91 )
+nodes/StateMachine/node = SubResource( 45 )
+nodes/StateMachine/position = Vector2( 1280, 360 )
+nodes/output/position = Vector2( 1640, 360 )
+node_connections = [ "output", 0, "StateMachine" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=46]
 
 [node name="Player" type="KinematicBody" groups=["Players", "Troops"]]
 collision_layer = 2
@@ -230,7 +291,7 @@ script = ExtResource( 2 )
 [node name="Model" parent="." instance=ExtResource( 22 )]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Model/Skeleton" index="2"]
-transform = Transform( -0.28642, -0.946422, -0.149162, -0.235963, -0.0812088, 0.968363, -0.928593, 0.312555, -0.200061, -0.213479, 1.13574, 0.174179 )
+transform = Transform( -0.0466489, -0.985937, -0.160468, -0.311716, -0.138252, 0.940063, -0.949029, 0.093874, -0.300883, -0.209339, 1.11246, 0.18404 )
 bone_name = "mixamorig_RightHand"
 
 [node name="Weapons" type="Spatial" parent="Model/Skeleton/BoneAttachment"]
@@ -274,6 +335,10 @@ script = ExtResource( 21 )
 [node name="Throw" type="AudioStreamPlayer" parent="Shooting/LaunchGrenade"]
 stream = ExtResource( 1 )
 volume_db = 6.992
+bus = "Sounds"
+
+[node name="NoAmmo" type="AudioStreamPlayer" parent="Shooting"]
+stream = ExtResource( 24 )
 bus = "Sounds"
 
 [node name="Interact" type="Node" parent="."]
@@ -388,45 +453,47 @@ START_STATE = NodePath("Walk")
 
 [node name="Walk" type="Node" parent="StateMachine"]
 script = ExtResource( 14 )
-MAX_SPEED = 5.0
 
 [node name="Run" type="Node" parent="StateMachine"]
 script = ExtResource( 16 )
-MAX_SPEED = 7.5
+MAX_SPEED = 9.0
 
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource( 13 )
-MAX_SPEED = 10.0
 
 [node name="Roll" type="Node" parent="StateMachine"]
 script = ExtResource( 15 )
-MAX_SPEED = 0.0
 
 [node name="Melee" type="Node" parent="StateMachine"]
 script = ExtResource( 20 )
-MAX_SPEED = 0.0
 
 [node name="Dead" type="Node" parent="StateMachine"]
 script = ExtResource( 12 )
 
-[node name="Reloading" type="Node" parent="StateMachine"]
+[node name="Reload" type="Node" parent="StateMachine"]
 script = ExtResource( 3 )
 MAX_SPEED = 3.0
+
+[node name="Reload" type="AudioStreamPlayer" parent="StateMachine/Reload"]
+stream = ExtResource( 25 )
+bus = "Sounds"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_default_blend_time = 0.26
 anims/Melee = SubResource( 5 )
 anims/RESET = SubResource( 4 )
+anims/Reload = SubResource( 66 )
 anims/Roll = SubResource( 2 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 8 )
 anim_player = NodePath("../Model/AnimationPlayer")
 active = true
-parameters/Melee/active = false
-parameters/Roll/active = false
-parameters/walk/blend_position = Vector2( 0, -0.812 )
-parameters/walk/3/aim/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 46 )
+parameters/StateMachine/walk/move/blend_position = Vector2( 0.02, 1.02586 )
+parameters/StateMachine/walk/move/3/blend_position = -0.275479
+parameters/StateMachine/walk/move/4/aim/blend_amount = 0.0
+parameters/StateMachine/walk/reload/active = false
 
 [node name="HurtBox" type="Area" parent="." groups=["HurtBox"]]
 collision_layer = 512

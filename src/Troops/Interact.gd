@@ -57,8 +57,18 @@ func _process(delta : float) -> void:
 func _on_Timer_timeout():
 	target_collider.interact(owner)
 	
+	play_sound()
+	
 	if target_collider.owner.is_in_group("Ships"):
 		owner.emit_signal("entered_ship", target_collider.owner)
 		owner.queue_free() # canvi estat
 	
 	target_collider = null
+
+
+func play_sound():
+	var audio : AudioStreamPlayer = AudioStreamPlayer.new()
+	audio.set_stream(preload("res://assets/audio/interaction.wav"))
+	audio.connect("finished", audio, "queue_free")
+	get_tree().current_scene.add_child(audio)
+	audio.play()

@@ -14,4 +14,4 @@ func _process(delta):
 	if owner.active:
 		$Cursor.rect_position = cursor_original_pos + Vector2(owner.input.pitch, owner.input.yaw).clamped(200) # el màxim és 250, però posem una mica menys a la interfcíie pq si no hi hauria alguns tirons amb el lerp
 		
-		print(owner.input.pitch, "  ", owner.input.yaw)
+		# print(owner.input.pitch, "  ", owner.input.yaw)

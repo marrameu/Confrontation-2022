@@ -199,15 +199,6 @@ cast_to = Vector3( 0, 0, 1500 )
 debug_shape_custom_color = Color( 1, 0, 0, 1 )
 debug_shape_thickness = 5
 
-[node name="EnginesAudio" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource( 11 )
-unit_db = 80.0
-unit_size = 100.0
-max_distance = 300.0
-bus = "Sounds"
-attenuation_filter_db = -12.0
-doppler_tracking = 2
-
 [node name="SpectateCamPivot" type="Spatial" parent="."]
 script = ExtResource( 17 )
 
@@ -309,6 +300,10 @@ script = ExtResource( 30 )
 [node name="CollisionShape2" type="CollisionShape" parent="InteractArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51836 )
 shape = SubResource( 1 )
+
+[node name="EnginesAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 11 )
+unit_db = 80.0
 
 [connection signal="big_ship_shields_down" from="." to="StateMachine/ChooseObjective" method="_on_big_ship_shields_down"]
 [connection signal="big_ship_shields_down" from="." to="StateMachine/PushForward" method="_on_big_ship_shields_down"]

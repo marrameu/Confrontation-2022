@@ -19,7 +19,7 @@ func enter():
 	owner.get_node("Model").rotation.y = Vector2(attack_direction.z, attack_direction.x).angle() - owner.rotation.y
 	# més endavant fer que no giri el model, sinó que tingui animació per a les 4 direccions
 	
-	owner.get_node("AnimationTree").set("parameters/Melee/active", true)
+	owner.get_node("AnimationTree").get("parameters/StateMachine/playback").travel("punch")
 	owner.get_node("AnimationPlayer").play("Melee")
 
 
