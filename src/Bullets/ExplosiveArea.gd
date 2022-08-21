@@ -37,4 +37,4 @@ func _on_Area_area_entered(area):
 
 
 func explode() -> void:
-	$AnimationPlayer.play("explode")
+	$CollisionShape.disabled = false

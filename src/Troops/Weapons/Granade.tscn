@@ -149,13 +149,13 @@ tracks/5/keys = {
 } ]
 }
 tracks/6/type = "method"
-tracks/6/path = NodePath("Area")
+tracks/6/path = NodePath("ExplosiveArea")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 1.9 ),
+"times": PoolRealArray( 1.8 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -242,6 +242,6 @@ max_distance = 75.0
 bus = "Sounds"
 attenuation_filter_db = -12.0
 
-[node name="Area" parent="." instance=ExtResource( 7 )]
+[node name="ExplosiveArea" parent="." instance=ExtResource( 7 )]
 
 [connection signal="body_entered" from="." to="." method="_on_Granade_body_entered"]

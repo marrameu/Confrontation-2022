@@ -1,27 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/Bullets/ExplosiveArea.gd" type="Script" id=1]
 
 [sub_resource type="SphereShape" id=11]
 radius = 10.0
-
-[sub_resource type="Animation" id=12]
-length = 0.001
-
-[sub_resource type="Animation" id=13]
-resource_name = "explode"
-tracks/0/type = "value"
-tracks/0/path = NodePath("CollisionShape:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ true, false, true ]
-}
 
 [node name="ExplosiveArea" type="Area"]
 collision_layer = 0
@@ -43,9 +25,5 @@ collision_mask = 9
 collision_mask = 9
 collide_with_areas = true
 collide_with_bodies = false
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 12 )
-anims/explode = SubResource( 13 )
 
 [connection signal="area_entered" from="." to="." method="_on_Area_area_entered"]
