@@ -16,7 +16,12 @@ func _ready():
 #	pass
 
 
+func _process(delta):
+	print(get_overlapping_areas())
+
+
 func _on_Area_area_entered(area):
+	print("expllosionara ", area)
 	$EnvironmentRayCast.cast_to = to_local(area.owner.global_translation)
 	$EnvironmentRayCast.force_raycast_update()
 	if $EnvironmentRayCast.is_colliding():

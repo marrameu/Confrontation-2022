@@ -69,7 +69,7 @@ func check_collisions():
 
 
 func _hit(body) -> bool:
-	if body.is_in_group("Turrets"): # -> donar-li team a les bullets
+	if body.is_in_group("Turret"): # -> donar-li team a les bullets
 		return false 
 	if body.blue_team == m_blue_team:
 		return false

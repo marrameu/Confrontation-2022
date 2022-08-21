@@ -160,17 +160,19 @@ tracks/5/keys = {
 "method": "play"
 } ]
 }
-tracks/6/type = "value"
-tracks/6/path = NodePath("Area/CollisionShape:disabled")
+tracks/6/type = "method"
+tracks/6/path = NodePath("Area")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 2.1, 2.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ true, false, true ]
+"times": PoolRealArray( 1.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "explode"
+} ]
 }
 
 [sub_resource type="ParticlesMaterial" id=11]
@@ -255,5 +257,3 @@ attenuation_filter_db = -12.0
 [node name="Area" parent="." instance=ExtResource( 7 )]
 
 [connection signal="body_entered" from="." to="." method="_on_Granade_body_entered"]
-
-[editable path="Area"]

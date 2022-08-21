@@ -93,6 +93,4 @@ mesh = SubResource( 6 )
 max_db = -5.0
 max_distance = 250.0
 
-[node name="Area" parent="." index="10" instance=ExtResource( 5 )]
-
-[editable path="Area"]
+[node name="ExplosiveArea" parent="." index="10" instance=ExtResource( 5 )]
