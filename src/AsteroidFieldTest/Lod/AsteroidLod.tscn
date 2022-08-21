@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/HealthSystem/HealthSystem.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Asteroid1/Fragmented/AsteroidFragmented.tscn" type="PackedScene" id=2]
@@ -54,10 +54,15 @@ surfaces/0 = {
 }
 
 [sub_resource type="CapsuleShape" id=6]
-radius = 12.8902
-height = 17.249
+radius = 11.0018
+height = 15.1316
+
+[sub_resource type="CapsuleShape" id=11]
+radius = 13.8886
+height = 18.3743
 
 [node name="AsteroidLod" type="StaticBody" groups=["Asteroids", "Damagable"]]
+collision_mask = 0
 script = ExtResource( 5 )
 
 [node name="LODSpatial" type="Spatial" parent="."]
@@ -69,19 +74,16 @@ lod_2_max_distance = 2500.0
 [node name="Meteorit-lod0" type="MeshInstance" parent="LODSpatial"]
 mesh = SubResource( 5 )
 skeleton = NodePath("../..")
-material/0 = null
 
 [node name="Meteorit-lod1" type="MeshInstance" parent="LODSpatial"]
 visible = false
 mesh = SubResource( 1 )
 skeleton = NodePath("../..")
-material/0 = null
 
 [node name="Meteorit-lod2" type="MeshInstance" parent="LODSpatial"]
 visible = false
 mesh = SubResource( 10 )
 skeleton = NodePath("../..")
-material/0 = null
 
 [node name="HealthSystem" parent="." instance=ExtResource( 1 )]
 MAX_HEALTH = 1200
@@ -95,13 +97,13 @@ script = ExtResource( 3 )
 shard_template = ExtResource( 6 )
 shard_scene = ExtResource( 2 )
 
-[node name="DamageArea" type="Area" parent="."]
-collision_layer = 8
+[node name="DamageArea" type="Area" parent="." groups=["HurtBox"]]
+collision_layer = 256
+collision_mask = 0
 monitoring = false
-monitorable = false
 
 [node name="CollisionShape2" type="CollisionShape" parent="DamageArea"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
-shape = SubResource( 6 )
+shape = SubResource( 11 )
 
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]

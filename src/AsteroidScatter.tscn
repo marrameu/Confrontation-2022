@@ -43,12 +43,10 @@ multimesh = SubResource( 2 )
 [node name="Superficie" type="MeshInstance" parent="."]
 visible = false
 mesh = SubResource( 3 )
-material/0 = null
 
 [node name="Cub" type="MeshInstance" parent="."]
 visible = false
 mesh = SubResource( 1 )
-material/0 = null
 
 [node name="Particles" type="Particles" parent="."]
 visible = false
