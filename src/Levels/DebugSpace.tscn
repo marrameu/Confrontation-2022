@@ -4,7 +4,7 @@
 [ext_resource path="res://CapitalShip.tscn" type="PackedScene" id=2]
 [ext_resource path="res://AttackShip.tscn" type="PackedScene" id=3]
 [ext_resource path="res://WaitingCam.gd" type="Script" id=4]
-[ext_resource path="res://src/Asteroid.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/AsteroidFieldTest/AsteroidField.tscn" type="PackedScene" id=5]
 [ext_resource path="res://WorldEnvironment.gd" type="Script" id=6]
 [ext_resource path="res://assets/LevelWorldEnvironment.tres" type="Environment" id=7]
 [ext_resource path="res://SpawnHUD.tscn" type="PackedScene" id=8]
@@ -78,64 +78,7 @@ script = ExtResource( 4 )
 [node name="Environment" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2000, 0 )
 
-[node name="Asteroids" type="Spatial" parent="Environment"]
-
-[node name="Asteroide" parent="Environment/Asteroids" instance=ExtResource( 5 )]
-transform = Transform( 0.488834, 0, 0.872377, 0.0738027, 0.996415, -0.0413552, -0.869249, 0.0845996, 0.487082, -1947.09, -64.5744, 0 )
-
-[node name="Asteroide2" parent="Environment/Asteroids" instance=ExtResource( 5 )]
-transform = Transform( -0.161337, 0.664988, 0.72922, 0.748138, 0.564302, -0.349074, -0.64363, 0.489239, -0.588546, -2030.66, 0.462402, 103.677 )
-
-[node name="Asteroide3" parent="Environment/Asteroids" instance=ExtResource( 5 )]
-transform = Transform( -0.161337, 0.664988, 0.72922, 0.748138, 0.564302, -0.349074, -0.64363, 0.489239, -0.588546, -2030.66, 128.879, -250.502 )
-
-[node name="Asteroide4" parent="Environment/Asteroids" instance=ExtResource( 5 )]
-transform = Transform( 0.340301, -0.546066, 0.765512, 0.371643, 0.825923, 0.423949, -0.863757, 0.140227, 0.484004, 1134.3, -432.988, -5.52795 )
-
-[node name="Asteroide5" parent="Environment/Asteroids" instance=ExtResource( 5 )]
-transform = Transform( -0.566409, 0.259076, 0.782343, 0.564158, 0.813896, 0.13892, -0.600755, 0.520051, -0.607158, 1031.98, -429.751, 101.626 )
-
-[node name="Asteroide6" parent="Environment/Asteroids" instance=ExtResource( 5 )]
-transform = Transform( -1.69923, 0.777228, 2.34703, 1.69247, 2.44169, 0.416761, -1.80226, 1.56015, -1.82147, 950.332, -306.265, -244.812 )
-
-[node name="Asteroide7" parent="Environment/Asteroids" instance=ExtResource( 5 )]
-transform = Transform( 1.0209, -1.6382, 2.29653, 1.11493, 2.47777, 1.27185, -2.59127, 0.420682, 1.45201, 296.23, 215.6, -851.632 )
-
-[node name="Asteroide8" parent="Environment/Asteroids" instance=ExtResource( 5 )]
-transform = Transform( -0.801373, -0.974383, 2.72183, 0.99387, 2.55946, 1.20887, -2.71478, 1.22464, -0.360891, -1345.67, 121.499, -712.09 )
-
-[node name="Asteroide9" parent="Environment/Asteroids" instance=ExtResource( 5 )]
-transform = Transform( -0.801373, -0.974383, 2.72183, 0.99387, 2.55946, 1.20887, -2.71478, 1.22464, -0.360891, -1251.03, 208.773, -1066.15 )
-
-[node name="Asteroide10" parent="Environment/Asteroids" instance=ExtResource( 5 )]
-transform = Transform( 0.0874492, -1.67745, 2.48566, 0.93886, 2.37701, 1.5711, -2.84796, 0.732098, 0.594255, 8.63742, -157.085, 742.443 )
-
-[node name="Asteroide11" parent="Environment/Asteroids" instance=ExtResource( 5 )]
-transform = Transform( -2.65359, 1.39932, -0.0196697, 1.38331, 2.62911, 0.417426, 0.211942, 0.360156, -2.97075, -283.319, -130.569, 757.127 )
-
-[node name="Asteroide12" parent="Environment/Asteroids" instance=ExtResource( 5 )]
-transform = Transform( -0.884529, 0.466439, -0.00655684, 0.461104, 0.876369, 0.139142, 0.0706472, 0.120052, -0.990251, -647.281, 57.1254, 371.157 )
-
-[node name="Asteroide13" parent="Environment/Asteroids" instance=ExtResource( 5 )]
-transform = Transform( -4.11319, 2.84236, 0.0511441, 2.82079, 4.06948, 0.694602, 0.353236, 0.60026, -4.95125, -532.109, -324.668, -127.898 )
-
-[node name="Asteroide14" parent="Environment/Asteroids" instance=ExtResource( 5 )]
-transform = Transform( -2.04727, 0.185975, 2.18497, -0.329797, 2.92908, -0.558322, -2.16793, -0.621211, -1.97843, 260.231, 81.1223, 450.892 )
-
-[node name="Asteroide15" parent="Environment/Asteroids" instance=ExtResource( 5 )]
-transform = Transform( -2.04727, 0.185975, 2.18497, 1.24921, 2.55565, 0.952958, -1.80226, 1.56015, -1.82147, -509.83, 982.862, -559.227 )
-
-[node name="Asteroide16" parent="Environment/Asteroids" instance=ExtResource( 5 )]
-transform = Transform( -1.39638, -0.688038, 2.56451, 1.11493, 2.47777, 1.27185, -2.40978, 1.54508, -0.897596, 1486.99, 372.367, 235.518 )
-
-[node name="Asteroide17" parent="Environment/Asteroids" instance=ExtResource( 5 )]
-transform = Transform( -2.46792, 1.70542, 0.0306865, 1.69247, 2.44169, 0.416761, 0.211942, 0.360156, -2.97075, 805.191, 481.693, 757.127 )
-
-[node name="Asteroide18" parent="Environment/Asteroids" instance=ExtResource( 5 )]
-transform = Transform( -0.822639, 0.568473, 0.0102285, 0.564158, 0.813896, 0.13892, 0.0706472, 0.120052, -0.990251, 466.45, 711.807, 371.157 )
-
-[node name="Asteroide19" parent="Environment/Asteroids" instance=ExtResource( 5 )]
-transform = Transform( -4.11319, 2.84236, 0.0511441, 2.82079, 4.06948, 0.694602, 0.353236, 0.60026, -4.95125, 577.669, 327.103, -127.898 )
+[node name="AsteroidField" parent="Environment" instance=ExtResource( 5 )]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 7 )
