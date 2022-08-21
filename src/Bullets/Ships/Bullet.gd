@@ -62,21 +62,17 @@ func check_collisions():
 		$Explosion.show()
 		$HitAudio.pitch_scale = rand_range(1, 1.7)
 		$HitAudio.play()
-		$AnimationPlayer.play("explode")
+		$AnimationPlayer.play("hit")
 		_hit = true
 		return
 	ray.cast_to = Vector3(0, 0, -long)
 
 
 func _hit(body) -> bool:
-	# AIXÒ ES PODRIA FER MILLOR, HI HAURIA D'HAVER UNA MANERA MÉS FÀCIL (I IGUAL) PER A COMPROVAR L'EQUIP
-	if body.is_in_group("Troops") or body.is_in_group("Ships"):
-		if body.pilot_man:
-			if body.blue_team == m_blue_team:
-				return false
-	elif body.is_in_group("BigShips"):
-		if body.blue_team == m_blue_team:
-			return false
+	if body.is_in_group("Turrets"): # -> donar-li team a les bullets
+		return false 
+	if body.blue_team == m_blue_team:
+		return false
 	
 	emit_signal("damagable_hit") # s'ha de fer abans, si no es menja l'animació "killed"
 	if not weakref(shooter).get_ref():

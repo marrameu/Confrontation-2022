@@ -6,12 +6,10 @@
 [ext_resource path="res://assets/particles/myst_bw.png" type="Texture" id=4]
 [ext_resource path="res://assets/audio/grenade_bouncing.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/audio/short_explosion.wav" type="AudioStream" id=6]
+[ext_resource path="res://src/Bullets/ExplosiveArea.tscn" type="PackedScene" id=7]
 
 [sub_resource type="PhysicsMaterial" id=14]
 bounce = 0.25
-
-[sub_resource type="SphereShape" id=3]
-radius = 11.0
 
 [sub_resource type="SphereMesh" id=1]
 radius = 0.1
@@ -23,7 +21,7 @@ radius = 0.1
 [sub_resource type="Animation" id=13]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Area/CollisionShape:disabled")
+tracks/0/path = NodePath("Explosion:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -32,7 +30,73 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Explosion:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
 "values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MeshInstance:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:mode")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Area/CollisionShape:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "explode"
+length = 3.0
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Explosion:emitting")
@@ -41,10 +105,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( 2.1 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
+"update": 1,
+"values": [ true ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Explosion:visible")
@@ -53,10 +117,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ true ]
+"times": PoolRealArray( 0, 2.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("MeshInstance:visible")
@@ -65,10 +129,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
+"times": PoolRealArray( 0, 2.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath(".:mode")
@@ -77,79 +141,13 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=4]
-resource_name = "explode"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Area/CollisionShape:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 2.1, 2.3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ true, false, true ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 3 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "queue_free"
-} ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Explosion:emitting")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 2.1 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ 1 ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("Explosion:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 2.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("MeshInstance:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 2.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath(".:mode")
+tracks/5/type = "method"
+tracks/5/path = NodePath("ExplosionAudio")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -157,22 +155,22 @@ tracks/5/enabled = true
 tracks/5/keys = {
 "times": PoolRealArray( 2.1 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 1 ]
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
 }
-tracks/6/type = "method"
-tracks/6/path = NodePath("ExplosionAudio")
+tracks/6/type = "value"
+tracks/6/path = NodePath("Area/CollisionShape:disabled")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 2.1 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ 0.0 ],
-"method": "play"
-} ]
+"times": PoolRealArray( 0, 2.1, 2.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
 }
 
 [sub_resource type="ParticlesMaterial" id=11]
@@ -210,15 +208,6 @@ physics_material_override = SubResource( 14 )
 continuous_cd = true
 angular_damp = 0.5
 script = ExtResource( 2 )
-
-[node name="Area" type="Area" parent="."]
-collision_layer = 0
-collision_mask = 5888
-monitorable = false
-
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
-shape = SubResource( 3 )
-disabled = true
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 visible = false
@@ -263,5 +252,8 @@ max_distance = 75.0
 bus = "Sounds"
 attenuation_filter_db = -12.0
 
+[node name="Area" parent="." instance=ExtResource( 7 )]
+
 [connection signal="body_entered" from="." to="." method="_on_Granade_body_entered"]
-[connection signal="area_entered" from="Area" to="." method="_on_Area_area_entered"]
+
+[editable path="Area"]

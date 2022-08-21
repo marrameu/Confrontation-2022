@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/Bullets/ShipBullet.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Bullets/Ships/MissileBullet.gd" type="Script" id=2]
+[ext_resource path="res://src/Bullets/Ships/ExplosiveBullet.gd" type="Script" id=2]
 [ext_resource path="res://assets/missilebullet_particlesmaterial.tres" type="Material" id=3]
 [ext_resource path="res://assets/missilebullet_spatialmaterial.tres" type="Material" id=4]
+[ext_resource path="res://src/Bullets/ExplosiveArea.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ParticlesMaterial" id=1]
 gravity = Vector3( 0, 0, 0 )
@@ -21,6 +22,27 @@ height = 5.0
 material = ExtResource( 4 )
 size = Vector2( 2, 2 )
 
+[sub_resource type="Animation" id=10]
+length = 0.001
+
+[sub_resource type="Animation" id=15]
+resource_name = "hit"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
 [sub_resource type="CubeMesh" id=7]
 material = SubResource( 2 )
 size = Vector3( 0.984, 0.36, 2.465 )
@@ -33,9 +55,9 @@ size = Vector3( 2, 2, 100 )
 
 [node name="MissileBullet" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-damage = 500
-bullet_velocity = 400.0
-_time_alive = 15.0
+damage = 1000
+bullet_velocity = 700.0
+_time_alive = 3.5
 rotate_speed = 50
 
 [node name="HitParticles" parent="." index="0"]
@@ -50,6 +72,10 @@ draw_pass_1 = SubResource( 9 )
 
 [node name="OmniLight" parent="." index="2"]
 light_color = Color( 0.301961, 0.541176, 1, 1 )
+
+[node name="AnimationPlayer" parent="." index="3"]
+anims/RESET = SubResource( 10 )
+anims/disappear = SubResource( 15 )
 
 [node name="CPUParticles" type="CPUParticles" parent="." index="7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.61629 )
@@ -66,3 +92,7 @@ mesh = SubResource( 6 )
 [node name="HitAudio" parent="." index="9"]
 max_db = -5.0
 max_distance = 250.0
+
+[node name="Area" parent="." index="10" instance=ExtResource( 5 )]
+
+[editable path="Area"]

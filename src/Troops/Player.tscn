@@ -295,7 +295,7 @@ script = ExtResource( 2 )
 [node name="Model" parent="." instance=ExtResource( 22 )]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Model/Skeleton" index="2"]
-transform = Transform( -0.0506136, -0.987765, -0.147506, -0.315739, -0.124295, 0.94067, -0.947495, 0.0941833, -0.305585, -0.193094, 1.07725, 0.194816 )
+transform = Transform( -0.0501462, -0.987804, -0.147406, -0.315612, -0.124355, 0.940704, -0.947561, 0.0936961, -0.305527, -0.198275, 1.05865, 0.20633 )
 bone_name = "mixamorig_RightHand"
 
 [node name="Weapons" type="Spatial" parent="Model/Skeleton/BoneAttachment"]
