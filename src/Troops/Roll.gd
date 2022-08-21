@@ -41,4 +41,4 @@ func exit():
 
 
 func impulse():
-	velocity = roll_direction * 25 # impuls
+	velocity = roll_direction * 25 + Vector3(0, 10, 0)

@@ -7,5 +7,4 @@ func can_interact(troop : Spatial) -> bool:
 
 func interact(troop : Spatial) -> void: # : Troop
 	troop.get_node("HealthSystem").heal(10000)
-	for weapon in troop.get_node("%Weapons").get_children():
-		weapon.reload_ammo = weapon.MAX_RELOAD_AMMO
+	troop.shooting.fill_all_weapons()

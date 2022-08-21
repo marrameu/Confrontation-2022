@@ -1,0 +1,556 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://src/HUD/HitMarkerParts.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Troops/Weapons/Old/Gun.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Troops/Weapons/PlayerGun.gd" type="Script" id=3]
+[ext_resource path="res://assets/interface/crosshair_part.png" type="Texture" id=4]
+[ext_resource path="res://assets/interface/life_bar.png" type="Texture" id=7]
+[ext_resource path="res://assets/audio/no_ammo.wav" type="AudioStream" id=8]
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "zoom_in"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "zoom_out"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+advance_condition = "!zooming"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+advance_condition = "zooming"
+
+[sub_resource type="AnimationNodeStateMachine" id=17]
+states/zoom_in/node = SubResource( 7 )
+states/zoom_in/position = Vector2( 102, 248 )
+states/zoom_out/node = SubResource( 8 )
+states/zoom_out/position = Vector2( 354, 72 )
+transitions = [ "zoom_in", "zoom_out", SubResource( 15 ), "zoom_out", "zoom_in", SubResource( 16 ) ]
+start_node = "zoom_out"
+graph_offset = Vector2( -522, -10 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=18]
+
+[sub_resource type="Animation" id=19]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 940, 520 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 40, 40 ) ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "zoom_in"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 940, 520 ), Vector2( 943, 523 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 40, 40 ), Vector2( 34, 34 ) ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "zoom_out"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 943, 523 ), Vector2( 940, 520 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 34, 34 ), Vector2( 40, 40 ) ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "zoomed"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 943, 523 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 34, 34 ) ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "hit"
+length = 0.15
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 32 ), Vector2( 38, 38 ), Vector2( 32, 32 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 56, 56 ), Vector2( 44, 44 ), Vector2( 56, 56 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("HitAudio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "killed"
+length = 0.15
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 32 ), Vector2( 38, 38 ), Vector2( 32, 32 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 56, 56 ), Vector2( 44, 44 ), Vector2( 56, 56 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 0, 1 ), Color( 1, 1, 0, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("KillAudio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="Animation" id=25]
+resource_name = "red"
+length = 0.15
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 32 ), Vector2( 38, 38 ), Vector2( 32, 32 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 56, 56 ), Vector2( 44, 44 ), Vector2( 56, 56 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("KillAudio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="Animation" id=26]
+resource_name = "red"
+length = 0.15
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 32 ), Vector2( 38, 38 ), Vector2( 32, 32 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 56, 56 ), Vector2( 44, 44 ), Vector2( 56, 56 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("KillAudio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+
+[node name="PlayerGun" instance=ExtResource( 2 )]
+script = ExtResource( 3 )
+continuous = true
+
+[node name="HUD" type="CanvasLayer" parent="." index="3"]
+visible = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD" index="0"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 60.0
+margin_top = -221.0
+margin_right = 126.0
+margin_bottom = -49.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Reload" type="TextureProgress" parent="HUD/HBoxContainer" index="0"]
+unique_name_in_owner = true
+margin_right = 23.0
+margin_bottom = 172.0
+rect_min_size = Vector2( 23, 0 )
+value = 53.0
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 7 )
+fill_mode = 3
+tint_under = Color( 1, 1, 1, 0.215686 )
+tint_progress = Color( 0.533333, 0.870588, 0.458824, 1 )
+nine_patch_stretch = true
+
+[node name="Ammo" type="TextureProgress" parent="HUD/HBoxContainer" index="1"]
+unique_name_in_owner = true
+margin_left = 27.0
+margin_right = 50.0
+margin_bottom = 172.0
+rect_min_size = Vector2( 23, 0 )
+value = 53.0
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 7 )
+fill_mode = 3
+tint_under = Color( 1, 1, 1, 0.215686 )
+tint_progress = Color( 1, 0.8, 0.207843, 1 )
+nine_patch_stretch = true
+
+[node name="Crosshair" type="Control" parent="HUD" index="1"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 940.0
+margin_top = 520.0
+margin_right = 980.0
+margin_bottom = 560.0
+
+[node name="CrosshairPart" type="TextureRect" parent="HUD/Crosshair" index="0"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_right = 14.0
+margin_bottom = 7.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="CrosshairPart2" type="TextureRect" parent="HUD/Crosshair" index="1"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 6.0
+margin_right = 20.0
+margin_bottom = 14.0
+rect_rotation = 90.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="CrosshairPart3" type="TextureRect" parent="HUD/Crosshair" index="2"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = -14.0
+margin_right = 20.0
+rect_rotation = 90.0
+texture = ExtResource( 4 )
+expand = true
+flip_h = true
+
+[node name="CrosshairPart4" type="TextureRect" parent="HUD/Crosshair" index="3"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -14.0
+margin_top = -7.0
+margin_bottom = 7.0
+texture = ExtResource( 4 )
+expand = true
+flip_h = true
+
+[node name="AnimationTree" type="AnimationTree" parent="HUD/Crosshair" index="4"]
+tree_root = SubResource( 17 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 18 )
+parameters/conditions/!zooming = false
+parameters/conditions/zooming = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/Crosshair" index="5"]
+anims/RESET = SubResource( 19 )
+anims/zoom_in = SubResource( 20 )
+anims/zoom_out = SubResource( 21 )
+anims/zoomed = SubResource( 22 )
+
+[node name="Pivot" type="Control" parent="HUD" index="2"]
+modulate = Color( 1, 1, 1, 0.615686 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -60.0
+margin_top = -60.0
+margin_right = 60.0
+margin_bottom = 60.0
+rect_pivot_offset = Vector2( 27, 27 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="HitMarkerParts" parent="HUD/Pivot" index="0" instance=ExtResource( 1 )]
+margin_left = -28.0
+margin_top = -28.0
+margin_right = 28.0
+margin_bottom = 28.0
+
+[node name="AnimationPlayer" parent="HUD/Pivot/HitMarkerParts" index="4"]
+anims/hit = SubResource( 23 )
+anims/killed = SubResource( 24 )
+anims/red = SubResource( 25 )
+anims/red_hitmarker = SubResource( 26 )
+
+[node name="NoAmmo" type="AudioStreamPlayer" parent="." index="4"]
+stream = ExtResource( 8 )
+
+[editable path="HUD/Pivot/HitMarkerParts"]

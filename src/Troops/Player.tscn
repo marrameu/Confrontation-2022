@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://assets/audio/grenade_throw.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/Troops/Player.gd" type="Script" id=2]
@@ -25,6 +25,10 @@
 [ext_resource path="res://assets/audio/punch.wav" type="AudioStream" id=23]
 [ext_resource path="res://assets/audio/no_ammo.wav" type="AudioStream" id=24]
 [ext_resource path="res://assets/audio/reload.mp3" type="AudioStream" id=25]
+[ext_resource path="res://assets/interface/grenade.png" type="Texture" id=26]
+[ext_resource path="res://assets/interface/life_bar.png" type="Texture" id=27]
+[ext_resource path="res://assets/interface/themes/new_theme.tres" type="Theme" id=28]
+[ext_resource path="res://src/Bullets/HeadshotBullet.tscn" type="PackedScene" id=29]
 
 [sub_resource type="BoxShape" id=6]
 extents = Vector3( 1.0304, 0.268886, 0.609748 )
@@ -291,7 +295,7 @@ script = ExtResource( 2 )
 [node name="Model" parent="." instance=ExtResource( 22 )]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Model/Skeleton" index="2"]
-transform = Transform( -0.0466489, -0.985937, -0.160468, -0.311716, -0.138252, 0.940063, -0.949029, 0.093874, -0.300883, -0.209339, 1.11246, 0.18404 )
+transform = Transform( -0.0506136, -0.987765, -0.147506, -0.315739, -0.124295, 0.94067, -0.947495, 0.0941833, -0.305585, -0.193094, 1.07725, 0.194816 )
 bone_name = "mixamorig_RightHand"
 
 [node name="Weapons" type="Spatial" parent="Model/Skeleton/BoneAttachment"]
@@ -299,9 +303,11 @@ unique_name_in_owner = true
 transform = Transform( 0.0679044, -0.0832143, 0.488329, 0.490528, -0.0574427, -0.0779988, 0.069083, 0.48967, 0.0738364, -0.267242, -0.00359118, 0.0118586 )
 
 [node name="Riffle" parent="Model/Skeleton/BoneAttachment/Weapons" instance=ExtResource( 4 )]
+bullet_scene = ExtResource( 29 )
 
 [node name="Pistol" parent="Model/Skeleton/BoneAttachment/Weapons" instance=ExtResource( 18 )]
 visible = false
+bullet_scene = ExtResource( 29 )
 
 [node name="MissileLauncher" parent="Model/Skeleton/BoneAttachment/Weapons" instance=ExtResource( 19 )]
 visible = false
@@ -331,10 +337,15 @@ script = ExtResource( 17 )
 
 [node name="LaunchGrenade" type="Spatial" parent="Shooting"]
 script = ExtResource( 21 )
+label_path = NodePath("../../PlayerHUD/SpeiclaWeapons/TextureRect/Label")
 
 [node name="Throw" type="AudioStreamPlayer" parent="Shooting/LaunchGrenade"]
 stream = ExtResource( 1 )
 volume_db = 6.992
+bus = "Sounds"
+
+[node name="NoAmmo" type="AudioStreamPlayer" parent="Shooting/LaunchGrenade"]
+stream = ExtResource( 24 )
 bus = "Sounds"
 
 [node name="NoAmmo" type="AudioStreamPlayer" parent="Shooting"]
@@ -405,22 +416,68 @@ margin_left = 1570.0
 margin_top = 950.0
 margin_right = 1770.0
 margin_bottom = 1022.0
+theme = ExtResource( 28 )
+alignment = 2
 
-[node name="Label" type="Label" parent="PlayerHUD/SpeiclaWeapons"]
-margin_right = 64.0
+[node name="TextureRect" type="TextureRect" parent="PlayerHUD/SpeiclaWeapons"]
+margin_left = 136.0
+margin_right = 200.0
 margin_bottom = 72.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 27 )
+expand = true
+
+[node name="TextureRect2" type="TextureRect" parent="PlayerHUD/SpeiclaWeapons/TextureRect"]
+modulate = Color( 1, 1, 1, 0.690196 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -16.5
+margin_top = -36.0
+margin_right = 16.5
+margin_bottom = 36.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "5
-GRANA-
-DES
-(F)"
+texture = ExtResource( 26 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="PlayerHUD/SpeiclaWeapons/TextureRect"]
+modulate = Color( 0.133333, 0.133333, 0.133333, 1 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -15.0
+margin_top = -30.0
+margin_right = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "5"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="PlayerHUD/SpeiclaWeapons/TextureRect"]
+modulate = Color( 0.133333, 0.133333, 0.133333, 1 )
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = -30.0
+margin_right = 15.0
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "F"
 align = 1
 valign = 1
 
 [node name="Label2" type="Label" parent="PlayerHUD/SpeiclaWeapons"]
+visible = false
 margin_left = 68.0
-margin_right = 132.0
+margin_right = 200.0
 margin_bottom = 72.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -429,6 +486,7 @@ align = 1
 valign = 1
 
 [node name="Label3" type="Label" parent="PlayerHUD/SpeiclaWeapons"]
+visible = false
 margin_left = 136.0
 margin_right = 200.0
 margin_bottom = 72.0

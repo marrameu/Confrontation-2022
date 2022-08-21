@@ -86,4 +86,5 @@ collision_mask = 3841
 stream = ExtResource( 4 )
 pitch_scale = 1.0
 max_distance = 1500.0
-emission_angle_filter_attenuation_db = -8.0
+attenuation_filter_db = -5.0
+doppler_tracking = 1

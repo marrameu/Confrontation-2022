@@ -137,11 +137,8 @@ func auto_reload_ammo(delta):
 
 func reload_ammo():
 	var target_ammo_to_transfer = min(MAX_AMMO, MAX_AMMO - ammo)
-	print("TARGET AMMO TO TRANFER   ",target_ammo_to_transfer)
 	var offset_ammo = min(reload_ammo - target_ammo_to_transfer, 0) # -10 -> t'has passat
-	print("offset_ammo   ",offset_ammo)
 	var transfered_ammo = target_ammo_to_transfer + offset_ammo
-	print("transfered_ammo  ", transfered_ammo)
 	reload_ammo -= transfered_ammo
 	ammo += transfered_ammo
 

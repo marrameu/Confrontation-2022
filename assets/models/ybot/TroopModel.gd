@@ -1,16 +1,10 @@
 extends Spatial
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimationPlayer.play("rifleidle")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func play_foot_step() -> void:
+	$FootstepAudio.pitch_scale = rand_range(0.8, 1.2)
+	$FootstepAudio.play()

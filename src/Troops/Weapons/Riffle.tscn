@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/Troops/Weapons/Gun.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Troops/Weapons/PlayerGun.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/models/weapons/Rifle/RifleModel.tscn" type="PackedScene" id=2]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=1]
