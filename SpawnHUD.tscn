@@ -36,7 +36,7 @@ margin_right = 637.0
 margin_bottom = 147.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "EQUILIBRAT"
+text = "RIFLE"
 
 [node name="Button2" type="Button" parent="Control/ChooseClass/ClassesButtons"]
 margin_left = 641.0
@@ -44,8 +44,7 @@ margin_right = 1278.0
 margin_bottom = 147.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-disabled = true
-text = "LLEUGER"
+text = "LLANÇA-MÍSSILS"
 
 [node name="Button3" type="Button" parent="Control/ChooseClass/ClassesButtons"]
 margin_left = 1282.0
@@ -54,7 +53,17 @@ margin_bottom = 147.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 disabled = true
-text = "PESAT"
+text = "TÈCNIC"
+
+[node name="Button4" type="Button" parent="Control/ChooseClass/ClassesButtons"]
+visible = false
+margin_left = 1443.0
+margin_right = 1920.0
+margin_bottom = 147.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+disabled = true
+text = "FRANCTIRADOR"
 
 [node name="WaitTime" type="Label" parent="Control"]
 visible = false
@@ -248,7 +257,8 @@ wait_time = 10.0
 one_shot = true
 autostart = true
 
-[connection signal="pressed" from="Control/ChooseClass/ClassesButtons/Button" to="." method="_on_ClassButton_pressed"]
+[connection signal="pressed" from="Control/ChooseClass/ClassesButtons/Button" to="." method="_on_class_button_pressed" binds= [ 0 ]]
+[connection signal="pressed" from="Control/ChooseClass/ClassesButtons/Button2" to="." method="_on_class_button_pressed" binds= [ 1 ]]
 [connection signal="pressed" from="Control/Spectate/HBoxContainer/Left" to="." method="_on_spectate_pressed" binds= [ 1, -1 ]]
 [connection signal="pressed" from="Control/Spectate/HBoxContainer/Button2" to="." method="_on_spectate_pressed" binds= [ 1 ]]
 [connection signal="pressed" from="Control/Spectate/HBoxContainer/Right" to="." method="_on_spectate_pressed" binds= [ 1, 1 ]]

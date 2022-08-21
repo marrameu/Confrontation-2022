@@ -1,9 +1,8 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://assets/audio/grenade_throw.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/Troops/Player.gd" type="Script" id=2]
 [ext_resource path="res://src/Troops/Reloading.gd" type="Script" id=3]
-[ext_resource path="res://src/Troops/Weapons/Riffle.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Troops/Interact.gd" type="Script" id=5]
 [ext_resource path="res://assets/interface/ship_cursor.png" type="Texture" id=6]
 [ext_resource path="res://src/HealthSystem/HealthSystem.tscn" type="PackedScene" id=7]
@@ -18,7 +17,6 @@
 [ext_resource path="res://src/Troops/Run.gd" type="Script" id=16]
 [ext_resource path="res://src/Troops/PlayerShooting.gd" type="Script" id=17]
 [ext_resource path="res://src/Troops/Weapons/Pistol.tscn" type="PackedScene" id=18]
-[ext_resource path="res://src/Troops/Weapons/MissileLauncher.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/Troops/Melee.gd" type="Script" id=20]
 [ext_resource path="res://src/Troops/GranadeLauncher.gd" type="Script" id=21]
 [ext_resource path="res://assets/models/ybot/TroopModelNew.tscn" type="PackedScene" id=22]
@@ -295,22 +293,16 @@ script = ExtResource( 2 )
 [node name="Model" parent="." instance=ExtResource( 22 )]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Model/Skeleton" index="2"]
-transform = Transform( -0.0501462, -0.987804, -0.147406, -0.315612, -0.124355, 0.940704, -0.947561, 0.0936961, -0.305527, -0.198275, 1.05865, 0.20633 )
+transform = Transform( -0.0518793, -0.983606, -0.172703, -0.315718, -0.147912, 0.937253, -0.947433, 0.10315, -0.302869, -0.209631, 1.08801, 0.212353 )
 bone_name = "mixamorig_RightHand"
 
 [node name="Weapons" type="Spatial" parent="Model/Skeleton/BoneAttachment"]
 unique_name_in_owner = true
 transform = Transform( 0.0679044, -0.0832143, 0.488329, 0.490528, -0.0574427, -0.0779988, 0.069083, 0.48967, 0.0738364, -0.267242, -0.00359118, 0.0118586 )
 
-[node name="Riffle" parent="Model/Skeleton/BoneAttachment/Weapons" instance=ExtResource( 4 )]
-bullet_scene = ExtResource( 29 )
-
 [node name="Pistol" parent="Model/Skeleton/BoneAttachment/Weapons" instance=ExtResource( 18 )]
 visible = false
 bullet_scene = ExtResource( 29 )
-
-[node name="MissileLauncher" parent="Model/Skeleton/BoneAttachment/Weapons" instance=ExtResource( 19 )]
-visible = false
 
 [node name="MeleeHitBox" type="Area" parent="Model"]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.885, 0 )

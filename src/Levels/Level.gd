@@ -5,7 +5,7 @@ signal ship_added
 signal big_ship_shields_down
 signal match_msg
 
-var player_scene : PackedScene = preload("res://src/Troops/Player.tscn")
+var player_scenes := { 0 : preload("res://src/Troops/Player/PlayerRifle.tscn"), 1 : preload("res://src/Troops/Player/PlayerMissileLauncher.tscn")}
 var ai_troop_scene : PackedScene = preload("res://src/Troops/AI/Troop.tscn")
 
 var blue_points = 0
@@ -107,7 +107,7 @@ func _on_player_entered_ship(ship : Spatial):
 
 
 func spawn_player(pos := Vector3(0, 2, 0)) -> Spatial:
-	var new_player = player_scene.instance()
+	var new_player = player_scenes[$SpawnHUD.selected_class_ind].instance()
 	new_player.translation = pos
 	new_player.pilot_man = $PilotManagers/PlayerMan
 	add_child(new_player)

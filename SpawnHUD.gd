@@ -15,6 +15,7 @@ var current_location_index : int = 0
 var waiting := false
 
 var selected_cp : CommandPost = null
+var selected_class_ind : int
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,14 +32,6 @@ func show():
 	$"%ChooseClass".show()
 	$"%ChooseCP".hide()
 	$"%ClassesButtons".get_child(0).grab_focus()
-
-
-func _on_ClassButton_pressed():
-	# $Control/StartButton.show()
-	$"%ChooseClass".hide()
-	$"%ChooseCP".show()
-	$"%CPButtons".get_child(0).grab_focus()
-	# $Control/StartButton.grab_focus()
 
 
 func _on_StartButton_pressed():
@@ -97,3 +90,10 @@ func _on_ChangeCamButton_pressed():
 
 func _on_ChangeClassButton_pressed():
 	show()
+
+
+func _on_class_button_pressed(new_class_ind):
+	$"%ChooseClass".hide()
+	$"%ChooseCP".show()
+	$"%CPButtons".get_child(0).grab_focus()
+	selected_class_ind = new_class_ind
