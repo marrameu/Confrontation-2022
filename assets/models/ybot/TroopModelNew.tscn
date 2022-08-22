@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/models/ybot/Rifle Idle.dae" type="PackedScene" id=1]
 [ext_resource path="res://assets/animations/rifleidle.tres" type="Animation" id=2]
@@ -14,18 +14,24 @@
 [ext_resource path="res://assets/animations/riflerun.tres" type="Animation" id=12]
 [ext_resource path="res://assets/animations/reload.tres" type="Animation" id=13]
 [ext_resource path="res://assets/audio/footstep.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/animations/sitting.tres" type="Animation" id=15]
+[ext_resource path="res://assets/animations/die.tres" type="Animation" id=16]
+[ext_resource path="res://assets/animations/grenadethrow.tres" type="Animation" id=17]
 
 [node name="TroopModel" instance=ExtResource( 1 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.77, 0 )
 script = ExtResource( 3 )
 
 [node name="AnimationPlayer" parent="." index="1"]
+anims/die = ExtResource( 16 )
+anims/grenadethrow = ExtResource( 17 )
 anims/punch = ExtResource( 10 )
 anims/reload = ExtResource( 13 )
 anims/rifleaim = ExtResource( 4 )
 anims/rifleidle = ExtResource( 2 )
 anims/riflerun = ExtResource( 12 )
 anims/roll = ExtResource( 11 )
+anims/sitting = ExtResource( 15 )
 anims/walkbackward = ExtResource( 8 )
 anims/walkforward = ExtResource( 5 )
 anims/walking = ExtResource( 9 )

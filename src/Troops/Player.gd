@@ -35,8 +35,18 @@ func _physics_process(delta):
 
 
 func _on_HealthSystem_die(attacker):
-	queue_free()
+	var t = Timer.new()
+	t.set_wait_time(5)
+	self.add_child(t)
+	t.start()
+	t.connect("timeout", self, "die")
+	$StateMachine._change_state("dead") # mirar com ho fa el gdquest
+	# camera
+
+
+func die():
 	emit_signal("died")
+	queue_free()
 
 
 func _on_damagable_hit():

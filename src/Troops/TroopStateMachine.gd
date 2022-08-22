@@ -10,7 +10,9 @@ func _ready():
 		"jump": $Jump,
 		"roll": $Roll,
 		"melee": $Melee,
-		"reload": $Reload
+		"reload": $Reload,
+		"dead": $Dead,
+		"throw_grenade": $ThrowGrenade
 	}
 	set_active(true)
 
