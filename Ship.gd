@@ -164,9 +164,9 @@ func leave() -> void:
 	#set_mode(RigidBody.MODE_RIGID)
 	state = States.LEAVING
 	$LeaveTimer.start()
-	$EnginesAudio.pitch_scale = 0
+	$EnginesAudio.pitch_scale = 0.001
 	var tween := create_tween()
-	tween.tween_property($EnginesAudio, "pitch_scale", 1, 2.5)
+	tween.tween_property($EnginesAudio, "pitch_scale", 1.0, 2.5)
 	$EnginesAudio.play()
 
 

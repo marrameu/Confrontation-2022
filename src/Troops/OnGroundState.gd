@@ -18,6 +18,8 @@ func handle_input(event : InputEvent):
 		emit_signal("finished", "melee")
 	elif event.is_action_pressed("reload") and owner.shooting.can_reload():
 		emit_signal("finished", "reload")
+	elif event.is_action_pressed("special_weapon") and owner.shooting.get_node("LaunchGrenade").can_throw(): # owner.can_shoot no cal
+		emit_signal("finished", "throw_grenade")
 
 
 func update_walk_anim(delta) -> void:

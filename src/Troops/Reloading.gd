@@ -5,7 +5,8 @@ func enter():
 	$Reload.play()
 	owner.can_shoot = false
 	owner.can_change_weapon = false
-	owner.get_node("AnimationTree").set("parameters/StateMachine/walk/reload/active", true)
+	owner.get_node("AnimationTree").get("parameters/StateMachine/walk/OneShotStateMachine/playback").start("reload")
+	owner.get_node("AnimationTree").set("parameters/StateMachine/walk/oneshot/active", true)
 	owner.get_node("AnimationPlayer").play("Reload")
 
 
@@ -24,7 +25,7 @@ func update(delta):
 
 
 func handle_input(event : InputEvent):
-	return
+	return # fer q pugui saltar i rodar però que torni al launch granade? o bé tallar l'animació i això fer-ho per a quan recarrega
 
 func exit():
 	owner.can_change_weapon = true

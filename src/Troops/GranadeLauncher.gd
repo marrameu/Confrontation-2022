@@ -21,12 +21,6 @@ func _ready():
 func _process(delta):
 	time += delta
 	
-	if Input.is_action_just_pressed("special_weapon") and time >= _next_time_to_fire:
-		if ammo >= 1:
-			_next_time_to_fire = time + 1.0 / fire_rate
-			launch_granade()
-		else:
-			$NoAmmo.play()
 	label.text = str(ammo)
 
 
@@ -37,3 +31,13 @@ func launch_granade():
 	get_tree().current_scene.add_child(new_granade)
 	new_granade.translation = owner.translation
 	$Throw.play()
+
+
+func can_throw() -> bool:
+	if time >= _next_time_to_fire:
+		if ammo >= 1:
+			_next_time_to_fire = time + 1.0 / fire_rate
+			return true
+		else:
+			$NoAmmo.play()
+	return false
