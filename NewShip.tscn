@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Ship.gd" type="Script" id=1]
 [ext_resource path="res://src/Ships/ShipPhysics.gd" type="Script" id=2]
@@ -31,6 +31,7 @@
 [ext_resource path="res://src/StateMachine/PatrolMiddlePoint.gd" type="Script" id=29]
 [ext_resource path="res://ShipInteraction.gd" type="Script" id=30]
 [ext_resource path="res://src/StateMachine/AttackBigShip.gd" type="Script" id=31]
+[ext_resource path="res://assets/effects/ThrusterParticles/ThrusterParticle.tscn" type="PackedScene" id=32]
 [ext_resource path="res://assets/Materials/grey_ship_mat.tres" type="Material" id=33]
 [ext_resource path="res://assets/materials/command_post/grey.tres" type="Material" id=34]
 
@@ -155,9 +156,16 @@ material_override = ExtResource( 34 )
 
 [node name="ThrusterFlame" parent="ShipMesh" instance=ExtResource( 6 )]
 transform = Transform( 0.00949448, 0, 0.999955, 0, 1, 0, -0.999955, 0, 0.00949448, 0, 0.62, -11.2598 )
+visible = false
 Speed = 0.1
 Energy = 0.1
 TextureUniform2 = SubResource( 8 )
+
+[node name="Thuster" parent="ShipMesh" instance=ExtResource( 32 )]
+transform = Transform( -8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -0.0449913, 0.768863, -8.47611 )
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="Shooting" type="Spatial" parent="."]
 script = ExtResource( 3 )

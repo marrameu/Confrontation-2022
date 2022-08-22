@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/effects/ThrusterParticles/Material.tres" type="Material" id=1]
+[ext_resource path="res://assets/effects/ThrusterParticles/ProcessMaterial.tres" type="Material" id=2]
+[ext_resource path="res://assets/effects/ThrusterParticles/ThrusterBehaviour.gd" type="Script" id=3]
+
+[sub_resource type="QuadMesh" id=70]
+material = ExtResource( 1 )
+
+[node name="Thruster" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="Fire" type="Particles" parent="."]
+amount = 600
+lifetime = 0.33
+visibility_aabb = AABB( -6.09823, -4, -4, 12.1965, 8, 8 )
+process_material = ExtResource( 2 )
+draw_pass_1 = SubResource( 70 )
