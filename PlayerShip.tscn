@@ -19,7 +19,6 @@ script = ExtResource( 8 )
 
 [node name="Input" parent="." index="3"]
 script = ExtResource( 2 )
-MIN_THROTTLE = 0.0
 
 [node name="TurboSwitchAudio" type="AudioStreamPlayer" parent="Input" index="2"]
 stream = ExtResource( 5 )
@@ -35,7 +34,7 @@ transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 3
 visible = false
 
 [node name="ThrusterFlame" parent="ShipMesh" index="4"]
-transform = Transform( 0.00759558, 0, 0.799964, 0, 0.8, 0, -0.799964, 0, 0.00759558, 0, 0.62, -10.2116 )
+transform = Transform( 0.00711136, 0, 0.899959, 0, 0.9, 0, -0.748966, 0, 0.00854503, 0, 0.658256, -10.4041 )
 TextureUniform2 = SubResource( 1 )
 
 [node name="Listener" type="Listener" parent="." index="10"]

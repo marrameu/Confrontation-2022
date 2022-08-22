@@ -20,7 +20,7 @@ func _ready():
 
 
 
-func _process(delta):
+func _process(_delta):
 	$FpsNode/FPS.text = str(Engine.get_frames_per_second())
 
 """func _unhandled_input(event):
