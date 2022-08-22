@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://PlayerInput.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://PlayerShipShooting.gd" type="Script" id=4]
 [ext_resource path="res://assets/audio/switch_turbo.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/effects/ThrusterFlameGradient.tres" type="Gradient" id=6]
+[ext_resource path="res://assets/effects/ThrusterParticles/ThrusterParticle.tscn" type="PackedScene" id=7]
 [ext_resource path="res://PlayerShip.gd" type="Script" id=8]
 [ext_resource path="res://assets/Player_Ship_Interior/PlayerShipInterior.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/audio/no_ammo.wav" type="AudioStream" id=10]
@@ -35,7 +36,12 @@ visible = false
 
 [node name="ThrusterFlame" parent="ShipMesh" index="4"]
 transform = Transform( 0.00711136, 0, 0.899959, 0, 0.9, 0, -0.748966, 0, 0.00854503, 0, 0.658256, -10.4041 )
+visible = false
 TextureUniform2 = SubResource( 1 )
+
+[node name="Fire" parent="ShipMesh" index="5" instance=ExtResource( 7 )]
+transform = Transform( -8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -0.0449913, 0.768863, -8.47611 )
+visibility_aabb = AABB( -2.68175, -1.02354, -1.02688, 5.36353, 2.04707, 2.05376 )
 
 [node name="Listener" type="Listener" parent="." index="10"]
 current = true

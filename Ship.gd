@@ -81,6 +81,18 @@ func set_team_color():
 
 
 func update_thruster_flame():
+	
+	var Thruster = $ShipMesh/Thuster
+	
+	$ShipMesh/Thuster/Fire.emitting = !input.drifting
+	
+	var v_len = linear_velocity.length()
+	print ((v_len / 2) - 105)
+	
+	$ShipMesh/Thuster/Fire.get_process_material().linear_accel = (v_len / 2) - 105
+	#$ShipMesh/Thuster/Fire.get_process_material().damping = això no tinc ni idea de com fer-ho
+	
+	"""
 	$ShipMesh/ThrusterFlame.TextureUniform2.gradient = $ShipMesh/ThrusterFlame.turbo_gradient if input.do_turbo else $ShipMesh/ThrusterFlame.normal_gradient
 	$ShipMesh/ThrusterFlame.visible = !input.drifting
 	var b = transform.basis
@@ -91,6 +103,9 @@ func update_thruster_flame():
 	$ShipMesh/ThrusterFlame.Speed = max(0.1, vel.z / 100)
 	$ShipMesh/ThrusterFlame.Intensity = max(0.1, vel.z / 200)
 	$ShipMesh/ThrusterFlame.Energy = max(0.1, vel.z / 100)
+	"""
+	
+	
 
 
 func input_to_physics(delta):

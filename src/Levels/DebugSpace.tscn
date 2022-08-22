@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://SupportShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://CapitalShip.tscn" type="PackedScene" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://addons/motion_blur/motion_blur.tscn" type="PackedScene" id=12]
 [ext_resource path="res://ShipCamera.gd" type="Script" id=13]
 [ext_resource path="res://src/PauseMenu.tscn" type="PackedScene" id=14]
+[ext_resource path="res://addons/silicon.vfx.lens_flare/lens_flare.gd" type="Script" id=15]
+[ext_resource path="res://addons/silicon.vfx.lens_flare/lens_dirt_default.jpeg" type="Texture" id=16]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -29,8 +31,30 @@ albedo_color = Color( 1, 0.0745098, 1, 1 )
 [node name="DebugSpace" type="Spatial"]
 script = ExtResource( 9 )
 
+[node name="LensFlare" type="Node" parent="."]
+script = ExtResource( 15 )
+flare_strength = 1.0
+flare_bias = 1.05
+flare_blur = 2.0
+distortion_quality = 0
+distortion = 2.0
+ghost_count = 7
+ghost_spacing = 0.3
+halo_width = 0.25
+streak_strength = 0.5
+lens_dirt = ExtResource( 16 )
+
 [node name="PauseMenu" parent="." instance=ExtResource( 14 )]
 layer = 2
+
+[node name="SpawnHUD" parent="." instance=ExtResource( 8 )]
+battle_state_path = NodePath("..")
+
+[node name="MatchUI" parent="." instance=ExtResource( 11 )]
+blue_support_ship1 = NodePath("../BigShips/SuportShip")
+blue_support_ship2 = NodePath("../BigShips/SuportShip2")
+red_support_ship1 = NodePath("../BigShips/SuportShip3")
+red_support_ship2 = NodePath("../BigShips/SuportShip4")
 
 [node name="BigShips" type="Spatial" parent="."]
 
@@ -83,24 +107,22 @@ script = ExtResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2000, 0 )
 
 [node name="AsteroidField" parent="Environment" instance=ExtResource( 5 )]
+start_roids = 1
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
 environment = ExtResource( 7 )
 script = ExtResource( 6 )
 
-[node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 0.70866, 0.457789, 0.53687, -0.635008, 0.0821853, 0.768122, 0.307515, -0.885254, 0.348941, 0, 57.0278, 0 )
+[node name="DirectionalLight" type="DirectionalLight" parent="Environment"]
+transform = Transform( 0.70866, 0.457789, 0.53687, -0.635008, 0.082185, 0.768121, 0.307515, -0.885254, 0.348941, 0, -1942.97, 0 )
 light_energy = 2.0
 shadow_enabled = true
 directional_shadow_max_distance = 200.0
 
-[node name="DirectionalLight2" type="DirectionalLight" parent="."]
-transform = Transform( 0.279008, -0.793125, -0.541394, -0.464626, 0.381903, -0.79892, 0.840403, 0.47445, -0.261952, 0, 61.3448, 0 )
+[node name="DirectionalLight2" type="DirectionalLight" parent="Environment"]
+transform = Transform( 0.279008, -0.793125, -0.541394, -0.464626, 0.381903, -0.79892, 0.840403, 0.474451, -0.261953, 0, -1938.66, 0 )
 light_energy = 0.4
 shadow_enabled = true
-
-[node name="SpawnHUD" parent="." instance=ExtResource( 8 )]
-battle_state_path = NodePath("..")
 
 [node name="PilotManagers" type="Node" parent="."]
 
@@ -128,12 +150,6 @@ visible = false
 mesh = SubResource( 1 )
 skeleton = NodePath("")
 material/0 = SubResource( 4 )
-
-[node name="MatchUI" parent="." instance=ExtResource( 11 )]
-blue_support_ship1 = NodePath("../BigShips/SuportShip")
-blue_support_ship2 = NodePath("../BigShips/SuportShip2")
-red_support_ship1 = NodePath("../BigShips/SuportShip3")
-red_support_ship2 = NodePath("../BigShips/SuportShip4")
 
 [node name="PlayerShipCam" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9301, 12.6019 )
