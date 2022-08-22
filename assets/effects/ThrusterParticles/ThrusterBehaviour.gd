@@ -14,7 +14,7 @@ func _ready():
 	pass # Replace with function body.
 
 func emitting_flame():
-	$Fire.emitting = emitting
+	$Fire.emitting = true
 
 func normal_mode():
 	linear_accel = -35.42
