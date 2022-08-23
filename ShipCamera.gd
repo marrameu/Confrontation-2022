@@ -189,6 +189,14 @@ func update_target(delta : float):
 		global_transform.origin = target.global_transform.origin # si és realitzat al physics prcess triga una mica a sguir la nau
 """
 
+
 func horizontal_lean(target : Spatial, x_input : float, lean_limit : float = 45 , time : float = 0.03) -> void:
 	var target_rotation : Vector3 = target.rotation_degrees
 	target.rotation_degrees = Vector3(target_rotation.x, target_rotation.y, lerp(target_rotation.z, x_input * lean_limit, time))
+
+
+func _on_player_entered_ship(new_ship : Spatial):
+	ship = new_ship
+	ship.cam = self # no hauria de caldre
+	make_current()
+	init_cam()

@@ -62,6 +62,9 @@ func _on_Timer_timeout():
 	if target_collider.owner.is_in_group("Ships"):
 		owner.emit_signal("entered_ship", target_collider.owner)
 		owner.queue_free() # canvi estat
+	elif target_collider.owner.is_in_group("Vehicle"):
+		owner.emit_signal("entered_vehicle", target_collider.owner)
+		owner.queue_free() # canvi estat
 	
 	target_collider = null
 

@@ -356,4 +356,5 @@ right_tab={
 [rendering]
 
 gles3/shaders/shader_compilation_mode=2
+quality/filters/msaa=2
 environment/default_environment="res://default_env.tres"

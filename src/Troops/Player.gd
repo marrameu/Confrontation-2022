@@ -1,6 +1,7 @@
 extends KinematicBody
 
 signal entered_ship
+signal entered_vehicle
 signal died
 
 onready var shooting := $Shooting

@@ -568,9 +568,11 @@ script = ExtResource( 13 )
 
 [node name="Roll" type="Node" parent="StateMachine"]
 script = ExtResource( 15 )
+MAX_SPEED = 0.0
 
 [node name="Melee" type="Node" parent="StateMachine"]
 script = ExtResource( 20 )
+MAX_SPEED = 0.0
 
 [node name="Dead" type="Node" parent="StateMachine"]
 script = ExtResource( 12 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://assets/materials/command_post/grey.tres" type="Material" id=1]
 [ext_resource path="res://src/Levels/Box.tscn" type="PackedScene" id=2]
@@ -31,6 +31,7 @@
 [ext_resource path="res://src/Ships/ShipTransport.tscn" type="PackedScene" id=29]
 [ext_resource path="res://src/HUD/Leaderboard.tscn" type="PackedScene" id=30]
 [ext_resource path="res://src/Vehicles/ManualTurret.tscn" type="PackedScene" id=31]
+[ext_resource path="res://src/Levels/VehicleCamera.gd" type="Script" id=32]
 
 [sub_resource type="CubeMesh" id=10]
 size = Vector3( 21.004, 2, 23.208 )
@@ -821,6 +822,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 188.36, -29.896, 33.4765 )
 physics_material_override = SubResource( 23 )
 
 [node name="Leaderboard" parent="." instance=ExtResource( 30 )]
+
+[node name="PlayerVehicleCam" type="InterpolatedCamera" parent="."]
+far = 5000.0
+script = ExtResource( 32 )
 
 [connection signal="battle_started" from="." to="Leaderboard" method="init"]
 [connection signal="change_cam" from="SpawnHUD" to="WaitingCam" method="_on_SpawnHUD_change_cam"]

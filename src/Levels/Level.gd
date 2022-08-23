@@ -98,21 +98,14 @@ func update_middle_point(delta):
 		red_take_over = false
 
 
-func _on_player_entered_ship(ship : Spatial):
-	$PlayerShipCam.ship = ship
-	ship.cam = $PlayerShipCam # no hauria de caldre
-	$PlayerShipCam.make_current()
-	$PlayerShipCam.init_cam()
-	
-
-
 func spawn_player(pos := Vector3(0, 2, 0)) -> Spatial:
 	var new_player = player_scenes[$SpawnHUD.selected_class_ind].instance()
 	new_player.translation = pos
 	new_player.pilot_man = $PilotManagers/PlayerMan
 	add_child(new_player)
 	$CameraBase.player_path = new_player.get_path()
-	new_player.connect("entered_ship", self, "_on_player_entered_ship") #cam en lloc de self
+	new_player.connect("entered_ship", $PlayerShipCam, "_on_player_entered_ship")
+	new_player.connect("entered_vehicle", $PlayerVehicleCam, "_on_player_entered_vehicle")
 	new_player.connect("died", self, "_on_player_died")
 	$CameraBase.get_node("%PlayerTroopCam").make_current()
 	return new_player

@@ -11,7 +11,7 @@ var pilot_man : PilotManager
 var active := false # temporal
 
 func _ready():
-	init(get_tree().current_scene.get_node("PilotManagers/PlayerMan"))
+	pass#init(get_tree().current_scene.get_node("PilotManagers/PlayerMan"))
 
 
 func init(new_pilot_man : PilotManager) -> bool:
