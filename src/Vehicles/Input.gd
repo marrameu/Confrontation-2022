@@ -8,8 +8,8 @@ var yaw := 0.0
 func _physics_process(delta):
 	if not owner.active:
 		return
-	pitch = clamp(mouse_movement.x + pitch, -250, 250) # 150?
-	yaw = clamp(mouse_movement.y + yaw, -250, 250)
+	pitch = clamp(mouse_movement.x / 10 + pitch, -50, 50) # 150?
+	yaw = clamp(mouse_movement.y / 10 + yaw, -50, 50)
 	mouse_movement = Vector2.ZERO
 
 

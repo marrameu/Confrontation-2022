@@ -51,12 +51,18 @@ func _physics_process(delta):
 		$ExitTimer.start()
 	elif Input.is_action_just_released("interact"):
 		$ExitTimer.stop()
-	var y_change = clamp(input.pitch / 2, -250, 250) * delta
-	var x_change = clamp(input.yaw / 2, -250, 250) * delta
-	input.pitch -= y_change * 4 # exponencial?
-	input.yaw -= x_change * 4
-	rotation.y = move_toward(rotation.y, rotation.y - y_change, delta / 5)
-	$Pivot.rotation.x = clamp(move_toward($Pivot.rotation.x, $Pivot.rotation.x + x_change, delta / 5), deg2rad(-70), deg2rad(20))
+	var y_change = clamp(input.pitch * delta * 5, -0.5, 0.5)
+	var x_change = clamp(input.yaw * delta * 5, -0.5, 0.5)
+	if sign(input.pitch) == 1:
+		input.pitch = max(input.pitch - delta *50, 0) # exponencial?. Lerp? ço és restar pitch i yaw * delta
+	else:
+		input.pitch = min(input.pitch + delta *50, 0)
+	if sign(input.yaw) == 1:
+		input.yaw = max(input.yaw - delta *50, 0) # exponencial?. Lerp? ço és restar pitch i yaw * delta
+	else:
+		input.yaw = min(input.yaw + delta *50, 0)
+	rotation.y = move_toward(rotation.y, rotation.y - y_change, delta / 2)
+	$Pivot.rotation.x = clamp(move_toward($Pivot.rotation.x, $Pivot.rotation.x + x_change, delta / 2), deg2rad(-70), deg2rad(20))
 	#if active:
 	#	input_to_physics(delta)
 
