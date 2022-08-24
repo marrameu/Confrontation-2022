@@ -2,6 +2,7 @@ extends CanvasLayer
 
 
 onready var cursor_original_pos : Vector2 = $Cursor.rect_position
+onready var crosshair_center_pos : Vector2 = get_node("%Crosshair").rect_position
 
 
 # Called when the node enters the scene tree for the first time.

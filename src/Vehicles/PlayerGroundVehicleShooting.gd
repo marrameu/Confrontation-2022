@@ -1,10 +1,13 @@
-extends "res://src/Ships/ShipShooting.gd"
+extends "res://src/Vehicles/GroundVehicleShooting.gd"
+
+# ES EXACATAMENT EL MATEIX Q PLAYERSHIPSHOOTING, ES PODRIA FER PER COMPONENTS AMB UN FILL? PENS Q SÍ
 
 var shoot_action := "shoot"
 var change_bullet_action := "change_bullet"
 var lock_action := "lock"
 
 var clear_target_press_time := 0.0
+
 
 func _process(delta):
 	if Input.is_action_just_pressed(lock_action): # fixar enemic

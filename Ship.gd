@@ -191,7 +191,7 @@ func on_BigShip_shields_down(ship):
 func exit_ship(): # de moment, sols player
 	if is_player_or_ai == 1:
 		$PlayerHUD.make_visible(false)
-		get_viewport().get_camera().ship = null
+		cam.ship = null
 		get_tree().current_scene.spawn_player(translation) # senyals
 	elif is_player_or_ai == 2:
 		$StateMachine.set_active(false)
