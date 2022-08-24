@@ -33,6 +33,10 @@ func _ready() -> void:
 		value = 0
 	if start_team != 0:
 		team_count[start_team - 1] = 10
+	
+	for child in get_children(): # tmb cal fer-ho quan canvia d'equip
+		if child is ShipSpawn:
+			child.blue_team = m_team
 
 
 func _process(delta : float) -> void:

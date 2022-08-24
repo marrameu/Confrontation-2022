@@ -301,13 +301,13 @@ gravity = Vector3( 0, 0, 0 )
 [node name="ExitTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="InteractArea" type="Area" parent="."]
+[node name="Interaction" type="Area" parent="."]
 collision_layer = 32768
 collision_mask = 0
 monitoring = false
 script = ExtResource( 30 )
 
-[node name="CollisionShape2" type="CollisionShape" parent="InteractArea"]
+[node name="CollisionShape2" type="CollisionShape" parent="Interaction"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51836 )
 shape = SubResource( 1 )
 

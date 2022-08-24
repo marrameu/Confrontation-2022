@@ -14,7 +14,8 @@ var MAX_POINTS = 1000
 
 var battle_started := false
 
-var num_of_players : int = 16
+var num_of_players : int = 26
+var num_of_space_troops : int = 10
 
 # middle point
 var middle_point := 0.0
@@ -173,7 +174,7 @@ func start_battle():
 	while x < blue_ais:
 		x += 1
 		var spawn_in_space := false
-		if x_spawn_in_space < 6:
+		if x_spawn_in_space < num_of_space_troops:
 			spawn_in_space = true
 			x_spawn_in_space += 1
 		spawn_ai_troop(ai_num, true, spawn_in_space)
@@ -184,7 +185,7 @@ func start_battle():
 	while y < red_ais:
 		y += 1
 		var spawn_in_space := false
-		if y_spawn_in_space < 6:
+		if y_spawn_in_space < num_of_space_troops:
 			spawn_in_space = true
 			y_spawn_in_space += 1
 		spawn_ai_troop(ai_num, false, spawn_in_space)

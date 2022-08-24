@@ -2,7 +2,7 @@ extends "res://Interaction.gd"
 
 
 func can_interact(troop : Spatial) -> bool:
-	return !owner.is_player_or_ai == 1
+	return !owner.is_player_or_ai == 1 # si és una IA, que tmpc no pugui si hi ha una IA
 	# and same equip
 
 

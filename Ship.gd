@@ -27,15 +27,16 @@ var landing_areas := 0
 var state := 0
 
 
-func init(new_pilot_man : PilotManager) -> bool:
-	if is_player_or_ai == 1:
-		return false
-	elif is_player_or_ai == 2:
+func _ready():
+	set_team_color()
+
+
+func init(new_pilot_man : PilotManager):
+	if pilot_man:
 		exit_ship()
 	
 	pilot_man = new_pilot_man
-	blue_team = pilot_man.blue_team
-	set_team_color()
+	# blue_team = pilot_man.blue_team
 	is_player_or_ai = 1 if pilot_man.is_player else 2
 	if is_player_or_ai == 1:
 		$PlayerHUD.make_visible(true)
@@ -69,10 +70,7 @@ func _process(delta):
 
 
 func set_team_color():
-	if not pilot_man:
-		$ShipMesh/Cube.material_override = grey_mat
-		$ShipMesh/Cube001.material_override = grey_mat
-	elif blue_team:
+	if blue_team:
 		$ShipMesh/Cube.material_override = blue_mat
 		$ShipMesh/Cube001.material_override = blue_mat
 	else:
@@ -138,8 +136,6 @@ func _on_HealthSystem_die(attacker : Spatial):
 		self.add_child(t)
 		t.start()
 		t.connect("timeout", self, "die")
-	else:
-		die()
 
 
 func die():

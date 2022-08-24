@@ -7,12 +7,6 @@ var cp : Node = null
 
 
 func _ready():
-	if blue_team:
-		$ShipMesh/Cube.material_override = blue_mat
-		$ShipMesh/Cube001.material_override = blue_mat
-	else:
-		$ShipMesh/Cube.material_override = red_mat
-		$ShipMesh/Cube001.material_override = red_mat
 	connect("cp_added", get_tree().current_scene, "_on_cp_added")
 
 

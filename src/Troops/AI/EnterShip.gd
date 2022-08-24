@@ -51,8 +51,11 @@ func _on_PathMaker_arrived():
 	if not weakref(desired_ship).get_ref():
 		emit_signal("finished", "enter_ship")
 	else:
-		desired_ship.init(owner.pilot_man)
-		owner.queue_free()
+		if desired_ship.get_node("Interaction").can_interact(owner):
+			desired_ship.get_node("Interaction").interact(owner)
+			owner.queue_free()
+		#else:
+		#	emit_signal("finished", "enter_ship")
 
 
 func _on_WaitTimer_timeout():

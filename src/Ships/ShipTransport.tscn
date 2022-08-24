@@ -12,7 +12,7 @@ size = Vector3( 10, 10, 20 )
 [node name="ShipTransport" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="StateMachine" parent="." index="15"]
+[node name="StateMachine" parent="." index="14"]
 script = ExtResource( 4 )
 
 [node name="ChooseObjective" parent="StateMachine" index="0"]
@@ -22,6 +22,7 @@ script = ExtResource( 3 )
 script = ExtResource( 5 )
 
 [node name="MeshInstance" type="MeshInstance" parent="." index="19"]
+visible = false
 mesh = SubResource( 1 )
 
 [editable path="ShipMesh"]

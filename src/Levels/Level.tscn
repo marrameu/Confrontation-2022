@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://assets/materials/command_post/grey.tres" type="Material" id=1]
 [ext_resource path="res://src/Levels/Box.tscn" type="PackedScene" id=2]
@@ -28,7 +28,6 @@
 [ext_resource path="res://assets/audio/gustav_holst_mercury.ogg" type="AudioStream" id=26]
 [ext_resource path="res://assets/models/container/scene.gltf" type="PackedScene" id=27]
 [ext_resource path="res://CSGCombiner.obj" type="ArrayMesh" id=28]
-[ext_resource path="res://src/Ships/ShipTransport.tscn" type="PackedScene" id=29]
 [ext_resource path="res://src/HUD/Leaderboard.tscn" type="PackedScene" id=30]
 [ext_resource path="res://src/Vehicles/ManualTurret.tscn" type="PackedScene" id=31]
 [ext_resource path="res://src/Levels/VehicleCamera.gd" type="Script" id=32]
@@ -98,9 +97,6 @@ glow_bloom = 0.58
 glow_blend_mode = 1
 glow_bicubic_upscale = true
 adjustment_enabled = true
-
-[sub_resource type="PhysicsMaterial" id=23]
-bounce = 0.5
 
 [node name="Level" type="Spatial"]
 script = ExtResource( 5 )
@@ -588,6 +584,12 @@ unique_name_in_owner = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -222.258, 29.3536, -142.667 )
 start_team = 1
 
+[node name="ShipSpawn" parent="Map/CommandPosts/CommandPost" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -150.696, 11.3742, 16.34 )
+
+[node name="ShipSpawn2" parent="Map/CommandPosts/CommandPost" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -86.219, 11.3742, 16.34 )
+
 [node name="CommandPost6" parent="Map/CommandPosts" groups=["OrbitalCannonCP"] instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -243.122, 19.3536, 136.986 )
 start_team = 1
@@ -711,15 +713,6 @@ transform = Transform( 3.0598e-07, 0, -1, 0, 1, 0, 1, 0, 3.0598e-07, 2748.31, 17
 collision_layer = 1
 blue_team = true
 
-[node name="ShipSpawn" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -372.954, 40.7278, -126.327 )
-
-[node name="ShipSpawn2" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -308.477, 40.7278, -126.327 )
-
-[node name="ShipSpawn3" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 271.402, -24.9633, 23.5059 )
-
 [node name="WaitingCam" type="Camera" parent="."]
 transform = Transform( -0.925547, 0.248166, -0.285965, -5.98572e-08, 0.755259, 0.655427, 0.378632, 0.606628, -0.699028, -233.185, 425.483, -401.426 )
 far = 5500.0
@@ -767,6 +760,7 @@ unique_name_in_owner = true
 
 [node name="Walker" parent="." instance=ExtResource( 4 )]
 transform = Transform( -0.566651, 0, -0.823958, 0, 1, 0, 0.823958, 0, -0.566651, 250.424, -32.5138, 24.2776 )
+visible = false
 
 [node name="BakedLightmap" type="BakedLightmap" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -76, 58.0795, -1 )
@@ -816,10 +810,6 @@ transform = Transform( -0.034114, 0, -0.0365546, 0, 0.05, 0, 0.0365546, 0, -0.03
 
 [node name="scene7" parent="." instance=ExtResource( 27 )]
 transform = Transform( -0.034114, 0, -0.0365546, 0, 0.05, 0, 0.0365546, 0, -0.034114, -164.799, 40.1057, -160.075 )
-
-[node name="ShipTransport" parent="." instance=ExtResource( 29 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 188.36, -29.896, 33.4765 )
-physics_material_override = SubResource( 23 )
 
 [node name="Leaderboard" parent="." instance=ExtResource( 30 )]
 

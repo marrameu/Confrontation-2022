@@ -1,6 +1,8 @@
 extends Position3D
+class_name ShipSpawn
 
 export var ship_scene : PackedScene = preload("res://NewShip.tscn")
+export var blue_team := false
 
 export var simultaneous_ships : int = 2
 var last_ship : Ship
@@ -26,6 +28,7 @@ func _physics_process(delta):
 func instance_ship():
 	var new_ship = ship_scene.instance()
 	new_ship.translation = global_transform.origin
+	new_ship.blue_team = blue_team
 	new_ship.connect("ship_died", self, "_on_ship_died")
 	# rotació tmb
 	get_tree().current_scene.add_child(new_ship)

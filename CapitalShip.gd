@@ -7,6 +7,9 @@ extends "res://BigShip.gd"
 
 
 func _ready():
+	for ship_spawn in get_node("Hangar").get_node("%ShipSpawns").get_children():
+		ship_spawn.blue_team = blue_team
+	
 	$SceneRoot/engines.material_override = blue_mat if blue_team else red_mat
 	$SceneRoot/bottom.material_override = blue_mat if blue_team else red_mat
 	$SceneRoot/up.material_override = blue_mat if blue_team else red_mat
