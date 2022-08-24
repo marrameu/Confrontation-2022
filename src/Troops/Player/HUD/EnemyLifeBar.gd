@@ -16,7 +16,7 @@ func _ready():
 func _physics_process(delta):
 	var viewport := get_viewport()
 	var current_cam : Camera = viewport.get_camera()
-	var space_state = get_parent().owner.get_world().direct_space_state
+	var space_state = owner.owner.get_world().direct_space_state
 	
 	if current_cam:
 		var camera_width_center := viewport.get_visible_rect().size.x / 2
@@ -47,7 +47,7 @@ func _physics_process(delta):
 	
 	if target and weakref(target).get_ref():
 		if not current_cam.is_position_behind(target.global_transform.origin):
-			if target.global_transform.origin.distance_to(get_parent().owner.translation) <= 500: # potser ni caldria
+			if target.global_transform.origin.distance_to(owner.owner.translation) <= 500: # potser ni caldria
 				if target.get_node("HealthSystem").health == 0:
 					hide()
 					return

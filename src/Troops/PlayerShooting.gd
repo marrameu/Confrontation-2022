@@ -41,3 +41,8 @@ func fill_all_weapons():
 	for weapon in owner.get_node("%Weapons").get_children():
 		weapon.reload_ammo = weapon.MAX_RELOAD_AMMO
 	$LaunchGrenade.ammo = $LaunchGrenade.MAX_AMMO
+
+
+func _on_HealthSystem_die(attacker):
+	for weapon in owner.get_node("%Weapons").get_children():
+		weapon.set_active(false) # UI sobretot

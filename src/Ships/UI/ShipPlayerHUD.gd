@@ -223,6 +223,7 @@ func on_enemy_died():
 
 
 func _on_HealthSystem_die(attacker):
+	$DieInfo.show()
 	$DieInfo.text = "Heu estat mort per " + attacker.name if attacker else "Heu estat mort"
 
 

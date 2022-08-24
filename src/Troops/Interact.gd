@@ -19,6 +19,10 @@ var current_vehicle : Spatial
 # Multiplayer
 var action := ""
 
+# UI
+export var interaction_progress_path : NodePath
+onready var interaction_progress : TextureProgress = get_node(interaction_progress_path)
+
 
 func _process(delta : float) -> void:
 	if get_tree().has_network_peer():
@@ -26,8 +30,8 @@ func _process(delta : float) -> void:
 			return
 	
 	current_camera = get_viewport().get_camera()
-	get_node("../PlayerHUD/TextureProgress").value = ($Timer.wait_time - $Timer.time_left) / $Timer.wait_time * 100
-	get_node("../PlayerHUD/TextureProgress").visible = true if target_collider else false
+	interaction_progress.value = ($Timer.wait_time - $Timer.time_left) / $Timer.wait_time * 100
+	interaction_progress.visible = true if target_collider else false
 	
 	if Input.is_action_just_pressed("interact") or (target_collider and Input.is_action_pressed("interact")): # pq no cicli
 		var viewport = get_viewport()

@@ -25,6 +25,9 @@ var current_gun : Gun
 export var player_path : NodePath
 
 
+var killer : Spatial
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$PuppetCamPos.translation = $CameraPosition.translation
@@ -47,10 +50,18 @@ func _physics_process(delta):
 	if not get_node_or_null(player_path):
 		return
 	
+	if get_node(player_path).dead:
+		translation += transform.basis.z * 2 * delta # o cap a endavant?
+		if weakref(killer).get_ref():
+			var rot_transform = transform.looking_at(killer.translation, transform.basis.y)
+			transform.basis = Basis(Quat(transform.basis).slerp(rot_transform.basis, 3 * delta))
+			rotation.z = 0
+		return
+	
 	translation = translation.linear_interpolate(get_node(player_path).get_node("CamPos").global_translation, 0.25 * delta * 60)
 	
 	var joystick_movement := 0.0
-	var pitch_strenght := (joystick_movement + mouse_movement.y) * rotate_speed_multipiler
+	var pitch_strenght := (-joystick_movement - mouse_movement.y) * rotate_speed_multipiler
 	var yaw_strenght : float = (joystick_movement + mouse_movement.x) * rotate_speed_multipiler
 	if pitch_strenght and get_node(player_path).can_aim:
 		rotate_pitch(pitch_strenght, delta)
@@ -154,7 +165,7 @@ func move_camera() -> void:
 	var _start = tween.start()
 
 
-func check_collisions():
+func check_collisions(): # hauria de ser diferent per a quan mor
 	if $RayCast.is_colliding():
 		#print($RayCast.get_collider(), randi())
 		$CameraPosition.translation = $CameraPosition.translation.linear_interpolate(to_local($RayCast.get_collision_point()), 0.2)

@@ -7,3 +7,4 @@ func enter() -> void:
 	owner.can_rotate = false
 	owner.can_shoot = false
 	owner.can_change_weapon = false
+	owner.dead = true

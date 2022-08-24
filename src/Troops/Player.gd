@@ -29,7 +29,7 @@ func _physics_process(delta):
 	else:
 		$AnimationTree.set("parameters/StateMachine/walk/move/4/aim/blend_amount", lerp($AnimationTree.get("parameters/StateMachine/walk/move/4/aim/blend_amount"), 0, 20 * delta))
 	if can_rotate:
-		var des_transform := global_transform.basis.slerp(get_tree().current_scene.get_node("CameraBase").global_transform.basis, 0.15 * delta * 60)
+		var des_transform := global_transform.basis.slerp(get_tree().current_scene.get_node("%CameraBase").global_transform.basis.rotated(Vector3(0, 1, 0), deg2rad(180)), 0.15 * delta * 60)
 		rotation.y = des_transform.get_euler().y
 		orthonormalize()
 		#inverse kinematics
@@ -42,7 +42,7 @@ func _on_HealthSystem_die(attacker):
 	t.start()
 	t.connect("timeout", self, "die")
 	$StateMachine._change_state("dead") # mirar com ho fa el gdquest
-	# camera
+	get_tree().current_scene.get_node("%CameraBase").killer = attacker
 
 
 func die():

@@ -11,7 +11,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$LifeBar.value = float(owner.get_node("HealthSystem").health) / owner.get_node("HealthSystem").MAX_HEALTH * 100
+	$"%MyLifeBar".value = float(owner.get_node("HealthSystem").health) / owner.get_node("HealthSystem").MAX_HEALTH * 100
 
 
 func _on_HealthSystem_damage_taken(attacker : Spatial):
@@ -27,3 +27,9 @@ func _on_HealthSystem_damage_taken(attacker : Spatial):
 	damage_indicator.attacker = attacker
 	damage_indicator.myself = owner
 	$"%DamageIndicators".add_child(damage_indicator)
+
+
+func _on_HealthSystem_die(attacker):
+	$Alive.hide()
+	$DieInfo.show()
+	$DieInfo.text = "Heu estat mort per " + attacker.name if attacker else "Heu estat mort"

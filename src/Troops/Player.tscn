@@ -1,15 +1,12 @@
-[gd_scene load_steps=70 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://assets/audio/grenade_throw.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/Troops/Player.gd" type="Script" id=2]
 [ext_resource path="res://src/Troops/Reloading.gd" type="Script" id=3]
 [ext_resource path="res://src/Troops/ThrowGrenade.gd" type="Script" id=4]
 [ext_resource path="res://src/Troops/Interact.gd" type="Script" id=5]
-[ext_resource path="res://assets/interface/ship_cursor.png" type="Texture" id=6]
+[ext_resource path="res://src/HUD/PlayerHUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/HealthSystem/HealthSystem.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/Troops/Player/HUD/LifeBar.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/Troops/PlayerHUD.gd" type="Script" id=9]
-[ext_resource path="res://src/Troops/Player/HUD/EnemyLifeBar.gd" type="Script" id=10]
 [ext_resource path="res://src/Troops/TroopStateMachine.gd" type="Script" id=11]
 [ext_resource path="res://src/Troops/Dead.gd" type="Script" id=12]
 [ext_resource path="res://src/Troops/Jump.gd" type="Script" id=13]
@@ -24,9 +21,6 @@
 [ext_resource path="res://assets/audio/punch.wav" type="AudioStream" id=23]
 [ext_resource path="res://assets/audio/no_ammo.wav" type="AudioStream" id=24]
 [ext_resource path="res://assets/audio/reload.mp3" type="AudioStream" id=25]
-[ext_resource path="res://assets/interface/grenade.png" type="Texture" id=26]
-[ext_resource path="res://assets/interface/life_bar.png" type="Texture" id=27]
-[ext_resource path="res://assets/interface/themes/new_theme.tres" type="Theme" id=28]
 [ext_resource path="res://src/Bullets/HeadshotBullet.tscn" type="PackedScene" id=29]
 
 [sub_resource type="BoxShape" id=6]
@@ -348,7 +342,7 @@ script = ExtResource( 2 )
 bones/36/bound_children = [ NodePath("BoneAttachment") ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Model/Skeleton" index="2"]
-transform = Transform( 0.822001, -0.243392, 0.514852, -0.0993691, 0.828897, 0.550504, -0.560747, -0.503676, 0.65717, -0.861152, 0.182414, 0.20488 )
+transform = Transform( -0.0534856, -0.984021, -0.169828, -0.314981, -0.144764, 0.937992, -0.947589, 0.103661, -0.302206, -0.315376, 1.03266, 0.187966 )
 bone_name = "mixamorig_RightHand"
 
 [node name="Weapons" type="Spatial" parent="Model/Skeleton/BoneAttachment"]
@@ -384,7 +378,7 @@ script = ExtResource( 17 )
 
 [node name="LaunchGrenade" type="Spatial" parent="Shooting"]
 script = ExtResource( 21 )
-label_path = NodePath("../../PlayerHUD/SpeiclaWeapons/TextureRect/Label")
+label_path = NodePath("../../PlayerHUD/Alive/SpeiclaWeapons/TextureRect/Label")
 
 [node name="Throw" type="AudioStreamPlayer" parent="Shooting/LaunchGrenade"]
 stream = ExtResource( 1 )
@@ -401,154 +395,12 @@ bus = "Sounds"
 
 [node name="Interact" type="Node" parent="."]
 script = ExtResource( 5 )
+interaction_progress_path = NodePath("../PlayerHUD/Alive/InteractionProgress")
 
 [node name="Timer" type="Timer" parent="Interact"]
 one_shot = true
 
-[node name="PlayerHUD" type="CanvasLayer" parent="."]
-script = ExtResource( 9 )
-
-[node name="TextureProgress" type="TextureProgress" parent="PlayerHUD"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 40.0
-margin_top = 44.0
-margin_right = 98.0
-margin_bottom = 102.0
-value = 25.0
-texture_under = ExtResource( 6 )
-texture_progress = ExtResource( 6 )
-fill_mode = 4
-tint_progress = Color( 1, 0.882353, 0.254902, 1 )
-nine_patch_stretch = true
-
-[node name="LifeBar" parent="PlayerHUD" instance=ExtResource( 8 )]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -124.0
-margin_top = -78.0
-margin_right = 124.0
-margin_bottom = -56.0
-value = 60.0
-nine_patch_stretch = true
-
-[node name="LifeBarEnemy" type="VBoxContainer" parent="PlayerHUD"]
-margin_right = 131.0
-margin_bottom = 31.0
-script = ExtResource( 10 )
-
-[node name="LifeBar" parent="PlayerHUD/LifeBarEnemy" instance=ExtResource( 8 )]
-margin_right = 131.0
-margin_bottom = 13.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-value = 60.0
-nine_patch_stretch = true
-
-[node name="Nickname" type="Label" parent="PlayerHUD/LifeBarEnemy"]
-margin_top = 17.0
-margin_right = 131.0
-margin_bottom = 31.0
-text = "JUSEP"
-align = 1
-
-[node name="Timer" type="Timer" parent="PlayerHUD/LifeBarEnemy"]
-
-[node name="SpeiclaWeapons" type="HBoxContainer" parent="PlayerHUD"]
-margin_left = 1570.0
-margin_top = 950.0
-margin_right = 1770.0
-margin_bottom = 1022.0
-theme = ExtResource( 28 )
-alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="PlayerHUD/SpeiclaWeapons"]
-margin_left = 136.0
-margin_right = 200.0
-margin_bottom = 72.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 27 )
-expand = true
-
-[node name="TextureRect2" type="TextureRect" parent="PlayerHUD/SpeiclaWeapons/TextureRect"]
-modulate = Color( 1, 1, 1, 0.690196 )
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -16.5
-margin_top = -36.0
-margin_right = 16.5
-margin_bottom = 36.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 26 )
-expand = true
-stretch_mode = 6
-
-[node name="Label" type="Label" parent="PlayerHUD/SpeiclaWeapons/TextureRect"]
-modulate = Color( 0.133333, 0.133333, 0.133333, 1 )
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -15.0
-margin_top = -30.0
-margin_right = -3.0
-grow_horizontal = 0
-grow_vertical = 0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "5"
-align = 1
-valign = 1
-
-[node name="Label2" type="Label" parent="PlayerHUD/SpeiclaWeapons/TextureRect"]
-modulate = Color( 0.133333, 0.133333, 0.133333, 1 )
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 3.0
-margin_top = -30.0
-margin_right = 15.0
-grow_vertical = 0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "F"
-align = 1
-valign = 1
-
-[node name="Label2" type="Label" parent="PlayerHUD/SpeiclaWeapons"]
-visible = false
-margin_left = 68.0
-margin_right = 200.0
-margin_bottom = 72.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "---"
-align = 1
-valign = 1
-
-[node name="Label3" type="Label" parent="PlayerHUD/SpeiclaWeapons"]
-visible = false
-margin_left = 136.0
-margin_right = 200.0
-margin_bottom = 72.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "---"
-align = 1
-valign = 1
-
-[node name="DamageIndicators" type="Control" parent="PlayerHUD"]
-unique_name_in_owner = true
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+[node name="PlayerHUD" parent="." instance=ExtResource( 6 )]
 
 [node name="HealthSystem" parent="." instance=ExtResource( 7 )]
 
@@ -634,9 +486,10 @@ bus = "Sounds"
 
 [connection signal="area_entered" from="Model/MeleeHitBox" to="." method="_on_MeleeHitBox_area_entered"]
 [connection signal="timeout" from="Interact/Timer" to="Interact" method="_on_Timer_timeout"]
-[connection signal="timeout" from="PlayerHUD/LifeBarEnemy/Timer" to="PlayerHUD/LifeBarEnemy" method="_on_Timer_timeout"]
-[connection signal="damage_taken" from="HealthSystem" to="PlayerHUD" method="_on_HealthSystem_damage_taken"]
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
+[connection signal="die" from="HealthSystem" to="Shooting" method="_on_HealthSystem_die"]
+[connection signal="die" from="HealthSystem" to="PlayerHUD" method="_on_HealthSystem_die"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine" method="_on_animation_finished"]
 
 [editable path="Model"]
+[editable path="PlayerHUD"]
