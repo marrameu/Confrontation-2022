@@ -38,7 +38,7 @@ func _process(delta):
 	var cam_basis : Basis = cam.global_transform.basis
 	
 	$RayCast.global_transform.origin = cam.global_transform.origin #- cam.global_transform.basis.z * 5 # distància fins al jugador
-	$RayCast.global_transform.basis = Basis(cam_basis.get_euler() + Vector3(deg2rad(180), 0, 0))
+	$RayCast.global_transform.basis = Basis(cam_basis.get_euler())
 
 
 func _physics_process(delta):

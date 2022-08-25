@@ -64,23 +64,22 @@ func _process(delta):
 		look_at($PathMaker.navigation_node.to_global($PathMaker.end), Vector3(0, 1, 0))
 		rotation = Vector3(0, rotation.y + deg2rad(180), 0)
 	
-	# Shoot
+	# AITroopShooting.gd
 	if current_enemy and weakref(current_enemy).get_ref():
-		if current_enemy.pilot_man:
-			if not current_enemy.translation == translation:
-				look_at(current_enemy.translation, Vector3(0, 1, 0))
-			rotation = Vector3(0, rotation.y + deg2rad(180), 0)
-			if not $Weapons/AIGun.shooting:
-				$Weapons/AIGun.shooting = true
+		var ray := get_world().direct_space_state.intersect_ray(translation, current_enemy.translation, [], 1) # sols environmmmment
+		if ray:
+			if current_enemy.translation.distance_to(translation) > 500: # si és prou a prop, no és estùpid, sap on s'amaga
+				current_enemy = null
+			else:
+				$Weapons/AIGun.shooting = false
 			return
-		else:
-			for i in range(0, $EnemyDetection.enemies.size()):
-				if not $EnemyDetection.enemies.size() > i:
-					return
-				if $EnemyDetection.enemies[i] == current_enemy:
-					$EnemyDetection.enemies.remove(i)
-			current_enemy = null
-	if $Weapons/AIGun.shooting:
+		
+		if not current_enemy.translation == translation:
+			look_at(current_enemy.global_translation, Vector3(0, 1, 0))
+		rotation = Vector3(0, rotation.y + deg2rad(180), 0)
+		$Weapons/AIGun.shooting = true
+	else:
+		current_enemy = null
 		$Weapons/AIGun.shooting = false
 
 

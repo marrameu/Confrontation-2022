@@ -97,7 +97,7 @@ func _shoot() -> void:
 	
 	var vector := Vector2(rand_range(-offset.x, offset.x), rand_range(-offset.y, offset.y))
 	vector = vector.length() * vector.normalized()
-	$RayCast.cast_to = Vector3(vector.x, vector.y, shoot_range)
+	$RayCast.cast_to = Vector3(vector.x, vector.y, -shoot_range)
 	$RayCast.force_raycast_update()
 	
 	var bullet : Bullet

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/Troops/AI/Troop.gd" type="Script" id=1]
 [ext_resource path="res://assets/models/ybot/TroopModelNew.tscn" type="PackedScene" id=2]
@@ -18,9 +18,6 @@
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.6
 height = 2.4
-
-[sub_resource type="BoxShape" id=2]
-extents = Vector3( 7, 3, 11 )
 
 [sub_resource type="CubeMesh" id=3]
 size = Vector3( 0.5, 0.5, 0.05 )
@@ -53,14 +50,9 @@ bullet_scene = ExtResource( 14 )
 [node name="EnemyDetection" type="Spatial" parent="."]
 script = ExtResource( 4 )
 
-[node name="Area" type="Area" parent="EnemyDetection"]
-collision_layer = 0
-collision_mask = 2
-monitorable = false
-
-[node name="CollisionShape" type="CollisionShape" parent="EnemyDetection/Area"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6 )
-shape = SubResource( 2 )
+[node name="Timer" type="Timer" parent="EnemyDetection"]
+wait_time = 3.0
+autostart = true
 
 [node name="PathMaker" type="Node" parent="."]
 script = ExtResource( 5 )
@@ -114,6 +106,7 @@ monitoring = false
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 4 )
 
+[connection signal="timeout" from="EnemyDetection/Timer" to="EnemyDetection" method="_on_Timer_timeout"]
 [connection signal="arrived" from="PathMaker" to="StateMachine/ConquerGroundCPs" method="_on_PathMaker_arrived"]
 [connection signal="arrived" from="PathMaker" to="StateMachine/EnterShip" method="_on_PathMaker_arrived"]
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
