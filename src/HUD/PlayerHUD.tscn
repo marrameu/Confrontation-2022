@@ -91,12 +91,19 @@ align = 1
 [node name="Timer" type="Timer" parent="Alive/LifeBarEnemy"]
 
 [node name="SpeiclaWeapons" type="HBoxContainer" parent="Alive"]
-margin_left = 1570.0
-margin_top = 950.0
-margin_right = 1770.0
-margin_bottom = 1022.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -267.0
+margin_top = -124.0
+margin_right = -67.0
+margin_bottom = -52.0
 theme = ExtResource( 3 )
 alignment = 2
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="TextureRect" type="TextureRect" parent="Alive/SpeiclaWeapons"]
 margin_left = 136.0
