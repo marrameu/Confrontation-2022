@@ -15,7 +15,7 @@ func spawn_player(pos := Vector3()):
 	new_ship.translation = Vector3(0, 2000, 0)
 	new_ship.init($PilotManagers/PlayerMan)
 	new_ship.leave()
-	_on_player_entered_ship(new_ship)
+	$PlayerShipCam._on_player_entered_ship()
 
 
 func start_battle():
