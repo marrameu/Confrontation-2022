@@ -79,7 +79,7 @@ func _physics_process(delta : float) -> void:
 	if wait_to_init:
 		return
 	
-	# AITroopShooting.gd
+		# AITroopShooting.gd
 	if current_enemy and weakref(current_enemy).get_ref():
 		# q no faci el ray cada frame
 		var ray := get_world().direct_space_state.intersect_ray(translation, current_enemy.translation, [], 1) # sols environmmmment
