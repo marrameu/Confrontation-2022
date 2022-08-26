@@ -63,25 +63,9 @@ func _process(delta):
 	if weakref($PathMaker.navigation_node).get_ref():
 		look_at($PathMaker.navigation_node.to_global($PathMaker.end), Vector3(0, 1, 0))
 		rotation = Vector3(0, rotation.y + deg2rad(180), 0)
-
-
-func _physics_process(delta : float) -> void:
-	if get_tree().has_network_peer():
-		if get_tree().is_network_server():
-			if translation.y > 1000:
-				pass
-			rset_unreliable("slave_position", global_transform.origin)
-			rset_unreliable("slave_rotation", rotation.y)
-		else:
-			global_transform.origin = slave_position
-			rotation = Vector3(0, slave_rotation, 0)
 	
-	if wait_to_init:
-		return
-	
-		# AITroopShooting.gd
+	# AITroopShooting.gd
 	if current_enemy and weakref(current_enemy).get_ref():
-		# q no faci el ray cada frame
 		var ray := get_world().direct_space_state.intersect_ray(translation, current_enemy.translation, [], 1) # sols environmmmment
 		if ray:
 			if current_enemy.translation.distance_to(translation) > 500: # si és prou a prop, no és estùpid, sap on s'amaga
@@ -97,6 +81,18 @@ func _physics_process(delta : float) -> void:
 	else:
 		current_enemy = null
 		$Weapons/AIGun.shooting = false
+
+
+func _physics_process(delta : float) -> void:
+	if get_tree().has_network_peer():
+		if get_tree().is_network_server():
+			if translation.y > 1000:
+				pass
+			rset_unreliable("slave_position", global_transform.origin)
+			rset_unreliable("slave_rotation", rotation.y)
+		else:
+			global_transform.origin = slave_position
+			rotation = Vector3(0, slave_rotation, 0)
 
 
 func _on_HealthSystem_die(attacker) -> void:
