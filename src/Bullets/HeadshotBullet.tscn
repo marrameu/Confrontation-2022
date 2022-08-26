@@ -5,3 +5,8 @@
 
 [node name="HeadshotBullet" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+bullet_velocity = 400.0
+_time_alive = 2.0
+
+[node name="HitAudio" parent="." index="7"]
+max_db = -5.0

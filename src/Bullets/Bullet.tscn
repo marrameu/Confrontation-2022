@@ -128,6 +128,7 @@ debug_shape_thickness = 5
 stream = ExtResource( 5 )
 unit_db = 80.0
 unit_size = 80.0
+max_db = 0.0
 pitch_scale = 1.5
 max_distance = 150.0
 attenuation_filter_db = -12.0

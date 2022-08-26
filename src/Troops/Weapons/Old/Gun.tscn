@@ -18,10 +18,10 @@ __meta__ = {
 
 [node name="ShootAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 2 )
-unit_db = 10.0
+unit_db = 80.0
 unit_size = 100.0
 max_db = 0.0
-max_distance = 150.0
+max_distance = 75.0
 attenuation_filter_db = -5.0
 __meta__ = {
 "_editor_description_": ""
