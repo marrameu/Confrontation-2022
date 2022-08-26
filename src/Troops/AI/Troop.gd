@@ -30,6 +30,8 @@ puppet var slave_rotation : = 0.0
 var wait_a_fcking_moment := false
 var wait_to_init := true
 
+var wait_to_shoot := false
+
 export var red_mat : Material
 export var blue_mat : Material
 
@@ -59,31 +61,25 @@ func _process(delta):
 	if wait_to_init:
 		return
 	
-	# Rotate, hauria de mirar al següent punt del camí i no pas al final de tot
-	if weakref($PathMaker.navigation_node).get_ref():
-		look_at($PathMaker.navigation_node.to_global($PathMaker.end), Vector3(0, 1, 0))
-		rotation = Vector3(0, rotation.y + deg2rad(180), 0)
-	
-	# AITroopShooting.gd
+		# AITroopShooting.gd
 	if current_enemy and weakref(current_enemy).get_ref():
-		# q no ho faci cada frame, però esq al physisc process no va bé, fa que apunti malament
-		# segurament és pq la gun tmb es gira en el physics, és a dir, abans
-		var ray := get_world().direct_space_state.intersect_ray(translation, current_enemy.translation, [], 1) # sols environmmmment
-		if ray:
-			if current_enemy.translation.distance_to(translation) > 500: # si és prou a prop, no és estùpid, sap on s'amaga
-				current_enemy = null
-			else:
-				$Weapons/AIGun.shooting = false
+		if wait_to_shoot:
+			$Weapons/AIGun.shooting = false
 			return
-		
 		if not current_enemy.translation == translation:
 			look_at(current_enemy.global_translation, Vector3(0, 1, 0))
 		rotation = Vector3(0, rotation.y + deg2rad(180), 0)
 		orthonormalize()
 		$Weapons/AIGun.shooting = true
+		return
 	else:
 		current_enemy = null
 		$Weapons/AIGun.shooting = false
+	
+	# Rotate, hauria de mirar al següent punt del camí i no pas al final de tot
+	if weakref($PathMaker.navigation_node).get_ref():
+		look_at($PathMaker.navigation_node.to_global($PathMaker.end), Vector3(0, 1, 0))
+		rotation = Vector3(0, rotation.y + deg2rad(180), 0)
 
 
 func _physics_process(delta : float) -> void:
@@ -209,3 +205,18 @@ func set_material() -> void:
 
 func _on_InitTimer_timeout():
 	wait_to_init = false
+
+
+func _on_CheckCurrentEnemyTimer_timeout():
+	# AITroopShooting.gd
+	if current_enemy and weakref(current_enemy).get_ref():
+		# q no ho faci cada frame, però esq al physisc process no va bé, fa que apunti malament
+		# segurament és pq la gun tmb es gira en el physics, és a dir, abans
+		var ray := get_world().direct_space_state.intersect_ray(translation, current_enemy.translation, [], 1) # sols environmmmment
+		if ray:
+			if current_enemy.translation.distance_to(translation) > 500: # si és prou a prop, no és estùpid, sap on s'amaga
+				current_enemy = null
+			else:
+				wait_to_shoot = true
+		else:
+			wait_to_shoot = false

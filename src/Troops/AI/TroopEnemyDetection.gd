@@ -18,7 +18,8 @@ func _process(_delta):
 				get_parent().current_enemy = null
 	"""
 
-func update_enemy(closest_dir := -INF, closes_dist := 1500.0) -> Spatial:
+# no sé quina hauria de ser la closest_dir per defecte
+func update_enemy(closest_dir := -1, closes_dist := 1500.0) -> Spatial:
 	var most_frontal_enenmy : Spatial = null
 	
 	var enemies := []
