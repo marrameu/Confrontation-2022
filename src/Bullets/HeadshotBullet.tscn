@@ -5,3 +5,4 @@
 
 [node name="HeadshotBullet" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+_time_alive = 2.0

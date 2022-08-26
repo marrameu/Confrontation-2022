@@ -35,6 +35,7 @@ func update_enemy(closest_dir := -INF, closes_dist := 1500.0) -> Spatial:
 						var ray := get_world().direct_space_state.intersect_ray(owner.translation, troop.translation, [], 1) # sols environmmmment
 						if not ray:
 							closest_dir = a
+							closes_dist = dist
 							most_frontal_enenmy = troop
 	
 	return most_frontal_enenmy

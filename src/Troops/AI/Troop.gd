@@ -66,6 +66,8 @@ func _process(delta):
 	
 	# AITroopShooting.gd
 	if current_enemy and weakref(current_enemy).get_ref():
+		# q no ho faci cada frame, però esq al physisc process no va bé, fa que apunti malament
+		# segurament és pq la gun tmb es gira en el physics, és a dir, abans
 		var ray := get_world().direct_space_state.intersect_ray(translation, current_enemy.translation, [], 1) # sols environmmmment
 		if ray:
 			if current_enemy.translation.distance_to(translation) > 500: # si és prou a prop, no és estùpid, sap on s'amaga
@@ -77,6 +79,7 @@ func _process(delta):
 		if not current_enemy.translation == translation:
 			look_at(current_enemy.global_translation, Vector3(0, 1, 0))
 		rotation = Vector3(0, rotation.y + deg2rad(180), 0)
+		orthonormalize()
 		$Weapons/AIGun.shooting = true
 	else:
 		current_enemy = null
