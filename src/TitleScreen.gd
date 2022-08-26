@@ -11,16 +11,16 @@ func _ready() -> void:
 	$MainMenu/VBoxContainer/FleetBattle.grab_focus()
 
 
-func _on_SpaceStationBattle_pressed():
+func _on_OrbitalBattle_pressed():
 	show_loading_screen(false)
-	load_scene("res://SpaceStationLevel.tscn", true)
+	load_scene("res://src/Levels/Level.tscn", true)
 
 
 func _on_FleetBattle_pressed():
 	# Utilities.play_button_audio()
 	# LocalMultiplayer.remap_inputs()
 	show_loading_screen(false)
-	load_scene("res://Level.tscn", true)
+	load_scene("res://src/Levels/FleetBattleSpace.tscn", true)
 
 
 func _on_Quit_pressed() -> void:
@@ -75,3 +75,14 @@ func update_progress() -> void:
 func _on_Debug_pressed():
 	show_loading_screen(false)
 	load_scene("res://DebugLevel.tscn", true)
+
+
+func _on_Credits_pressed():
+	$"%CreditsScreen".show()
+	$MainMenu.hide()
+
+
+func _on_Back_pressed():
+	$"%CreditsScreen".hide()
+	$MainMenu.show()
+
