@@ -8,7 +8,7 @@ const SPEED := 5
 var begin := Vector3()
 var end := Vector3()
 
-var min_distance := 5.0
+var min_distance := 1.0
 var path := []
 
 var finished := true
@@ -23,7 +23,9 @@ func _process(delta : float) -> void:
 	# Walk
 	if path.size() > 1:
 		# Distance to stop
+		# primer calcular la y
 		if get_parent().global_transform.origin.distance_to(end) < min_distance:
+			print(end)
 			path = []
 			finished = true
 			emit_signal("arrived")
@@ -44,7 +46,7 @@ func _process(delta : float) -> void:
 		
 		if path.size() > 1:
 			var atpos = path[path.size() - 1]
-			get_parent().translation = atpos + Vector3(0, 1.4 + 0.015, 0) 
+			get_parent().translation = atpos + Vector3(0, 1.415, 0) 
 			"""
 			No s'aplcia al transform global perque no hi hagin problemes amb
 			les naus en moviment, nogensmenys, per poder fer-ho, cal que el 
@@ -66,6 +68,8 @@ func update_path(new_begin : Vector3, new_end : Vector3) -> void:
 	var p = navigation_node.get_simple_path(begin, end, true)
 	path = Array(p) # Vector3 array too complex to use, convert to regular array (nse q vol dir)
 	path.invert()
+	
+	# això ho fa
 	
 	# Cal passar, ara, la path a coords. globals perquè aquestes s'apliquen directament a la posició de la tropa.
 	# Quan les naus capitals es moguin, açò s'haurà de fer diferent, potser passant-les primer a global i després a local respecte el node base de la nau

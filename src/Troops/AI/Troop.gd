@@ -36,9 +36,21 @@ export var red_mat : Material
 export var blue_mat : Material
 
 
+# pathfinding
+onready var agent: NavigationAgent = $NavigationAgent
+
+export var max_speed := 5.0
+export var rotation_speed := 8.0
+
+var current_direction := Vector3()
+var _velocity := Vector3.ZERO
+var _snap := Vector3.DOWN * 0.05
+
+
 func _ready():
 	blue_team = pilot_man.blue_team
 	$TeamIndicator.material_override = blue_mat if blue_team else red_mat
+	agent.connect("velocity_computed", self, "_move")
 
 
 # Client
@@ -51,8 +63,7 @@ func init() -> void:
 		die()
 
 
-# TOT AÇÒ NECESSITA UNA STATE MACHINE O, ALEMNYS, MÉS FUNCIONS SEPARADES o MATCH
-func _process(delta):
+func _physics_process(delta):
 	#$PlayerMesh.moving = !$PathMaker.finished
 	if get_tree().has_network_peer():
 		if not get_tree().is_network_server():
@@ -61,37 +72,44 @@ func _process(delta):
 	if wait_to_init:
 		return
 	
-		# AITroopShooting.gd
+	# Pathfinding.gd -> script separat potser per a l'agent
+	if not agent.is_navigation_finished():
+		var target_global_position := agent.get_next_location()
+		var direction := global_transform.origin.direction_to(target_global_position)
+		var desired_velocity := direction * agent.max_speed
+		var steering = (desired_velocity - _velocity) * delta * 4.0
+		_velocity += steering
+		#agent.set_velocity(_velocity)
+		_move(_velocity)
+		#_orient_character_to_direction(current_direction)
+	
+	# AITroopShooting.gd
 	if current_enemy and weakref(current_enemy).get_ref():
 		if wait_to_shoot:
-			$Weapons/AIGun.shooting = false
+			$"%AIGun".shooting = false
 			return
 		if not current_enemy.translation == translation:
 			look_at(current_enemy.global_translation, Vector3(0, 1, 0))
 		rotation = Vector3(0, rotation.y + deg2rad(180), 0)
 		orthonormalize()
-		$Weapons/AIGun.shooting = true
+		$"%AIGun".shooting = true
 		return
 	else:
 		current_enemy = null
-		$Weapons/AIGun.shooting = false
-	
-	# Rotate, hauria de mirar al següent punt del camí i no pas al final de tot
-	if weakref($PathMaker.navigation_node).get_ref():
-		look_at($PathMaker.navigation_node.to_global($PathMaker.end), Vector3(0, 1, 0))
-		rotation = Vector3(0, rotation.y + deg2rad(180), 0)
+		$"%AIGun".shooting = false
 
 
-func _physics_process(delta : float) -> void:
-	if get_tree().has_network_peer():
-		if get_tree().is_network_server():
-			if translation.y > 1000:
-				pass
-			rset_unreliable("slave_position", global_transform.origin)
-			rset_unreliable("slave_rotation", rotation.y)
-		else:
-			global_transform.origin = slave_position
-			rotation = Vector3(0, slave_rotation, 0)
+func _move(velocity: Vector3) -> void:
+	_velocity = move_and_slide_with_snap(velocity, _snap, Vector3.UP, true)
+	current_direction = Vector3(velocity.x, 0, velocity.z).normalized()
+
+
+func _orient_character_to_direction(direction: Vector3) -> void:
+	return
+	var left_axis := Vector3.UP.cross(direction)
+	var rotation_basis := Basis(left_axis, Vector3.UP, direction)
+	transform.basis = transform.basis.get_rotation_quat().slerp(rotation_basis.get_rotation_quat(), get_physics_process_delta_time() * rotation_speed)
+
 
 
 func _on_HealthSystem_die(attacker) -> void:
@@ -205,18 +223,5 @@ func set_material() -> void:
 
 func _on_InitTimer_timeout():
 	wait_to_init = false
+	$StateMachine.set_active(true)
 
-
-func _on_CheckCurrentEnemyTimer_timeout():
-	# AITroopShooting.gd
-	if current_enemy and weakref(current_enemy).get_ref():
-		# q no ho faci cada frame, però esq al physisc process no va bé, fa que apunti malament
-		# segurament és pq la gun tmb es gira en el physics, és a dir, abans
-		var ray := get_world().direct_space_state.intersect_ray(translation, current_enemy.translation, [], 1) # sols environmmmment
-		if ray:
-			if current_enemy.translation.distance_to(translation) > 500: # si és prou a prop, no és estùpid, sap on s'amaga
-				current_enemy = null
-			else:
-				wait_to_shoot = true
-		else:
-			wait_to_shoot = false

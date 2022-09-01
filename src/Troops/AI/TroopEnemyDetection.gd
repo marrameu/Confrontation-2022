@@ -7,19 +7,10 @@ func _ready() -> void:
 
 func _process(_delta):
 	pass
-	
-	"""
-	No funciona pq enemies sempre es buida
-	
-	if get_parent().current_enemy and weakref(get_parent().current_enemy).get_ref():
-		if get_parent().current_enemy.translation.distance_to(get_parent().translation) > 500: # si és prou a prop, no és estùpid, sap on s'amaga
-			var ray := get_world().direct_space_state.intersect_ray(owner.translation, get_parent().current_enemy.translation, [], 1) # sols environmmmment
-			if ray:
-				get_parent().current_enemy = null
-	"""
+
 
 # no sé quina hauria de ser la closest_dir per defecte
-func update_enemy(closest_dir := -1, closes_dist := 1500.0) -> Spatial:
+func update_enemy(closest_dir := -0.5, closes_dist := 1000.0) -> Spatial:
 	var most_frontal_enenmy : Spatial = null
 	
 	var enemies := []
@@ -33,7 +24,7 @@ func update_enemy(closest_dir := -1, closes_dist := 1500.0) -> Spatial:
 				if a > closest_dir:
 					var health_system : HealthSystem = troop.get_node("HealthSystem")
 					if health_system.health > 0:
-						var ray := get_world().direct_space_state.intersect_ray(owner.translation, troop.translation, [], 1) # sols environmmmment
+						var ray := get_world().direct_space_state.intersect_ray(owner.translation, troop.translation, [owner, troop], 3) # sols environmmmment
 						if not ray:
 							closest_dir = a
 							closes_dist = dist
@@ -45,3 +36,12 @@ func update_enemy(closest_dir := -1, closes_dist := 1500.0) -> Spatial:
 func _on_Timer_timeout():
 	if not owner.current_enemy: # timer pq no ho hagi de calcular cada frame
 		owner.current_enemy = update_enemy()
+
+
+func _on_HealthSystem_damage_taken(attacker : Spatial):
+	if owner.current_enemy != attacker:
+		if weakref(attacker).get_ref():
+			owner.look_at(attacker.translation, Vector3.UP)
+			owner.rotation = Vector3(0, rotation.y + deg2rad(180), 0)
+			owner.orthonormalize()
+			owner.current_enemy = update_enemy()

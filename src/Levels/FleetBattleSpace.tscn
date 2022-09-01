@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://SupportShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://CapitalShip.tscn" type="PackedScene" id=2]
@@ -17,6 +17,8 @@
 [ext_resource path="res://addons/silicon.vfx.lens_flare/lens_flare.gd" type="Script" id=15]
 [ext_resource path="res://addons/silicon.vfx.lens_flare/lens_dirt_default.jpeg" type="Texture" id=16]
 [ext_resource path="res://src/PostProcessing/ChromaticAberration/ChromaticAberrationPro.gdshader" type="Shader" id=17]
+
+[sub_resource type="BakedLightmapData" id=6]
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 17 )
@@ -48,6 +50,17 @@ blue_support_ship1 = NodePath("../BigShips/SuportShip")
 blue_support_ship2 = NodePath("../BigShips/SuportShip2")
 red_support_ship1 = NodePath("../BigShips/SuportShip3")
 red_support_ship2 = NodePath("../BigShips/SuportShip4")
+
+[node name="BakedLightmap" type="BakedLightmap" parent="."]
+transform = Transform( -2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, -2723.4, 1980.32, -0.112518 )
+extents = Vector3( 290.955, 27.4104, 138.449 )
+quality = 0
+bounces = 2
+atlas_generate = false
+atlas_max_size = 32768
+environment_mode = 1
+capture_enabled = false
+light_data = SubResource( 6 )
 
 [node name="PostProcessing" type="CanvasLayer" parent="."]
 

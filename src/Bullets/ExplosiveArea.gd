@@ -11,14 +11,6 @@ func _ready():
 	$DistanceRayCast.collision_mask = collision_mask
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
-func _process(delta):
-	print(get_overlapping_areas())
-
 
 func _on_Area_area_entered(area):
 	print("expllosionara ", area)

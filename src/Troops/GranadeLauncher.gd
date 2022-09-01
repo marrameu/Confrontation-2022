@@ -2,8 +2,6 @@ extends Spatial
 
 
 export var granade_scene : PackedScene = preload("res://src/Troops/Weapons/Granade.tscn")
-export var label_path : NodePath
-onready var label : Label = get_node(label_path)
 
 export var MAX_AMMO : int = 3
 var ammo := MAX_AMMO
@@ -20,8 +18,6 @@ func _ready():
 
 func _process(delta):
 	time += delta
-	
-	label.text = str(ammo)
 
 
 func launch_granade():

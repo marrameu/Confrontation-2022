@@ -11,6 +11,9 @@ func enter():
 
 
 func _on_PathMaker_arrived():
+	if get_parent().current_state != self:
+		return
+	
 	idle = false # nse q ve a compondre això
 	
 	if not conquering_a_cp:
@@ -53,7 +56,8 @@ func search_cp_and_conquer(): # àlies terra
 		
 		var begin : Vector3 = owner.get_node("PathMaker").navigation_node.get_closest_point(owner.get_translation())
 		var end := Vector3(rand_range(nearest_command_post.translation.x - 7, nearest_command_post.translation.x + 7), 0, rand_range(nearest_command_post.translation.z - 5, nearest_command_post.translation.z + 5))
-		owner.get_node("PathMaker").update_path(begin, end)
+		owner.agent.set_target_location(end)
+		print(owner, " ha update path?")
 		
 	# Si no hi han CP enemics
 	else:
@@ -66,3 +70,18 @@ func search_cp_and_conquer(): # àlies terra
 func _on_ConquestTimer_timeout():
 	# conquering_a_cp = false
 	emit_signal("finished", "choose_objective")
+
+
+func _on_CheckCurrentEnemyTimer_timeout() -> void:
+	if not get_parent().current_state == self:
+		return
+	._on_CheckCurrentEnemyTimer_timeout()
+	if owner.current_enemy: # ha de calcular dues veagdes la distància, tot plegat es podria fer millor
+		if owner.translation.distance_to(owner.current_enemy.translation) < 150:
+			emit_signal("finished", "attack_enemy")
+
+
+func exit():
+	idle = false
+	going_to_cp_to_conquer = false
+	conquering_a_cp = false

@@ -3,6 +3,9 @@ extends CanvasLayer
 
 const damage_indicator_scene : PackedScene = preload("res://src/HUD/TroopDamageIndicator.tscn")
 
+export var launch_grenade_path : NodePath
+onready var launch_grenade : Spatial = get_node(launch_grenade_path)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,6 +15,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	$"%MyLifeBar".value = float(owner.get_node("HealthSystem").health) / owner.get_node("HealthSystem").MAX_HEALTH * 100
+	$Alive/SpeiclaWeapons/TextureRect/Label.text = str(launch_grenade.ammo)
 
 
 func _on_HealthSystem_damage_taken(attacker : Spatial):

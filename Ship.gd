@@ -85,7 +85,7 @@ func update_thruster_flame():
 	$ShipMesh/Thuster/Fire.emitting = !input.drifting
 	
 	var v_len = linear_velocity.length()
-	print ((v_len / 2) - 105)
+	#print ((v_len / 2) - 105)
 	
 	$ShipMesh/Thuster/Fire.get_process_material().linear_accel = (v_len / 2) - 105
 	#$ShipMesh/Thuster/Fire.get_process_material().damping = això no tinc ni idea de com fer-ho
