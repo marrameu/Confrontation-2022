@@ -31,11 +31,12 @@ func _on_CheckCurrentEnemyTimer_timeout():
 		approaching_enemy = false
 		if dist < 50:
 			# tira enrere
-			owner.get_node("PathMaker").clean_path()
+			owner.agent.set_target_location(owner.translation)
+			#owner.get_node("PathMaker").clean_path()
 			return
 		else:
 			# q es mougui de dreta a esquerra?, així els raycast pdorien obviar el layer de les tropes
-			owner.get_node("PathMaker").clean_path()
+			owner.agent.set_target_location(owner.translation)
 			return
 	
 	# dsitància 200-500

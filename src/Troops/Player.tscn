@@ -213,13 +213,13 @@ states/grenadethrow/position = Vector2( 540, 128 )
 states/reload/node = SubResource( 73 )
 states/reload/position = Vector2( 223, 149 )
 
-[sub_resource type="AnimationNodeAnimation" id=56]
+[sub_resource type="AnimationNodeAnimation" id=87]
 animation = "walkright"
 
-[sub_resource type="AnimationNodeAnimation" id=57]
+[sub_resource type="AnimationNodeAnimation" id=88]
 animation = "walkbackward"
 
-[sub_resource type="AnimationNodeAnimation" id=58]
+[sub_resource type="AnimationNodeAnimation" id=89]
 animation = "walkleft"
 
 [sub_resource type="AnimationNodeAnimation" id=59]
@@ -228,7 +228,7 @@ animation = "walkforward"
 [sub_resource type="AnimationNodeAnimation" id=60]
 animation = "riflerun"
 
-[sub_resource type="AnimationNodeBlendSpace1D" id=61]
+[sub_resource type="AnimationNodeBlendSpace1D" id=90]
 blend_point_0/node = SubResource( 59 )
 blend_point_0/pos = 0.0
 blend_point_1/node = SubResource( 60 )
@@ -243,7 +243,7 @@ animation = "rifleidle"
 
 [sub_resource type="AnimationNodeBlend2" id=64]
 
-[sub_resource type="AnimationNodeBlendTree" id=65]
+[sub_resource type="AnimationNodeBlendTree" id=91]
 nodes/Animation/node = SubResource( 63 )
 nodes/Animation/position = Vector2( 226.08, 159.84 )
 "nodes/Animation 2/node" = SubResource( 62 )
@@ -255,15 +255,15 @@ node_connections = [ "output", 0, "aim", "aim", 0, "Animation", "aim", 1, "Anima
 
 [sub_resource type="AnimationNodeBlendSpace2D" id=47]
 resource_local_to_scene = true
-blend_point_0/node = SubResource( 56 )
+blend_point_0/node = SubResource( 87 )
 blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 57 )
+blend_point_1/node = SubResource( 88 )
 blend_point_1/pos = Vector2( 0, -1 )
-blend_point_2/node = SubResource( 58 )
+blend_point_2/node = SubResource( 89 )
 blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 61 )
+blend_point_3/node = SubResource( 90 )
 blend_point_3/pos = Vector2( 0, 1 )
-blend_point_4/node = SubResource( 65 )
+blend_point_4/node = SubResource( 91 )
 blend_point_4/pos = Vector2( 0, 0 )
 
 [sub_resource type="AnimationNodeOneShot" id=50]
@@ -339,7 +339,7 @@ script = ExtResource( 2 )
 [node name="Model" parent="." instance=ExtResource( 22 )]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Model/Skeleton" index="2"]
-transform = Transform( -0.0537194, -0.983836, -0.17082, -0.314992, -0.145638, 0.937853, -0.947572, 0.104187, -0.302078, -0.317036, 1.02922, 0.188713 )
+transform = Transform( -0.0512894, -0.984053, -0.17032, -0.31662, -0.145724, 0.937292, -0.947165, 0.102, -0.304096, -0.307618, 1.01124, 0.219207 )
 bone_name = "mixamorig_RightHand"
 
 [node name="Weapons" type="Spatial" parent="Model/Skeleton/BoneAttachment"]

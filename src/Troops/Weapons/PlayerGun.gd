@@ -20,8 +20,8 @@ func _process(delta):
 		#$HUD/Crosshair/AnimationPlayer.current_animation = "RESET"
 		return
 	
-	$HUD/Crosshair/AnimationTree.set("parameters/conditions/!zooming", !cam_base.zooming)
-	$HUD/Crosshair/AnimationTree.set("parameters/conditions/zooming", cam_base.zooming)
+	$HUD.get_node("%Crosshair/AnimationTree").set("parameters/conditions/!zooming", !cam_base.zooming)
+	$HUD.get_node("%Crosshair/AnimationTree").set("parameters/conditions/zooming", cam_base.zooming)
 	
 	$"%Ammo".value = ammo/MAX_AMMO*100
 	if !reload_per_sec:
@@ -42,7 +42,7 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	$HUD/Crosshair.modulate = Color("ffffff") if owner.can_shoot else Color("3fffffff")
+	$HUD.get_node("%Crosshair").modulate = Color("ffffff") if owner.can_shoot else Color("3fffffff")
 	if not owner.can_shoot: #or not get_viewport().get_camera().owner.zooming:
 		$Mesh.rotation = original_rot
 		return

@@ -7,141 +7,6 @@
 [ext_resource path="res://assets/interface/life_bar.png" type="Texture" id=7]
 [ext_resource path="res://assets/audio/no_ammo.wav" type="AudioStream" id=8]
 
-[sub_resource type="AnimationNodeAnimation" id=7]
-animation = "zoom_in"
-
-[sub_resource type="AnimationNodeAnimation" id=8]
-animation = "zoom_out"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=15]
-advance_condition = "!zooming"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=16]
-advance_condition = "zooming"
-
-[sub_resource type="AnimationNodeStateMachine" id=17]
-states/zoom_in/node = SubResource( 7 )
-states/zoom_in/position = Vector2( 102, 248 )
-states/zoom_out/node = SubResource( 8 )
-states/zoom_out/position = Vector2( 354, 72 )
-transitions = [ "zoom_in", "zoom_out", SubResource( 15 ), "zoom_out", "zoom_in", SubResource( 16 ) ]
-start_node = "zoom_out"
-graph_offset = Vector2( -522, -10 )
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id=18]
-
-[sub_resource type="Animation" id=19]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 940, 520 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:rect_size")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 40, 40 ) ]
-}
-
-[sub_resource type="Animation" id=20]
-resource_name = "zoom_in"
-length = 0.1
-step = 0.01
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 940, 520 ), Vector2( 943, 523 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:rect_size")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 40, 40 ), Vector2( 34, 34 ) ]
-}
-
-[sub_resource type="Animation" id=21]
-resource_name = "zoom_out"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 943, 523 ), Vector2( 940, 520 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:rect_size")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 34, 34 ), Vector2( 40, 40 ) ]
-}
-
-[sub_resource type="Animation" id=22]
-resource_name = "zoomed"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 943, 523 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:rect_size")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 34, 34 ) ]
-}
-
 [sub_resource type="Animation" id=23]
 resource_name = "hit"
 length = 0.15
@@ -410,6 +275,141 @@ tracks/4/keys = {
 } ]
 }
 
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "zoom_in"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "zoom_out"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+advance_condition = "!zooming"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+advance_condition = "zooming"
+
+[sub_resource type="AnimationNodeStateMachine" id=17]
+states/zoom_in/node = SubResource( 7 )
+states/zoom_in/position = Vector2( 102, 248 )
+states/zoom_out/node = SubResource( 8 )
+states/zoom_out/position = Vector2( 354, 72 )
+transitions = [ "zoom_in", "zoom_out", SubResource( 15 ), "zoom_out", "zoom_in", SubResource( 16 ) ]
+start_node = "zoom_out"
+graph_offset = Vector2( -310, -20 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=18]
+
+[sub_resource type="Animation" id=19]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 40, 40 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 40, 40 ) ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "zoom_in"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 40, 40 ), Vector2( 43, 43 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 40, 40 ), Vector2( 34, 34 ) ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "zoom_out"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 43, 43 ), Vector2( 40, 40 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 34, 34 ), Vector2( 40, 40 ) ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "zoomed"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 44, 44 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 32, 32 ) ]
+}
+
 [node name="PlayerGun" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 continuous = true
@@ -455,75 +455,7 @@ tint_under = Color( 1, 1, 1, 0.215686 )
 tint_progress = Color( 1, 0.8, 0.207843, 1 )
 nine_patch_stretch = true
 
-[node name="Crosshair" type="Control" parent="HUD" index="1"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 20.0
-margin_bottom = 20.0
-
-[node name="CrosshairPart" type="TextureRect" parent="HUD/Crosshair" index="0"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_top = -7.0
-margin_right = 14.0
-margin_bottom = 7.0
-texture = ExtResource( 4 )
-expand = true
-
-[node name="CrosshairPart2" type="TextureRect" parent="HUD/Crosshair" index="1"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = 6.0
-margin_right = 20.0
-margin_bottom = 14.0
-rect_rotation = 90.0
-texture = ExtResource( 4 )
-expand = true
-
-[node name="CrosshairPart3" type="TextureRect" parent="HUD/Crosshair" index="2"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 6.0
-margin_top = -14.0
-margin_right = 20.0
-rect_rotation = 90.0
-texture = ExtResource( 4 )
-expand = true
-flip_h = true
-
-[node name="CrosshairPart4" type="TextureRect" parent="HUD/Crosshair" index="3"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -14.0
-margin_top = -7.0
-margin_bottom = 7.0
-texture = ExtResource( 4 )
-expand = true
-flip_h = true
-
-[node name="AnimationTree" type="AnimationTree" parent="HUD/Crosshair" index="4"]
-tree_root = SubResource( 17 )
-anim_player = NodePath("../AnimationPlayer")
-active = true
-parameters/playback = SubResource( 18 )
-parameters/conditions/!zooming = false
-parameters/conditions/zooming = false
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/Crosshair" index="5"]
-anims/RESET = SubResource( 19 )
-anims/zoom_in = SubResource( 20 )
-anims/zoom_out = SubResource( 21 )
-anims/zoomed = SubResource( 22 )
-
-[node name="Pivot" type="Control" parent="HUD" index="2"]
+[node name="Pivot" type="Control" parent="HUD" index="1"]
 modulate = Color( 1, 1, 1, 0.615686 )
 anchor_left = 0.5
 anchor_top = 0.5
@@ -549,6 +481,75 @@ anims/hit = SubResource( 23 )
 anims/killed = SubResource( 24 )
 anims/red = SubResource( 25 )
 anims/red_hitmarker = SubResource( 26 )
+
+[node name="Crosshair" type="Control" parent="HUD/Pivot" index="1"]
+unique_name_in_owner = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 80.0
+margin_bottom = 80.0
+
+[node name="CrosshairPart" type="TextureRect" parent="HUD/Pivot/Crosshair" index="0"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_right = 14.0
+margin_bottom = 7.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="CrosshairPart2" type="TextureRect" parent="HUD/Pivot/Crosshair" index="1"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 6.0
+margin_right = 20.0
+margin_bottom = 14.0
+rect_rotation = 90.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="CrosshairPart3" type="TextureRect" parent="HUD/Pivot/Crosshair" index="2"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = -14.0
+margin_right = 20.0
+rect_rotation = 90.0
+texture = ExtResource( 4 )
+expand = true
+flip_h = true
+
+[node name="CrosshairPart4" type="TextureRect" parent="HUD/Pivot/Crosshair" index="3"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -14.0
+margin_top = -7.0
+margin_bottom = 7.0
+texture = ExtResource( 4 )
+expand = true
+flip_h = true
+
+[node name="AnimationTree" type="AnimationTree" parent="HUD/Pivot/Crosshair" index="4"]
+tree_root = SubResource( 17 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 18 )
+parameters/conditions/!zooming = false
+parameters/conditions/zooming = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/Pivot/Crosshair" index="5"]
+anims/RESET = SubResource( 19 )
+anims/zoom_in = SubResource( 20 )
+anims/zoom_out = SubResource( 21 )
+anims/zoomed = SubResource( 22 )
 
 [node name="NoAmmo" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource( 8 )

@@ -55,9 +55,12 @@ func search_cp_and_conquer(): # àlies terra
 		nearest_command_post = enemy_command_posts[randi()%enemy_command_posts.size()]
 		
 		var begin : Vector3 = owner.get_node("PathMaker").navigation_node.get_closest_point(owner.get_translation())
-		var end := Vector3(rand_range(nearest_command_post.translation.x - 7, nearest_command_post.translation.x + 7), 0, rand_range(nearest_command_post.translation.z - 5, nearest_command_post.translation.z + 5))
+		var end := Vector3(rand_range(nearest_command_post.translation.x - 7, nearest_command_post.translation.x - 7), nearest_command_post.translation.y, rand_range(nearest_command_post.translation.z - 5, nearest_command_post.translation.z + 5))
 		owner.agent.set_target_location(end)
 		print(owner, " ha update path?")
+		
+		if !owner.agent.is_target_reachable():
+			pass
 		
 	# Si no hi han CP enemics
 	else:
