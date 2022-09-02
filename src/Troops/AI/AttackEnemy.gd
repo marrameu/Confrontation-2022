@@ -20,7 +20,7 @@ func _on_CheckCurrentEnemyTimer_timeout():
 	if not owner.current_enemy:
 		emit_signal("finished", "previous")
 		return
-	var ray = owner.get_world().direct_space_state.intersect_ray(owner.translation, owner.current_enemy.translation, [owner, owner.current_enemy], 3) # sols environmmmment
+	var ray = owner.get_world().direct_space_state.intersect_ray(owner.translation + Vector3(0, 1.75, 0), owner.current_enemy.translation + Vector3(0, 1.75, 0), [owner, owner.current_enemy], 3) # sols environmmmment
 	if ray: # q passaria si la distància fos 1500 i no hi haguès raycast?
 		if not approaching_enemy:
 			approach_enemy()

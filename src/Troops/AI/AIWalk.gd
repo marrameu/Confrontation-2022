@@ -20,11 +20,12 @@ func update(delta):
 		if _velocity:
 			if not owner.current_enemy:
 				_orient_character_to_direction(current_direction)
-		else:
-			owner.get_node("AnimationTree").set("parameters/StateMachine/walk/move/blend_position", Vector2.ZERO)
+	else:
+		owner.get_node("AnimationTree").set("parameters/StateMachine/walk/move/blend_position", Vector2.ZERO)
 	
 	# AITroopShooting.gd
 	if owner.current_enemy and weakref(owner.current_enemy).get_ref():
+		print(_velocity)
 		if owner.wait_to_shoot:
 			owner.get_node("%AIGun").shooting = false
 			return

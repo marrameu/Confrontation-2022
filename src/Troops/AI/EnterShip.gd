@@ -47,7 +47,7 @@ func search_ship(): # comprovar que no hi hagi ningú a la nau
 			owner.agent.set_target_location(end)
 
 
-func _on_PathMaker_arrived():
+func _on_NavigationAgent_target_reached():
 	if get_parent().current_state != self:
 		return
 	
@@ -72,3 +72,4 @@ func _on_CheckCurrentEnemyTimer_timeout() -> void:
 	if owner.current_enemy: # ha de calcular dues veagdes la distància, tot plegat es podria fer millor
 		if owner.translation.distance_to(owner.current_enemy.translation) < 150:
 			emit_signal("finished", "attack_enemy")
+

@@ -16,6 +16,7 @@ func _ready():
 func _process(delta):
 	$"%MyLifeBar".value = float(owner.get_node("HealthSystem").health) / owner.get_node("HealthSystem").MAX_HEALTH * 100
 	$Alive/SpeiclaWeapons/TextureRect/Label.text = str(launch_grenade.ammo)
+	$"%TotalPointsNumberLabel".text = str(owner.pilot_man.points)
 
 
 func _on_HealthSystem_damage_taken(attacker : Spatial):

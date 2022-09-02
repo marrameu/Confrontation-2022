@@ -10,7 +10,7 @@ func enter():
 	search_cp_and_conquer()
 
 
-func _on_PathMaker_arrived():
+func _on_NavigationAgent_target_reached():
 	if get_parent().current_state != self:
 		return
 	

@@ -5966,7 +5966,7 @@ blue_mat = ExtResource( 9 )
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.0153644, 0 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Model/Skeleton" index="2"]
-transform = Transform( -0.0536838, -0.983921, -0.170342, -0.315033, -0.145189, 0.937909, -0.947561, 0.104014, -0.302173, -0.314209, 1.03396, 0.188026 )
+transform = Transform( -0.0549361, -0.983106, -0.174597, -0.315433, -0.148819, 0.937206, -0.947356, 0.10656, -0.301929, -0.301956, 1.04733, 0.188911 )
 bone_name = "mixamorig_RightHand"
 
 [node name="Weapons" type="Spatial" parent="Model/Skeleton/BoneAttachment"]
@@ -5978,7 +5978,7 @@ __meta__ = {
 
 [node name="AIGun" parent="Model/Skeleton/BoneAttachment/Weapons" instance=ExtResource( 3 )]
 unique_name_in_owner = true
-transform = Transform( 0.135808, 0.981051, 0.138165, -0.166428, -0.114885, 0.979336, 0.976655, -0.155997, 0.147672, -0.05374, 0.202095, 1.3833 )
+transform = Transform( -0.975965, -0.151395, -0.156731, -0.139035, 0.986446, -0.0870924, 0.167793, -0.0632085, -0.983791, -0.0514054, -0.00399709, -0.0301232 )
 bullet_scene = ExtResource( 14 )
 
 [node name="AnimationPlayer" parent="Model" index="1"]
@@ -6162,6 +6162,8 @@ shape = SubResource( 95 )
 [connection signal="damage_taken" from="HealthSystem" to="EnemyDetection" method="_on_HealthSystem_damage_taken"]
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
 [connection signal="timeout" from="InitTimer" to="." method="_on_InitTimer_timeout"]
+[connection signal="target_reached" from="NavigationAgent" to="AIStateMachine/ConquerGroundCPs" method="_on_NavigationAgent_target_reached"]
+[connection signal="target_reached" from="NavigationAgent" to="AIStateMachine/EnterShip" method="_on_NavigationAgent_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent" to="." method="_on_NavigationAgent_velocity_computed"]
 [connection signal="timeout" from="AIStateMachine/ConquerGroundCPs/ConquestTimer" to="AIStateMachine/ConquerGroundCPs" method="_on_ConquestTimer_timeout"]
 [connection signal="timeout" from="AIStateMachine/EnterShip/WaitTimer" to="AIStateMachine/EnterShip" method="_on_WaitTimer_timeout"]

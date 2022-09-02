@@ -39,6 +39,7 @@ onready var agent: NavigationAgent = $NavigationAgent
 
 
 func _ready():
+	$CheckCurrentEnemyTimer.wait_time = rand_range(2.5, 3.5)
 	$AnimationTree.set("parameters/StateMachine/walk/move/3/blend_position", 1)
 	blue_team = pilot_man.blue_team
 	$TeamIndicator.material_override = blue_mat if blue_team else red_mat
@@ -73,9 +74,25 @@ func set_material() -> void:
 		get_node(body).set_surface_material(4, load("res://assets/models/mannequiny/Azul_L.material"))
 
 
-
 func _on_InitTimer_timeout():
 	wait_to_init = false
 	$StateMachine.set_active(true)
 	$AIStateMachine.set_active(true)
+
+
+func _on_damagable_hit():
+	pilot_man.points += 10
+
+
+func _on_headshot():
+	pilot_man.points += 20
+
+
+func _on_enemy_died(attacker):
+	if attacker == self:
+		pilot_man.points += 100
+	else:
+		# assistència, desonenectar el senyal després de 5 segons
+		pilot_man.points += 50
+
 

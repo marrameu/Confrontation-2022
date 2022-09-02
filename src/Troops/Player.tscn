@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://assets/audio/grenade_throw.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/Troops/Player.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/HUD/PlayerHUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/HealthSystem/HealthSystem.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/Troops/PlayerTroopShooting.gd" type="Script" id=8]
+[ext_resource path="res://src/Troops/PointsTracker.gd" type="Script" id=9]
 [ext_resource path="res://src/Troops/TroopStateMachine.gd" type="Script" id=11]
 [ext_resource path="res://src/Troops/Dead.gd" type="Script" id=12]
 [ext_resource path="res://src/Troops/Jump.gd" type="Script" id=13]
@@ -339,7 +340,7 @@ script = ExtResource( 2 )
 [node name="Model" parent="." instance=ExtResource( 22 )]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Model/Skeleton" index="2"]
-transform = Transform( -0.0512894, -0.984053, -0.17032, -0.31662, -0.145724, 0.937292, -0.947165, 0.102, -0.304096, -0.307618, 1.01124, 0.219207 )
+transform = Transform( -0.0545275, -0.98306, -0.174982, -0.315527, -0.149299, 0.937098, -0.947349, 0.106309, -0.302041, -0.291366, 1.05865, 0.190386 )
 bone_name = "mixamorig_RightHand"
 
 [node name="Weapons" type="Spatial" parent="Model/Skeleton/BoneAttachment"]
@@ -483,6 +484,9 @@ current = true
 stream = ExtResource( 23 )
 volume_db = 10.0
 bus = "Sounds"
+
+[node name="PointsTracker" type="Node" parent="."]
+script = ExtResource( 9 )
 
 [connection signal="area_entered" from="Model/MeleeHitBox" to="." method="_on_MeleeHitBox_area_entered"]
 [connection signal="timeout" from="Interact/Timer" to="Interact" method="_on_Timer_timeout"]

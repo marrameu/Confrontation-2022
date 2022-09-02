@@ -36,7 +36,7 @@ func _on_CheckCurrentEnemyTimer_timeout():
 			owner.current_enemy = null
 			return
 		var dist : float = owner.current_enemy.translation.distance_to(owner.translation)
-		var ray = owner.get_world().direct_space_state.intersect_ray(owner.translation, owner.current_enemy.translation, [owner, owner.current_enemy], 3) # sols environmmmment
+		var ray = owner.get_world().direct_space_state.intersect_ray(owner.translation + Vector3(0, 1.75, 0), owner.current_enemy.translation + Vector3(0, 1.75, 0), [owner, owner.current_enemy], 3) # sols environmmmment
 		if ray:
 			if dist > 500: # si és prou a prop, no és estùpid, sap on s'amaga
 				owner.current_enemy = null

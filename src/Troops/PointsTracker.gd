@@ -1,13 +1,14 @@
-extends PilotManager
-class_name AIPilotManager
+extends Node
 
-var spawn_in_space := false
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = "text"
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#nickname = "Troop " + str(randi()%100)
-	pass
+	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

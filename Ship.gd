@@ -129,13 +129,15 @@ func _on_HealthSystem_die(attacker : Spatial):
 	if attacker and is_player_or_ai == 1:
 		cam.killer = (attacker)
 	
-	if state == States.FLYING:
-		# marca de dany?
-		var t = Timer.new()
-		t.set_wait_time(2)
-		self.add_child(t)
-		t.start()
-		t.connect("timeout", self, "die")
+	#if state == States.FLYING:
+	# marca de dany?
+	var t = Timer.new()
+	t.set_wait_time(2)
+	self.add_child(t)
+	t.start()
+	t.connect("timeout", self, "die")
+	#else:
+	#	die()
 
 
 func die():

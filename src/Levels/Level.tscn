@@ -672,6 +672,7 @@ visible = false
 [node name="PlayerMan" type="Node" parent="PilotManagers"]
 script = ExtResource( 8 )
 is_player = true
+nickname = "Player"
 
 [node name="BigShips" type="Spatial" parent="."]
 
