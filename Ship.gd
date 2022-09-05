@@ -4,6 +4,7 @@ class_name Ship
 signal ship_died
 signal killed_enemy
 signal big_ship_shields_down
+signal points_added
 
 export var red_mat : Material
 export var blue_mat : Material
@@ -85,7 +86,7 @@ func update_thruster_flame():
 	$ShipMesh/Thuster/Fire.emitting = !input.drifting
 	
 	var v_len = linear_velocity.length()
-	print ((v_len / 2) - 105)
+	#print ((v_len / 2) - 105)
 	
 	$ShipMesh/Thuster/Fire.get_process_material().linear_accel = (v_len / 2) - 105
 	#$ShipMesh/Thuster/Fire.get_process_material().damping = això no tinc ni idea de com fer-ho
@@ -129,13 +130,15 @@ func _on_HealthSystem_die(attacker : Spatial):
 	if attacker and is_player_or_ai == 1:
 		cam.killer = (attacker)
 	
-	if state == States.FLYING:
-		# marca de dany?
-		var t = Timer.new()
-		t.set_wait_time(2)
-		self.add_child(t)
-		t.start()
-		t.connect("timeout", self, "die")
+	#if state == States.FLYING:
+	# marca de dany?
+	var t = Timer.new()
+	t.set_wait_time(2)
+	self.add_child(t)
+	t.start()
+	t.connect("timeout", self, "die")
+	#else:
+	#	die()
 
 
 func die():
@@ -145,15 +148,19 @@ func die():
 
 
 func _on_damagable_hit():
+	add_points(5) # fer q depengui de la bala
 	if is_player_or_ai == 1:
 		$PlayerHUD.on_damagable_hit()
 
 
 func _on_enemy_died(attacker : Node): # passar tmb l'enemic
 	if attacker == self:
+		add_points(150)
 		emit_signal("killed_enemy")
 		if is_player_or_ai == 1:
 			$PlayerHUD.on_enemy_died()
+	else:
+		add_points(75)
 
 
 func leave() -> void:
@@ -198,3 +205,9 @@ func exit_ship(): # de moment, sols player
 	set_team_color()
 	disconnect("ship_died", get_tree().current_scene, "_on_ship_died")
 	is_player_or_ai = 0
+
+
+func add_points(points : int) -> void:
+	if is_player_or_ai == 1:
+		emit_signal("points_added", points)
+	pilot_man.points += points

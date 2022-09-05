@@ -598,7 +598,7 @@ start_team = 1
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 231.874, -41.732, 129.971 )
 
 [node name="CommandPost2" parent="Map/CommandPosts" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -32.0445, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -44.7776, -32.0445, 0 )
 
 [node name="CommandPost3" parent="Map/CommandPosts" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 84.8109, 8.7182, -139.98 )
@@ -672,6 +672,7 @@ visible = false
 [node name="PlayerMan" type="Node" parent="PilotManagers"]
 script = ExtResource( 8 )
 is_player = true
+nickname = "Player"
 
 [node name="BigShips" type="Spatial" parent="."]
 

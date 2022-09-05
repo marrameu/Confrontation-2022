@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/Troops/PlayerHUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/interface/ship_cursor.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://src/Troops/Player/HUD/LifeBar.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/interface/life_bar.png" type="Texture" id=6]
 [ext_resource path="res://assets/interface/grenade.png" type="Texture" id=7]
+[ext_resource path="res://src/HUD/Points.tscn" type="PackedScene" id=8]
 
 [node name="PlayerHUD" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -188,5 +189,7 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+
+[node name="Points" parent="." instance=ExtResource( 8 )]
 
 [connection signal="timeout" from="Alive/LifeBarEnemy/Timer" to="Alive/LifeBarEnemy" method="_on_Timer_timeout"]

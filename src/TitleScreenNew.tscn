@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://assets/interface/themes/new_theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/interface/Fonts/Manrope/Manrope-VariableFont_wght.ttf" type="DynamicFontData" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/Materials/red_ship_mat.tres" type="Material" id=6]
 [ext_resource path="res://assets/models/ybot/TroopModelNew.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/models/weapons/Rifle/RifleModel.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/effects/ThrusterParticles/ThrusterParticle.tscn" type="PackedScene" id=9]
 
 [sub_resource type="DynamicFont" id=20]
 size = 20
@@ -5766,6 +5767,9 @@ material_override = ExtResource( 6 )
 [node name="Cube001" parent="Models/CombatShip2" index="1"]
 material_override = ExtResource( 6 )
 
+[node name="Thruster" parent="Models/CombatShip2" instance=ExtResource( 9 )]
+transform = Transform( 0.0253996, 0.449621, 1.94864, -0.00464728, 1.9488, -0.449598, -1.99983, 0.00118186, 0.0257942, 0.0911355, 0.666113, -8.81744 )
+
 [node name="DirectionalLight2" type="DirectionalLight" parent="Models"]
 transform = Transform( 0.70866, 0.457789, 0.53687, -0.635008, 0.0821853, 0.768122, 0.307515, -0.885254, 0.348941, 0, 57.0278, 0 )
 light_energy = 2.0
@@ -5783,11 +5787,8 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Skeleton" parent="Models/Model" index="0"]
-bones/36/bound_children = [ NodePath("BoneAttachment") ]
-
 [node name="BoneAttachment" type="BoneAttachment" parent="Models/Model/Skeleton" index="2"]
-transform = Transform( -0.896398, -0.356441, 0.263472, 0.322696, -0.117295, 0.939207, -0.303868, 0.926926, 0.220166, -0.12208, 1.16277, 0.23293 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.737799, 1.43446, -0.0592439 )
 bone_name = "mixamorig_RightHand"
 
 [node name="Rifle" parent="Models/Model/Skeleton/BoneAttachment" instance=ExtResource( 8 )]
@@ -5880,6 +5881,7 @@ text = "BACK"
 [connection signal="pressed" from="MainMenu/VBoxContainer/OrbitalBattle" to="." method="_on_OrbitalBattle_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/FleetBattle" to="." method="_on_FleetBattle_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/Credits" to="." method="_on_Credits_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="pressed" from="CreditsScreen/Back" to="." method="_on_Back_pressed"]
 
 [editable path="Models/CombatShip2"]

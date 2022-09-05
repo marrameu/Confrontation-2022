@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Ships/LandingArea/LandingArea.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/BigShips/Hangar/ShipSpawn.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/audio/not_a_drill.ogg" type="AudioStream" id=3]
+[ext_resource path="res://src/Ships/ShipTransport.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -28,7 +29,7 @@ material/0 = SubResource( 2 )
 
 [node name="StaticBody" type="StaticBody" parent="HangarDoor"]
 collision_layer = 16
-collision_mask = 2
+collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="HangarDoor/StaticBody"]
 shape = SubResource( 3 )
@@ -40,7 +41,7 @@ material/0 = SubResource( 2 )
 
 [node name="StaticBody" type="StaticBody" parent="HangarDoor2"]
 collision_layer = 16
-collision_mask = 2
+collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="HangarDoor2/StaticBody"]
 shape = SubResource( 4 )
@@ -59,6 +60,7 @@ simultaneous_ships = 2
 
 [node name="ShipSpawn2" parent="ShipSpawns" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -89.3984, -14.8672, -29.6907 )
+ship_scene = ExtResource( 4 )
 simultaneous_ships = 2
 
 [node name="ShipSpawn3" parent="ShipSpawns" instance=ExtResource( 2 )]

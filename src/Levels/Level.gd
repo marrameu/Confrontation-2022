@@ -118,6 +118,7 @@ func spawn_ai_troop(ai_num : int, blue_team := false, spawn_in_space := false, p
 	if not new_troop_man:
 		new_troop_man = AIPilotManager.new()
 		new_troop_man.name = ("AIManager" + str(ai_num))
+		new_troop_man.nickname = ("Troop " + str(ai_num)) # array de noms que es va esborrant i sempre agafa el primer
 		new_troop_man.blue_team = blue_team
 		new_troop_man.spawn_in_space = spawn_in_space
 		

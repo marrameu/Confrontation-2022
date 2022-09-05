@@ -12,7 +12,7 @@ func _ready():
 func _hit(body):
 	var headshot := false
 	if body.is_in_group("Troops"):
-		if $RayCast.get_collision_point().y > body.get_global_transform().origin.y + 1.2:
+		if $RayCast.get_collision_point().y > body.get_global_transform().origin.y + 2.95:
 			damage = headshot_damage
 			headshot = true
 	if ._hit(body):

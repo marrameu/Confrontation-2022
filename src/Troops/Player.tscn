@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://assets/audio/grenade_throw.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/Troops/Player.gd" type="Script" id=2]
@@ -7,13 +7,14 @@
 [ext_resource path="res://src/Troops/Interact.gd" type="Script" id=5]
 [ext_resource path="res://src/HUD/PlayerHUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/HealthSystem/HealthSystem.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Troops/PlayerTroopShooting.gd" type="Script" id=8]
+[ext_resource path="res://src/Troops/PointsTracker.gd" type="Script" id=9]
 [ext_resource path="res://src/Troops/TroopStateMachine.gd" type="Script" id=11]
 [ext_resource path="res://src/Troops/Dead.gd" type="Script" id=12]
 [ext_resource path="res://src/Troops/Jump.gd" type="Script" id=13]
 [ext_resource path="res://src/Troops/Walk.gd" type="Script" id=14]
 [ext_resource path="res://src/Troops/Roll.gd" type="Script" id=15]
 [ext_resource path="res://src/Troops/Run.gd" type="Script" id=16]
-[ext_resource path="res://src/Troops/PlayerShooting.gd" type="Script" id=17]
 [ext_resource path="res://src/Troops/Weapons/Pistol.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/Troops/Melee.gd" type="Script" id=20]
 [ext_resource path="res://src/Troops/GranadeLauncher.gd" type="Script" id=21]
@@ -213,13 +214,13 @@ states/grenadethrow/position = Vector2( 540, 128 )
 states/reload/node = SubResource( 73 )
 states/reload/position = Vector2( 223, 149 )
 
-[sub_resource type="AnimationNodeAnimation" id=56]
+[sub_resource type="AnimationNodeAnimation" id=87]
 animation = "walkright"
 
-[sub_resource type="AnimationNodeAnimation" id=57]
+[sub_resource type="AnimationNodeAnimation" id=88]
 animation = "walkbackward"
 
-[sub_resource type="AnimationNodeAnimation" id=58]
+[sub_resource type="AnimationNodeAnimation" id=89]
 animation = "walkleft"
 
 [sub_resource type="AnimationNodeAnimation" id=59]
@@ -228,7 +229,7 @@ animation = "walkforward"
 [sub_resource type="AnimationNodeAnimation" id=60]
 animation = "riflerun"
 
-[sub_resource type="AnimationNodeBlendSpace1D" id=61]
+[sub_resource type="AnimationNodeBlendSpace1D" id=90]
 blend_point_0/node = SubResource( 59 )
 blend_point_0/pos = 0.0
 blend_point_1/node = SubResource( 60 )
@@ -243,7 +244,7 @@ animation = "rifleidle"
 
 [sub_resource type="AnimationNodeBlend2" id=64]
 
-[sub_resource type="AnimationNodeBlendTree" id=65]
+[sub_resource type="AnimationNodeBlendTree" id=91]
 nodes/Animation/node = SubResource( 63 )
 nodes/Animation/position = Vector2( 226.08, 159.84 )
 "nodes/Animation 2/node" = SubResource( 62 )
@@ -255,15 +256,15 @@ node_connections = [ "output", 0, "aim", "aim", 0, "Animation", "aim", 1, "Anima
 
 [sub_resource type="AnimationNodeBlendSpace2D" id=47]
 resource_local_to_scene = true
-blend_point_0/node = SubResource( 56 )
+blend_point_0/node = SubResource( 87 )
 blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 57 )
+blend_point_1/node = SubResource( 88 )
 blend_point_1/pos = Vector2( 0, -1 )
-blend_point_2/node = SubResource( 58 )
+blend_point_2/node = SubResource( 89 )
 blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 61 )
+blend_point_3/node = SubResource( 90 )
 blend_point_3/pos = Vector2( 0, 1 )
-blend_point_4/node = SubResource( 65 )
+blend_point_4/node = SubResource( 91 )
 blend_point_4/pos = Vector2( 0, 0 )
 
 [sub_resource type="AnimationNodeOneShot" id=50]
@@ -339,12 +340,15 @@ script = ExtResource( 2 )
 [node name="Model" parent="." instance=ExtResource( 22 )]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Model/Skeleton" index="2"]
-transform = Transform( -0.0546869, -0.983095, -0.17474, -0.315582, -0.149014, 0.937125, -0.947321, 0.106393, -0.302098, -0.287027, 1.06372, 0.19091 )
+transform = Transform( -0.0530781, -0.984286, -0.168416, -0.3152, -0.143518, 0.938111, -0.94754, 0.102878, -0.302629, -0.284899, 1.09482, 0.217719 )
 bone_name = "mixamorig_RightHand"
 
 [node name="Weapons" type="Spatial" parent="Model/Skeleton/BoneAttachment"]
 unique_name_in_owner = true
 transform = Transform( 0.0679044, -0.0832143, 0.488329, 0.490528, -0.0574427, -0.0779988, 0.069083, 0.48967, 0.0738364, -0.267242, -0.00359118, 0.0118586 )
+__meta__ = {
+"_editor_description_": "Resource?"
+}
 
 [node name="Pistol" parent="Model/Skeleton/BoneAttachment/Weapons" instance=ExtResource( 18 )]
 visible = false
@@ -371,11 +375,10 @@ enabled = true
 cast_to = Vector3( 0, -0.4, 0 )
 
 [node name="Shooting" type="Spatial" parent="."]
-script = ExtResource( 17 )
+script = ExtResource( 8 )
 
 [node name="LaunchGrenade" type="Spatial" parent="Shooting"]
 script = ExtResource( 21 )
-label_path = NodePath("../../PlayerHUD/Alive/SpeiclaWeapons/TextureRect/Label")
 
 [node name="Throw" type="AudioStreamPlayer" parent="Shooting/LaunchGrenade"]
 stream = ExtResource( 1 )
@@ -398,6 +401,11 @@ interaction_progress_path = NodePath("../PlayerHUD/Alive/InteractionProgress")
 one_shot = true
 
 [node name="PlayerHUD" parent="." instance=ExtResource( 6 )]
+launch_grenade_path = NodePath("../Shooting/LaunchGrenade")
+
+[node name="Points" parent="PlayerHUD" index="2"]
+margin_right = 1160.0
+margin_bottom = 846.0
 
 [node name="HealthSystem" parent="." instance=ExtResource( 7 )]
 
@@ -481,6 +489,10 @@ stream = ExtResource( 23 )
 volume_db = 10.0
 bus = "Sounds"
 
+[node name="PointsTracker" type="Node" parent="."]
+script = ExtResource( 9 )
+
+[connection signal="points_added" from="." to="PlayerHUD" method="points_added"]
 [connection signal="area_entered" from="Model/MeleeHitBox" to="." method="_on_MeleeHitBox_area_entered"]
 [connection signal="timeout" from="Interact/Timer" to="Interact" method="_on_Timer_timeout"]
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]

@@ -6,7 +6,7 @@ export var blue_team = false
 export var is_player := false
 
 var points : int = 0
-var nickname := "Juseb"
+export var nickname := "Juseb"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

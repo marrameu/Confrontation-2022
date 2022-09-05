@@ -358,6 +358,7 @@ right_tab={
 3d_physics/layer_2="Troop"
 3d_physics/layer_3="Ship"
 3d_physics/layer_4="BigShip"
+3d_physics/layer_5="HangarDoors"
 3d_physics/layer_9="ShipHurtBox"
 3d_physics/layer_10="TroopHurtBox"
 3d_physics/layer_11="TurretHurtBox"
