@@ -16,7 +16,6 @@ func _ready():
 func _process(delta):
 	$"%MyLifeBar".value = float(owner.get_node("HealthSystem").health) / owner.get_node("HealthSystem").MAX_HEALTH * 100
 	$Alive/SpeiclaWeapons/TextureRect/Label.text = str(launch_grenade.ammo)
-	$"%TotalPointsNumberLabel".text = str(owner.pilot_man.points)
 
 
 func _on_HealthSystem_damage_taken(attacker : Spatial):
@@ -38,3 +37,10 @@ func _on_HealthSystem_die(attacker):
 	$Alive.hide()
 	$DieInfo.show()
 	$DieInfo.text = "Heu estat mort per " + attacker.name if attacker else "Heu estat mort"
+
+
+func points_added(new_points : int):
+	$Points/HBoxContainer2/Label2.text = str(int($Points/HBoxContainer2/Label2.text) + new_points)
+	if not $Points/AnimationPlayer.is_playing():
+		$"%TotalPointsNumberLabel".text = str(owner.pilot_man.points)
+	$Points/AnimationPlayer.play("points_added")

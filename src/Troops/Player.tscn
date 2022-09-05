@@ -340,7 +340,7 @@ script = ExtResource( 2 )
 [node name="Model" parent="." instance=ExtResource( 22 )]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Model/Skeleton" index="2"]
-transform = Transform( -0.0545275, -0.98306, -0.174982, -0.315527, -0.149299, 0.937098, -0.947349, 0.106309, -0.302041, -0.291366, 1.05865, 0.190386 )
+transform = Transform( -0.0547641, -0.983374, -0.173135, -0.314915, -0.147536, 0.937582, -0.947538, 0.105869, -0.3016, -0.317602, 1.02119, 0.194675 )
 bone_name = "mixamorig_RightHand"
 
 [node name="Weapons" type="Spatial" parent="Model/Skeleton/BoneAttachment"]
@@ -402,6 +402,29 @@ one_shot = true
 
 [node name="PlayerHUD" parent="." instance=ExtResource( 6 )]
 launch_grenade_path = NodePath("../Shooting/LaunchGrenade")
+
+[node name="Points" parent="PlayerHUD" index="2"]
+margin_right = 1160.0
+margin_bottom = 846.0
+
+[node name="HBoxContainer2" parent="PlayerHUD/Points" index="1"]
+margin_right = 107.0
+
+[node name="Label2" parent="PlayerHUD/Points/HBoxContainer2" index="0"]
+margin_right = 107.0
+
+[node name="ColorRect" parent="PlayerHUD/Points" index="2"]
+margin_right = 107.0
+
+[node name="HBoxContainer3" parent="PlayerHUD/Points" index="3"]
+margin_right = 107.0
+
+[node name="TotalPointsNumberLabel" parent="PlayerHUD/Points/HBoxContainer3" index="0"]
+margin_right = 50.0
+
+[node name="Label" parent="PlayerHUD/Points/HBoxContainer3" index="1"]
+margin_left = 60.0
+margin_right = 107.0
 
 [node name="HealthSystem" parent="." instance=ExtResource( 7 )]
 
@@ -488,6 +511,7 @@ bus = "Sounds"
 [node name="PointsTracker" type="Node" parent="."]
 script = ExtResource( 9 )
 
+[connection signal="points_added" from="." to="PlayerHUD" method="points_added"]
 [connection signal="area_entered" from="Model/MeleeHitBox" to="." method="_on_MeleeHitBox_area_entered"]
 [connection signal="timeout" from="Interact/Timer" to="Interact" method="_on_Timer_timeout"]
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]

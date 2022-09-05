@@ -3,6 +3,7 @@ extends KinematicBody
 signal entered_ship
 signal entered_vehicle
 signal died
+signal points_added
 
 onready var shooting := $Shooting
 
@@ -53,22 +54,22 @@ func die():
 func _on_damagable_hit():
 	# fer-ho millor amb senyals més ednavant i %
 	$"%Weapons".get_child($Shooting.current_weapon_ind).get_node("HUD/Pivot/HitMarkerParts/AnimationPlayer").play("hit")
-	pilot_man.points += 10
+	add_points(10)
 
 
 func _on_headshot():
 	$"%Weapons".get_child($Shooting.current_weapon_ind).get_node("HUD/Pivot/HitMarkerParts/AnimationPlayer").play("killed")
-	pilot_man.points += 20
+	add_points(20)
 
 
 func _on_enemy_died(attacker):
 	if attacker == self:
 		yield(get_tree(), "idle_frame") # pq no se'l mengi el headshot
 		$"%Weapons".get_child($Shooting.current_weapon_ind).get_node("HUD/Pivot/HitMarkerParts/AnimationPlayer").play("red_hitmarker")
-		pilot_man.points += 100
+		add_points(100)
 	else:
 		# assistència, desonenectar el senyal després de 5 segons
-		pilot_man.points += 50
+		add_points(50)
 
 
 func _on_MeleeHitBox_area_entered(area):
@@ -81,3 +82,8 @@ func _on_MeleeHitBox_area_entered(area):
 	_on_damagable_hit()
 	if not $AudioStreamPlayer.playing:
 		$AudioStreamPlayer.play()
+
+
+func add_points(points : int) -> void:
+	emit_signal("points_added", points)
+	pilot_man.points += points
