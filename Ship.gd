@@ -4,6 +4,7 @@ class_name Ship
 signal ship_died
 signal killed_enemy
 signal big_ship_shields_down
+signal points_added
 
 export var red_mat : Material
 export var blue_mat : Material
@@ -147,15 +148,19 @@ func die():
 
 
 func _on_damagable_hit():
+	add_points(5) # fer q depengui de la bala
 	if is_player_or_ai == 1:
 		$PlayerHUD.on_damagable_hit()
 
 
 func _on_enemy_died(attacker : Node): # passar tmb l'enemic
 	if attacker == self:
+		add_points(150)
 		emit_signal("killed_enemy")
 		if is_player_or_ai == 1:
 			$PlayerHUD.on_enemy_died()
+	else:
+		add_points(75)
 
 
 func leave() -> void:
@@ -200,3 +205,9 @@ func exit_ship(): # de moment, sols player
 	set_team_color()
 	disconnect("ship_died", get_tree().current_scene, "_on_ship_died")
 	is_player_or_ai = 0
+
+
+func add_points(points : int) -> void:
+	if is_player_or_ai == 1:
+		emit_signal("points_added", points)
+	pilot_man.points += points

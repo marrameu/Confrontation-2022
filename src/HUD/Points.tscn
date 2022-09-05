@@ -1,0 +1,147 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/interface/Fonts/Manrope/Manrope-VariableFont_wght.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://src/HUD/Points.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer2/Label2:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "0" ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "points_added"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer2/Label2:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "0" ]
+}
+
+[node name="Points" type="VBoxContainer"]
+visible = false
+margin_left = 1053.0
+margin_top = 791.0
+margin_right = 1183.0
+margin_bottom = 841.0
+theme = SubResource( 2 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+visible = false
+margin_right = 130.0
+margin_bottom = 23.0
+custom_constants/separation = 10
+
+[node name="Label2" type="Label" parent="HBoxContainer"]
+margin_right = 22.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+text = "0"
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_left = 32.0
+margin_right = 130.0
+margin_bottom = 23.0
+text = "ENEMIC FERIT"
+align = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+margin_right = 130.0
+margin_bottom = 23.0
+custom_constants/separation = 10
+
+[node name="Label2" type="Label" parent="HBoxContainer2"]
+margin_right = 71.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+text = "0"
+
+[node name="Label" type="Label" parent="HBoxContainer2"]
+margin_left = 81.0
+margin_right = 130.0
+margin_bottom = 23.0
+text = "PUNTS"
+align = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_top = 27.0
+margin_right = 130.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 0, 1 )
+color = Color( 1, 1, 1, 0.619608 )
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+margin_top = 32.0
+margin_right = 130.0
+margin_bottom = 55.0
+custom_constants/separation = 10
+
+[node name="TotalPointsNumberLabel" type="Label" parent="HBoxContainer3"]
+unique_name_in_owner = true
+margin_right = 73.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+text = "0"
+
+[node name="Label" type="Label" parent="HBoxContainer3"]
+margin_left = 83.0
+margin_right = 130.0
+margin_bottom = 23.0
+text = "TOTAL"
+align = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 4 )
+anims/points_added = SubResource( 3 )

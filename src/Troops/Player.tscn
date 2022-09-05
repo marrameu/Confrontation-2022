@@ -340,7 +340,7 @@ script = ExtResource( 2 )
 [node name="Model" parent="." instance=ExtResource( 22 )]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Model/Skeleton" index="2"]
-transform = Transform( -0.0547641, -0.983374, -0.173135, -0.314915, -0.147536, 0.937582, -0.947538, 0.105869, -0.3016, -0.317602, 1.02119, 0.194675 )
+transform = Transform( -0.0530781, -0.984286, -0.168416, -0.3152, -0.143518, 0.938111, -0.94754, 0.102878, -0.302629, -0.284899, 1.09482, 0.217719 )
 bone_name = "mixamorig_RightHand"
 
 [node name="Weapons" type="Spatial" parent="Model/Skeleton/BoneAttachment"]
@@ -406,25 +406,6 @@ launch_grenade_path = NodePath("../Shooting/LaunchGrenade")
 [node name="Points" parent="PlayerHUD" index="2"]
 margin_right = 1160.0
 margin_bottom = 846.0
-
-[node name="HBoxContainer2" parent="PlayerHUD/Points" index="1"]
-margin_right = 107.0
-
-[node name="Label2" parent="PlayerHUD/Points/HBoxContainer2" index="0"]
-margin_right = 107.0
-
-[node name="ColorRect" parent="PlayerHUD/Points" index="2"]
-margin_right = 107.0
-
-[node name="HBoxContainer3" parent="PlayerHUD/Points" index="3"]
-margin_right = 107.0
-
-[node name="TotalPointsNumberLabel" parent="PlayerHUD/Points/HBoxContainer3" index="0"]
-margin_right = 50.0
-
-[node name="Label" parent="PlayerHUD/Points/HBoxContainer3" index="1"]
-margin_left = 60.0
-margin_right = 107.0
 
 [node name="HealthSystem" parent="." instance=ExtResource( 7 )]
 

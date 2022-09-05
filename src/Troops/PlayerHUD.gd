@@ -40,7 +40,4 @@ func _on_HealthSystem_die(attacker):
 
 
 func points_added(new_points : int):
-	$Points/HBoxContainer2/Label2.text = str(int($Points/HBoxContainer2/Label2.text) + new_points)
-	if not $Points/AnimationPlayer.is_playing():
-		$"%TotalPointsNumberLabel".text = str(owner.pilot_man.points)
-	$Points/AnimationPlayer.play("points_added")
+	$Points.on_points_added(new_points)

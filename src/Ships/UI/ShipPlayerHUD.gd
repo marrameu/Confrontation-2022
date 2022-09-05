@@ -243,6 +243,13 @@ func _on_HealthSystem_damage_taken(attacker : Spatial):
 
 
 func make_visible(value : bool) -> void:
+	# fer un node alive, com el diescreen
 	for child in get_children():
+		if child == $Points:
+			continue
 		if "visible" in child:
 			child.visible = value
+
+
+func points_added(new_points : int):
+	$Points.on_points_added(new_points)
