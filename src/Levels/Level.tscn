@@ -597,6 +597,12 @@ start_team = 1
 [node name="CommandPost5" parent="Map/CommandPosts" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 231.874, -41.732, 129.971 )
 
+[node name="ShipSpawn3" parent="Map/CommandPosts/CommandPost5" instance=ExtResource( 6 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 84.3653, 15.2304, -15.3708 )
+
+[node name="ShipSpawn4" parent="Map/CommandPosts/CommandPost5" instance=ExtResource( 6 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 84.3653, 15.2304, 49.1062 )
+
 [node name="CommandPost2" parent="Map/CommandPosts" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -44.7776, -32.0445, 0 )
 

@@ -340,7 +340,7 @@ script = ExtResource( 2 )
 [node name="Model" parent="." instance=ExtResource( 22 )]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Model/Skeleton" index="2"]
-transform = Transform( -0.0530781, -0.984286, -0.168416, -0.3152, -0.143518, 0.938111, -0.94754, 0.102878, -0.302629, -0.284899, 1.09482, 0.217719 )
+transform = Transform( -0.0535565, -0.9837, -0.171659, -0.314808, -0.146506, 0.93778, -0.947643, 0.104264, -0.30183, -0.295087, 1.06645, 0.205657 )
 bone_name = "mixamorig_RightHand"
 
 [node name="Weapons" type="Spatial" parent="Model/Skeleton/BoneAttachment"]
@@ -403,7 +403,7 @@ one_shot = true
 [node name="PlayerHUD" parent="." instance=ExtResource( 6 )]
 launch_grenade_path = NodePath("../Shooting/LaunchGrenade")
 
-[node name="Points" parent="PlayerHUD" index="2"]
+[node name="Points" parent="PlayerHUD" index="3"]
 margin_right = 1160.0
 margin_bottom = 846.0
 
@@ -495,6 +495,7 @@ script = ExtResource( 9 )
 [connection signal="points_added" from="." to="PlayerHUD" method="points_added"]
 [connection signal="area_entered" from="Model/MeleeHitBox" to="." method="_on_MeleeHitBox_area_entered"]
 [connection signal="timeout" from="Interact/Timer" to="Interact" method="_on_Timer_timeout"]
+[connection signal="damage_taken" from="HealthSystem" to="PlayerHUD" method="_on_HealthSystem_damage_taken"]
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
 [connection signal="die" from="HealthSystem" to="Shooting" method="_on_HealthSystem_die"]
 [connection signal="die" from="HealthSystem" to="PlayerHUD" method="_on_HealthSystem_die"]

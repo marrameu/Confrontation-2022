@@ -5966,7 +5966,7 @@ blue_mat = ExtResource( 9 )
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.0153644, 0 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Model/Skeleton" index="2"]
-transform = Transform( -0.0549361, -0.983106, -0.174597, -0.315433, -0.148819, 0.937206, -0.947356, 0.10656, -0.301929, -0.301956, 1.04733, 0.188911 )
+transform = Transform( -0.0544992, -0.983345, -0.173378, -0.314881, -0.147851, 0.937545, -0.947565, 0.105688, -0.301579, -0.319157, 1.02111, 0.192069 )
 bone_name = "mixamorig_RightHand"
 
 [node name="Weapons" type="Spatial" parent="Model/Skeleton/BoneAttachment"]

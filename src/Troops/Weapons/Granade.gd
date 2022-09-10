@@ -3,6 +3,7 @@ extends RigidBody
 export var impulse := 25.0
 export var damage := 300.0
 
+var shooter
 
 #func init(direction):
 #	rotation = direction

@@ -19,6 +19,10 @@ func _process(delta):
 
 
 func _on_HealthSystem_damage_taken(attacker : Spatial):
+	$RedRect.color.a = 0.08# = damage_taken/250?
+	var tween := get_tree().create_tween()
+	tween.tween_property($RedRect, "color:a", 0.0, 0.5)
+	
 	if not attacker or not weakref(attacker).get_ref():
 		return
 	

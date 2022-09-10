@@ -12,6 +12,11 @@
 [node name="PlayerHUD" type="CanvasLayer"]
 script = ExtResource( 1 )
 
+[node name="RedRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 0, 0, 0 )
+
 [node name="DieInfo" type="Label" parent="."]
 visible = false
 anchor_left = 0.5
