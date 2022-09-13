@@ -592,10 +592,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -86.219, 11.3742, 16.34 )
 
 [node name="CommandPost6" parent="Map/CommandPosts" groups=["OrbitalCannonCP"] instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -243.122, 19.3536, 136.986 )
-start_team = 1
 
 [node name="CommandPost5" parent="Map/CommandPosts" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 231.874, -41.732, 129.971 )
+start_team = 2
 
 [node name="ShipSpawn3" parent="Map/CommandPosts/CommandPost5" instance=ExtResource( 6 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 84.3653, 15.2304, -15.3708 )
@@ -604,15 +604,13 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 84.3653
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 84.3653, 15.2304, 49.1062 )
 
 [node name="CommandPost2" parent="Map/CommandPosts" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -44.7776, -32.0445, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -44.7776, -7.68548, 0 )
 
 [node name="CommandPost3" parent="Map/CommandPosts" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 84.8109, 8.7182, -139.98 )
-start_team = 2
 
 [node name="CommandPost4" parent="Map/CommandPosts" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.9971, -31.9711, -229.671 )
-start_team = 2
 
 [node name="ManualTurret" parent="Map" instance=ExtResource( 31 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -83.4691, 29.9226, -89.0698 )

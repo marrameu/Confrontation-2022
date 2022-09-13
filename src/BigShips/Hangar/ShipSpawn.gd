@@ -4,7 +4,7 @@ class_name ShipSpawn
 export var ship_scene : PackedScene = preload("res://NewShip.tscn")
 export var blue_team := false
 
-var spawn_ships := false
+var spawn_ships := true
 export var simultaneous_ships : int = 2
 var last_ship : Ship
 var current_number_of_ships_instanced := 0

@@ -40,7 +40,7 @@ func _on_HealthSystem_damage_taken(attacker : Spatial):
 func _on_HealthSystem_die(attacker):
 	$Alive.hide()
 	$DieInfo.show()
-	$DieInfo.text = "Heu estat mort per " + attacker.name if attacker else "Heu estat mort"
+	$DieInfo.text = "Heu estat mort per " + attacker.name if attacker else "Heu mort"
 
 
 func points_added(new_points : int):

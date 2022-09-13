@@ -14,8 +14,8 @@ var MAX_POINTS = 1000
 
 var battle_started := false
 
-var num_of_players : int = 26
-var num_of_space_troops : int = 10
+var num_of_players : int = 20
+var num_of_space_troops : int = 8
 
 # middle point
 var middle_point := 0.0
@@ -53,6 +53,8 @@ func _process(delta):
 
 func _physics_process(delta):
 	update_middle_point(delta)
+	if red_points >= 1000 or blue_points >= 1000:
+		get_tree().paused = true
 
 
 func update_middle_point(delta): 
