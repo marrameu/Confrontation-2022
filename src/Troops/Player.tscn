@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://assets/audio/grenade_throw.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/Troops/Player.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/HealthSystem/HealthSystem.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/Troops/PlayerTroopShooting.gd" type="Script" id=8]
 [ext_resource path="res://src/Troops/PointsTracker.gd" type="Script" id=9]
+[ext_resource path="res://src/Troops/Movement.gd" type="Script" id=10]
 [ext_resource path="res://src/Troops/TroopStateMachine.gd" type="Script" id=11]
 [ext_resource path="res://src/Troops/Dead.gd" type="Script" id=12]
 [ext_resource path="res://src/Troops/Jump.gd" type="Script" id=13]
@@ -337,10 +338,13 @@ collision_layer = 2
 collision_mask = 3
 script = ExtResource( 2 )
 
+[node name="Movement" type="Node" parent="."]
+script = ExtResource( 10 )
+
 [node name="Model" parent="." instance=ExtResource( 22 )]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Model/Skeleton" index="2"]
-transform = Transform( -0.0512055, -0.984004, -0.170627, -0.316738, -0.14603, 0.937205, -0.94713, 0.102034, -0.304194, -0.321854, 1.03103, 0.209215 )
+transform = Transform( -0.0552482, -0.983342, -0.173164, -0.316019, -0.147292, 0.93725, -0.947142, 0.106505, -0.302618, -0.315888, 1.02741, 0.19741 )
 bone_name = "mixamorig_RightHand"
 
 [node name="Weapons" type="Spatial" parent="Model/Skeleton/BoneAttachment"]

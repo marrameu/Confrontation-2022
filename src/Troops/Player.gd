@@ -27,6 +27,7 @@ export var min_height := 5
 func _ready():
 	max_y = translation.y
 	blue_team = pilot_man.blue_team
+	$StateMachine.set_active(true)
 
 
 func _physics_process(delta):

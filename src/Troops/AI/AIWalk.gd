@@ -8,6 +8,15 @@ var _velocity := Vector3.ZERO
 var _snap := Vector3.DOWN * 0.05
 
 
+func enter():
+	owner.agent.set_target_location(owner.agent.get_target_location())
+
+
+func handle_input(event):
+	if event.is_action_pressed("test"):
+		emit_signal("finished", "roll")
+
+
 func update(delta):
 	if not owner.agent.is_navigation_finished():
 		var target_global_position = owner.agent.get_next_location()
@@ -15,9 +24,8 @@ func update(delta):
 		var desired_velocity = direction * max_speed
 		var steering = (desired_velocity - _velocity) * delta * 4.0
 		_velocity += steering
-		#agent.set_velocity(_velocity)
 		_move(_velocity)
-		if _velocity:
+		if _velocity: #.length() > 0.1:
 			if not owner.current_enemy:
 				_orient_character_to_direction(current_direction)
 	else:
@@ -25,7 +33,6 @@ func update(delta):
 	
 	# AITroopShooting.gd
 	if owner.current_enemy and weakref(owner.current_enemy).get_ref():
-		print(_velocity)
 		if owner.wait_to_shoot:
 			owner.get_node("%AIGun").shooting = false
 			return
@@ -42,6 +49,7 @@ func update(delta):
 
 func _move(velocity: Vector3) -> void:
 	_velocity = owner.move_and_slide_with_snap(velocity, _snap, Vector3.UP)#, true)
+	print(_velocity)
 	current_direction = Vector3(velocity.x, 0, velocity.z).normalized()
 
 
