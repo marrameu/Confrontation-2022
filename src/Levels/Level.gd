@@ -5,8 +5,8 @@ signal ship_added
 signal big_ship_shields_down
 signal match_msg
 
-var player_scenes := { 0 : preload("res://src/Troops/Player/PlayerRifle.tscn"), 1 : preload("res://src/Troops/Player/PlayerMissileLauncher.tscn")}
-var ai_troop_scene : PackedScene = preload("res://src/Troops/AI/Troop.tscn")
+var player_scenes := { 0 : preload("res://src/Troops/Player/NewPlayerRifle.tscn"), 1 : preload("res://src/Troops/Player/NewPlayerMissileLauncher.tscn")}
+var ai_troop_scene : PackedScene = preload("res://src/Troops/AI/AITroop.tscn")
 
 var blue_points = 0
 var red_points = 0

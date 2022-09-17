@@ -1,23 +1,12 @@
-[gd_scene load_steps=88 format=2]
+[gd_scene load_steps=76 format=2]
 
-[ext_resource path="res://src/Troops/AI/Troop.gd" type="Script" id=1]
+[ext_resource path="res://src/Troops/TroopShooting.gd" type="Script" id=1]
 [ext_resource path="res://assets/models/ybot/TroopModelNew.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Troops/Weapons/AIGun.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/Troops/AI/TroopEnemyDetection.gd" type="Script" id=4]
-[ext_resource path="res://src/Troops/AI/PathMakerTemproal.gd" type="Script" id=5]
+[ext_resource path="res://src/Troops/PointsTracker.gd" type="Script" id=3]
 [ext_resource path="res://src/HealthSystem/HealthSystem.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/materials/command_post/red.tres" type="Material" id=7]
 [ext_resource path="res://src/Troops/ThrowGrenade.gd" type="Script" id=8]
-[ext_resource path="res://assets/materials/command_post/blue.tres" type="Material" id=9]
-[ext_resource path="res://src/Troops/AI/AITroopStateMachine.gd" type="Script" id=10]
-[ext_resource path="res://src/Troops/AI/ChooseObjective.gd" type="Script" id=11]
-[ext_resource path="res://src/Troops/AI/ConquerGroundCPs.gd" type="Script" id=12]
-[ext_resource path="res://src/Troops/AI/EnterShip.gd" type="Script" id=13]
-[ext_resource path="res://src/Bullets/HeadshotBullet.tscn" type="PackedScene" id=14]
-[ext_resource path="res://src/Troops/AI/AttackEnemy.gd" type="Script" id=15]
 [ext_resource path="res://src/Troops/Reloading.gd" type="Script" id=16]
 [ext_resource path="res://assets/audio/grenade_throw.wav" type="AudioStream" id=17]
-[ext_resource path="res://src/Troops/TroopShooting.gd" type="Script" id=18]
 [ext_resource path="res://assets/audio/no_ammo.wav" type="AudioStream" id=19]
 [ext_resource path="res://src/Troops/GranadeLauncher.gd" type="Script" id=20]
 [ext_resource path="res://src/Troops/TroopStateMachine.gd" type="Script" id=21]
@@ -5645,9 +5634,6 @@ extents = Vector3( 1.0304, 0.268886, 0.609748 )
 radius = 0.6
 height = 2.4
 
-[sub_resource type="CubeMesh" id=3]
-size = Vector3( 0.5, 0.5, 0.05 )
-
 [sub_resource type="Animation" id=82]
 resource_name = "Melee"
 length = 1.6
@@ -5956,16 +5942,13 @@ height = 2.4
 [node name="Troop" type="KinematicBody" groups=["AI", "Damagable", "Troops"]]
 pause_mode = 1
 collision_layer = 2
-script = ExtResource( 1 )
-body = NodePath("PlayerMesh/rig/body")
-red_mat = ExtResource( 7 )
-blue_mat = ExtResource( 9 )
+collision_mask = 9
 
 [node name="Model" parent="." instance=ExtResource( 2 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.0153644, 0 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Model/Skeleton" index="2"]
-transform = Transform( -0.0532959, -0.983794, -0.171195, -0.314857, -0.146138, 0.937821, -0.947642, 0.103884, -0.301966, -0.290444, 1.0772, 0.209014 )
+transform = Transform( -0.0539191, -0.983918, -0.170282, -0.316209, -0.14493, 0.937553, -0.947156, 0.104396, -0.30331, -0.27975, 1.07997, 0.227455 )
 bone_name = "mixamorig_RightHand"
 
 [node name="Weapons" type="Spatial" parent="Model/Skeleton/BoneAttachment"]
@@ -5974,11 +5957,6 @@ transform = Transform( 0.0679044, -0.0832143, 0.488329, 0.490528, -0.0574427, -0
 __meta__ = {
 "_editor_description_": "Resource?"
 }
-
-[node name="AIGun" parent="Model/Skeleton/BoneAttachment/Weapons" instance=ExtResource( 3 )]
-unique_name_in_owner = true
-transform = Transform( -0.975965, -0.151395, -0.156731, -0.139035, 0.986446, -0.0870924, 0.167793, -0.0632085, -0.983791, -0.0514054, -0.00399709, -0.0301232 )
-bullet_scene = ExtResource( 14 )
 
 [node name="AnimationPlayer" parent="Model" index="1"]
 anims/default = SubResource( 5 )
@@ -6014,7 +5992,7 @@ shape = SubResource( 1 )
 
 [node name="Shooting" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.78536, 0 )
-script = ExtResource( 18 )
+script = ExtResource( 1 )
 
 [node name="LaunchGrenade" type="Spatial" parent="Shooting"]
 script = ExtResource( 20 )
@@ -6032,51 +6010,7 @@ bus = "Sounds"
 stream = ExtResource( 19 )
 bus = "Sounds"
 
-[node name="EnemyDetection" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.78536, 0 )
-script = ExtResource( 4 )
-
-[node name="Timer" type="Timer" parent="EnemyDetection"]
-wait_time = 3.0
-autostart = true
-
 [node name="HealthSystem" parent="." instance=ExtResource( 6 )]
-
-[node name="InitTimer" type="Timer" parent="."]
-one_shot = true
-autostart = true
-
-[node name="TeamIndicator" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.55491, 0.321415 )
-mesh = SubResource( 3 )
-
-[node name="NavigationAgent" type="NavigationAgent" parent="."]
-path_max_distance = 4.0
-max_speed = 6.0
-
-[node name="AIStateMachine" type="Node" parent="."]
-script = ExtResource( 10 )
-START_STATE = NodePath("ChooseObjective")
-
-[node name="ChooseObjective" type="Node" parent="AIStateMachine"]
-script = ExtResource( 11 )
-
-[node name="ConquerGroundCPs" type="Node" parent="AIStateMachine"]
-script = ExtResource( 12 )
-
-[node name="ConquestTimer" type="Timer" parent="AIStateMachine/ConquerGroundCPs"]
-wait_time = 10.0
-one_shot = true
-
-[node name="EnterShip" type="Node" parent="AIStateMachine"]
-script = ExtResource( 13 )
-
-[node name="WaitTimer" type="Timer" parent="AIStateMachine/EnterShip"]
-wait_time = 2.0
-one_shot = true
-
-[node name="AttackEnemy" type="Node" parent="AIStateMachine"]
-script = ExtResource( 15 )
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 21 )
@@ -6116,12 +6050,6 @@ bus = "Sounds"
 script = ExtResource( 8 )
 MAX_SPEED = 3.0
 
-[node name="CheckCurrentEnemyTimer" type="Timer" parent="."]
-autostart = true
-
-[node name="PathMaker" type="Node" parent="."]
-script = ExtResource( 5 )
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_default_blend_time = 0.26
 anims/Melee = SubResource( 82 )
@@ -6157,22 +6085,18 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0
 shape = SubResource( 95 )
 
 [node name="Tail" type="RayCast" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0146563, 0 )
 enabled = true
 cast_to = Vector3( 0, -0.4, 0 )
 
-[connection signal="timeout" from="EnemyDetection/Timer" to="EnemyDetection" method="_on_Timer_timeout"]
-[connection signal="damage_taken" from="HealthSystem" to="EnemyDetection" method="_on_HealthSystem_damage_taken"]
+[node name="PointsTracker" type="Node" parent="."]
+script = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": "Proves"
+}
+
+[connection signal="area_entered" from="Model/MeleeHitBox" to="." method="_on_MeleeHitBox_area_entered"]
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
-[connection signal="timeout" from="InitTimer" to="." method="_on_InitTimer_timeout"]
-[connection signal="target_reached" from="NavigationAgent" to="AIStateMachine/ConquerGroundCPs" method="_on_NavigationAgent_target_reached"]
-[connection signal="target_reached" from="NavigationAgent" to="AIStateMachine/EnterShip" method="_on_NavigationAgent_target_reached"]
-[connection signal="velocity_computed" from="NavigationAgent" to="." method="_on_NavigationAgent_velocity_computed"]
-[connection signal="timeout" from="AIStateMachine/ConquerGroundCPs/ConquestTimer" to="AIStateMachine/ConquerGroundCPs" method="_on_ConquestTimer_timeout"]
-[connection signal="timeout" from="AIStateMachine/EnterShip/WaitTimer" to="AIStateMachine/EnterShip" method="_on_WaitTimer_timeout"]
-[connection signal="timeout" from="CheckCurrentEnemyTimer" to="AIStateMachine/ConquerGroundCPs" method="_on_CheckCurrentEnemyTimer_timeout"]
-[connection signal="timeout" from="CheckCurrentEnemyTimer" to="AIStateMachine/EnterShip" method="_on_CheckCurrentEnemyTimer_timeout"]
-[connection signal="timeout" from="CheckCurrentEnemyTimer" to="AIStateMachine/AttackEnemy" method="_on_CheckCurrentEnemyTimer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine" method="_on_animation_finished"]
 
 [editable path="Model"]

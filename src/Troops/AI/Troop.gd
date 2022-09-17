@@ -100,3 +100,5 @@ func _on_enemy_died(attacker):
 		pilot_man.points += 50
 
 
+func _on_MeleeHitBox_area_entered(area):
+	pass # Replace with function body.
