@@ -12,12 +12,17 @@ func _ready():
 
 func _process(delta):
 	if (cp.m_team == 1 or cp.m_team == 2):
-		if $Timer.is_stopped():
-			$Timer.start()
 		if not target or not weakref(target).get_ref():
 			target = update_target(cp.m_team == 2)
 			wants_shoot = false
 		else:
+			if target.get_node("HealthSystem").shield < 2500:
+				if not $Timer.is_stopped():
+					$Timer.stop()
+				wants_shoot = false
+				return
+			if $Timer.is_stopped():
+				$Timer.start()
 			$Node3D.look_at(target.position, Vector3.UP)
 	elif cp.m_team == 0 and not $Timer.is_stopped():
 		$Timer.stop()

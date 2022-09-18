@@ -3,6 +3,7 @@ extends Node3D
 class_name CommandPost
 
 signal add_points
+signal team_changed
 
 @export var capturable := true
 @export var start_team := 0 # (int, 0, 2)
@@ -20,7 +21,7 @@ var bodies : PackedInt32Array = [0, 0, 0]
 var old_menus := []
 var buttons := []
 
-puppet var slave_team_count := [0.0, 0.0, 0.0]
+var slave_team_count := [0.0, 0.0, 0.0] # puppet
 
 var is_ground : bool = false
 
@@ -33,10 +34,6 @@ func _ready() -> void:
 		value = 0
 	if start_team != 0:
 		team_count[start_team - 1] = 10
-	
-	for child in get_children(): # tmb cal fer-ho quan canvia d'equip
-		if child is ShipSpawn:
-			child.blue_team = m_team
 
 
 func _process(delta : float) -> void:
@@ -85,32 +82,29 @@ func _process(delta : float) -> void:
 
 
 func _physics_process(delta : float) -> void:
+	var new_team : int
 	if team_count[0] > 7:
-		m_team = 1 # vermell
+		new_team = 1 # vermell
 		if $Timer.is_stopped():
 			$Timer.start()
 	elif team_count[1] > 7:
-		m_team = 2 # blau
+		new_team = 2 # blau
 		if $Timer.is_stopped():
 			$Timer.start()
 	elif team_count[2] > 7:
-		m_team = 3
+		new_team = 3
 	elif team_count[0] + team_count[1] + team_count[2] < 7:
 		if not $Timer.is_stopped():
 			$Timer.stop()
-		m_team = 0
+		new_team = 0
+	if m_team != new_team:
+		m_team = new_team
+		emit_signal("team_changed")
 	
 	update_material()
 	
 	if not capturable: # TOT AIXÒ S'HA DE REFER URGENTMENT
 		return
-	
-	if get_tree().has_multiplayer_peer():
-		if get_tree().is_server():
-			rset_unreliable("slave_team_count", team_count)
-		else:
-			team_count = slave_team_count
-			return
 	
 	# Sphagetti Code
 	if bodies[0] > 0 and bodies[1] + bodies[2] == 0:
@@ -200,3 +194,9 @@ func update_material() -> void:
 func _on_Timer_timeout():
 	var blue_team = m_team == 2
 	emit_signal("add_points", blue_team)
+
+
+func _update_ship_spawns():
+	for child in get_children(): # tmb cal fer-ho quan canvia d'equip
+		if child is ShipSpawn:
+			child.change_team(m_team)

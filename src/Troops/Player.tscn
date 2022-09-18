@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://assets/audio/grenade_throw.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/Troops/Player.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/HealthSystem/HealthSystem.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/Troops/PlayerTroopShooting.gd" type="Script" id=8]
 [ext_resource path="res://src/Troops/PointsTracker.gd" type="Script" id=9]
+[ext_resource path="res://src/Troops/Movement.gd" type="Script" id=10]
 [ext_resource path="res://src/Troops/TroopStateMachine.gd" type="Script" id=11]
 [ext_resource path="res://src/Troops/Dead.gd" type="Script" id=12]
 [ext_resource path="res://src/Troops/Jump.gd" type="Script" id=13]
@@ -337,10 +338,13 @@ collision_layer = 2
 collision_mask = 3
 script = ExtResource( 2 )
 
+[node name="Movement" type="Node" parent="."]
+script = ExtResource( 10 )
+
 [node name="Model" parent="." instance=ExtResource( 22 )]
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Model/Skeleton3D" index="2"]
-transform = Transform3D( -0.0530781, -0.984286, -0.168416, -0.3152, -0.143518, 0.938111, -0.94754, 0.102878, -0.302629, -0.284899, 1.09482, 0.217719 )
+transform = Transform3D( -0.0552482, -0.983342, -0.173164, -0.316019, -0.147292, 0.93725, -0.947142, 0.106505, -0.302618, -0.315888, 1.02741, 0.19741 )
 bone_name = "mixamorig_RightHand"
 
 [node name="Weapons" type="Node3D" parent="Model/Skeleton3D/BoneAttachment3D"]
@@ -403,11 +407,12 @@ one_shot = true
 [node name="PlayerHUD" parent="." instance=ExtResource( 6 )]
 launch_grenade_path = NodePath("../Shooting/LaunchGrenade")
 
-[node name="Points" parent="PlayerHUD" index="2"]
+[node name="Points" parent="PlayerHUD" index="3"]
 offset_right = 1160.0
 offset_bottom = 846.0
 
 [node name="HealthSystem" parent="." instance=ExtResource( 7 )]
+MAX_HEALTH = 300
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 11 )
@@ -495,6 +500,7 @@ script = ExtResource( 9 )
 [connection signal="points_added" from="." to="PlayerHUD" method="points_added"]
 [connection signal="area_entered" from="Model/MeleeHitBox" to="." method="_on_MeleeHitBox_area_entered"]
 [connection signal="timeout" from="Interact/Timer" to="Interact" method="_on_Timer_timeout"]
+[connection signal="damage_taken" from="HealthSystem" to="PlayerHUD" method="_on_HealthSystem_damage_taken"]
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
 [connection signal="die" from="HealthSystem" to="Shooting" method="_on_HealthSystem_die"]
 [connection signal="die" from="HealthSystem" to="PlayerHUD" method="_on_HealthSystem_die"]

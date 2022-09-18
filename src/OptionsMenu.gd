@@ -22,13 +22,13 @@ func _ready():
 
 func _process(_delta):
 	$FpsNode/FPS.text = str(Engine.get_frames_per_second())
-
-"""func _unhandled_input(event):
+	
+	"""func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel"):
 		$"../MenuPrincipal".show()
 		$"../MenuPrincipal/Opcions".grab_focus()
 		self.hide()
-"""
+	"""
 
 func _on_SensibilitySlider_value_changed(value):
 	Settings.mouse_sensitivity = value

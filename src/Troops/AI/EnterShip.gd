@@ -33,7 +33,7 @@ func search_ship(): # comprovar que no hi hagi ningú a la nau
 		desired_ship = null
 	else:
 		var ships = get_tree().get_nodes_in_group("Ships")
-		var new_ship_pos : Vector3 = Vector3.INF
+		var new_ship_pos : Vector3 = Vector3(INF, INF, INF)
 		for ship in ships:
 			if ship.is_player_or_ai == 0:
 				if owner.global_transform.origin.distance_to(ship.global_transform.origin) < owner.global_transform.origin.distance_to(new_ship_pos):

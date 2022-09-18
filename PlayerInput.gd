@@ -67,13 +67,15 @@ func _on_DrainTurboTimer_timeout():
 	do_turbo = wants_turbo and can_turbo
 
 
-"""
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	set_player_input()
+
+#func _process(delta):
+#	set_player_input()
 
 
 func set_player_input() -> void:
+	pass
+	"""
 	pass
 	
 	var ship_camera : Camera3D = get_node("/root/Main").players_cameras[get_parent().number_of_player - 1].ship_camera

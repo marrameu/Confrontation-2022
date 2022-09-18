@@ -11,7 +11,7 @@ func update_navigation_node():
 	else:
 		var my_cap_ship = null
 		var cap_ships = get_tree().get_nodes_in_group("CapitalShips")
-		var new_cap_ship_pos : Vector3 = Vector3.INF
+		var new_cap_ship_pos := Vector3(INF, INF, INF)
 		for cap_ship in cap_ships: # Com indic que ha de ser un Node3D? O un array de Spatials
 			if owner.global_transform.origin.distance_to(cap_ship.global_transform.origin) <  owner.global_transform.origin.distance_to(new_cap_ship_pos):
 				new_cap_ship_pos = cap_ship.global_transform.origin

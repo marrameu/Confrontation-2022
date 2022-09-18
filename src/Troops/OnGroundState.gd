@@ -1,6 +1,4 @@
-"""
-Walk i córrer
-"""
+#Walk i córrer
 extends MoveState
 class_name OnGroundState
 

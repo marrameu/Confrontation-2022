@@ -1,247 +1,243 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=3 uid="uid://dj6mq7ptc1g72"]
 
-[ext_resource path="res://assets/materials/command_post/grey.tres" type="Material" id=1]
-[ext_resource path="res://src/Troops/Weapons/Granade.gd" type="Script" id=2]
-[ext_resource path="res://assets/missilebullet_spatialmaterial.tres" type="Material" id=3]
-[ext_resource path="res://assets/particles/myst_bw.png" type="Texture2D" id=4]
-[ext_resource path="res://assets/audio/grenade_bouncing.wav" type="AudioStream" id=5]
-[ext_resource path="res://assets/audio/short_explosion.wav" type="AudioStream" id=6]
-[ext_resource path="res://src/Bullets/ExplosiveArea.tscn" type="PackedScene" id=7]
+[ext_resource type="Script" path="res://src/Troops/Weapons/Granade.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://lcmp1gnea1d8" path="res://assets/particles/myst_bw.png" id="4"]
+[ext_resource type="AudioStream" uid="uid://c2mxvxdjtgiqb" path="res://assets/audio/grenade_bouncing.wav" id="5"]
+[ext_resource type="AudioStream" uid="uid://cofm13venwvdk" path="res://assets/audio/short_explosion.wav" id="6"]
+[ext_resource type="PackedScene" path="res://src/Bullets/ExplosiveArea.tscn" id="7"]
 
-[sub_resource type="PhysicsMaterial" id=14]
+[sub_resource type="PhysicsMaterial" id="14"]
 bounce = 0.25
 
-[sub_resource type="SphereMesh" id=1]
+[sub_resource type="SphereMesh" id="1"]
 radius = 0.1
 height = 0.2
 
-[sub_resource type="SphereShape3D" id=2]
+[sub_resource type="SphereShape3D" id="2"]
 radius = 0.1
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id="13"]
 length = 0.001
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Explosion:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ false ]
+"values": [false]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("Explosion:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ true ]
+"values": [true]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("MeshInstance3D:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ false ]
+"values": [false]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath(".:mode")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 0 ]
+"values": [0]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id="4"]
 resource_name = "explode"
 length = 3.0
 tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 3 ),
-"transitions": PackedFloat32Array( 1 ),
-"values": [ {
-"args": [  ],
-"method": "queue_free"
-} ]
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("Explosion:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 2.1 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(2.1),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [true]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("Explosion:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PackedFloat32Array( 0, 2.1 ),
-"transitions": PackedFloat32Array( 1, 1 ),
+"times": PackedFloat32Array(0, 2.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ false, true ]
+"values": [false, true]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath("MeshInstance3D:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PackedFloat32Array( 0, 2.1 ),
-"transitions": PackedFloat32Array( 1, 1 ),
+"times": PackedFloat32Array(0, 2.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ true, false ]
+"values": [true, false]
 }
 tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
 tracks/4/path = NodePath(".:mode")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
 tracks/4/keys = {
-"times": PackedFloat32Array( 2.1 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(2.1),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ 1 ]
+"values": [1]
 }
 tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
 tracks/5/path = NodePath("ExplosionAudio")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
 tracks/5/keys = {
-"times": PackedFloat32Array( 2.1 ),
-"transitions": PackedFloat32Array( 1 ),
-"values": [ {
-"args": [ 0.0 ],
-"method": "play"
-} ]
+"times": PackedFloat32Array(2.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
 }
 tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
 tracks/6/path = NodePath("ExplosiveArea")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
 tracks/6/keys = {
-"times": PackedFloat32Array( 1.8 ),
-"transitions": PackedFloat32Array( 1 ),
-"values": [ {
-"args": [  ],
-"method": "explode"
-} ]
+"times": PackedFloat32Array(1.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"explode"
+}]
 }
 
-[sub_resource type="ParticleProcessMaterial" id=11]
-next_pass = ExtResource( 3 )
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 0.3
-angular_velocity = 35.0
-angular_velocity_random = 1.0
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_psv5v"]
+_data = {
+"RESET": SubResource("13"),
+"explode": SubResource("4")
+}
 
-[sub_resource type="StandardMaterial3D" id=10]
-flags_transparent = true
-flags_unshaded = true
+[sub_resource type="ParticleProcessMaterial" id="11"]
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="10"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
-params_blend_mode = 1
-params_billboard_mode = 3
+albedo_color = Color(1, 0, 0, 1)
+albedo_texture = ExtResource("4")
+billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
-albedo_color = Color( 1, 0, 0, 1 )
-albedo_texture = ExtResource( 4 )
 proximity_fade_enable = true
 proximity_fade_distance = 0.2
 
-[sub_resource type="QuadMesh" id=12]
-material = SubResource( 10 )
-size = Vector2( 2, 2 )
+[sub_resource type="PlaneMesh" id="12"]
+material = SubResource("10")
 
 [node name="Granade" type="RigidBody3D"]
 collision_layer = 0
 collision_mask = 13
 mass = 1.25
-physics_material_override = SubResource( 14 )
+physics_material_override = SubResource("14")
 continuous_cd = true
 angular_damp = 0.5
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
-mesh = SubResource( 1 )
-material/0 = ExtResource( 1 )
+mesh = SubResource("1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource("2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 13 )
-anims/explode = SubResource( 4 )
+libraries = {
+"": SubResource("AnimationLibrary_psv5v")
+}
 
 [node name="Explosion" type="GPUParticles3D" parent="."]
-transform = Transform3D( 11, 0, 0, 0, 11, 0, 0, 0, 11, 0, 0, 0 )
+transform = Transform3D(11, 0, 0, 0, 11, 0, 0, 0, 11, 0, 0, 0)
 emitting = false
 lifetime = 0.92
 one_shot = true
 speed_scale = 1.83
 explosiveness = 0.57
 randomness = 0.24
-process_material = SubResource( 11 )
-draw_pass_1 = SubResource( 12 )
-__meta__ = {
-"_editor_description_": ""
-}
+process_material = SubResource("11")
+draw_pass_1 = SubResource("12")
 
 [node name="BounceAudio" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource( 5 )
+stream = ExtResource("5")
 unit_db = 80.0
 unit_size = 50.0
 max_distance = 75.0
-bus = "Sounds"
+bus = &"Sounds"
 attenuation_filter_db = -12.0
 
 [node name="ExplosionAudio" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource( 6 )
+stream = ExtResource("6")
 unit_db = 80.0
 unit_size = 64.3
 max_db = 0.0
 max_distance = 75.0
-bus = "Sounds"
+bus = &"Sounds"
 attenuation_filter_db = -12.0
 
-[node name="ExplosiveArea" parent="." instance=ExtResource( 7 )]
+[node name="ExplosiveArea" parent="." instance=ExtResource("7")]
 
 [connection signal="body_entered" from="." to="." method="_on_Granade_body_entered"]

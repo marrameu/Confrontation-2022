@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://src/Troops/TroopBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Troops/Weapons/Pistol.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Bullets/HeadshotBullet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Troops/PlayerTroopShooting.gd" type="Script" id=4]
+[ext_resource path="res://src/Troops/Interact.gd" type="Script" id=5]
+[ext_resource path="res://src/HUD/PlayerHUD.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Troops/Player.gd" type="Script" id=7]
+[ext_resource path="res://src/Troops/Walk.gd" type="Script" id=8]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
+
+[node name="Player" instance=ExtResource( 1 )]
+collision_mask = 11
+script = ExtResource( 7 )
+
+[node name="BoneAttachment3D" parent="Model/Skeleton3D" index="2"]
+transform = Transform3D( -0.0516359, -0.984104, -0.169921, -0.316209, -0.145282, 0.937499, -0.947283, 0.102139, -0.303681, -0.287911, 1.01654, 0.223721 )
+
+[node name="Pistol" parent="Model/Skeleton3D/BoneAttachment3D/Weapons" index="0" instance=ExtResource( 2 )]
+visible = false
+bullet_scene = ExtResource( 3 )
+
+[node name="Shooting" parent="." index="2"]
+script = ExtResource( 4 )
+
+[node name="HealthSystem" parent="." index="3"]
+MAX_HEALTH = 300
+
+[node name="Walk" parent="StateMachine" index="0"]
+script = ExtResource( 8 )
+MAX_SPEED = 5.0
+
+[node name="AnimationTree" parent="." index="6"]
+parameters/StateMachine/playback = SubResource( 1 )
+parameters/StateMachine/walk/OneShotStateMachine/playback = SubResource( 2 )
+
+[node name="Interact" type="Node" parent="." index="10"]
+script = ExtResource( 5 )
+interaction_progress_path = NodePath("../PlayerHUD/Alive/InteractionProgress")
+
+[node name="Timer" type="Timer" parent="Interact" index="0"]
+one_shot = true
+
+[node name="PlayerHUD" parent="." index="11" instance=ExtResource( 6 )]
+launch_grenade_path = NodePath("../Shooting/LaunchGrenade")
+
+[node name="Points" parent="PlayerHUD" index="3"]
+offset_right = 1160.0
+offset_bottom = 846.0
+
+[node name="CamPos" type="Marker3D" parent="." index="12"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+__meta__ = {
+"_editor_description_": "Bones bonding pq segueixi la camera"
+}
+
+[node name="AudioListener3D" type="AudioListener3D" parent="." index="13"]
+current = true
+
+[connection signal="timeout" from="Interact/Timer" to="Interact" method="_on_Timer_timeout"]
+
+[editable path="Model"]
+[editable path="PlayerHUD"]

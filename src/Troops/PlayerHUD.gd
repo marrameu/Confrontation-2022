@@ -19,6 +19,10 @@ func _process(delta):
 
 
 func _on_HealthSystem_damage_taken(attacker : Node3D):
+	$RedRect.color.a = 0.08# = damage_taken/250?
+	var tween := get_tree().create_tween()
+	tween.tween_property($RedRect, "color:a", 0.0, 0.5)
+	
 	if not attacker or not weakref(attacker).get_ref():
 		return
 	
@@ -36,7 +40,7 @@ func _on_HealthSystem_damage_taken(attacker : Node3D):
 func _on_HealthSystem_die(attacker):
 	$Alive.hide()
 	$DieInfo.show()
-	$DieInfo.text = "Heu estat mort per " + attacker.name if attacker else "Heu estat mort"
+	$DieInfo.text = "Heu estat mort per " + attacker.name if attacker else "Heu mort"
 
 
 func points_added(new_points : int):

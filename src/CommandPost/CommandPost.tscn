@@ -83,4 +83,5 @@ script = ExtResource( 4 )
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
 shape = SubResource( 4 )
 
+[connection signal="team_changed" from="." to="." method="_update_ship_spawns"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

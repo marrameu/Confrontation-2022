@@ -1,7 +1,7 @@
 extends Node
 
 signal bloom_toggled(value)
-signal set_brightness(value)
+signal brightness_set(value)
 
 var player_mouse_sensitivity := 0.2
 
@@ -50,7 +50,7 @@ func set_sharpen_value(value):
 	print(get_viewport().get_sharpen_intensity())
 
 func set_brightness(value):
-	emit_signal("set_brightness", value)
+	emit_signal("brightness_set", value)
 
 func toggle_MotionBlur(toggle):
 	if toggle == false:

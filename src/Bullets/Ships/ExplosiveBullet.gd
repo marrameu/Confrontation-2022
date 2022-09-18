@@ -14,4 +14,4 @@ func check_collisions():
 		_hit = true
 		$ExplosiveArea.explode()
 		return
-	ray.cast_to = Vector3(0, 0, -long)
+	ray.target_position = Vector3(0, 0, -long)

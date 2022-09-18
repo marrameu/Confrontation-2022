@@ -1,71 +1,65 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=37 format=3 uid="uid://bvwh48memyfds"]
 
-[ext_resource path="res://Ship.gd" type="Script" id=1]
-[ext_resource path="res://src/Ships/ShipPhysics.gd" type="Script" id=2]
-[ext_resource path="res://src/Ships/ShipShooting.gd" type="Script" id=3]
-[ext_resource path="res://ShipInput.gd" type="Script" id=4]
-[ext_resource path="res://assets/CombatShip1/CombatShip1.glb" type="PackedScene" id=5]
-[ext_resource path="res://assets/effects/ThrusterFlame.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/audio/laser.wav" type="AudioStream" id=7]
-[ext_resource path="res://assets/audio/turret_overamplified.wav" type="AudioStream" id=8]
-[ext_resource path="res://src/HealthSystem/HealthSystem.tscn" type="PackedScene" id=9]
-[ext_resource path="res://src/HealthSystem/AutorepairHealthSystem.gd" type="Script" id=10]
-[ext_resource path="res://assets/audio/engines.ogg" type="AudioStream" id=11]
-[ext_resource path="res://assets/Materials/blue_ship_mat.tres" type="Material" id=12]
-[ext_resource path="res://assets/Materials/red_ship_mat.tres" type="Material" id=13]
-[ext_resource path="res://assets/audio/drift.wav" type="AudioStream" id=14]
-[ext_resource path="res://assets/audio/turbo.wav" type="AudioStream" id=15]
-[ext_resource path="res://assets/effects/ThrusterFlameGradient.tres" type="Gradient" id=16]
-[ext_resource path="res://SpectateCamPivot.gd" type="Script" id=17]
-[ext_resource path="res://assets/audio/switch_turbo.wav" type="AudioStream" id=18]
-[ext_resource path="res://src/Ships/UI/ShipPlayerHUD.tscn" type="PackedScene" id=19]
-[ext_resource path="res://assets/Player_Ship_Interior/PlayerShipInterior.tscn" type="PackedScene" id=20]
-[ext_resource path="res://assets/audio/locking_enemy.wav" type="AudioStream" id=21]
-[ext_resource path="res://assets/audio/no_ammo.wav" type="AudioStream" id=22]
-[ext_resource path="res://src/StateMachine/ChooseObjective.gd" type="Script" id=23]
-[ext_resource path="res://src/StateMachine/AttackEnemy.gd" type="Script" id=24]
-[ext_resource path="res://AIShipStateMachine.gd" type="Script" id=25]
-[ext_resource path="res://src/StateMachine/Escape.gd" type="Script" id=26]
-[ext_resource path="res://src/StateMachine/DefendCS.gd" type="Script" id=27]
-[ext_resource path="res://src/StateMachine/PushForward.gd" type="Script" id=28]
-[ext_resource path="res://src/StateMachine/PatrolMiddlePoint.gd" type="Script" id=29]
-[ext_resource path="res://ShipInteraction.gd" type="Script" id=30]
-[ext_resource path="res://src/StateMachine/AttackBigShip.gd" type="Script" id=31]
-[ext_resource path="res://assets/effects/ThrusterParticles/ThrusterParticle.tscn" type="PackedScene" id=32]
-[ext_resource path="res://assets/Materials/grey_ship_mat.tres" type="Material" id=33]
-[ext_resource path="res://assets/materials/command_post/grey.tres" type="Material" id=34]
+[ext_resource type="Script" path="res://Ship.gd" id="1"]
+[ext_resource type="Script" path="res://src/Ships/ShipPhysics.gd" id="2"]
+[ext_resource type="Script" path="res://src/Ships/ShipShooting.gd" id="3"]
+[ext_resource type="Script" path="res://ShipInput.gd" id="4"]
+[ext_resource type="PackedScene" uid="uid://cjuvkn47nggnc" path="res://assets/CombatShip1/CombatShip1.glb" id="5"]
+[ext_resource type="AudioStream" uid="uid://cpxtqpbote56u" path="res://assets/audio/laser.wav" id="7"]
+[ext_resource type="AudioStream" uid="uid://dctoxll353pba" path="res://assets/audio/turret_overamplified.wav" id="8"]
+[ext_resource type="PackedScene" path="res://src/HealthSystem/HealthSystem.tscn" id="9"]
+[ext_resource type="Script" path="res://src/HealthSystem/AutorepairHealthSystem.gd" id="10"]
+[ext_resource type="AudioStream" uid="uid://d0xgfuy61twed" path="res://assets/audio/engines.ogg" id="11"]
+[ext_resource type="Material" path="res://assets/Materials/blue_ship_mat.tres" id="12"]
+[ext_resource type="Material" path="res://assets/Materials/red_ship_mat.tres" id="13"]
+[ext_resource type="AudioStream" uid="uid://cw1xxywyxmy4r" path="res://assets/audio/drift.wav" id="14"]
+[ext_resource type="AudioStream" uid="uid://6cao4b8ol65x" path="res://assets/audio/turbo.wav" id="15"]
+[ext_resource type="Script" path="res://SpectateCamPivot.gd" id="17"]
+[ext_resource type="AudioStream" uid="uid://t6rgqvpowuqd" path="res://assets/audio/switch_turbo.wav" id="18"]
+[ext_resource type="PackedScene" path="res://src/Ships/UI/ShipPlayerHUD.tscn" id="19"]
+[ext_resource type="PackedScene" path="res://assets/Player_Ship_Interior/PlayerShipInterior.tscn" id="20"]
+[ext_resource type="AudioStream" uid="uid://b3g830f8m135u" path="res://assets/audio/locking_enemy.wav" id="21"]
+[ext_resource type="AudioStream" uid="uid://c13d8evfwoeq4" path="res://assets/audio/no_ammo.wav" id="22"]
+[ext_resource type="Script" path="res://src/StateMachine/ChooseObjective.gd" id="23"]
+[ext_resource type="Script" path="res://src/StateMachine/AttackEnemy.gd" id="24"]
+[ext_resource type="Script" path="res://AIShipStateMachine.gd" id="25"]
+[ext_resource type="Script" path="res://src/StateMachine/Escape.gd" id="26"]
+[ext_resource type="Script" path="res://src/StateMachine/DefendCS.gd" id="27"]
+[ext_resource type="Script" path="res://src/StateMachine/PushForward.gd" id="28"]
+[ext_resource type="Script" path="res://src/StateMachine/PatrolMiddlePoint.gd" id="29"]
+[ext_resource type="Script" path="res://ShipInteraction.gd" id="30"]
+[ext_resource type="Script" path="res://src/StateMachine/AttackBigShip.gd" id="31"]
+[ext_resource type="Material" path="res://assets/Materials/grey_ship_mat.tres" id="33"]
+[ext_resource type="Material" path="res://assets/materials/command_post/grey.tres" id="34"]
 
-[sub_resource type="PhysicsMaterial" id=6]
+[sub_resource type="PhysicsMaterial" id="6"]
 bounce = 0.5
 
-[sub_resource type="BoxShape3D" id=1]
-extents = Vector3( 3.70997, 1.34271, 7.36319 )
+[sub_resource type="BoxShape3D" id="1"]
+size = Vector3(7.41994, 2.68542, 14.7264)
 
-[sub_resource type="BoxShape3D" id=7]
-extents = Vector3( 7.10742, 4.44127, 10.355 )
+[sub_resource type="BoxShape3D" id="7"]
+size = Vector3(14.2148, 8.88254, 20.71)
 
-[sub_resource type="GradientTexture2D" id=8]
-gradient = ExtResource( 16 )
+[sub_resource type="BoxMesh" id="4"]
 
-[sub_resource type="BoxMesh" id=4]
-
-[sub_resource type="SphereMesh" id=5]
+[sub_resource type="SphereMesh" id="5"]
 
 [node name="Ship" type="RigidBody3D" groups=["Damagable", "Ships"]]
 collision_layer = 4
 mass = 5000.0
-physics_material_override = SubResource( 6 )
+physics_material_override = SubResource("6")
 continuous_cd = true
 max_contacts_reported = 1
 contact_monitor = true
-script = ExtResource( 1 )
-red_mat = ExtResource( 13 )
-blue_mat = ExtResource( 12 )
-grey_mat = ExtResource( 33 )
+script = ExtResource("1")
+red_mat = ExtResource("13")
+blue_mat = ExtResource("12")
+grey_mat = ExtResource("33")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51836 )
-shape = SubResource( 1 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51836)
+shape = SubResource("1")
 
 [node name="HurtBox" type="Area3D" parent="." groups=["HurtBox"]]
 collision_layer = 256
@@ -73,18 +67,18 @@ collision_mask = 0
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51836 )
-shape = SubResource( 7 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51836)
+shape = SubResource("7")
 
-[node name="HealthSystem" parent="." instance=ExtResource( 9 )]
-script = ExtResource( 10 )
+[node name="HealthSystem" parent="." instance=ExtResource("9")]
+script = ExtResource("10")
 MAX_SHIELD = 500
 time_before_shield_repair = 10.0
 shield_repair_per_sec = 100.0
 MAX_HEALTH = 1500
 
 [node name="Input" type="Node3D" parent="."]
-script = ExtResource( 4 )
+script = ExtResource("4")
 
 [node name="ReloadTurboTimer" type="Timer" parent="Input"]
 wait_time = 5.0
@@ -102,91 +96,76 @@ wait_time = 3.0
 one_shot = true
 
 [node name="DriftAudio" type="AudioStreamPlayer3D" parent="Input"]
-stream = ExtResource( 14 )
+stream = ExtResource("14")
 unit_db = 80.0
 unit_size = 100.0
 max_db = 5.0
 max_distance = 150.0
-bus = "Sounds"
+bus = &"Sounds"
 attenuation_filter_db = -5.0
-__meta__ = {
-"_editor_description_": ""
-}
 
 [node name="TurboAudio" type="AudioStreamPlayer3D" parent="Input"]
-stream = ExtResource( 15 )
+stream = ExtResource("15")
 unit_db = 80.0
 unit_size = 100.0
 max_distance = 150.0
-bus = "Sounds"
+bus = &"Sounds"
 attenuation_filter_db = -5.0
 
 [node name="TurboSwitchAudio" type="AudioStreamPlayer" parent="Input"]
-stream = ExtResource( 18 )
-bus = "Sounds"
+stream = ExtResource("18")
+bus = &"Sounds"
 
 [node name="Physics" type="Node3D" parent="."]
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="Tween" type="Tween" parent="Physics"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+editor_description = ""
+script = null
 
 [node name="Tail" type="RayCast3D" parent="Physics"]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.7079, 0 )
-enabled = true
-cast_to = Vector3( 0, -1.5, 0 )
-debug_shape_custom_color = Color( 1, 0, 0, 1 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.7079, 0)
+debug_shape_custom_color = Color(1, 0, 0, 1)
 debug_shape_thickness = 5
 
 [node name="CameraPosition" type="Marker3D" parent="."]
-transform = Transform3D( -1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 0, 5, -15 )
-__meta__ = {
-"_editor_description_": ""
-}
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 0, 5, -15)
 
 [node name="FPCameraPosition" type="Marker3D" parent="."]
-transform = Transform3D( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.01986, 3.31544 )
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.01986, 3.31544)
 
-[node name="ShipMesh" parent="." instance=ExtResource( 5 )]
+[node name="ShipMesh" parent="." instance=ExtResource("5")]
 
 [node name="Cube" parent="ShipMesh" index="0"]
-material_override = ExtResource( 34 )
+material_override = ExtResource("34")
 
 [node name="Cube001" parent="ShipMesh" index="1"]
-material_override = ExtResource( 34 )
-
-[node name="ThrusterFlame" parent="ShipMesh" instance=ExtResource( 6 )]
-transform = Transform3D( 0.00949448, 0, 0.999955, 0, 1, 0, -0.999955, 0, 0.00949448, 0, 0.62, -11.2598 )
-visible = false
-Speed = 0.1
-Energy = 0.1
-TextureUniform2 = SubResource( 8 )
-
-[node name="Thuster" parent="ShipMesh" instance=ExtResource( 32 )]
-transform = Transform3D( -8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -0.0449913, 0.768863, -8.47611 )
-__meta__ = {
-"_editor_description_": ""
-}
+material_override = ExtResource("34")
 
 [node name="Shooting" type="Node3D" parent="."]
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="Audio1" type="AudioStreamPlayer3D" parent="Shooting"]
-stream = ExtResource( 7 )
+stream = ExtResource("7")
 unit_db = 80.0
 unit_size = 100.0
 max_db = 0.0
 max_distance = 500.0
-bus = "Sounds"
+bus = &"Sounds"
 attenuation_filter_db = -12.0
 doppler_tracking = 1
 
 [node name="Audio2" type="AudioStreamPlayer3D" parent="Shooting"]
-stream = ExtResource( 8 )
+stream = ExtResource("8")
 unit_db = 80.0
 unit_size = 100.0
 max_db = 6.0
 max_distance = 500.0
-bus = "Sounds"
+bus = &"Sounds"
 attenuation_filter_db = -12.0
 doppler_tracking = 1
 
@@ -195,108 +174,95 @@ wait_time = 2.0
 one_shot = true
 
 [node name="NoAmmoAudio" type="AudioStreamPlayer" parent="Shooting"]
-stream = ExtResource( 22 )
-bus = "Sounds"
+stream = ExtResource("22")
+bus = &"Sounds"
 
 [node name="LockingAudio" type="AudioStreamPlayer" parent="Shooting"]
-stream = ExtResource( 21 )
+stream = ExtResource("21")
 volume_db = 15.0
-bus = "Sounds"
+bus = &"Sounds"
 
 [node name="RayCast3D" type="RayCast3D" parent="Shooting"]
-enabled = true
-cast_to = Vector3( 0, 0, 1500 )
-debug_shape_custom_color = Color( 1, 0, 0, 1 )
+debug_shape_custom_color = Color(1, 0, 0, 1)
 debug_shape_thickness = 5
 
 [node name="SpectateCamPivot" type="Node3D" parent="."]
-script = ExtResource( 17 )
+script = ExtResource("17")
 
 [node name="SpectateCamPos" type="Marker3D" parent="SpectateCamPivot"]
-transform = Transform3D( -0.982648, 0.0210385, -0.184281, -9.91625e-09, 0.993546, 0.113429, 0.185478, 0.11146, -0.976307, -5.0953, 10.1634, -29.3627 )
+transform = Transform3D(-0.982648, 0.0210385, -0.184281, -9.91625e-09, 0.993546, 0.113429, 0.185478, 0.11146, -0.976307, -5.0953, 10.1634, -29.3627)
 
 [node name="LeaveTimer" type="Timer" parent="."]
 wait_time = 2.5
 one_shot = true
 
-[node name="PlayerHUD" parent="." instance=ExtResource( 19 )]
+[node name="PlayerHUD" parent="." instance=ExtResource("19")]
 
-[node name="PlayerShipInterior" parent="." instance=ExtResource( 20 )]
-transform = Transform3D( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 3.7104 )
+[node name="PlayerShipInterior" parent="." instance=ExtResource("20")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 3.7104)
 visible = false
 
 [node name="AudioListener3D" type="AudioListener3D" parent="."]
 
 [node name="StateMachine" type="Node" parent="."]
-script = ExtResource( 25 )
+script = ExtResource("25")
 START_STATE = NodePath("ChooseObjective")
 
 [node name="ChooseObjective" type="Node" parent="StateMachine"]
-script = ExtResource( 23 )
+script = ExtResource("23")
 
 [node name="AttackEnemy" type="Node" parent="StateMachine"]
-script = ExtResource( 24 )
+script = ExtResource("24")
 
 [node name="DefendBS" type="Node" parent="StateMachine"]
-script = ExtResource( 27 )
+script = ExtResource("27")
 
 [node name="Escape" type="Node" parent="StateMachine"]
-script = ExtResource( 26 )
+script = ExtResource("26")
 
 [node name="AttackBigShip" type="Node" parent="StateMachine"]
-script = ExtResource( 31 )
+script = ExtResource("31")
 
 [node name="PatrolMiddlePoint" type="Node" parent="StateMachine"]
-script = ExtResource( 29 )
+script = ExtResource("29")
 
 [node name="PushForward" type="Node" parent="StateMachine"]
-script = ExtResource( 28 )
+script = ExtResource("28")
 
 [node name="ColDetects" type="Node3D" parent="."]
 
 [node name="ColDetectLeft" type="RayCast3D" parent="ColDetects"]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 0 )
-enabled = true
-cast_to = Vector3( 150, 0, 300 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 0)
 collision_mask = 13
 
 [node name="ColDetectRight" type="RayCast3D" parent="ColDetects"]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, 0 )
-enabled = true
-cast_to = Vector3( -150, 0, 300 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, 0)
 collision_mask = 13
 
 [node name="ColDetectForward" type="RayCast3D" parent="ColDetects"]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.5584 )
-enabled = true
-cast_to = Vector3( 0, 0, 300 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.5584)
 collision_mask = 13
 
 [node name="ColDetectUp" type="RayCast3D" parent="ColDetects"]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
-enabled = true
-cast_to = Vector3( 0, 150, 300 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 collision_mask = 13
 
 [node name="ColDetectDown" type="RayCast3D" parent="ColDetects"]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0 )
-enabled = true
-cast_to = Vector3( 0, -150, 300 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
 collision_mask = 13
 
 [node name="Debug" type="Node3D" parent="."]
 visible = false
 
 [node name="Pito" type="MeshInstance3D" parent="Debug"]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.75062, 0 )
-mesh = SubResource( 4 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.75062, 0)
+mesh = SubResource("4")
 skeleton = NodePath("../..")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="Debug"]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.85104 )
-local_coords = false
-mesh = SubResource( 5 )
-gravity = Vector3( 0, 0, 0 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.85104)
+mesh = SubResource("5")
+gravity = Vector3(0, 0, 0)
 
 [node name="ExitTimer" type="Timer" parent="."]
 one_shot = true
@@ -305,14 +271,14 @@ one_shot = true
 collision_layer = 32768
 collision_mask = 0
 monitoring = false
-script = ExtResource( 30 )
+script = ExtResource("30")
 
 [node name="CollisionShape2" type="CollisionShape3D" parent="Interaction"]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51836 )
-shape = SubResource( 1 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51836)
+shape = SubResource("1")
 
 [node name="EnginesAudio" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource( 11 )
+stream = ExtResource("11")
 unit_db = 80.0
 
 [connection signal="big_ship_shields_down" from="." to="StateMachine/ChooseObjective" method="_on_big_ship_shields_down"]
@@ -323,7 +289,6 @@ unit_db = 80.0
 [connection signal="timeout" from="Input/ReloadTurboTimer" to="Input" method="_on_ReloadTurboTimer_timeout"]
 [connection signal="timeout" from="Input/DrainTurboTimer" to="Input" method="_on_DrainTurboTimer_timeout"]
 [connection signal="timeout" from="Input/DriftTimer" to="Input" method="_on_DriftTimer_timeout"]
-[connection signal="tween_all_completed" from="Physics/Tween" to="Physics" method="_on_Tween_tween_all_completed"]
 [connection signal="timeout" from="Shooting/LockMissileTimer" to="Shooting" method="_on_LockMissileTimer_timeout"]
 [connection signal="timeout" from="LeaveTimer" to="." method="_on_LeaveTimer_timeout"]
 [connection signal="timeout" from="ExitTimer" to="." method="exit_ship"]

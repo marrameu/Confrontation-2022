@@ -5,11 +5,11 @@ var my_team_big_ships_wo_shields : Array
 var enemy_big_ships_wo_shields : Array
 
 
-func _get_configuration_warnings() -> String:
-	var warning := ""
-	if owner != Ship:
-		warning = "L''owner' de l'estat no és una nau"
-	return warning
+#func _get_configuration_warnings() -> String:
+#	var warning := ""
+#	if owner != Ship:
+#		warning = "L''owner' de l'estat no és una nau"
+#	return warning
 
 
 func escape():

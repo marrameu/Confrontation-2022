@@ -22,7 +22,7 @@ func _process(delta):
 		
 		if target.owner.is_in_group("Ships"):
 			var text : String
-			text = target.owner.name + "\n" + target.owner.get_node("StateMachine").current_state.name + "\n" + str(target.owner.input.des_throttle) + " " + str(target.owner.input.wants_turbo) + " " + str(target.owner.input.do_turbo)
+			text = str(target.owner.name) + "\n" + target.owner.get_node("StateMachine").current_state.name + "\n" + str(target.owner.input.des_throttle) + " " + str(target.owner.input.wants_turbo) + " " + str(target.owner.input.do_turbo)
 			$CanvasLayer/Label.text = text
 
 
@@ -32,7 +32,7 @@ func _on_SpawnHUD_change_spectate(location : int, index : int = 0):
 		0:
 			target = null
 			position = Vector3(1060, 1512, 2512)
-			rotation_degrees = Vector3(-26.6, 11.842, 4.789)
+			rotation = Vector3(deg_to_rad(-26.6), deg_to_rad(11.842), deg_to_rad(4.789))
 			return
 		1:
 			target_ships = get_tree().get_nodes_in_group("CapitalShips")
@@ -60,7 +60,11 @@ func _on_SpawnHUD_change_spectate(location : int, index : int = 0):
 func _on_SpawnHUD_change_cam():
 	if position == original_pos:
 		position = Vector3(0, 5000, 0)
-		rotation_degrees = Vector3(-90, 180, 0)
+		rotation = Vector3(deg_to_rad(-90), deg_to_rad(180), deg_to_rad(0))
 	else:
 		position = original_pos
 		rotation = original_rot
+
+
+func change_cam():
+	pass # Replace with function body.

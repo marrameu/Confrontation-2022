@@ -7,7 +7,7 @@ func enter():
 	for cs in get_tree().get_nodes_in_group("CapitalShips"):
 		if cs.blue_team != owner.blue_team:
 			path = cs.get_node("EnterPath")
-			owner.input.target = path.get_child(0).global_translation
+			owner.input.target = path.get_child(0).global_position
 	owner.input.des_throttle = 1.0
 
 
@@ -17,6 +17,6 @@ func update(delta):
 		owner.input.des_throttle = 0.7 # 0.4 abans
 		ind += 1
 		if path.get_child(ind):
-			owner.input.target = path.get_child(ind).global_translation
+			owner.input.target = path.get_child(ind).global_position
 		else:
 			owner.land()

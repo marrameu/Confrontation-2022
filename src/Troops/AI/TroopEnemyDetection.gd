@@ -24,8 +24,9 @@ func update_enemy(closest_dir := -0.5, closes_dist := 1000.0) -> Node3D:
 				if a > closest_dir:
 					var health_system : HealthSystem = troop.get_node("HealthSystem")
 					if health_system.health > 0:
-						var ray := get_world_3d().direct_space_state.intersect_ray(owner.position, troop.position, [owner, troop], 3) # sols environmmmment
-						if not ray:
+						var query := PhysicsRayQueryParameters3D.create(owner.position, troop.position, 3, [owner, troop]) # sols environmmmment
+						var ray := get_world_3d().direct_space_state.intersect_ray(query) 
+						if not ray.is_empty():
 							closest_dir = a
 							closes_dist = dist
 							most_frontal_enenmy = troop

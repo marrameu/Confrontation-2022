@@ -42,11 +42,6 @@ func _ready() -> void:
 
 
 func _process(delta : float) -> void:
-	if get_tree().has_multiplayer_peer():
-		if get_parent().is_player:
-			if get_parent().player_id != get_tree().get_unique_id():
-				return
-	
 	$DieInfo.visible = owner.dead
 	if owner.dead or owner.is_player_or_ai != 1:
 		_make_visible(false)
@@ -90,7 +85,7 @@ func _process(delta : float) -> void:
 			var x = direction.dot(owner.global_transform.basis.x)
 			var y = direction.dot(owner.global_transform.basis.y)
 			var prova = Vector2(-x, -y).normalized()
-			lock_target_info.position = (prova * 500 - lock_target_info_center_pos).clamp(500) + lock_target_info_center_pos
+			lock_target_info.position = (prova * 500 - lock_target_info_center_pos).limit_length(500) + lock_target_info_center_pos
 			
 			# així 100% q no
 			#lock_target_info.position = (owner.cam as Camera3D).unproject_position(target.position) - Vector2(lock_target_info.size / 2) + Vector2.UP * 80
@@ -224,7 +219,7 @@ func on_enemy_died():
 
 func _on_HealthSystem_die(attacker):
 	$DieInfo.show()
-	$DieInfo.text = "Heu estat mort per " + attacker.name if attacker else "Heu estat mort"
+	$DieInfo.text = "Heu estat mort per " + attacker.name if attacker else "Heu mort"
 
 
 func _on_HealthSystem_damage_taken(attacker : Node3D):

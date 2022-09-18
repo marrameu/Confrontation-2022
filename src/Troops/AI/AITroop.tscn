@@ -1,0 +1,99 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://src/Troops/TroopBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Bullets/HeadshotBullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Troops/Weapons/AIGun.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/materials/command_post/red.tres" type="Material" id=4]
+[ext_resource path="res://src/Troops/AI/Troop.gd" type="Script" id=5]
+[ext_resource path="res://src/Troops/AI/AITroopStateMachine.gd" type="Script" id=6]
+[ext_resource path="res://src/Troops/AI/AttackEnemy.gd" type="Script" id=7]
+[ext_resource path="res://src/Troops/AI/EnterShip.gd" type="Script" id=8]
+[ext_resource path="res://src/Troops/AI/ConquerGroundCPs.gd" type="Script" id=9]
+[ext_resource path="res://src/Troops/AI/TroopEnemyDetection.gd" type="Script" id=10]
+[ext_resource path="res://src/Troops/AI/ChooseObjective.gd" type="Script" id=11]
+[ext_resource path="res://src/Troops/AI/PathMakerTemproal.gd" type="Script" id=12]
+[ext_resource path="res://assets/materials/command_post/blue.tres" type="Material" id=13]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
+
+[sub_resource type="BoxMesh" id=3]
+size = Vector3( 0.5, 0.5, 0.05 )
+
+[node name="AITroop" instance=ExtResource( 1 )]
+script = ExtResource( 5 )
+red_mat = ExtResource( 4 )
+blue_mat = ExtResource( 13 )
+
+[node name="Skeleton3D" parent="Model" index="0"]
+bones/36/bound_children = [ NodePath("BoneAttachment3D") ]
+
+[node name="BoneAttachment3D" parent="Model/Skeleton3D" index="2"]
+transform = Transform3D( -0.0518228, -0.984133, -0.169695, -0.316206, -0.145011, 0.937542, -0.947274, 0.102245, -0.303674, -0.282969, 1.02274, 0.225258 )
+
+[node name="AIGun" parent="Model/Skeleton3D/BoneAttachment3D/Weapons" index="0" instance=ExtResource( 3 )]
+unique_name_in_owner = true
+transform = Transform3D( -0.975965, -0.151395, -0.156731, -0.139035, 0.986446, -0.0870924, 0.167793, -0.0632085, -0.983791, -0.0514054, -0.00399709, -0.0301232 )
+bullet_scene = ExtResource( 2 )
+
+[node name="AnimationTree" parent="." index="6"]
+parameters/StateMachine/playback = SubResource( 1 )
+parameters/StateMachine/walk/OneShotStateMachine/playback = SubResource( 2 )
+
+[node name="EnemyDetection" type="Node3D" parent="." index="11"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.78536, 0 )
+script = ExtResource( 10 )
+
+[node name="Timer" type="Timer" parent="EnemyDetection" index="0"]
+wait_time = 3.0
+autostart = true
+
+[node name="InitTimer" type="Timer" parent="." index="12"]
+one_shot = true
+autostart = true
+
+[node name="TeamIndicator" type="MeshInstance3D" parent="." index="13"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.55491, 0.321415 )
+mesh = SubResource( 3 )
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." index="14"]
+path_max_distance = 4.0
+max_speed = 6.0
+
+[node name="AIStateMachine" type="Node" parent="." index="15"]
+script = ExtResource( 6 )
+START_STATE = NodePath("ChooseObjective")
+
+[node name="ChooseObjective" type="Node" parent="AIStateMachine" index="0"]
+script = ExtResource( 11 )
+
+[node name="ConquerGroundCPs" type="Node" parent="AIStateMachine" index="1"]
+script = ExtResource( 9 )
+
+[node name="ConquestTimer" type="Timer" parent="AIStateMachine/ConquerGroundCPs" index="0"]
+wait_time = 10.0
+one_shot = true
+
+[node name="EnterShip" type="Node" parent="AIStateMachine" index="2"]
+script = ExtResource( 8 )
+
+[node name="WaitTimer" type="Timer" parent="AIStateMachine/EnterShip" index="0"]
+wait_time = 2.0
+one_shot = true
+
+[node name="AttackEnemy" type="Node" parent="AIStateMachine" index="3"]
+script = ExtResource( 7 )
+
+[node name="CheckCurrentEnemyTimer" type="Timer" parent="." index="16"]
+autostart = true
+
+[node name="PathMaker" type="Node" parent="." index="17"]
+script = ExtResource( 12 )
+
+[connection signal="timeout" from="EnemyDetection/Timer" to="EnemyDetection" method="_on_Timer_timeout"]
+[connection signal="timeout" from="InitTimer" to="." method="_on_InitTimer_timeout"]
+[connection signal="timeout" from="AIStateMachine/ConquerGroundCPs/ConquestTimer" to="AIStateMachine/ConquerGroundCPs" method="_on_ConquestTimer_timeout"]
+[connection signal="timeout" from="AIStateMachine/EnterShip/WaitTimer" to="AIStateMachine/EnterShip" method="_on_WaitTimer_timeout"]
+
+[editable path="Model"]

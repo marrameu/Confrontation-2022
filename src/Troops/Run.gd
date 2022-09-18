@@ -17,7 +17,7 @@ func update(delta):
 	direction = direction.normalized()
 	
 	move(delta, MAX_SPEED, direction)
-	if not Input.is_action_pressed("run") or direction * aim.z < 1: # <= 0?
+	if not Input.is_action_pressed("run") or direction * aim.z < Vector3(0, 0, 1): # <= 0?
 		emit_signal("finished", "walk")
 	
 	update_walk_anim(delta)

@@ -25,7 +25,7 @@ func _process(delta):
 	
 	$"%Ammo".value = ammo/MAX_AMMO*100
 	if !reload_per_sec:
-		$"%Reload".value = reload_ammo/MAX_RELOAD_AMMO*100
+		$"%Reload".value = ammo_to_reload/MAX_RELOAD_AMMO*100
 	
 	offset = init_offset/2 if get_tree().current_scene.get_node("CameraBase").zooming else init_offset
 	
@@ -38,7 +38,7 @@ func _process(delta):
 	var cam_basis : Basis = cam.global_transform.basis
 	
 	$RayCast3D.global_transform.origin = cam.global_transform.origin #- cam.global_transform.basis.z * 5 # distància fins al jugador
-	$RayCast3D.global_transform.basis = Basis(cam_basis.get_euler())
+	$RayCast3D.global_transform.basis = Basis(cam_basis.get_euler(), 0)
 
 
 func _physics_process(delta):
@@ -58,7 +58,7 @@ func _physics_process(delta):
 	else:
 		var cam := get_viewport().get_camera_3d()
 		var cam_basis : Basis = cam.global_transform.basis
-		$Mesh.global_transform.basis = Basis(cam_basis.get_euler() + Vector3(0, 0, deg_to_rad(180)))
+		$Mesh.global_transform.basis = Basis(cam_basis.get_euler() + Vector3(0, 0, deg_to_rad(180)), 0)
 		$Mesh.rotation_degrees.z += 180
 
 

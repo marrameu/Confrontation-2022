@@ -12,7 +12,7 @@ func _physics_process(_delta):
 	ammo = MAX_AMMO
 	#if shooting:
 	if weakref(owner.current_enemy).get_ref():
-		look_at(owner.current_enemy.get_node("CollisionShape3D").global_translation + Vector3(0, 1, 0), Vector3(0, 1, 0))
+		look_at(owner.current_enemy.get_node("CollisionShape3D").global_position + Vector3(0, 1, 0), Vector3(0, 1, 0))
 		#rotation.x = -rotation.x
 		#rotation.z = -rotation.z
 		transform = transform.orthonormalized()

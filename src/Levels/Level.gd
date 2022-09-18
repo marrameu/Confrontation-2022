@@ -5,17 +5,17 @@ signal ship_added
 signal big_ship_shields_down
 signal match_msg
 
-var player_scenes := { 0 : preload("res://src/Troops/Player/PlayerRifle.tscn"), 1 : preload("res://src/Troops/Player/PlayerMissileLauncher.tscn")}
-var ai_troop_scene : PackedScene = preload("res://src/Troops/AI/Troop.tscn")
+var player_scenes := { 0 : preload("res://src/Troops/Player/NewPlayerRifle.tscn"), 1 : preload("res://src/Troops/Player/NewPlayerMissileLauncher.tscn")}
+var ai_troop_scene : PackedScene = preload("res://src/Troops/AI/AITroop.tscn")
 
 var blue_points = 0
 var red_points = 0
 var MAX_POINTS = 1000
 
-var battle_started := false
+var has_battle_started := false
 
-var num_of_players : int = 26
-var num_of_space_troops : int = 10
+var num_of_players : int = 20
+var num_of_space_troops : int = 8
 
 # middle point
 var middle_point := 0.0
@@ -53,6 +53,8 @@ func _process(delta):
 
 func _physics_process(delta):
 	update_middle_point(delta)
+	if red_points >= 1000 or blue_points >= 1000:
+		get_tree().paused = true
 
 
 func update_middle_point(delta): 
@@ -147,7 +149,7 @@ func spawn_ai_troop(ai_num : int, blue_team := false, spawn_in_space := false, p
 	
 	new_troop.pilot_man = new_troop_man
 	# ES POT FER MILLOR, COM AMB EL PLAYER
-	if not pos:
+	if pos != Vector3.ZERO:
 		new_troop.position = my_cp.global_transform.origin + Vector3(randf_range(-15, 15), 2, randf_range(-15, 15))
 	else:
 		new_troop.position = pos
@@ -195,7 +197,7 @@ func start_battle():
 	for attack_ship in get_tree().get_nodes_in_group("AttackShips"):
 		attack_ship.can_move = true
 	
-	battle_started = true
+	has_battle_started = true
 	emit_signal("battle_started")
 
 
@@ -214,7 +216,7 @@ func _on_ship_died(pilot_man : PilotManager) -> void:
 		if pilot_man.is_player:
 			_on_player_died()
 		else:
-			_on_ai_troop_died(int(pilot_man.name.trim_prefix("AIManager")))
+			_on_ai_troop_died(str(pilot_man.name).trim_prefix("AIManager").to_int())
 
 
 func _on_ai_troop_died(ai_num : int):
@@ -243,7 +245,7 @@ func _on_BigShip_shields_down(ship):
 
 
 func _on_BigShip_destroyed(ship : Node3D):
-	emit_signal("match_msg", ship.name + " HA ESTAT DESTRUÏDA", !ship.blue_team)
+	emit_signal("match_msg", ship.name, " HA ESTAT DESTRUÏDA", !ship.blue_team)
 	if ship.is_in_group("CapitalShips"):
 		if ship.blue_team:
 			red_points += 200

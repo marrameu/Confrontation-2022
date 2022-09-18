@@ -42,7 +42,10 @@ func _process(delta : float) -> void:
 		ray_normal = ray_origin + current_camera.project_ray_normal(Vector2(camera_width_center, camera_height_center)) * ray_range
 		
 		var space_state = current_camera.get_world_3d().direct_space_state
-		var result = space_state.intersect_ray(ray_origin, ray_normal, [], 32768, false, true)
+		var query := PhysicsRayQueryParameters3D.create(ray_origin, ray_normal, 32768)
+		query.collide_with_areas = true
+		query.collide_with_bodies = false
+		var result = space_state.intersect_ray(query)
 		if result:
 			var collider = result.collider
 			if not target_collider:

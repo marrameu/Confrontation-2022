@@ -1,7 +1,7 @@
 extends Node3D
 
 @onready var init_h_offset : float = -$CameraPosition.position.x
-@onready var tween : Tween = $Tween
+#@onready var tween : Tween = $Tween
 
 var mouse_movement := Vector2()
 
@@ -31,7 +31,7 @@ var killer : Node3D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$PuppetCamPos.position = $CameraPosition.position
-	$RayCast3D.cast_to = $PuppetCamPos.position
+	$RayCast3D.target_position = $PuppetCamPos.position
 	$RayCast3D.add_exception(get_node(player_path)) # pq no va? -> mirar errors debug
 
 
@@ -58,7 +58,7 @@ func _physics_process(delta):
 			rotation.z = 0
 		return
 	
-	position = position.lerp(get_node(player_path).get_node("CamPos").global_translation, 0.25 * delta * 60)
+	position = position.lerp(get_node(player_path).get_node("CamPos").global_position, 0.25 * delta * 60)
 	
 	var joystick_movement := 0.0
 	var pitch_strenght := (-joystick_movement - mouse_movement.y) * rotate_speed_multipiler
@@ -74,7 +74,7 @@ func _physics_process(delta):
 	process_shake()
 	mouse_movement = Vector2.ZERO
 	
-	$RayCast3D.cast_to = $PuppetCamPos.position
+	$RayCast3D.target_position = $PuppetCamPos.position
 
 
 func _input(event : InputEvent) -> void:
@@ -157,18 +157,21 @@ func _on_StabilizeTimer_timeout():
 
 
 func move_camera() -> void:
+	pass
+	"""
 	var current_h_offset = $PuppetCamPos.position.x
 	if current_h_offset > 0:
 		var _new_x = tween.interpolate_property($PuppetCamPos, "position:x", current_h_offset, -init_h_offset, 0.2, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	else:
 		var _new_x = tween.interpolate_property($PuppetCamPos, "position:x", current_h_offset, init_h_offset, 0.2, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	var _start = tween.start()
+	"""
 
 
 func check_collisions(): # hauria de ser diferent per a quan mor
 	if $RayCast3D.is_colliding():
 		#print($RayCast3D.get_collider(), randi())
 		$CameraPosition.position = $CameraPosition.position.lerp(to_local($RayCast3D.get_collision_point()), 0.2)
-		$CameraPosition.global_translation += Vector3.ONE / 10 * $CameraPosition.global_translation.direction_to(position)
+		$CameraPosition.global_position += Vector3.ONE / 10 * $CameraPosition.global_position.direction_to(position)
 	else:
 		$CameraPosition.position = $PuppetCamPos.position

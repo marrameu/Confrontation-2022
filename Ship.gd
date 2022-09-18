@@ -126,7 +126,7 @@ func check_collisions(delta):
 
 func _on_HealthSystem_die(attacker : Node3D):
 	dead = true
-	print(name + "died")
+	print(name, " died")
 	if attacker and is_player_or_ai == 1:
 		cam.killer = (attacker)
 	
@@ -198,7 +198,7 @@ func exit_ship(): # de moment, sols player
 		get_tree().current_scene.spawn_player(position) # senyals
 	elif is_player_or_ai == 2:
 		$StateMachine.set_active(false)
-		get_tree().current_scene.spawn_ai_troop(int(pilot_man.name.trim_prefix("AIManager")), false, false, position) # senyals
+		get_tree().current_scene.spawn_ai_troop(String(pilot_man.name).trim_prefix("AIManager").to_int(), false, false, position) # senyals
 	pilot_man = null
 	input.set_script(preload("res://ShipInput.gd"))
 	shooting.set_script(preload("res://src/Ships/ShipShooting.gd"))

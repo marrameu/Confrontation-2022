@@ -22,9 +22,6 @@ var searching_ship := false
 
 var nickname := "Troop"
 
-# Networking
-puppet var slave_position : = Vector3()
-puppet var slave_rotation : = 0.0
 
 # temproal
 var wait_a_fcking_moment := false
@@ -36,6 +33,10 @@ var wait_to_shoot := false
 @export var blue_mat : Material
 
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
+
+
+var can_shoot = false
+var can_rotate = false
 
 
 func _ready():
@@ -96,3 +97,5 @@ func _on_enemy_died(attacker):
 		pilot_man.points += 50
 
 
+func _on_MeleeHitBox_area_entered(area):
+	pass # Replace with function body.

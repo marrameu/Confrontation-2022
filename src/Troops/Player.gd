@@ -19,9 +19,15 @@ var can_change_weapon := true
 
 var dead := false
 
+# fall damage
+var max_y := 0
+@export var min_height := 5
+
 
 func _ready():
+	max_y = position.y
 	blue_team = pilot_man.blue_team
+	$StateMachine.set_active(true)
 
 
 func _physics_process(delta):
@@ -34,6 +40,16 @@ func _physics_process(delta):
 		rotation.y = des_transform.get_euler().y
 		orthonormalize()
 		#inverse kinematics
+	
+	if "has_contact" in $StateMachine.current_state:
+		if is_on_floor() and $StateMachine.current_state.has_contact:
+			var jumped_height : float = max_y - position.y
+			if jumped_height > min_height:
+				get_node("HealthSystem").take_damage(jumped_height * 5)
+			max_y = position.y
+		elif not is_on_floor() and not $StateMachine.current_state.has_contact:
+			if position.y > max_y:
+				max_y = position.y
 
 
 func _on_HealthSystem_die(attacker):

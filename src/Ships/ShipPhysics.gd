@@ -28,10 +28,11 @@ var DESIRED_DESCENSE_VEL := 5.0
 var ascense_vel := 0.0
 var DESIRED_ASCENSE_VEL := 2.0
 
+enum States { LANDED, FLYING, LEAVING, LANDING } # solució temporal Godot 4.0
+
 
 func _process(delta : float) -> void:
 	var state : int = owner.state
-	var States = owner.States
 	
 	match state:
 		States.FLYING:
@@ -75,13 +76,13 @@ func _process(delta : float) -> void:
 				ship.position += Vector3(0, -descense_vel * delta, 0)
 			"""
 			if get_node("Tail").is_colliding():
-				owner.state = States.LANDED
+				owner.state = owner.States.LANDED
 				
 				stabilizing = false
 				stabilized = false
 		
-		States.LANDED:
-			owner.set_mode(RigidBody3D.MODE_RIGID)
+		#States.LANDED:
+		#	#owner.set_mode(RigidBody3D.MODE_RIGID)
 
 
 func set_physics_input(linear_input : Vector3, angular_input : Vector3, delta):

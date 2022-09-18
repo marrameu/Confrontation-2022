@@ -37,7 +37,7 @@ func _ready():
 	# Meh
 	var c := Control.new()
 	add_child(c)
-	_font = c.get_font("font")
+	#_font = c.get_font("font")
 	c.queue_free()
 
 
@@ -63,6 +63,7 @@ func draw_box(position: Vector3, size: Vector3, color: Color = Color(1,1,1)):
 ## @param b: end position in world units
 ## @param color
 func draw_line_3d(a: Vector3, b: Vector3, color: Color):
+	return
 	var g = ImmediateMesh.new()
 	g.material_override = _get_line_material()
 	g.begin(Mesh.PRIMITIVE_LINES)
@@ -70,7 +71,7 @@ func draw_line_3d(a: Vector3, b: Vector3, color: Color):
 	g.add_vertex(a)
 	g.add_vertex(b)
 	g.end()
-	add_child(g)
+	#add_child(g)
 	_lines.append({
 		"node": g,
 		"frame": Engine.get_frames_drawn() + LINES_LINGER_FRAMES,
@@ -168,10 +169,11 @@ func _process(delta: float):
 		_canvas_item.position = Vector2(8, 8)
 		_canvas_item.connect("draw",Callable(self,"_on_CanvasItem_draw"))
 		add_child(_canvas_item)
-	_canvas_item.update()
+	#_canvas_item.update()
 
 
 func _on_CanvasItem_draw():
+	return
 	var ci := _canvas_item
 
 	var ascent := Vector2(0, _font.get_ascent())
@@ -186,7 +188,7 @@ func _on_CanvasItem_draw():
 		var text := str(key, ": ", t.text, "\n")
 		var ss := _font.get_string_size(text)
 		ci.draw_rect(Rect2(pos, Vector2(ss.x + xpad * 2, line_height)), TEXT_BG_COLOR)
-		ci.draw_string(_font, pos + font_offset, text, TEXT_COLOR)
+		#ci.draw_string(_font, pos + font_offset, text, TEXT_COLOR)
 		pos.y += line_height
 
 

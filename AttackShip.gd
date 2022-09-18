@@ -77,39 +77,39 @@ func turn(delta):
 	var right = false
 	var left = false
 	
-	$ColDetectRays.get_node("ColDetectForward").cast_to = Vector3(0, 0, 150 * 1)
-	$ColDetectRays.get_node("ColDetectDown").cast_to = Vector3(0, -75 * 1, 150 * 1)
-	$ColDetectRays.get_node("ColDetectUp").cast_to = Vector3(0, 75 * 1, 150 * 1)
-	$ColDetectRays.get_node("ColDetectRight").cast_to = Vector3(-75 * 1, 0, 150 * 1)
-	$ColDetectRays.get_node("ColDetectLeft").cast_to = Vector3(75 * 1, 0, 150 * 1)
+	$ColDetectRays.get_node("ColDetectForward").target_position = Vector3(0, 0, 150 * 1)
+	$ColDetectRays.get_node("ColDetectDown").target_position = Vector3(0, -75 * 1, 150 * 1)
+	$ColDetectRays.get_node("ColDetectUp").target_position = Vector3(0, 75 * 1, 150 * 1)
+	$ColDetectRays.get_node("ColDetectRight").target_position = Vector3(-75 * 1, 0, 150 * 1)
+	$ColDetectRays.get_node("ColDetectLeft").target_position = Vector3(75 * 1, 0, 150 * 1)
 	
 	"""
 	# fer-ho amb la velocitat?
 	var dist = owner.global_transform.origin.distance_to(target)
 	var multi = clamp(((dist - a_partir_daqui_min)/(distancia_per_comencar_a_frenat - a_partir_daqui_min)), min_raycast_longitude, 1)
 	#print(multi)
-	owner.get_node("ColDetectForward").cast_to = Vector3(0, 0, 300 * multi)
-	owner.get_node("ColDetectDown").cast_to = Vector3(0, -150 * multi, 300 * multi)
-	owner.get_node("ColDetectUp").cast_to = Vector3(0, 150 * multi, 300 * multi)
-	owner.get_node("ColDetectRight").cast_to = Vector3(-150 * multi, 0, 300 * multi)
-	owner.get_node("ColDetectLeft").cast_to = Vector3(150 * multi, 0, 300 * multi)
+	owner.get_node("ColDetectForward").target_position = Vector3(0, 0, 300 * multi)
+	owner.get_node("ColDetectDown").target_position = Vector3(0, -150 * multi, 300 * multi)
+	owner.get_node("ColDetectUp").target_position = Vector3(0, 150 * multi, 300 * multi)
+	owner.get_node("ColDetectRight").target_position = Vector3(-150 * multi, 0, 300 * multi)
+	owner.get_node("ColDetectLeft").target_position = Vector3(150 * multi, 0, 300 * multi)
 	
 	#owner.get_node("ColDetectForward").force_raycast_update()
 	"""
 	
 	if ($ColDetectRays.get_node("ColDetectUp") as RayCast3D).is_colliding():
-		DebugDraw.draw_line_3d(global_transform.origin, global_transform.origin+(global_transform.basis * $ColDetectRays.get_node("ColDetectUp").cast_to), Color.BLUE)
+		DebugDraw.draw_line_3d(global_transform.origin, global_transform.origin+(global_transform.basis * $ColDetectRays.get_node("ColDetectUp").target_position), Color.BLUE)
 		pitch = 1 # ves avall
 		up = true
 	if ($ColDetectRays.get_node("ColDetectDown") as RayCast3D).is_colliding():
-		DebugDraw.draw_line_3d(global_transform.origin, global_transform.origin+(global_transform.basis * $ColDetectRays.get_node("ColDetectDown").cast_to), Color.BLUE)
+		DebugDraw.draw_line_3d(global_transform.origin, global_transform.origin+(global_transform.basis * $ColDetectRays.get_node("ColDetectDown").target_position), Color.BLUE)
 		pitch = -1 # vés amunt
 		down = true
 	# No elif pq si no, no es pot posar a true up i down
 	
 	# No toca ni a dalt ni a baix però si endavant
 	if not down and not up and ($ColDetectRays.get_node("ColDetectForward") as RayCast3D).is_colliding():
-		DebugDraw.draw_line_3d(global_transform.origin, global_transform.origin+(global_transform.basis * $ColDetectRays.get_node("ColDetectForward").cast_to), Color.BROWN)
+		DebugDraw.draw_line_3d(global_transform.origin, global_transform.origin+(global_transform.basis * $ColDetectRays.get_node("ColDetectForward").target_position), Color.BROWN)
 		pitch = -1 # Tant se val si -1 o 1, pq no toca enlloc
 	elif down and up: # Toca a dalt i a baix
 		if not ($ColDetectRays.get_node("ColDetectForward") as RayCast3D).is_colliding(): # No toca endavant
@@ -132,18 +132,18 @@ func turn(delta):
 	# En un món ideal, la llargada dels RayCast3D dependria de la velocitat de la nau
 	# dreta esquerra
 	if ($ColDetectRays.get_node("ColDetectRight") as RayCast3D).is_colliding():
-		DebugDraw.draw_line_3d(global_transform.origin, global_transform.origin+(global_transform.basis * $ColDetectRays.get_node("ColDetectRight").cast_to), Color.BLUE)
+		DebugDraw.draw_line_3d(global_transform.origin, global_transform.origin+(global_transform.basis * $ColDetectRays.get_node("ColDetectRight").target_position), Color.BLUE)
 		yaw = 1 # veé esquerra
 		right = true
 	# No elif pq si no, no es pot posar a true right i left
 	if ($ColDetectRays.get_node("ColDetectLeft") as RayCast3D).is_colliding():
-		DebugDraw.draw_line_3d(global_transform.origin, global_transform.origin+(global_transform.basis * $ColDetectRays.get_node("ColDetectLeft").cast_to), Color.BLUE)
+		DebugDraw.draw_line_3d(global_transform.origin, global_transform.origin+(global_transform.basis * $ColDetectRays.get_node("ColDetectLeft").target_position), Color.BLUE)
 		yaw = -1 # vés dreta
 		left = true
 	
 	# No toca ni a dreta ni a esq però si endavant
 	if not left and not right and ($ColDetectRays.get_node("ColDetectForward") as RayCast3D).is_colliding():
-		DebugDraw.draw_line_3d(global_transform.origin, global_transform.origin+(global_transform.basis * $ColDetectRays.get_node("ColDetectForward").cast_to), Color.BROWN)
+		DebugDraw.draw_line_3d(global_transform.origin, global_transform.origin+(global_transform.basis * $ColDetectRays.get_node("ColDetectForward").target_position), Color.BROWN)
 		yaw = 1 # Tant se val si -1 o 1, pq no toca enlloc
 	elif right and left: # Toca dreta i esquerra
 		if not ($ColDetectRays.get_node("ColDetectForward") as RayCast3D).is_colliding(): # No toca endavant
