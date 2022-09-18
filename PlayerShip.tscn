@@ -12,7 +12,7 @@
 [ext_resource path="res://assets/audio/no_ammo.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/audio/locking_enemy.wav" type="AudioStream" id=11]
 
-[sub_resource type="GradientTexture" id=1]
+[sub_resource type="GradientTexture2D" id=1]
 gradient = ExtResource( 6 )
 
 [node name="PlayerShip" instance=ExtResource( 1 )]
@@ -28,22 +28,22 @@ bus = "Sounds"
 [node name="PlayerHUD" parent="." index="4" instance=ExtResource( 3 )]
 
 [node name="CameraPosition" parent="." index="6"]
-transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 5, -15 )
+transform = Transform3D( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 5, -15 )
 
 [node name="PlayerShipInterior" parent="." index="8" instance=ExtResource( 9 )]
-transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 3.7104 )
+transform = Transform3D( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 3.7104 )
 visible = false
 
 [node name="ThrusterFlame" parent="ShipMesh" index="4"]
-transform = Transform( 0.00711136, 0, 0.899959, 0, 0.9, 0, -0.748966, 0, 0.00854503, 0, 0.658256, -10.4041 )
+transform = Transform3D( 0.00711136, 0, 0.899959, 0, 0.9, 0, -0.748966, 0, 0.00854503, 0, 0.658256, -10.4041 )
 visible = false
 TextureUniform2 = SubResource( 1 )
 
 [node name="Fire" parent="ShipMesh" index="5" instance=ExtResource( 7 )]
-transform = Transform( -8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -0.0449913, 0.768863, -8.47611 )
+transform = Transform3D( -8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -0.0449913, 0.768863, -8.47611 )
 visibility_aabb = AABB( -2.68175, -1.02354, -1.02688, 5.36353, 2.04707, 2.05376 )
 
-[node name="Listener" type="Listener" parent="." index="10"]
+[node name="AudioListener3D" type="AudioListener3D" parent="." index="10"]
 current = true
 
 [node name="Shooting" parent="." index="11"]
@@ -59,7 +59,7 @@ volume_db = 15.0
 bus = "Sounds"
 
 [node name="Pito" parent="." index="12"]
-transform = Transform( -0.746258, -0.254745, 0.614983, -0.164444, 0.965791, 0.200514, -0.645025, 0.0485047, -0.76262, 0, 7.75062, 0 )
+transform = Transform3D( -0.746258, -0.254745, 0.614983, -0.164444, 0.965791, 0.200514, -0.645025, 0.0485047, -0.76262, 0, 7.75062, 0 )
 
 [connection signal="damage_taken" from="HealthSystem" to="PlayerHUD" method="_on_HealthSystem_damage_taken"]
 [connection signal="die" from="HealthSystem" to="PlayerHUD" method="_on_HealthSystem_die"]

@@ -7,7 +7,7 @@ var cp : Node = null
 
 
 func _ready():
-	connect("cp_added", get_tree().current_scene, "_on_cp_added")
+	connect("cp_added",Callable(get_tree().current_scene,"_on_cp_added"))
 
 
 func _process(delta):
@@ -19,9 +19,9 @@ func _process(delta):
 
 
 func instance_cp() -> void:
-	var new_cp : CommandPost = cp_scene.instance()
+	var new_cp : CommandPost = cp_scene.instantiate()
 	new_cp.start_team = 2 if blue_team else 1
-	if translation.y > 1000:
+	if position.y > 1000:
 		new_cp.add_to_group("SpaceCP")
 	add_child(new_cp)
 	cp = new_cp

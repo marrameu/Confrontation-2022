@@ -13,9 +13,9 @@ func update():
 		child.queue_free()
 	
 	for cp in get_tree().get_nodes_in_group("CommandPosts"):
-		var new_button : Button = cp_button_scene.instance()
-		new_button.rect_position = get_viewport().get_camera().unproject_position(cp.translation)
-		new_button.rect_position -= Vector2(new_button.rect_size.x / 2, new_button.rect_size.y / 2)
+		var new_button : Button = cp_button_scene.instantiate()
+		new_button.position = get_viewport().get_camera_3d().unproject_position(cp.position)
+		new_button.position -= Vector2(new_button.size.x / 2, new_button.size.y / 2)
 		new_button.cp = cp
-		new_button.connect("pressed", owner, "_on_cp_button_pressed", [cp])
+		new_button.connect("pressed",Callable(owner,"_on_cp_button_pressed").bind(cp))
 		add_child(new_button)

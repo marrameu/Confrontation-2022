@@ -1,8 +1,8 @@
-extends Spatial
+extends Node3D
 
-export var move_speed = 20.0
-export var rotation_speed = 0.005
-export var rotation_smoothing = 20.0
+@export var move_speed = 20.0
+@export var rotation_speed = 0.005
+@export var rotation_smoothing = 20.0
 
 var target_x_rotation = 0.0
 var target_y_rotation = 0.0

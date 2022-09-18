@@ -10,7 +10,7 @@ offset = Vector2( 10, 10 )
 
 [node name="Rifle" parent="Mesh" index="0" instance=ExtResource( 2 )]
 
-[node name="RayCast" parent="." index="1"]
+[node name="RayCast3D" parent="." index="1"]
 cast_to = Vector3( 0, 0, 500 )
 
 [node name="AnimationTree" parent="HUD/Crosshair" index="4"]

@@ -1,4 +1,4 @@
-[gd_resource type="ParticlesMaterial" load_steps=2 format=2]
+[gd_resource type="ParticleProcessMaterial" load_steps=2 format=2]
 
 [ext_resource path="res://assets/missilebullet_spatialmaterial.tres" type="Material" id=1]
 

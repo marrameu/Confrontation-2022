@@ -8,4 +8,4 @@ func update_can_shoots():
 			can_shoots[ind] = false
 			ind += 1
 	else:
-		.update_can_shoots()
+		super.update_can_shoots()

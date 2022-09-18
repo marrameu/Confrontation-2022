@@ -1,20 +1,20 @@
-static func create_shards(object : Spatial, shard_template : PackedScene = preload("res://addons/destruction/ShardTemplates/DefaultShardTemplate.tscn")) -> Spatial:
-	var shards := Spatial.new()
+static func create_shards(object : Node3D, shard_template : PackedScene = preload("res://addons/destruction/ShardTemplates/DefaultShardTemplate.tscn")) -> Node3D:
+	var shards := Node3D.new()
 	shards.name = object.name + "Shards"
 	var shard_num := 0
 	for shard_mesh in object.get_children():
-		if not shard_mesh is MeshInstance:
+		if not shard_mesh is MeshInstance3D:
 			continue
 		reposition_mesh_to_middle(shard_mesh)
-		var new_shard : RigidBody = shard_template.instance()
-		new_shard.translation = shard_mesh.translation
+		var new_shard : RigidBody3D = shard_template.instantiate()
+		new_shard.position = shard_mesh.position
 		new_shard.name = new_shard.name.format(
 				{name = object.name, number = shard_num})
 		
-		var mesh_instance : MeshInstance = new_shard.get_node("MeshInstance")
+		var mesh_instance : MeshInstance3D = new_shard.get_node("MeshInstance3D")
 		mesh_instance.mesh = shard_mesh.mesh
 		
-		var collision_shape : CollisionShape = new_shard.get_node("CollisionShape")
+		var collision_shape : CollisionShape3D = new_shard.get_node("CollisionShape3D")
 		collision_shape.shape = mesh_instance.mesh.create_convex_shape()
 		
 		shards.add_child(new_shard)
@@ -22,7 +22,7 @@ static func create_shards(object : Spatial, shard_template : PackedScene = prelo
 	return shards
 
 
-static func reposition_mesh_to_middle(mesh_instance : MeshInstance):
+static func reposition_mesh_to_middle(mesh_instance : MeshInstance3D):
 	var mesh := mesh_instance.mesh
 	if mesh.get_faces().size() == 0:
 		return
@@ -39,7 +39,7 @@ static func reposition_mesh_to_middle(mesh_instance : MeshInstance):
 	mesh_instance.translate(middle)
 
 
-static func get_middle(points : PoolVector3Array) -> Vector3:
+static func get_middle(points : PackedVector3Array) -> Vector3:
 	if points.size() == 0:
 		return Vector3()
 	

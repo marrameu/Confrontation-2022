@@ -8,7 +8,7 @@ script = ExtResource( 2 )
 bullet_velocity = 400.0
 _time_alive = 2.0
 
-[node name="RayCast" parent="." index="6"]
+[node name="RayCast3D" parent="." index="6"]
 collision_mask = 5905
 
 [node name="HitAudio" parent="." index="7"]

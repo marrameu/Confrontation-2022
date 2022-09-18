@@ -1,6 +1,6 @@
 extends Control
 
-var loader : ResourceInteractiveLoader
+var loader : ResourceLoader
 var changing_scene : bool = false
 var emit_signal : bool = false
 
@@ -50,7 +50,7 @@ func _process_load_scene() -> void:
 		if emit_signal:
 			emit_signal("finished_loading", resource)
 		else:
-			get_tree().change_scene_to(resource)
+			get_tree().change_scene_to_packed(resource)
 		
 	elif err == OK:
 		update_progress()
@@ -60,7 +60,7 @@ func _process_load_scene() -> void:
 
 
 func load_scene(path : String, instant_load : bool) -> void:
-	loader = ResourceLoader.load_interactive(path)
+	loader = ResourceLoader.load_threaded_request(path)
 	emit_signal = !instant_load
 	if loader == null:
 		return

@@ -96,7 +96,7 @@ input_name = "uv"
 [sub_resource type="VisualShaderNodeInput" id=4]
 input_name = "time"
 
-[sub_resource type="VisualShaderNodeScalarConstant" id=5]
+[sub_resource type="VisualShaderNodeFloatConstant" id=5]
 constant = 1.0
 
 [resource]
@@ -323,4 +323,4 @@ nodes/fragment/5/node = SubResource( 4 )
 nodes/fragment/5/position = Vector2( -700, 620 )
 nodes/fragment/6/node = SubResource( 5 )
 nodes/fragment/6/position = Vector2( -720, 520 )
-nodes/fragment/connections = PoolIntArray( 3, 0, 0, 0, 4, 0, 3, 0, 5, 0, 3, 2, 6, 0, 3, 1 )
+nodes/fragment/connections = PackedInt32Array( 3, 0, 0, 0, 4, 0, 3, 0, 5, 0, 3, 2, 6, 0, 3, 1 )

@@ -14,8 +14,8 @@ func update(delta):
 	if enemy_big_ships_wo_shields or my_team_big_ships_wo_shields:
 		emit_signal("finished", "choose_objective")
 	
-	if owner.translation.distance_to(owner.input.target) < 250:
-		var closest_support_ship : Spatial = closest_big_ship("SupportShips")
+	if owner.position.distance_to(owner.input.target) < 250:
+		var closest_support_ship : Node3D = closest_big_ship("SupportShips")
 		if closest_support_ship:
 			owner.shooting.target = closest_support_ship
 			print("support ship, fora!!")
@@ -32,9 +32,9 @@ func update(delta):
 		emit_signal("finished", "choose_objective")
 	
 	# No sé si això és pot optimitzar més (amb el ChooseObj)
-	var closest_attack_ship : Spatial = closest_big_ship("AttackShips")
+	var closest_attack_ship : Node3D = closest_big_ship("AttackShips")
 	if closest_attack_ship:
-		if closest_attack_ship.translation.distance_to(owner.translation) < 1000:
+		if closest_attack_ship.position.distance_to(owner.position) < 1000:
 			emit_signal("finished", "choose_objective")
 	
 	if number_of_my_team_ships() - number_of_enemy_ships() <= 2: # millor fer-ho en funció del middle point
@@ -49,6 +49,6 @@ func update(delta):
 
 func update_destination():
 	if owner.blue_team:
-		owner.input.target = Vector3(-1500, 2000 + rand_range(-350, 350), rand_range(-700, 700))
+		owner.input.target = Vector3(-1500, 2000 + randf_range(-350, 350), randf_range(-700, 700))
 	else:
-		owner.input.target = Vector3(1500, 2000 + rand_range(-350, 350), rand_range(-700, 700))
+		owner.input.target = Vector3(1500, 2000 + randf_range(-350, 350), randf_range(-700, 700))

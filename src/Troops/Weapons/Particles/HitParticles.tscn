@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/Troops/Weapons/Particles/TimeDelete.gd" type="Script" id=1]
+[ext_resource path="res://src/Troops/Weapons/GPUParticles3D/TimeDelete.gd" type="Script" id=1]
 
 [sub_resource type="SphereMesh" id=2]
 
-[node name="HitParticles" type="CPUParticles"]
-pause_mode = 1
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
+[node name="HitParticles" type="CPUParticles3D"]
+process_mode = 1
+transform = Transform3D( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
 mesh = SubResource( 2 )
 emission_shape = 2
 emission_box_extents = Vector3( 1, 1, 1 )

@@ -43,9 +43,9 @@ func enter():
 	
 	# TOTES LES NAUS GRANS TENEN ESCUTS
 	if us_van_guanyant:
-		var closest_attack_ship : Spatial = closest_big_ship("AttackShips")
+		var closest_attack_ship : Node3D = closest_big_ship("AttackShips")
 		if closest_attack_ship:
-			if closest_attack_ship.translation.distance_to(owner.translation) < 1000 and randi() % 2:
+			if closest_attack_ship.position.distance_to(owner.position) < 1000 and randi() % 2:
 				owner.shooting.target = closest_attack_ship
 				emit_signal("finished", "attack_big_ship")
 				return
@@ -70,15 +70,15 @@ func enter():
 		
 	elif aneu_guanyant:
 		print("nem guanyant")
-		var closest_attack_ship : Spatial = closest_big_ship("AttackShips")
+		var closest_attack_ship : Node3D = closest_big_ship("AttackShips")
 		if closest_attack_ship:
-			if closest_attack_ship.translation.distance_to(owner.translation) < 1000:
+			if closest_attack_ship.position.distance_to(owner.position) < 1000:
 				owner.shooting.target = closest_attack_ship
 				emit_signal("finished", "attack_big_ship")
 				print("ataca la nau d'atac!")
 				return
 		
-		var closest_support_ship : Spatial = closest_big_ship("SupportShips")
+		var closest_support_ship : Node3D = closest_big_ship("SupportShips")
 		if closest_support_ship:
 			owner.shooting.target = closest_support_ship
 			print("support ship, fora!!")
@@ -94,9 +94,9 @@ func enter():
 	else:
 		# DIFERÈNCIA < 1500
 		
-		var closest_attack_ship : Spatial = closest_big_ship("AttackShips")
+		var closest_attack_ship : Node3D = closest_big_ship("AttackShips")
 		if closest_attack_ship:
-			if closest_attack_ship.translation.distance_to(owner.translation) < 1000 and randi() % 2:
+			if closest_attack_ship.position.distance_to(owner.position) < 1000 and randi() % 2:
 				owner.shooting.target = closest_attack_ship
 				emit_signal("finished", "attack_big_ship")
 				return

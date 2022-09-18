@@ -12,7 +12,7 @@ var first_person := false
 func play_button_audio() -> void:
 	var button_audio : AudioStreamPlayer = AudioStreamPlayer.new()
 	button_audio.set_stream(preload("res://assets/audio/button_sfx.wav"))
-	button_audio.connect("finished", button_audio, "queue_free")
+	button_audio.connect("finished",Callable(button_audio,"queue_free"))
 	var current_scene = get_tree().get_root().get_child(get_tree().get_root().get_child_count() -1)
 	current_scene.add_child(button_audio)
 	button_audio.play()
@@ -24,4 +24,4 @@ func _input(event : InputEvent) -> void:
 
 
 func _process(delta : float) -> void:
-	time = OS.get_ticks_msec() / 1000.0 # Pausa?
+	time = Time.get_ticks_msec() / 1000.0 # Pausa?

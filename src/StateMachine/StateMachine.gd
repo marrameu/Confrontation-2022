@@ -9,24 +9,28 @@ extends Node
 signal state_changed(current_state)
 
 """
-You must set a starting node from the inspector or on
+You must set a starting node from the inspector or checked
 the node that inherits from this state machine interface
-If you don't the game will crash (on purpose, so you won't 
+If you don't the game will crash (checked purpose, so you won't 
 forget to initialize the state machine)
 """
-export(NodePath) var START_STATE
+@export var START_STATE: NodePath
 var states_map = {}
 
 var states_stack = []
 var current_state = null
-var _active = false setget set_active
+var _active = false :
+	get:
+		return _active # TODOConverter40 Non existent get function 
+	set(mod_value):
+		mod_value  # TODOConverter40 Copy here content of set_active
 
-onready var point_of_change := rand_range(1000, 1500)
+@onready var point_of_change := randf_range(1000, 1500)
 
 
 func _ready():
 	for child in get_children():
-		child.connect("finished", self, "_change_state")
+		child.connect("finished",Callable(self,"_change_state"))
 	#set_active(true)
 
 
@@ -56,7 +60,7 @@ func _input(event):
 	If that"s the case you don"t want to use the states. They"ll add micro
 	freezes in the gameplay and/or make your code more complex
 	Firing is the weapon"s responsibility (BulletSpawn here) so the code for shooting
-	is all on BulletSpawner (including input)
+	is all checked BulletSpawner (including input)
 	"""
 	current_state.handle_input(event)
 

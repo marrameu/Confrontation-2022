@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 
 func _ready():
@@ -6,5 +6,5 @@ func _ready():
 
 
 func play_foot_step() -> void:
-	$FootstepAudio.pitch_scale = rand_range(0.8, 1.2)
+	$FootstepAudio.pitch_scale = randf_range(0.8, 1.2)
 	$FootstepAudio.play()

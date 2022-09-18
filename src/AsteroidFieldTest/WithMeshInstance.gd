@@ -1,12 +1,12 @@
-extends Spatial
+extends Node3D
 
 #onready var asteroid = preload("res://src/Asteroid.tscn")
-onready var asteroid = preload("res://src/AsteroidFieldTest/Lod/AsteroidLod.tscn")
+@onready var asteroid = preload("res://src/AsteroidFieldTest/Lod/AsteroidLod.tscn")
 #onready var asteroid = preload("res://src/AsteroidFieldTest/Asteroid_Debug.tscn")
 
-onready var SizeEditValues = $SizeEdit.mesh.size
+@onready var SizeEditValues = $SizeEdit.mesh.size
 
-export var start_roids = 1000
+@export var start_roids = 1000
 var max_roids = 1000000
 var max_dist = 200.0
 
@@ -22,16 +22,16 @@ func add_roids():
 		# Create a new mesh instance
 		var new_meshinstance = asteroid
 		
-		#var new_meshinstance = MeshInstance.new()
+		#var new_meshinstance = MeshInstance3D.new()
 		#new_meshinstance.mesh = $Asteroid/Meteoritlod1.mesh
 		
 		var s = (randf() + 0.1) * 2
 		
 		var r = Vector3(randf()*360, randf()*360, randf()*360)
-		var t = Transform().scaled(Vector3(s, s, s))
+		var t = Transform3D().scaled(Vector3(s, s, s))
 		t.origin = Vector3(randf() * SizeEditValues.x, randf() * SizeEditValues.y, randf() * SizeEditValues.z) - Vector3(0.5 * SizeEditValues.x, 0.5 * SizeEditValues.y, 0.5 * SizeEditValues.z)
 		
-		var AsteroidInstance = new_meshinstance.instance()
+		var AsteroidInstance = new_meshinstance.instantiate()
 		
 		add_child(AsteroidInstance)
 		AsteroidInstance.global_transform = t

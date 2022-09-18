@@ -6,7 +6,7 @@
 [ext_resource path="res://AIShipStateMachine.gd" type="Script" id=4]
 [ext_resource path="res://src/StateMachine/ChooseObjective.gd" type="Script" id=5]
 [ext_resource path="res://src/StateMachine/AttackEnemy.gd" type="Script" id=6]
-[ext_resource path="res://assets/cone.tres" type="Shape" id=7]
+[ext_resource path="res://assets/cone.tres" type="Shape3D" id=7]
 [ext_resource path="res://src/StateMachine/AttackCS.gd" type="Script" id=9]
 [ext_resource path="res://AIShip.gd" type="Script" id=10]
 [ext_resource path="res://src/StateMachine/Escape.gd" type="Script" id=11]
@@ -15,7 +15,7 @@
 [ext_resource path="res://src/StateMachine/PatrolMiddlePoint.gd" type="Script" id=14]
 [ext_resource path="res://src/StateMachine/PushForward.gd" type="Script" id=15]
 
-[sub_resource type="SphereShape" id=2]
+[sub_resource type="SphereShape3D" id=2]
 radius = 1000.0
 
 [node name="AIShip" instance=ExtResource( 1 )]
@@ -57,55 +57,55 @@ script = ExtResource( 15 )
 script = ExtResource( 3 )
 
 [node name="Audio" parent="Shooting" index="0"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+transform = Transform3D( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 emission_angle_degrees = 46.0
 
 [node name="Audio2" parent="Shooting" index="1"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+transform = Transform3D( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 
-[node name="RayCast" type="RayCast" parent="Shooting" index="2"]
+[node name="RayCast3D" type="RayCast3D" parent="Shooting" index="2"]
 enabled = true
 cast_to = Vector3( 0, 0, 1500 )
 debug_shape_custom_color = Color( 1, 0, 0, 1 )
 debug_shape_thickness = 5
 
-[node name="ShootingArea" type="Area" parent="Shooting" index="3"]
+[node name="ShootingArea" type="Area3D" parent="Shooting" index="3"]
 
-[node name="CollisionShape" type="CollisionShape" parent="Shooting/ShootingArea" index="0"]
-transform = Transform( 300, 0, 0, 0, -6.55671e-05, 300, 0, -1500, -1.31134e-05, 0, 0, 1500 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shooting/ShootingArea" index="0"]
+transform = Transform3D( 300, 0, 0, 0, -6.55671e-05, 300, 0, -1500, -1.31134e-05, 0, 0, 1500 )
 shape = ExtResource( 7 )
 __meta__ = {
 "_editor_description_": "Fer-la més petita"
 }
 
-[node name="ColDetectLeft" type="RayCast" parent="." index="10"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 0 )
+[node name="ColDetectLeft" type="RayCast3D" parent="." index="10"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 0 )
 enabled = true
 cast_to = Vector3( 150, 0, 300 )
 
-[node name="ColDetectRight" type="RayCast" parent="." index="11"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, 0 )
+[node name="ColDetectRight" type="RayCast3D" parent="." index="11"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, 0 )
 enabled = true
 cast_to = Vector3( -150, 0, 300 )
 
-[node name="ColDetectForward" type="RayCast" parent="." index="12"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.33 )
+[node name="ColDetectForward" type="RayCast3D" parent="." index="12"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.33 )
 enabled = true
 cast_to = Vector3( 0, 0, 300 )
 
-[node name="ColDetectUp" type="RayCast" parent="." index="13"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+[node name="ColDetectUp" type="RayCast3D" parent="." index="13"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
 enabled = true
 cast_to = Vector3( 0, 150, 300 )
 
-[node name="ColDetectDown" type="RayCast" parent="." index="14"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0 )
+[node name="ColDetectDown" type="RayCast3D" parent="." index="14"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0 )
 enabled = true
 cast_to = Vector3( 0, -150, 300 )
 
-[node name="EnemyDetectArea" type="Area" parent="." index="18"]
+[node name="EnemyDetectArea" type="Area3D" parent="." index="18"]
 
-[node name="CollisionShape" type="CollisionShape" parent="EnemyDetectArea" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyDetectArea" index="0"]
 shape = SubResource( 2 )
 
 [connection signal="big_ship_shields_down" from="." to="StateMachine/ChooseObjective" method="_on_big_ship_shields_down"]

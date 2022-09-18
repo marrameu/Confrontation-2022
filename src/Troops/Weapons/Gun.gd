@@ -1,11 +1,11 @@
-extends Spatial
+extends Node3D
 class_name Gun
 
 """
 Serveix tant a jugadors com a bots ja que l'unic necesari per disparar es
 canviar la variable _shooting a true.
 
-Té un raycast per a determinar on ha de dsisparar, en el cas de la IA,
+Té un raycast per a determinar checked ha de dsisparar, en el cas de la IA,
 el raycast es reposiciona al seu centre, mentrés que en els jugadors aquest 
 es posiciona en la càmara. En el futur no serà necesari reposicionar-ho.
 
@@ -28,24 +28,24 @@ signal hit
 signal shot
 signal headshot
 
-export var bullet_scene : PackedScene = preload("res://src/Bullets/Bullet.tscn")
-const hit_scene : PackedScene = preload("res://src/Troops/Weapons/Particles/HitParticles.tscn")
+@export var bullet_scene : PackedScene = preload("res://src/Bullets/Bullet.tscn")
+const hit_scene : PackedScene = preload("res://src/Troops/Weapons/GPUParticles3D/HitParticles.tscn")
 
-export var fire_rate := 5.0
+@export var fire_rate := 5.0
 var _next_time_to_fire := 0.0
 var time := 0.0
 
-export var shoot_range := 500
-export var offset := Vector2(30, 30)
+@export var shoot_range := 500
+@export var offset := Vector2(30, 30)
 
-export var recoil_force := Vector2.ONE
+@export var recoil_force := Vector2.ONE
 
-export var MAX_AMMO := 50.0
+@export var MAX_AMMO := 50.0
 var ammo : float
 var not_eased_ammo : float
-export var reload_per_sec := 0.0 #  0.0 vol dir que no es recarrega automàticament
+@export var reload_per_sec := 0.0 #  0.0 vol dir que no es recarrega automàticament
 
-export var MAX_RELOAD_AMMO := 100.0 # només si no es recarrega auto (fer classes diferents?)
+@export var MAX_RELOAD_AMMO := 100.0 # només si no es recarrega auto (fer classes diferents?)
 var reload_ammo : float
 
 # var m_team := 0 wat?
@@ -60,14 +60,14 @@ func _ready() -> void:
 	reload_ammo = MAX_RELOAD_AMMO
 	
 	#m_team = 0
-	if get_tree().has_network_peer():
-		if not is_network_master():
+	if get_tree().has_multiplayer_peer():
+		if not is_multiplayer_authority():
 			$HUD/Crosshair.queue_free()
 
 
 func _process(delta : float) -> void:
-	if get_tree().has_network_peer():
-		if not is_network_master():
+	if get_tree().has_multiplayer_peer():
+		if not is_multiplayer_authority():
 			return
 	
 	if not active:
@@ -95,13 +95,13 @@ func _shoot() -> void:
 	
 	ammo -= 1
 	
-	var vector := Vector2(rand_range(-offset.x, offset.x), rand_range(-offset.y, offset.y))
+	var vector := Vector2(randf_range(-offset.x, offset.x), randf_range(-offset.y, offset.y))
 	vector = vector.length() * vector.normalized()
-	$RayCast.cast_to = Vector3(vector.x, vector.y, -shoot_range)
-	$RayCast.force_raycast_update()
+	$RayCast3D.cast_to = Vector3(vector.x, vector.y, -shoot_range)
+	$RayCast3D.force_raycast_update()
 	
 	var bullet : Bullet
-	bullet = bullet_scene.instance()
+	bullet = bullet_scene.instantiate()
 	bullet.init(owner, owner.blue_team)
 	
 	get_tree().current_scene.add_child(bullet)
@@ -109,17 +109,17 @@ func _shoot() -> void:
 	var shoot_from : Vector3 = global_transform.origin # Pistola
 	bullet.global_transform.origin = shoot_from
 	
-	if $RayCast.is_colliding():
-		var shoot_target = $RayCast.get_collision_point()
+	if $RayCast3D.is_colliding():
+		var shoot_target = $RayCast3D.get_collision_point()
 		
 		#bullet.direction = (shoot_target - shoot_from).normalized()
 		bullet.look_at(shoot_target, Vector3.UP)
 	else:
-		bullet.look_at($RayCast.to_global($RayCast.cast_to), Vector3.UP)
+		bullet.look_at($RayCast3D.to_global($RayCast3D.cast_to), Vector3.UP)
 	bullet.direction = -bullet.global_transform.basis.z
 	
 	
-	$RayCast.cast_to = Vector3(0, 0, shoot_range)
+	$RayCast3D.cast_to = Vector3(0, 0, shoot_range)
 
 
 func auto_reload_ammo(delta):

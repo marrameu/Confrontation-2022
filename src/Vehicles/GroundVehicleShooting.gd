@@ -9,7 +9,7 @@ func update_can_shoots():
 
 
 
-sync func shoot_bullet(current_bullet : int, shoot_target := Vector3.ZERO) -> void:
+@rpc(any_peer, call_local) func shoot_bullet(current_bullet : int, shoot_target := Vector3.ZERO) -> void:
 	if owner.dead:
 		return
 	
@@ -26,7 +26,7 @@ sync func shoot_bullet(current_bullet : int, shoot_target := Vector3.ZERO) -> vo
 	
 	# instance
 	var bullet : Bullet
-	bullet = bullets_scenes[current_bullet].instance()
+	bullet = bullets_scenes[current_bullet].instantiate()
 	
 	bullet.init(owner, owner.blue_team)
 	

@@ -1,6 +1,6 @@
 extends "AIShipState.gd"
 
-var enemy_bs : Spatial
+var enemy_bs : Node3D
 var attack_rel_pos : Vector3
 
 var get_away_from_the_enemy := false
@@ -15,7 +15,7 @@ func enter():
 	print(owner, " entered ", name)
 	
 	enemy_bs = owner.shooting.target
-	enemy_bs.connect("shields_recovered", self, "_on_BigShip_shields_recovered")
+	enemy_bs.connect("shields_recovered",Callable(self,"_on_BigShip_shields_recovered"))
 
 
 func update(delta):
@@ -30,31 +30,31 @@ func update(delta):
 	owner.shooting.wants_shoots[1] = true
 	
 	if not get_away_from_the_enemy:
-		if owner.translation.distance_to(enemy_bs.translation) < 500:
-			owner.input.target = owner.translation + attack_rel_pos
+		if owner.position.distance_to(enemy_bs.position) < 500:
+			owner.input.target = owner.position + attack_rel_pos
 			get_away_from_the_enemy = true
 			change_rel_pos()
 		else:
 			owner.input.des_throttle = 0.7
-			owner.input.target = enemy_bs.translation
+			owner.input.target = enemy_bs.position
 	else:
 		owner.input.des_throttle = 1.0
-		if owner.translation.distance_to(owner.input.target) < 250:
+		if owner.position.distance_to(owner.input.target) < 250:
 			get_away_from_the_enemy = false
 
 
 func change_rel_pos():
-	var x : float = rand_range(-1000, -500) if randi() % 2 else rand_range(500, 1000)
-	var y : float = rand_range(-1000, -500) if randi() % 2 else rand_range(500, 1000)
-	var z : float = rand_range(-1000, -500) if randi() % 2 else rand_range(500, 1000)
+	var x : float = randf_range(-1000, -500) if randi() % 2 else randf_range(500, 1000)
+	var y : float = randf_range(-1000, -500) if randi() % 2 else randf_range(500, 1000)
+	var z : float = randf_range(-1000, -500) if randi() % 2 else randf_range(500, 1000)
 	attack_rel_pos = Vector3(x, y, z)
 
 
-func _on_BigShip_shields_recovered(ship : Spatial):
+func _on_BigShip_shields_recovered(ship : Node3D):
 	if ship == enemy_bs:
 		emit_signal("finished", "choose_objective")
 
 
 func exit():
 	if weakref(enemy_bs).get_ref():
-		enemy_bs.disconnect("shields_recovered", self, "_on_BigShip_shields_recovered")
+		enemy_bs.disconnect("shields_recovered",Callable(self,"_on_BigShip_shields_recovered"))

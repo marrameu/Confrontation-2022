@@ -1,11 +1,11 @@
-extends Spatial
+extends Node3D
 
 class_name CommandPost
 
 signal add_points
 
-export var capturable := true
-export(int, 0, 2) var start_team := 0
+@export var capturable := true
+@export var start_team := 0 # (int, 0, 2)
 
 const materials := {
 	0: preload("res://assets/materials/command_post/grey.tres"),
@@ -15,7 +15,7 @@ const materials := {
 }
 var team_count := [0.0, 0.0, 0.0]
 var m_team : int = 0
-var bodies : PoolIntArray = [0, 0, 0]
+var bodies : PackedInt32Array = [0, 0, 0]
 
 var old_menus := []
 var buttons := []
@@ -26,7 +26,7 @@ var is_ground : bool = false
 
 
 func _ready() -> void:
-	$TextureProgress.hide()
+	$TextureProgressBar.hide()
 	
 	#PQ 3 EQUIPS?
 	for value in team_count:
@@ -44,12 +44,12 @@ func _process(delta : float) -> void:
 	update_menus()
 	
 	for i in range(0, old_menus.size()):
-		var scene_camera : Camera = get_node("/root/Main").players_cameras[old_menus[i].get_parent().number_of_player - 1].scene_camera
+		var scene_camera : Camera3D = get_node("/root/Main").players_cameras[old_menus[i].get_parent().number_of_player - 1].scene_camera
 		
 		if old_menus[i].get_node("SpawnMenu").visible and not scene_camera.is_position_behind(global_transform.origin):
-			buttons[i].rect_position = scene_camera.unproject_position(global_transform.origin)
+			buttons[i].position = scene_camera.unproject_position(global_transform.origin)
 			# Mirar si es pot treure
-			buttons[i].rect_position -= Vector2(buttons[i].rect_size.x / 2, buttons[i].rect_size.y / 2)
+			buttons[i].position -= Vector2(buttons[i].size.x / 2, buttons[i].size.y / 2)
 			
 			update_button_color(buttons[i])
 			buttons[i].show()
@@ -65,7 +65,7 @@ func _process(delta : float) -> void:
 	bodies[2] = 0
 	var texture_progress_visible := false
 	var interact_label_visible := false
-	for body in $Area.get_overlapping_bodies():
+	for body in $Area3D.get_overlapping_bodies():
 		if body.is_in_group("Troops"):
 			if not body.dead:
 				if body.is_in_group("Players"):
@@ -80,7 +80,7 @@ func _process(delta : float) -> void:
 						bodies[1] += 1 # blau
 					3:
 						bodies[2] += 1
-	$TextureProgress.visible = texture_progress_visible
+	$TextureProgressBar.visible = texture_progress_visible
 	$Label.visible = interact_label_visible and ((m_team == 2 and PlayerInfo.player_blue_team) or (m_team == 1 and not PlayerInfo.player_blue_team))
 
 
@@ -105,8 +105,8 @@ func _physics_process(delta : float) -> void:
 	if not capturable: # TOT AIXÒ S'HA DE REFER URGENTMENT
 		return
 	
-	if get_tree().has_network_peer():
-		if get_tree().is_network_server():
+	if get_tree().has_multiplayer_peer():
+		if get_tree().is_server():
 			rset_unreliable("slave_team_count", team_count)
 		else:
 			team_count = slave_team_count
@@ -142,19 +142,19 @@ func _physics_process(delta : float) -> void:
 		if value > max_value:
 			max_value = value
 			if value == team_count[0]:
-				$TextureProgress.tint_progress = Color.red
+				$TextureProgressBar.tint_progress = Color.RED
 			elif value == team_count[1]:
-				$TextureProgress.tint_progress = Color.blue
-	$TextureProgress.value = max_value
+				$TextureProgressBar.tint_progress = Color.BLUE
+	$TextureProgressBar.value = max_value
 
 
 func update_button_color(button : Button) -> void:
 	if m_team == 0:
-		button.add_color_override("font_color", Color.white)
+		button.add_theme_color_override("font_color", Color.WHITE)
 	elif m_team == get_node("/root/Main").local_players[0].get_node("TroopManager").m_team:
-		button.add_color_override("font_color", Color("b4c7dc"))
+		button.add_theme_color_override("font_color", Color("b4c7dc"))
 	else:
-		button.add_color_override("font_color", Color("dcb4b4"))
+		button.add_theme_color_override("font_color", Color("dcb4b4"))
 
 
 func update_menus() -> void:
@@ -173,28 +173,28 @@ func update_menus() -> void:
 	
 	var elements_removed := 0
 	for i in range(0, menus_to_remove.size()):
-		new_menus.remove(menus_to_remove[i - elements_removed])
+		new_menus.remove_at(menus_to_remove[i - elements_removed])
 		elements_removed += 1
 	
 	for new_menu in new_menus:
 		old_menus.push_back(new_menu)
 		
-		var button : Button = load("res://src/CommandPost/CPButton.tscn").instance()
+		var button : Button = load("res://src/CommandPost/CPButton.tscn").instantiate()
 		new_menu.get_node("SpawnMenu/Buttons").add_child(button)
-		button.connect("pressed", new_menu.get_parent(), "_on_CommandPostButton_pressed", [self])
-		connect("tree_exiting", button, "queue_free")
+		button.connect("pressed",Callable(new_menu.get_parent(),"_on_CommandPostButton_pressed").bind(self))
+		connect("tree_exiting",Callable(button,"queue_free"))
 		buttons.push_back(button)
 
 
 func update_material() -> void:
 	if m_team == 0:
-		$MeshInstance.set_material_override(materials[0])
+		$MeshInstance3D.set_material_override(materials[0])
 	elif m_team == 3:
-		$MeshInstance.set_material_override(materials[3])
+		$MeshInstance3D.set_material_override(materials[3])
 	elif m_team == 2:
-		$MeshInstance.set_material_override(materials[1])
+		$MeshInstance3D.set_material_override(materials[1])
 	elif m_team == 1:
-		$MeshInstance.set_material_override(materials[2])
+		$MeshInstance3D.set_material_override(materials[2])
 
 
 func _on_Timer_timeout():

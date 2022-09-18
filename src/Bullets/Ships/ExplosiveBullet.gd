@@ -2,13 +2,13 @@ extends MissileBullet
 
 
 func check_collisions():
-	var long = translation.distance_to(_old_translation)
-	var ray := $RayCast
+	var long = position.distance_to(_old_translation)
+	var ray := $RayCast3D
 	if ray.is_colliding():
-		translation = ray.get_collision_point()
+		position = ray.get_collision_point()
 		$HitParticles.hide()
 		$Explosion.show()
-		$HitAudio.pitch_scale = rand_range(1, 1.7)
+		$HitAudio.pitch_scale = randf_range(1, 1.7)
 		$HitAudio.play()
 		$AnimationPlayer.play("hit")
 		_hit = true

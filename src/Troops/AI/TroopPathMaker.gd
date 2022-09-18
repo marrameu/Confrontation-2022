@@ -13,11 +13,11 @@ var path := []
 
 var finished := true
 
-var navigation_node : Navigation = null
+var navigation_node : Node3D = null
 
 func _process(delta : float) -> void:
-	if get_tree().has_network_peer():
-		if not get_tree().is_network_server():
+	if get_tree().has_multiplayer_peer():
+		if not get_tree().is_server():
 			return
 	
 	# Walk
@@ -38,15 +38,15 @@ func _process(delta : float) -> void:
 			var pto = path[path.size() - 2]
 			var d = pfrom.distance_to(pto)
 			if d <= to_walk:
-				path.remove(path.size() - 1)
+				path.remove_at(path.size() - 1)
 				to_walk -= d
 			else:
-				path[path.size() - 1] = pfrom.linear_interpolate(pto, to_walk/d)
+				path[path.size() - 1] = pfrom.lerp(pto, to_walk/d)
 				to_walk = 0
 		
 		if path.size() > 1:
 			var atpos = path[path.size() - 1]
-			get_parent().translation = atpos + Vector3(0, 1.415, 0) 
+			get_parent().position = atpos + Vector3(0, 1.415, 0) 
 			"""
 			No s'aplcia al transform global perque no hi hagin problemes amb
 			les naus en moviment, nogensmenys, per poder fer-ho, cal que el 
@@ -67,7 +67,7 @@ func update_path(new_begin : Vector3, new_end : Vector3) -> void:
 	
 	var p = navigation_node.get_simple_path(begin, end, true)
 	path = Array(p) # Vector3 array too complex to use, convert to regular array (nse q vol dir)
-	path.invert()
+	path.reverse()
 	
 	# això ho fa
 	

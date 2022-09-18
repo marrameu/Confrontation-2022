@@ -1,10 +1,10 @@
-extends Position3D
+extends Marker3D
 class_name ShipSpawn
 
-export var ship_scene : PackedScene = preload("res://NewShip.tscn")
-export var blue_team := false
+@export var ship_scene : PackedScene = preload("res://NewShip.tscn")
+@export var blue_team := false
 
-export var simultaneous_ships : int = 2
+@export var simultaneous_ships : int = 2
 var last_ship : Ship
 var current_number_of_ships_instanced := 0
 
@@ -19,17 +19,17 @@ func _physics_process(delta):
 	if current_number_of_ships_instanced < simultaneous_ships:
 		if $Timer.is_stopped():
 			if weakref(last_ship).get_ref():
-				if last_ship.translation.distance_to(global_transform.origin) > 10:
+				if last_ship.position.distance_to(global_transform.origin) > 10:
 					$Timer.start()
 			else:
 				$Timer.start()
 
 
 func instance_ship():
-	var new_ship = ship_scene.instance()
-	new_ship.translation = global_transform.origin
+	var new_ship = ship_scene.instantiate()
+	new_ship.position = global_transform.origin
 	new_ship.blue_team = blue_team
-	new_ship.connect("ship_died", self, "_on_ship_died")
+	new_ship.connect("ship_died",Callable(self,"_on_ship_died"))
 	# rotació tmb
 	get_tree().current_scene.add_child(new_ship)
 	last_ship = new_ship

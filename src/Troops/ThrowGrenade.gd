@@ -4,7 +4,7 @@ extends OnGroundState
 func enter():
 	owner.can_shoot = false
 	owner.get_node("AnimationTree").get("parameters/StateMachine/walk/OneShotStateMachine/playback").start("grenadethrow")
-	owner.get_node("AnimationTree").set("parameters/StateMachine/walk/oneshot/active", true)
+	owner.get_node("AnimationTree").set("parameters/StateMachine/walk/one_shot/active", true)
 	owner.get_node("AnimationPlayer").play("ThrowGrenade")
 
 

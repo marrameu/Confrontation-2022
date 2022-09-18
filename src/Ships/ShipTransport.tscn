@@ -6,7 +6,7 @@
 [ext_resource path="res://src/Ships/AITransportShipStateMachine.gd" type="Script" id=4]
 [ext_resource path="res://src/StateMachine/EnterCS.gd" type="Script" id=5]
 
-[sub_resource type="CubeMesh" id=1]
+[sub_resource type="BoxMesh" id=1]
 size = Vector3( 10, 10, 20 )
 
 [node name="ShipTransport" instance=ExtResource( 1 )]
@@ -21,7 +21,7 @@ script = ExtResource( 3 )
 [node name="EnterCS" type="Node" parent="StateMachine" index="7"]
 script = ExtResource( 5 )
 
-[node name="MeshInstance" type="MeshInstance" parent="." index="19"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="19"]
 mesh = SubResource( 1 )
 
 [editable path="ShipMesh"]

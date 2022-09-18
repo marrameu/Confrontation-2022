@@ -1,9 +1,9 @@
 extends AudioStreamPlayer
 
 
-export(AudioStream) var audio_sfx1
-export(AudioStream) var audio_sfx2
-export(AudioStream) var audio_sfx3
+@export var audio_sfx1: AudioStream
+@export var audio_sfx2: AudioStream
+@export var audio_sfx3: AudioStream
 
 
 # Called when the node enters the scene tree for the first time.

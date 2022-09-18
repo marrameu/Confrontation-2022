@@ -1,7 +1,7 @@
 extends "res://BigShip.gd"
 
 
-onready var original_x = translation.x
+@onready var original_x = position.x
 
 
 # Called when the node enters the scene tree for the first time.
@@ -28,9 +28,9 @@ func _physics_process(delta):
 		des_x = min(get_node("/root/Level").middle_point * 1.75 + original_x, original_x + 500)
 	
 	var collider
-	if translation.x > des_x:
+	if position.x > des_x:
 		move_and_collide(Vector3(-30 * delta, 0, 0))
-	elif translation.x < des_x:
+	elif position.x < des_x:
 		move_and_collide(Vector3(30 * delta, 0, 0))
 	#if collider:
 	#	if collider.is_in_group("Asteroids"):

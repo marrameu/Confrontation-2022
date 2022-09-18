@@ -17,6 +17,6 @@ MAX_AMMO = 2.0
 MAX_RELOAD_AMMO = 8.0
 continuous = false
 
-[node name="MeshInstance" type="MeshInstance" parent="Mesh" index="0"]
-transform = Transform( 1, 8.74228e-08, 8.74228e-08, -8.74228e-08, -4.37114e-08, 1, 8.74228e-08, -1, -4.37114e-08, 0, 0, 0 )
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh" index="0"]
+transform = Transform3D( 1, 8.74228e-08, 8.74228e-08, -8.74228e-08, -4.37114e-08, 1, 8.74228e-08, -1, -4.37114e-08, 0, 0, 0 )
 mesh = SubResource( 1 )

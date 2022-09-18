@@ -4,8 +4,8 @@ var vehicle_data = { vehicle_res = "", vehicle_name = "", health = 0, is_player 
 position = Vector3(), rotation = Vector3(), team = 0, parent_cap_ship_id = 0 }
 
 func _ready() -> void:
-	if get_tree().has_network_peer():
-		if get_tree().is_network_server():
+	if get_tree().has_multiplayer_peer():
+		if get_tree().is_server():
 			vehicle_data.vehicle_name = get_parent().name
 			
 			if get_parent().is_in_group("Ships"):
@@ -24,11 +24,11 @@ func _ready() -> void:
 
 # func _request_data
 func _physics_process(delta : float) -> void:
-	if get_tree().has_network_peer():
-		if get_tree().is_network_server():
+	if get_tree().has_multiplayer_peer():
+		if get_tree().is_server():
 			vehicle_data.is_player = get_parent().is_player
 			vehicle_data.state = get_parent().state
-			vehicle_data.position = get_parent().translation
+			vehicle_data.position = get_parent().position
 			vehicle_data.rotation = get_parent().rotation
 			vehicle_data.health = get_node("../HealthSystem").health
 			if get_parent().is_player:

@@ -1,6 +1,6 @@
 extends "res://Turret.gd"
 
-onready var ray : RayCast = $Spatial/RayCast
+@onready var ray : RayCast3D = $Node3D/RayCast3D
 
 
 func _process(delta):
@@ -29,7 +29,7 @@ func _on_Area_body_exited(body):
 	var a := 0
 	for enemy in enemies:
 		if enemy == body:
-			enemies.remove(a)
+			enemies.remove_at(a)
 			break
 		a += 1
 

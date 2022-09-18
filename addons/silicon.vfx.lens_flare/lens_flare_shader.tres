@@ -86,7 +86,7 @@ void fragment() {
 	float d = length(centerVec);
 	float radial = acos(centerVec.x / d);
 	
-	float starOffset = dot(CAMERA_MATRIX[2].xyz, vec3(1.0)) * 10.0;
+	float starOffset = dot(INV_VIEW_MATRIX[2].xyz, vec3(1.0)) * 10.0;
 	float star = 
 			texture(starburst, vec2(radial + starOffset)).r
 		  * texture(starburst, vec2(radial + starOffset * 0.5)).r;
@@ -100,12 +100,12 @@ void fragment() {
 }"
 
 [sub_resource type="Gradient" id=2]
-colors = PoolColorArray( 0.774481, 0.756324, 0.309654, 1, 0.890625, 0.125, 1, 1 )
+colors = PackedColorArray( 0.774481, 0.756324, 0.309654, 1, 0.890625, 0.125, 1, 1 )
 
-[sub_resource type="GradientTexture" id=3]
+[sub_resource type="GradientTexture2D" id=3]
 gradient = SubResource( 2 )
 
-[sub_resource type="StreamTexture" id=4]
+[sub_resource type="CompressedTexture2D" id=4]
 flags = 7
 
 [sub_resource type="OpenSimplexNoise" id=5]

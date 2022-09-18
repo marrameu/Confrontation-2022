@@ -1,29 +1,29 @@
 # Copyright © 2020 Hugo Locurcio and contributors - MIT License
 # See `LICENSE.md` included in the source distribution for details.
-extends SpotLight
+extends SpotLight3D
 class_name LODSpotLight, "lod_spot_light.svg"
 
 # If `false`, LOD won't update anymore. This can be used for performance comparison
 # purposes.
-export var enable_lod := true
+@export var enable_lod := true
 
 # The maximum shadow distance in units. Past this distance, the shadow will be disabled.
-export(float, 0.0, 1000.0, 0.1) var shadow_max_distance := 25
+@export var shadow_max_distance := 25 # (float, 0.0, 1000.0, 0.1)
 
 # The distance factor at which the shadow starts fading.
 # A value of 0.0 will result in the smoothest transition whereas a value of 1.0 disables fading.
-export(float, 0.0, 1.0, 0.1) var shadow_fade_start := 0.8
+@export var shadow_fade_start := 0.8 # (float, 0.0, 1.0, 0.1)
 
 # The maximum shadow distance in units. Past this distance, the light will be hidden.
-export(float, 0.0, 1000.0, 0.1) var light_max_distance := 50
+@export var light_max_distance := 50 # (float, 0.0, 1000.0, 0.1)
 
 # The distance factor at which the light starts fading.
 # A value of 0.0 will result in the smoothest transition whereas a value of 1.0 disables fading.
-export(float, 0.0, 1.0, 0.1) var light_fade_start := 0.8
+@export var light_fade_start := 0.8 # (float, 0.0, 1.0, 0.1)
 
 # The rate at which LODs will be updated (in seconds). Lower values are more reactive
 # but use more CPU, which is especially noticeable with large amounts of LOD-enabled nodes.
-# Set this accordingly depending on your camera movement speed.
+# Set this accordingly depending checked your camera movement speed.
 # The default value should suit most projects already.
 # Note: Slow cameras don't need to have LOD-enabled objects update their status often.
 # By default, lights have their LOD updated faster than other LOD nodes since their
@@ -52,7 +52,7 @@ func _ready() -> void:
 
 	# Add random jitter to the timer to ensure LODs don't all swap at the same time.
 	randomize()
-	timer += rand_range(0, refresh_rate)
+	timer += randf_range(0, refresh_rate)
 
 # Despite LOD not being related to physics, we chose to run in `_physics_process()`
 # to minimize the amount of method calls per second (and therefore decrease CPU usage).
@@ -61,7 +61,7 @@ func _physics_process(delta: float) -> void:
 		return
 
 	# We need a camera to do the rest.
-	var camera := get_viewport().get_camera()
+	var camera := get_viewport().get_camera_3d()
 	if camera == null:
 		return
 

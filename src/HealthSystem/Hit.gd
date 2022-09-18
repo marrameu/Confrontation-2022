@@ -1,4 +1,4 @@
 extends Resource
 
 
-export (int) var damage_multiplier := 1 
+@export (int) var damage_multiplier := 1 

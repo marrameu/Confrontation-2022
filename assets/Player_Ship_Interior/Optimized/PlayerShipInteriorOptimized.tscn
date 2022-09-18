@@ -4,8 +4,8 @@
 
 [node name="PlayerShipInteriorOptimized" instance=ExtResource( 1 )]
 
-[node name="OmniLight" type="OmniLight" parent="." index="1"]
-transform = Transform( 1, 0, 0, 0, -0.887397, 0.461006, 0, -0.461006, -0.887397, 0.41504, 1.61185, -0.290692 )
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="1"]
+transform = Transform3D( 1, 0, 0, 0, -0.887397, 0.461006, 0, -0.461006, -0.887397, 0.41504, 1.61185, -0.290692 )
 
-[node name="OmniLight2" type="OmniLight" parent="." index="2"]
-transform = Transform( 1, 0, 0, 0, -0.887397, 0.461006, 0, -0.461006, -0.887397, -0.442696, 1.57889, -0.290692 )
+[node name="OmniLight2" type="OmniLight3D" parent="." index="2"]
+transform = Transform3D( 1, 0, 0, 0, -0.887397, 0.461006, 0, -0.461006, -0.887397, -0.442696, 1.57889, -0.290692 )

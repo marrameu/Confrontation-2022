@@ -1,7 +1,7 @@
 extends State
 
-export var max_speed := 6.0
-export var rotation_speed := 8.0
+@export var max_speed := 6.0
+@export var rotation_speed := 8.0
 
 var current_direction := Vector3()
 var _velocity := Vector3.ZERO
@@ -29,9 +29,9 @@ func update(delta):
 		if owner.wait_to_shoot:
 			owner.get_node("%AIGun").shooting = false
 			return
-		if not owner.current_enemy.translation == owner.translation:
+		if not owner.current_enemy.position == owner.position:
 			owner.look_at(owner.current_enemy.global_translation, Vector3(0, 1, 0))
-		owner.rotation = Vector3(0, owner.rotation.y + deg2rad(180), 0)
+		owner.rotation = Vector3(0, owner.rotation.y + deg_to_rad(180), 0)
 		owner.orthonormalize()
 		owner.get_node("%AIGun").shooting = true
 		return
@@ -41,12 +41,16 @@ func update(delta):
 
 
 func _move(velocity: Vector3) -> void:
-	_velocity = owner.move_and_slide_with_snap(velocity, _snap, Vector3.UP)#, true)
+	owner.set_velocity(velocity)
+	# TODOConverter40 looks that snap in Godot 4.0 is float, not vector like in Godot 3 - previous value `_snap`
+	owner.set_up_direction(Vector3.UP)
+	owner.move_and_slide()
+	_velocity = owner.velocity#, true)
 	current_direction = Vector3(velocity.x, 0, velocity.z).normalized()
 
 
 func _orient_character_to_direction(direction: Vector3) -> void:
 	var left_axis := Vector3.UP.cross(direction)
 	var rotation_basis := Basis(left_axis, Vector3.UP, direction)
-	owner.transform.basis = Basis(owner.transform.basis.get_rotation_quat().slerp(rotation_basis.get_rotation_quat(), get_physics_process_delta_time() * rotation_speed))
+	owner.transform.basis = Basis(owner.transform.basis.get_rotation_quaternion().slerp(rotation_basis.get_rotation_quaternion(), get_physics_process_delta_time() * rotation_speed))
 	owner.get_node("AnimationTree").set("parameters/StateMachine/walk/move/blend_position", Vector2(0, 1))#lerp(owner.get_node("AnimationTree").get("parameters/StateMachine/walk/move/blend_position"), Vector2(left_axis.z, left_axis.x), 20 * get_physics_process_delta_time()))

@@ -5,8 +5,8 @@
 [node name="CommandPost" instance=ExtResource( 1 )]
 capturable = false
 
-[node name="MeshInstance" parent="." index="0"]
+[node name="MeshInstance3D" parent="." index="0"]
 visible = false
 
-[node name="CollisionShape3" parent="Area" index="0"]
+[node name="CollisionShape3" parent="Area3D" index="0"]
 disabled = true

@@ -1,4 +1,4 @@
-extends RigidBody
+extends RigidBody3D
 class_name Ship
 
 signal ship_died
@@ -6,20 +6,20 @@ signal killed_enemy
 signal big_ship_shields_down
 signal points_added
 
-export var red_mat : Material
-export var blue_mat : Material
-export var grey_mat : Material
+@export var red_mat : Material
+@export var blue_mat : Material
+@export var grey_mat : Material
 
-onready var input : Node = $Input # class per a linput i el physics
-onready var physics : Node = $Physics
-onready var shooting : Node = $Shooting
+@onready var input : Node = $Input # class per a linput i el physics
+@onready var physics : Node = $Physics
+@onready var shooting : Node = $Shooting
 
 var pilot_man : PilotManager
 var blue_team : bool
 
 var is_player_or_ai := 0 # 1 player, 2 ia
 
-var cam : Camera
+var cam : Camera3D
 
 var dead := false
 
@@ -40,8 +40,8 @@ func init(new_pilot_man : PilotManager):
 	# blue_team = pilot_man.blue_team
 	is_player_or_ai = 1 if pilot_man.is_player else 2
 	if is_player_or_ai == 1:
-		$PlayerHUD.make_visible(true)
-		$Listener.make_current() # temporal, a vera com va
+		$PlayerHUD._make_visible(true)
+		$AudioListener3D.make_current() # temporal, a vera com va
 		input.set_script(preload("res://PlayerInput.gd"))
 		shooting.set_script(preload("res://PlayerShipShooting.gd"))
 	elif is_player_or_ai == 2:
@@ -49,7 +49,7 @@ func init(new_pilot_man : PilotManager):
 		input.set_physics_process(true) # WTF pq cal?
 		shooting.set_script(preload("res://AIShipShooting.gd"))
 		$StateMachine.set_active(true)
-	connect("ship_died", get_tree().current_scene, "_on_ship_died", [pilot_man])
+	connect("ship_died",Callable(get_tree().current_scene,"_on_ship_died").bind(pilot_man))
 	return true
 
 
@@ -124,7 +124,7 @@ func check_collisions(delta):
 				die() # Així si xoca quan fa voltes, en lloc de seguir fent voltes (que queda fatal), explota directament
 
 
-func _on_HealthSystem_die(attacker : Spatial):
+func _on_HealthSystem_die(attacker : Node3D):
 	dead = true
 	print(name + "died")
 	if attacker and is_player_or_ai == 1:
@@ -136,7 +136,7 @@ func _on_HealthSystem_die(attacker : Spatial):
 	t.set_wait_time(2)
 	self.add_child(t)
 	t.start()
-	t.connect("timeout", self, "die")
+	t.connect("timeout",Callable(self,"die"))
 	#else:
 	#	die()
 
@@ -164,7 +164,7 @@ func _on_enemy_died(attacker : Node): # passar tmb l'enemic
 
 
 func leave() -> void:
-	#set_mode(RigidBody.MODE_RIGID)
+	#set_mode(RigidBody3D.MODE_RIGID)
 	state = States.LEAVING
 	$LeaveTimer.start()
 	$EnginesAudio.pitch_scale = 0.001
@@ -193,17 +193,17 @@ func on_BigShip_shields_down(ship):
 
 func exit_ship(): # de moment, sols player
 	if is_player_or_ai == 1:
-		$PlayerHUD.make_visible(false)
+		$PlayerHUD._make_visible(false)
 		cam.ship = null
-		get_tree().current_scene.spawn_player(translation) # senyals
+		get_tree().current_scene.spawn_player(position) # senyals
 	elif is_player_or_ai == 2:
 		$StateMachine.set_active(false)
-		get_tree().current_scene.spawn_ai_troop(int(pilot_man.name.trim_prefix("AIManager")), false, false, translation) # senyals
+		get_tree().current_scene.spawn_ai_troop(int(pilot_man.name.trim_prefix("AIManager")), false, false, position) # senyals
 	pilot_man = null
 	input.set_script(preload("res://ShipInput.gd"))
 	shooting.set_script(preload("res://src/Ships/ShipShooting.gd"))
 	set_team_color()
-	disconnect("ship_died", get_tree().current_scene, "_on_ship_died")
+	disconnect("ship_died",Callable(get_tree().current_scene,"_on_ship_died"))
 	is_player_or_ai = 0
 
 

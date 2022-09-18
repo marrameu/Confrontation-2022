@@ -4,10 +4,10 @@ var t : Timer
 
 func enter():
 	t = Timer.new()
-	t.set_wait_time(rand_range(7, 14))
+	t.set_wait_time(randf_range(7, 14))
 	self.add_child(t)
-	t.connect("timeout", self, "update_point")
-	connect("finished", t, "queue_free")
+	t.connect("timeout",Callable(self,"update_point"))
+	connect("finished",Callable(t,"queue_free"))
 	
 	update_point()
 
@@ -24,7 +24,7 @@ func update(_delta):
 
 
 func update_point():
-	owner.input.target = Vector3(get_node("/root/Level").middle_point + rand_range(-1000, 1000), rand_range(-350, 350), rand_range(-700, 700))
+	owner.input.target = Vector3(get_node("/root/Level").middle_point + randf_range(-1000, 1000), randf_range(-350, 350), randf_range(-700, 700))
 
 
 func check_for_close_enemies(min_dist : float = 750.0):
@@ -32,7 +32,7 @@ func check_for_close_enemies(min_dist : float = 750.0):
 	var clos_enemy : Ship
 	for ship in get_tree().get_nodes_in_group("Ships"):
 		if ship.blue_team != owner.blue_team:
-			var dist = owner.translation.distance_to(ship.translation)
+			var dist = owner.position.distance_to(ship.position)
 			if dist < clos_dist:
 				clos_dist = dist
 				clos_enemy = ship

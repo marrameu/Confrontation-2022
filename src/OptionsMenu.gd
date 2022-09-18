@@ -2,13 +2,13 @@ extends Control
 
 
 #Video Settings
-onready var display_options = $MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/DisplayMode/DisplayMode2
+@onready var display_options = $MarginContainer/VBoxContainer/TabContainer/GRAPHICS/MarginContainer/HBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/DisplayMode/DisplayMode2
 
 #Controls
-onready var SensiblitySlider = $MarginContainer/VBoxContainer/TabContainer/CONTROLS/GridContainer/SensibilitySlider
+@onready var SensiblitySlider = $MarginContainer/VBoxContainer/TabContainer/CONTROLS/GridContainer/SensibilitySlider
 
 #Audio
-onready var MasterAudioSlider = $MarginContainer/VBoxContainer/TabContainer/AUDIO/GridContainer/MasterVolumSlider
+@onready var MasterAudioSlider = $MarginContainer/VBoxContainer/TabContainer/AUDIO/GridContainer/MasterVolumSlider
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

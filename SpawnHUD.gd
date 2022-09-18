@@ -6,8 +6,8 @@ signal start_battle
 signal change_spectate
 signal change_cam
 
-export var battle_state_path : NodePath 
-onready var battle_state = get_node(battle_state_path)
+@export var battle_state_path : NodePath 
+@onready var battle_state = get_node(battle_state_path)
 
 var current_specting_location : int = 0
 var current_location_index : int = 0

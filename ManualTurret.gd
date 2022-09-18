@@ -1,8 +1,8 @@
-extends Spatial
+extends Node3D
 
-onready var input : Node = $Input # class per a linput i el physics
-onready var physics : Node = $Physics
-onready var shooting : Node = $Shooting
+@onready var input : Node = $Input # class per a linput i el physics
+@onready var physics : Node = $Physics
+@onready var shooting : Node = $Shooting
 
 var blue_team := false
 var is_player_or_ai : int = 0
@@ -11,7 +11,7 @@ var pilot_man : PilotManager
 var active := false # temporal
 var dead := false
 
-var cam : Camera
+var cam : Camera3D
 
 func _ready():
 	pass#init(get_tree().current_scene.get_node("PilotManagers/PlayerMan"))
@@ -31,7 +31,7 @@ func init(new_pilot_man : PilotManager) -> bool:
 		$PlayerHUD.visible = true
 		active = true
 		cam = get_tree().current_scene.get_node("PlayerVehicleCam")
-		#$Listener.make_current() # temporal, a vera com va
+		#$AudioListener3D.make_current() # temporal, a vera com va
 		# input.set_script(preload("res://PlayerInput.gd"))
 		shooting.set_script(preload("res://src/Vehicles/PlayerGroundVehicleShooting.gd"))
 	elif is_player_or_ai == 2:
@@ -40,7 +40,7 @@ func init(new_pilot_man : PilotManager) -> bool:
 		#input.set_physics_process(true) # WTF pq cal?
 		#shooting.set_script(preload("res://AIShipShooting.gd"))
 		#$StateMachine.set_active(true)
-	# connect("ship_died", get_tree().current_scene, "_on_ship_died", [pilot_man])
+	# connect("ship_died",Callable(get_tree().current_scene,"_on_ship_died").bind(pilot_man))
 	return true
 
 
@@ -62,7 +62,7 @@ func _physics_process(delta):
 	else:
 		input.yaw = min(input.yaw + delta *50, 0)
 	rotation.y = move_toward(rotation.y, rotation.y - y_change, delta / 2)
-	$Pivot.rotation.x = clamp(move_toward($Pivot.rotation.x, $Pivot.rotation.x + x_change, delta / 2), deg2rad(-70), deg2rad(20))
+	$Pivot.rotation.x = clamp(move_toward($Pivot.rotation.x, $Pivot.rotation.x + x_change, delta / 2), deg_to_rad(-70), deg_to_rad(20))
 	#if active:
 	#	input_to_physics(delta)
 
@@ -71,14 +71,14 @@ func exit():
 	if is_player_or_ai == 1:
 		$PlayerHUD.visible = false
 		cam.ship = null
-		get_tree().current_scene.spawn_player(translation) # senyals
+		get_tree().current_scene.spawn_player(position) # senyals
 	elif is_player_or_ai == 2:
 		#$StateMachine.set_active(false)
-		get_tree().current_scene.spawn_ai_troop(int(pilot_man.name.trim_prefix("AIManager")), false, false, translation) # senyals
+		get_tree().current_scene.spawn_ai_troop(int(pilot_man.name.trim_prefix("AIManager")), false, false, position) # senyals
 	pilot_man = null
 	#input.set_script(preload("res://ShipInput.gd"))
 	shooting.set_script(preload("res://src/Vehicles/GroundVehicleShooting.gd"))
-	# disconnect("ship_died", get_tree().current_scene, "_on_ship_died")
+	# disconnect("ship_died",Callable(get_tree().current_scene,"_on_ship_died"))
 	is_player_or_ai = 0
 
 

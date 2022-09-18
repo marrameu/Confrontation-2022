@@ -24,10 +24,10 @@
 [ext_resource path="res://assets/audio/reload.mp3" type="AudioStream" id=25]
 [ext_resource path="res://src/Bullets/HeadshotBullet.tscn" type="PackedScene" id=29]
 
-[sub_resource type="BoxShape" id=6]
+[sub_resource type="BoxShape3D" id=6]
 extents = Vector3( 1.0304, 0.268886, 0.609748 )
 
-[sub_resource type="CapsuleShape" id=3]
+[sub_resource type="CapsuleShape3D" id=3]
 radius = 0.6
 height = 2.4
 
@@ -35,14 +35,14 @@ height = 2.4
 resource_name = "Melee"
 length = 1.6
 tracks/0/type = "value"
-tracks/0/path = NodePath("Model/MeleeHitBox/CollisionShape:disabled")
+tracks/0/path = NodePath("Model/MeleeHitBox/CollisionShape3D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.5, 1 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
 }
@@ -53,8 +53,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.5 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0.5 ),
+"transitions": PackedFloat32Array( 1 ),
 "values": [ {
 "args": [  ],
 "method": "impulse"
@@ -64,50 +64,50 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=4]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("CollisionShape:translation")
+tracks/0/path = NodePath("CollisionShape3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("CollisionShape:shape:height")
+tracks/1/path = NodePath("CollisionShape3D:shape:height")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ 2.4 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("CollisionShape:shape:radius")
+tracks/2/path = NodePath("CollisionShape3D:shape:radius")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ 0.6 ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Model/MeleeHitBox/CollisionShape:disabled")
+tracks/3/path = NodePath("Model/MeleeHitBox/CollisionShape3D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ true ]
 }
@@ -122,8 +122,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 3.8 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 3.8 ),
+"transitions": PackedFloat32Array( 1 ),
 "values": [ {
 "args": [  ],
 "method": "reload_current_weapon"
@@ -134,26 +134,26 @@ tracks/0/keys = {
 resource_name = "Roll"
 length = 2.4
 tracks/0/type = "value"
-tracks/0/path = NodePath("CollisionShape:translation")
+tracks/0/path = NodePath("CollisionShape3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 1.5, 1.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.4, 1.5, 1.8 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, -0.769913, 0 ), Vector3( 0, -0.769913, 0 ), Vector3( 0, 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("CollisionShape:shape:height")
+tracks/1/path = NodePath("CollisionShape3D:shape:height")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4, 1.5, 1.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.4, 1.5, 1.8 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 2.4, 0.8, 0.8, 2.4 ]
 }
@@ -164,8 +164,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.4 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0.4 ),
+"transitions": PackedFloat32Array( 1 ),
 "values": [ {
 "args": [  ],
 "method": "impulse"
@@ -182,8 +182,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 2 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 2 ),
+"transitions": PackedFloat32Array( 1 ),
 "values": [ {
 "args": [  ],
 "method": "launch_granade"
@@ -269,7 +269,7 @@ blend_point_4/pos = Vector2( 0, 0 )
 
 [sub_resource type="AnimationNodeOneShot" id=50]
 filter_enabled = true
-filters = [ "Skeleton:mixamorig_Head", "Skeleton:mixamorig_LeftArm", "Skeleton:mixamorig_LeftForeArm", "Skeleton:mixamorig_LeftHand", "Skeleton:mixamorig_LeftHandIndex1", "Skeleton:mixamorig_LeftHandIndex2", "Skeleton:mixamorig_LeftHandIndex3", "Skeleton:mixamorig_LeftHandMiddle1", "Skeleton:mixamorig_LeftHandMiddle2", "Skeleton:mixamorig_LeftHandMiddle3", "Skeleton:mixamorig_LeftHandPinky1", "Skeleton:mixamorig_LeftHandPinky2", "Skeleton:mixamorig_LeftHandPinky3", "Skeleton:mixamorig_LeftHandRing1", "Skeleton:mixamorig_LeftHandRing2", "Skeleton:mixamorig_LeftHandRing3", "Skeleton:mixamorig_LeftHandThumb1", "Skeleton:mixamorig_LeftHandThumb2", "Skeleton:mixamorig_LeftHandThumb3", "Skeleton:mixamorig_LeftShoulder", "Skeleton:mixamorig_Neck", "Skeleton:mixamorig_RightArm", "Skeleton:mixamorig_RightForeArm", "Skeleton:mixamorig_RightHand", "Skeleton:mixamorig_RightHandIndex1", "Skeleton:mixamorig_RightHandIndex2", "Skeleton:mixamorig_RightHandIndex3", "Skeleton:mixamorig_RightHandMiddle1", "Skeleton:mixamorig_RightHandMiddle2", "Skeleton:mixamorig_RightHandMiddle3", "Skeleton:mixamorig_RightHandPinky1", "Skeleton:mixamorig_RightHandPinky2", "Skeleton:mixamorig_RightHandPinky3", "Skeleton:mixamorig_RightHandRing1", "Skeleton:mixamorig_RightHandRing2", "Skeleton:mixamorig_RightHandRing3", "Skeleton:mixamorig_RightHandThumb1", "Skeleton:mixamorig_RightHandThumb2", "Skeleton:mixamorig_RightHandThumb3", "Skeleton:mixamorig_RightShoulder", "Skeleton:mixamorig_Spine", "Skeleton:mixamorig_Spine1", "Skeleton:mixamorig_Spine2" ]
+filters = [ "Skeleton3D:mixamorig_Head", "Skeleton3D:mixamorig_LeftArm", "Skeleton3D:mixamorig_LeftForeArm", "Skeleton3D:mixamorig_LeftHand", "Skeleton3D:mixamorig_LeftHandIndex1", "Skeleton3D:mixamorig_LeftHandIndex2", "Skeleton3D:mixamorig_LeftHandIndex3", "Skeleton3D:mixamorig_LeftHandMiddle1", "Skeleton3D:mixamorig_LeftHandMiddle2", "Skeleton3D:mixamorig_LeftHandMiddle3", "Skeleton3D:mixamorig_LeftHandPinky1", "Skeleton3D:mixamorig_LeftHandPinky2", "Skeleton3D:mixamorig_LeftHandPinky3", "Skeleton3D:mixamorig_LeftHandRing1", "Skeleton3D:mixamorig_LeftHandRing2", "Skeleton3D:mixamorig_LeftHandRing3", "Skeleton3D:mixamorig_LeftHandThumb1", "Skeleton3D:mixamorig_LeftHandThumb2", "Skeleton3D:mixamorig_LeftHandThumb3", "Skeleton3D:mixamorig_LeftShoulder", "Skeleton3D:mixamorig_Neck", "Skeleton3D:mixamorig_RightArm", "Skeleton3D:mixamorig_RightForeArm", "Skeleton3D:mixamorig_RightHand", "Skeleton3D:mixamorig_RightHandIndex1", "Skeleton3D:mixamorig_RightHandIndex2", "Skeleton3D:mixamorig_RightHandIndex3", "Skeleton3D:mixamorig_RightHandMiddle1", "Skeleton3D:mixamorig_RightHandMiddle2", "Skeleton3D:mixamorig_RightHandMiddle3", "Skeleton3D:mixamorig_RightHandPinky1", "Skeleton3D:mixamorig_RightHandPinky2", "Skeleton3D:mixamorig_RightHandPinky3", "Skeleton3D:mixamorig_RightHandRing1", "Skeleton3D:mixamorig_RightHandRing2", "Skeleton3D:mixamorig_RightHandRing3", "Skeleton3D:mixamorig_RightHandThumb1", "Skeleton3D:mixamorig_RightHandThumb2", "Skeleton3D:mixamorig_RightHandThumb3", "Skeleton3D:mixamorig_RightShoulder", "Skeleton3D:mixamorig_Spine", "Skeleton3D:mixamorig_Spine1", "Skeleton3D:mixamorig_Spine2" ]
 
 [sub_resource type="AnimationNodeBlendTree" id=48]
 graph_offset = Vector2( -694.148, 233.236 )
@@ -277,9 +277,9 @@ nodes/OneShotStateMachine/node = SubResource( 74 )
 nodes/OneShotStateMachine/position = Vector2( -20, 500 )
 nodes/move/node = SubResource( 47 )
 nodes/move/position = Vector2( -120, 240 )
-nodes/oneshot/node = SubResource( 50 )
-nodes/oneshot/position = Vector2( 120, 160 )
-node_connections = [ "output", 0, "oneshot", "oneshot", 0, "move", "oneshot", 1, "OneShotStateMachine" ]
+nodes/one_shot/node = SubResource( 50 )
+nodes/one_shot/position = Vector2( 120, 160 )
+node_connections = [ "output", 0, "one_shot", "one_shot", 0, "move", "one_shot", 1, "OneShotStateMachine" ]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=51]
 switch_mode = 2
@@ -332,52 +332,52 @@ node_connections = [ "output", 0, "StateMachine" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=75]
 
-[node name="Player" type="KinematicBody" groups=["Players", "Troops"]]
+[node name="Player" type="CharacterBody3D" groups=["Players", "Troops"]]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="Model" parent="." instance=ExtResource( 22 )]
 
-[node name="BoneAttachment" type="BoneAttachment" parent="Model/Skeleton" index="2"]
-transform = Transform( -0.0530781, -0.984286, -0.168416, -0.3152, -0.143518, 0.938111, -0.94754, 0.102878, -0.302629, -0.284899, 1.09482, 0.217719 )
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Model/Skeleton3D" index="2"]
+transform = Transform3D( -0.0530781, -0.984286, -0.168416, -0.3152, -0.143518, 0.938111, -0.94754, 0.102878, -0.302629, -0.284899, 1.09482, 0.217719 )
 bone_name = "mixamorig_RightHand"
 
-[node name="Weapons" type="Spatial" parent="Model/Skeleton/BoneAttachment"]
+[node name="Weapons" type="Node3D" parent="Model/Skeleton3D/BoneAttachment3D"]
 unique_name_in_owner = true
-transform = Transform( 0.0679044, -0.0832143, 0.488329, 0.490528, -0.0574427, -0.0779988, 0.069083, 0.48967, 0.0738364, -0.267242, -0.00359118, 0.0118586 )
+transform = Transform3D( 0.0679044, -0.0832143, 0.488329, 0.490528, -0.0574427, -0.0779988, 0.069083, 0.48967, 0.0738364, -0.267242, -0.00359118, 0.0118586 )
 __meta__ = {
 "_editor_description_": "Resource?"
 }
 
-[node name="Pistol" parent="Model/Skeleton/BoneAttachment/Weapons" instance=ExtResource( 18 )]
+[node name="Pistol" parent="Model/Skeleton3D/BoneAttachment3D/Weapons" instance=ExtResource( 18 )]
 visible = false
 bullet_scene = ExtResource( 29 )
 
-[node name="MeleeHitBox" type="Area" parent="Model"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.885, 0 )
+[node name="MeleeHitBox" type="Area3D" parent="Model"]
+transform = Transform3D( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.885, 0 )
 collision_layer = 0
 collision_mask = 512
 monitorable = false
 
-[node name="CollisionShape" type="CollisionShape" parent="Model/MeleeHitBox"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.798786, 1.03381 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/MeleeHitBox"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.798786, 1.03381 )
 shape = SubResource( 6 )
 disabled = true
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 3 )
 
-[node name="Tail" type="RayCast" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0 )
+[node name="Tail" type="RayCast3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0 )
 enabled = true
 cast_to = Vector3( 0, -0.4, 0 )
 
-[node name="Shooting" type="Spatial" parent="."]
+[node name="Shooting" type="Node3D" parent="."]
 script = ExtResource( 8 )
 
-[node name="LaunchGrenade" type="Spatial" parent="Shooting"]
+[node name="LaunchGrenade" type="Node3D" parent="Shooting"]
 script = ExtResource( 21 )
 
 [node name="Throw" type="AudioStreamPlayer" parent="Shooting/LaunchGrenade"]
@@ -404,8 +404,8 @@ one_shot = true
 launch_grenade_path = NodePath("../Shooting/LaunchGrenade")
 
 [node name="Points" parent="PlayerHUD" index="2"]
-margin_right = 1160.0
-margin_bottom = 846.0
+offset_right = 1160.0
+offset_bottom = 846.0
 
 [node name="HealthSystem" parent="." instance=ExtResource( 7 )]
 
@@ -464,24 +464,24 @@ parameters/StateMachine/walk/OneShotStateMachine/playback = SubResource( 75 )
 parameters/StateMachine/walk/move/blend_position = Vector2( 0.972, 0.158 )
 parameters/StateMachine/walk/move/3/blend_position = -0.275479
 parameters/StateMachine/walk/move/4/aim/blend_amount = 0.0
-parameters/StateMachine/walk/oneshot/active = false
+parameters/StateMachine/walk/one_shot/active = false
 
-[node name="HurtBox" type="Area" parent="." groups=["HurtBox"]]
+[node name="HurtBox" type="Area3D" parent="." groups=["HurtBox"]]
 collision_layer = 512
 collision_mask = 0
 monitoring = false
 
-[node name="CollisionShape2" type="CollisionShape" parent="HurtBox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+[node name="CollisionShape2" type="CollisionShape3D" parent="HurtBox"]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 3 )
 
-[node name="CamPos" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.603, 0 )
+[node name="CamPos" type="Marker3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.603, 0 )
 __meta__ = {
 "_editor_description_": "Bones bonding pq segueixi la camera"
 }
 
-[node name="Listener" type="Listener" parent="."]
+[node name="AudioListener3D" type="AudioListener3D" parent="."]
 current = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

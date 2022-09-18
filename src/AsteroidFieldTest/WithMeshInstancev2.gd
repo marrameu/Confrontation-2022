@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 
 var start_roids = 1000
@@ -16,10 +16,10 @@ func add_roids():
 	for i in range(current_roids, needed_roids):
 		# Create a new mesh instance
 		
-		var new_meshinstance = MeshInstance.new()
+		var new_meshinstance = MeshInstance3D.new()
 		new_meshinstance.mesh = $Asteroid/Meteoritlod1.mesh
 		
-		var t = Transform().scaled(Vector3(0.1, 0.1, 0.1))
+		var t = Transform3D().scaled(Vector3(0.1, 0.1, 0.1))
 		t.origin = Vector3(randf() * max_dist, randf() * max_dist, randf() * max_dist) - Vector3(0.5 * max_dist, 0.5 * max_dist, 0.5 * max_dist)
 		
 		
@@ -41,5 +41,5 @@ func _input(event):
 
 func _process(delta):
 	$DrawCalls.set_text(str(Performance.get_monitor(Performance.TIME_FPS)))
-	print(Performance.get_monitor(Performance.RENDER_DRAW_CALLS_IN_FRAME))
+	print(Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME))
 	

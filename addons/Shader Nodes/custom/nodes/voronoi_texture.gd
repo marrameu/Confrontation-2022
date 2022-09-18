@@ -1,4 +1,4 @@
-tool
+@tool
 extends VisualShaderNodeCustom
 class_name VisualShaderVoronoiTexture
 
@@ -12,7 +12,7 @@ func _get_category():
 
 
 func _get_description():
-	return "Voronoi-noise Texture (based on the Blender Foundation Voronoi texture)"
+	return "Voronoi-noise Texture2D (based checked the Blender Foundation Voronoi texture)"
 
 
 func _get_return_icon_type():
@@ -90,7 +90,7 @@ func _get_global_code(mode):
 		}
 
 
-		/* === Based on The Blender Foundation shader
+		/* === Based checked The Blender Foundation shader
 		@ https://git.blender.org/gitweb/gitweb.cgi/blender.git/blob/HEAD:/source/blender/gpu/shaders/material/gpu_shader_material_tex_voronoi.glsl
 		_________________________________________________________________________________________________________________________________________*/
 

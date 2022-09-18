@@ -6,30 +6,30 @@ var camera_width_center := 0.0
 var camera_height_center := 0.0
 var ray_origin := Vector3()
 var ray_normal := Vector3()
-var target_collider : Spatial
+var target_collider : Node3D
 
 # Cameras
-var ship_camera : Camera
-var current_camera : Camera
+var ship_camera : Camera3D
+var current_camera : Camera3D
 
 # State
 var is_in_a_vehicle := false
-var current_vehicle : Spatial
+var current_vehicle : Node3D
 
 # Multiplayer
 var action := ""
 
 # UI
-export var interaction_progress_path : NodePath
-onready var interaction_progress : TextureProgress = get_node(interaction_progress_path)
+@export var interaction_progress_path : NodePath
+@onready var interaction_progress : TextureProgressBar = get_node(interaction_progress_path)
 
 
 func _process(delta : float) -> void:
-	if get_tree().has_network_peer():
-		if not is_network_master():
+	if get_tree().has_multiplayer_peer():
+		if not is_multiplayer_authority():
 			return
 	
-	current_camera = get_viewport().get_camera()
+	current_camera = get_viewport().get_camera_3d()
 	interaction_progress.value = ($Timer.wait_time - $Timer.time_left) / $Timer.wait_time * 100
 	interaction_progress.visible = true if target_collider else false
 	
@@ -41,7 +41,7 @@ func _process(delta : float) -> void:
 		ray_origin = current_camera.project_ray_origin(Vector2(camera_width_center, camera_height_center))
 		ray_normal = ray_origin + current_camera.project_ray_normal(Vector2(camera_width_center, camera_height_center)) * ray_range
 		
-		var space_state = current_camera.get_world().direct_space_state
+		var space_state = current_camera.get_world_3d().direct_space_state
 		var result = space_state.intersect_ray(ray_origin, ray_normal, [], 32768, false, true)
 		if result:
 			var collider = result.collider
@@ -76,6 +76,6 @@ func _on_Timer_timeout():
 func play_sound():
 	var audio : AudioStreamPlayer = AudioStreamPlayer.new()
 	audio.set_stream(preload("res://assets/audio/interaction.wav"))
-	audio.connect("finished", audio, "queue_free")
+	audio.connect("finished",Callable(audio,"queue_free"))
 	get_tree().current_scene.add_child(audio)
 	audio.play()

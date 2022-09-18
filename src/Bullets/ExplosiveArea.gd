@@ -1,4 +1,4 @@
-extends Area
+extends Area3D
 
 
 # Declare member variables here. Examples:
@@ -22,11 +22,11 @@ func _on_Area_area_entered(area):
 	$DistanceRayCast.cast_to = to_local(area.owner.global_translation)
 	$DistanceRayCast.force_raycast_update()
 	if $DistanceRayCast.is_colliding():
-		area.owner.get_node("HealthSystem").take_damage(owner.damage / ($DistanceRayCast.get_collision_point().distance_to(translation) / 2) * 100)
+		area.owner.get_node("HealthSystem").take_damage(owner.damage / ($DistanceRayCast.get_collision_point().distance_to(position) / 2) * 100)
 		# emit_signal("damagable_hit")
 	else:
 		print("MALAMENT RAYO")
 
 
 func explode() -> void:
-	$CollisionShape.disabled = false
+	$CollisionShape3D.disabled = false

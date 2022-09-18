@@ -3,15 +3,15 @@
 [ext_resource path="res://src/Bullets/Ships/Bullet.gd" type="Script" id=1]
 [ext_resource path="res://assets/missilebullet_spatialmaterial.tres" type="Material" id=2]
 [ext_resource path="res://assets/audio/air.wav" type="AudioStream" id=3]
-[ext_resource path="res://assets/particles/myst_bw.png" type="Texture" id=4]
+[ext_resource path="res://assets/particles/myst_bw.png" type="Texture2D" id=4]
 [ext_resource path="res://assets/audio/bullet_explosion.wav" type="AudioStream" id=5]
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="ParticleProcessMaterial" id=1]
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 angular_velocity = 9.62984e-35
 
-[sub_resource type="SpatialMaterial" id=11]
+[sub_resource type="StandardMaterial3D" id=11]
 flags_do_not_receive_shadows = true
 flags_disable_ambient_light = true
 albedo_color = Color( 0, 0, 0, 1 )
@@ -24,11 +24,11 @@ emission_on_uv2 = false
 [sub_resource type="CapsuleMesh" id=12]
 material = SubResource( 11 )
 radius = 0.5
-mid_height = 20.0
+height = 20.0
 radial_segments = 4
 rings = 1
 
-[sub_resource type="ParticlesMaterial" id=4]
+[sub_resource type="ParticleProcessMaterial" id=4]
 next_pass = ExtResource( 2 )
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
@@ -36,7 +36,7 @@ initial_velocity = 0.3
 angular_velocity = 35.0
 angular_velocity_random = 1.0
 
-[sub_resource type="SpatialMaterial" id=14]
+[sub_resource type="StandardMaterial3D" id=14]
 flags_transparent = true
 flags_unshaded = true
 vertex_color_use_as_albedo = true
@@ -65,29 +65,29 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.5 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0.5 ),
+"transitions": PackedFloat32Array( 1 ),
 "values": [ {
 "args": [  ],
 "method": "queue_free"
 } ]
 }
 
-[node name="Bullet" type="Spatial" groups=["Bullets"]]
+[node name="Bullet" type="Node3D" groups=["Bullets"]]
 script = ExtResource( 1 )
 damage = 20
 bullet_velocity = 500.0
 _time_alive = 3.0
 
-[node name="HitParticles" type="Particles" parent="."]
-pause_mode = 1
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
+[node name="HitParticles" type="GPUParticles3D" parent="."]
+process_mode = 1
+transform = Transform3D( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
 amount = 1
 lifetime = 5.0
 process_material = SubResource( 1 )
 draw_pass_1 = SubResource( 12 )
 
-[node name="Explosion" type="Particles" parent="."]
+[node name="Explosion" type="GPUParticles3D" parent="."]
 lifetime = 0.5
 speed_scale = 3.0
 explosiveness = 1.0
@@ -95,7 +95,7 @@ randomness = 0.6
 process_material = SubResource( 4 )
 draw_pass_1 = SubResource( 13 )
 
-[node name="OmniLight" type="OmniLight" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
 light_color = Color( 1, 0.301961, 0.301961, 1 )
 light_energy = 1.5
 omni_range = 5.18852
@@ -113,10 +113,10 @@ max_distance = 250.0
 bus = "Sounds"
 doppler_tracking = 2
 
-[node name="VisibilityNotifier" type="VisibilityNotifier" parent="."]
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
 aabb = AABB( -1, -1, -4.14208, 2, 2, 8.28415 )
 
-[node name="RayCast" type="RayCast" parent="."]
+[node name="RayCast3D" type="RayCast3D" parent="."]
 enabled = true
 exclude_parent = false
 cast_to = Vector3( 0, 0, -25 )
@@ -133,5 +133,5 @@ pitch_scale = 1.5
 max_distance = 150.0
 attenuation_filter_db = -12.0
 
-[connection signal="screen_entered" from="VisibilityNotifier" to="." method="_on_VisibilityNotifier_screen_entered"]
-[connection signal="screen_exited" from="VisibilityNotifier" to="." method="_on_VisibilityNotifier_screen_exited"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier3D" to="." method="_on_VisibilityNotifier_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_VisibilityNotifier_screen_exited"]

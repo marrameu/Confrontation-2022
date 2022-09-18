@@ -25,7 +25,7 @@ func _process(delta):
 		controller_input = !controller_input
 
 func toggle_fullscreen(toggle):
-	OS.window_fullscreen = toggle
+	ProjectSettings.set("display/window/size/fullscreen", toggle)
 
 func toggle_bloom(value):
 	emit_signal("bloom_toggled", value)
@@ -54,6 +54,6 @@ func set_brightness(value):
 
 func toggle_MotionBlur(toggle):
 	if toggle == false:
-		get_parent().get_node("Level").get_node("Camera/motion_blur").hide()
+		get_parent().get_node("Level").get_node("Camera3D/motion_blur").hide()
 	else:
-		get_parent().get_node("Level").get_node("Camera/motion_blur").show()
+		get_parent().get_node("Level").get_node("Camera3D/motion_blur").show()

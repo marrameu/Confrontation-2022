@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/interface/themes/new_theme.tres" type="Theme" id=3]
 
 [node name="PauseMenu" type="CanvasLayer"]
-pause_mode = 2
+process_mode = 2
 layer = 40
 script = ExtResource( 1 )
 
@@ -21,38 +21,38 @@ visible = false
 [node name="MenuPrincipal" type="VBoxContainer" parent="Control"]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_top = -175.0
-margin_right = 404.0
-margin_bottom = 539.0
+offset_top = -175.0
+offset_right = 404.0
+offset_bottom = 539.0
 custom_constants/separation = 40
 alignment = 1
 
 [node name="Reprendre" type="Button" parent="Control/MenuPrincipal"]
-margin_top = 167.0
-margin_right = 404.0
-margin_bottom = 267.0
-rect_min_size = Vector2( 0, 100 )
+offset_top = 167.0
+offset_right = 404.0
+offset_bottom = 267.0
+minimum_size = Vector2( 0, 100 )
 text = "Reprendre"
 
 [node name="Opcions" type="Button" parent="Control/MenuPrincipal"]
-margin_top = 307.0
-margin_right = 404.0
-margin_bottom = 407.0
-rect_min_size = Vector2( 0, 100 )
+offset_top = 307.0
+offset_right = 404.0
+offset_bottom = 407.0
+minimum_size = Vector2( 0, 100 )
 text = "Opcions"
 
 [node name="Sortir" type="Button" parent="Control/MenuPrincipal"]
-margin_top = 447.0
-margin_right = 404.0
-margin_bottom = 547.0
-rect_min_size = Vector2( 0, 100 )
+offset_top = 447.0
+offset_right = 404.0
+offset_bottom = 547.0
+minimum_size = Vector2( 0, 100 )
 text = "Sortir"
 
 [node name="Button" type="Button" parent="Control"]
-margin_left = 1595.0
-margin_top = 984.0
-margin_right = 1881.0
-margin_bottom = 1050.0
+offset_left = 1595.0
+offset_top = 984.0
+offset_right = 1881.0
+offset_bottom = 1050.0
 text = "Suicidament"
 
 [connection signal="pressed" from="Control/MenuPrincipal/Reprendre" to="." method="_on_Reprendre_pressed"]

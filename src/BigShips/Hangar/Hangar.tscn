@@ -5,74 +5,74 @@
 [ext_resource path="res://assets/audio/not_a_drill.ogg" type="AudioStream" id=3]
 [ext_resource path="res://src/Ships/ShipTransport.tscn" type="PackedScene" id=4]
 
-[sub_resource type="CubeMesh" id=1]
+[sub_resource type="BoxMesh" id=1]
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="StandardMaterial3D" id=2]
 flags_transparent = true
 albedo_color = Color( 0.698039, 0.882353, 1, 0.196078 )
 
-[sub_resource type="ConcavePolygonShape" id=3]
-data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+[sub_resource type="ConcavePolygonShape3D" id=3]
+data = PackedVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
 
-[sub_resource type="ConcavePolygonShape" id=4]
-data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+[sub_resource type="ConcavePolygonShape3D" id=4]
+data = PackedVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
 
-[sub_resource type="BoxShape" id=5]
+[sub_resource type="BoxShape3D" id=5]
 extents = Vector3( 205, 15, 110 )
 
-[node name="Hangar" type="Spatial"]
+[node name="Hangar" type="Node3D"]
 
-[node name="HangarDoor" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 25, 0, 0, 0, 135, -227.5, 0, 0 )
+[node name="HangarDoor" type="MeshInstance3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 25, 0, 0, 0, 135, -227.5, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
-[node name="StaticBody" type="StaticBody" parent="HangarDoor"]
+[node name="StaticBody3D" type="StaticBody3D" parent="HangarDoor"]
 collision_layer = 16
 collision_mask = 0
 
-[node name="CollisionShape" type="CollisionShape" parent="HangarDoor/StaticBody"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HangarDoor/StaticBody3D"]
 shape = SubResource( 3 )
 
-[node name="HangarDoor2" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 25, 0, 0, 0, 135, 227.5, 0, 0 )
+[node name="HangarDoor2" type="MeshInstance3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 25, 0, 0, 0, 135, 227.5, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
-[node name="StaticBody" type="StaticBody" parent="HangarDoor2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="HangarDoor2"]
 collision_layer = 16
 collision_mask = 0
 
-[node name="CollisionShape" type="CollisionShape" parent="HangarDoor2/StaticBody"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HangarDoor2/StaticBody3D"]
 shape = SubResource( 4 )
 
 [node name="LandingArea" parent="." instance=ExtResource( 1 )]
 
-[node name="CollisionShape" parent="LandingArea" index="0"]
+[node name="CollisionShape3D" parent="LandingArea" index="0"]
 shape = SubResource( 5 )
 
-[node name="ShipSpawns" type="Spatial" parent="."]
+[node name="ShipSpawns" type="Node3D" parent="."]
 unique_name_in_owner = true
 
 [node name="ShipSpawn" parent="ShipSpawns" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -89.3984, -14.8672, -67.1562 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -89.3984, -14.8672, -67.1562 )
 simultaneous_ships = 2
 
 [node name="ShipSpawn2" parent="ShipSpawns" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -89.3984, -14.8672, -29.6907 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -89.3984, -14.8672, -29.6907 )
 ship_scene = ExtResource( 4 )
 simultaneous_ships = 2
 
 [node name="ShipSpawn3" parent="ShipSpawns" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -89.3984, -14.8672, 32.157 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -89.3984, -14.8672, 32.157 )
 simultaneous_ships = 2
 
 [node name="ShipSpawn4" parent="ShipSpawns" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -89.3984, -14.8672, 78.5429 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -89.3984, -14.8672, 78.5429 )
 simultaneous_ships = 2
 
 [node name="Information" type="AudioStreamPlayer3D" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.290264, 0 )
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.290264, 0 )
 stream = ExtResource( 3 )
 unit_db = 80.0
 unit_size = 100.0
@@ -81,38 +81,38 @@ max_distance = 250.0
 area_mask = 0
 attenuation_filter_db = -5.0
 
-[node name="SpotLight" type="SpotLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 22.9746, 58.6921 )
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 22.9746, 58.6921 )
 light_color = Color( 1, 0.886275, 0.741176, 1 )
 spot_range = 124.928
 spot_angle = 32.48
 
-[node name="SpotLight2" type="SpotLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 22.9746, -64.4787 )
+[node name="SpotLight2" type="SpotLight3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 22.9746, -64.4787 )
 light_color = Color( 1, 0.886275, 0.741176, 1 )
 spot_range = 124.928
 spot_angle = 32.48
 
-[node name="SpotLight3" type="SpotLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 122.344, 22.9746, 58.6921 )
+[node name="SpotLight3" type="SpotLight3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 122.344, 22.9746, 58.6921 )
 light_color = Color( 1, 0.886275, 0.741176, 1 )
 spot_range = 124.928
 spot_angle = 32.48
 
-[node name="SpotLight4" type="SpotLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 122.344, 22.9746, -64.4787 )
+[node name="SpotLight4" type="SpotLight3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 122.344, 22.9746, -64.4787 )
 light_color = Color( 1, 0.886275, 0.741176, 1 )
 spot_range = 124.928
 spot_angle = 32.48
 
-[node name="SpotLight5" type="SpotLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -124.824, 22.9746, 58.6921 )
+[node name="SpotLight5" type="SpotLight3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -124.824, 22.9746, 58.6921 )
 light_color = Color( 1, 0.886275, 0.741176, 1 )
 spot_range = 124.928
 spot_angle = 32.48
 
-[node name="SpotLight6" type="SpotLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -124.824, 22.9746, -64.4787 )
+[node name="SpotLight6" type="SpotLight3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -124.824, 22.9746, -64.4787 )
 light_color = Color( 1, 0.886275, 0.741176, 1 )
 spot_range = 124.928
 spot_angle = 32.48

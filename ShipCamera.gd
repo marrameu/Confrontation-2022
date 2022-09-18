@@ -1,6 +1,6 @@
-extends Camera
+extends Camera3D
 
-var target : Position3D
+var target : Marker3D
 var ship : Ship = null
 var ship_wr : WeakRef
 
@@ -47,7 +47,7 @@ var camera_up_action := "camera_up"
 var camera_down_action := "camera_down"
 
 
-var killer : Spatial
+var killer : Node3D
 
 
 func _ready():
@@ -60,10 +60,10 @@ func _process(delta):
 		return
 	
 	if ship.dead:
-		translation += transform.basis.z * 100 * delta
+		position += transform.basis.z * 100 * delta
 		if weakref(killer).get_ref():
-			var rot_transform = transform.looking_at(killer.translation, transform.basis.y)
-			transform.basis = Basis(Quat(transform.basis).slerp(rot_transform.basis, 3 * delta))
+			var rot_transform = transform.looking_at(killer.position, transform.basis.y)
+			transform.basis = Basis(Quaternion(transform.basis).slerp(rot_transform.basis, 3 * delta))
 		return
 	
 	if Input.is_action_just_pressed("change_cam"):
@@ -101,7 +101,7 @@ func init_cam():
 		return
 	
 	if target and weakref(target).get_ref(): # si no, l'starter position es va canviant tota l'estona
-		target.translation = starter_target_position
+		target.position = starter_target_position
 	
 	# això es deu poder fer una mica millor
 	if  Settings.first_person:
@@ -129,12 +129,12 @@ func init_cam():
 	
 	global_transform.origin = target.global_transform.origin
 	global_transform.basis = target.global_transform.basis.get_euler()
-	starter_target_position = target.translation
+	starter_target_position = target.position
 
 
 func shake_cam():
-	h_offset = rand_range(-1.0, 1.0) * shake_amount
-	v_offset = rand_range(-1.0, 1.0) * shake_amount
+	h_offset = randf_range(-1.0, 1.0) * shake_amount
+	v_offset = randf_range(-1.0, 1.0) * shake_amount
 
 
 func move_camera(delta : float) -> void:
@@ -144,7 +144,7 @@ func move_camera(delta : float) -> void:
 	global_transform.basis = target.global_transform.basis.get_euler()
 	
 	# té cap effecte açò?, potser s'hauria de fer diferent l'acció de mirar enrere
-	global_transform.basis = Quat(global_transform.basis).slerp(Quat(target.global_transform.basis), rotate_speed * delta)
+	global_transform.basis = Quaternion(global_transform.basis).slerp(Quaternion(target.global_transform.basis), rotate_speed * delta)
 	update_target(delta)
 
 
@@ -181,7 +181,7 @@ func update_target(delta : float):
 	
 	# en lloc de fer l'angular amb l'input, fer-ho amb les físiques reals?
 	var desired_position = starter_target_position + Vector3(-horizontal, vertical, -speed_forward)
-	target.translation = target.translation.linear_interpolate(desired_position, delta)
+	target.position = target.position.lerp(desired_position, delta)
 	
 	"""
 	# temporal
@@ -190,12 +190,12 @@ func update_target(delta : float):
 """
 
 
-func horizontal_lean(target : Spatial, x_input : float, lean_limit : float = 45 , time : float = 0.03) -> void:
+func horizontal_lean(target : Node3D, x_input : float, lean_limit : float = 45 , time : float = 0.03) -> void:
 	var target_rotation : Vector3 = target.rotation_degrees
 	target.rotation_degrees = Vector3(target_rotation.x, target_rotation.y, lerp(target_rotation.z, x_input * lean_limit, time))
 
 
-func _on_player_entered_ship(new_ship : Spatial):
+func _on_player_entered_ship(new_ship : Node3D):
 	ship = new_ship
 	ship.cam = self # no hauria de caldre
 	make_current()

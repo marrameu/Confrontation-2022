@@ -1,7 +1,7 @@
-extends Spatial
+extends Node3D
 
-onready var init_h_offset : float = -$CameraPosition.translation.x
-onready var tween : Tween = $Tween
+@onready var init_h_offset : float = -$CameraPosition.position.x
+@onready var tween : Tween = $Tween
 
 var mouse_movement := Vector2()
 
@@ -22,17 +22,17 @@ var cam_yaw_at_last_shot := 0.0
 var current_gun : Gun
 
 
-export var player_path : NodePath
+@export var player_path : NodePath
 
 
-var killer : Spatial
+var killer : Node3D
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$PuppetCamPos.translation = $CameraPosition.translation
-	$RayCast.cast_to = $PuppetCamPos.translation
-	$RayCast.add_exception(get_node(player_path)) # pq no va? -> mirar errors debug
+	$PuppetCamPos.position = $CameraPosition.position
+	$RayCast3D.cast_to = $PuppetCamPos.position
+	$RayCast3D.add_exception(get_node(player_path)) # pq no va? -> mirar errors debug
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -51,14 +51,14 @@ func _physics_process(delta):
 		return
 	
 	if get_node(player_path).dead:
-		translation += transform.basis.z * 2 * delta # o cap a endavant?
+		position += transform.basis.z * 2 * delta # o cap a endavant?
 		if weakref(killer).get_ref():
-			var rot_transform = transform.looking_at(killer.translation, transform.basis.y)
-			transform.basis = Basis(Quat(transform.basis).slerp(rot_transform.basis, 3 * delta))
+			var rot_transform = transform.looking_at(killer.position, transform.basis.y)
+			transform.basis = Basis(Quaternion(transform.basis).slerp(rot_transform.basis, 3 * delta))
 			rotation.z = 0
 		return
 	
-	translation = translation.linear_interpolate(get_node(player_path).get_node("CamPos").global_translation, 0.25 * delta * 60)
+	position = position.lerp(get_node(player_path).get_node("CamPos").global_translation, 0.25 * delta * 60)
 	
 	var joystick_movement := 0.0
 	var pitch_strenght := (-joystick_movement - mouse_movement.y) * rotate_speed_multipiler
@@ -74,7 +74,7 @@ func _physics_process(delta):
 	process_shake()
 	mouse_movement = Vector2.ZERO
 	
-	$RayCast.cast_to = $PuppetCamPos.translation
+	$RayCast3D.cast_to = $PuppetCamPos.position
 
 
 func _input(event : InputEvent) -> void:
@@ -83,7 +83,7 @@ func _input(event : InputEvent) -> void:
 
 
 func rotate_pitch(strenght, delta):
-	var camera_x_rot = clamp(rotation.x + strenght * delta, deg2rad(CAMERA_X_ROT_MIN), deg2rad(CAMERA_X_ROT_MAX))
+	var camera_x_rot = clamp(rotation.x + strenght * delta, deg_to_rad(CAMERA_X_ROT_MIN), deg_to_rad(CAMERA_X_ROT_MAX))
 	rotation.x = camera_x_rot
 	orthonormalize()
 
@@ -95,7 +95,7 @@ func rotate_yaw(strenght, delta):
 
 
 func update_zoom() -> void:
-	get_viewport().get_camera().fov = lerp(get_viewport().get_camera().fov, 70 / 2.0, .25) if zooming else lerp(get_viewport().get_camera().fov, 70.0, .25)
+	get_viewport().get_camera_3d().fov = lerp(get_viewport().get_camera_3d().fov, 70 / 2.0, .25) if zooming else lerp(get_viewport().get_camera_3d().fov, 70.0, .25)
 	rotate_speed_multipiler = 0.5 if zooming else 1.0
 	#get_parent().joystick_sensitivity = init_joystick_sensitivity / 3 if zooming else init_joystick_sensitivity
 
@@ -113,9 +113,9 @@ func shake_camera(gun : Gun) -> void:
 	var multiplier := 0.5 if zooming else 1.0
 	shake_amount.x = -0.025 * multiplier * shake_force.x
 	if randf() > 0.5:
-		shake_amount.y = rand_range(0.006 * multiplier * shake_force.y, 0.01 * multiplier * shake_force.y)
+		shake_amount.y = randf_range(0.006 * multiplier * shake_force.y, 0.01 * multiplier * shake_force.y)
 	else:
-		shake_amount.y = rand_range(-0.01 * multiplier * shake_force.y, -0.006 * multiplier * shake_force.y)
+		shake_amount.y = randf_range(-0.01 * multiplier * shake_force.y, -0.006 * multiplier * shake_force.y)
 	if shake_amount.y + recoil_amount.y > (0.02 * shake_force.y * multiplier) or shake_amount.y + recoil_amount.y < (-0.02 * shake_force.y * multiplier):
 		shake_amount.y = 0
 	recoil_amount.y += shake_amount.y
@@ -127,7 +127,7 @@ func shake_camera(gun : Gun) -> void:
 func process_shake() -> void:
 	# Si es mou el ratolí, talla-ho tot (reinicia), deixa de shake
 	# hi ha hagut un moviment fort? o, si no, s'ha mogut molt però a poc a poc des que va deixar de siparar (sorbetot per no haver de canviar el valor del timer, cosa q segurament caldrà fer per a les armes com snipers i llançamíssils)
-	if abs(mouse_movement.y) > 0.5:# or abs(cam_yaw_at_last_shot - rotation.x) > deg2rad(5):#if mouse_movement.length() > 1:#input_movement.length() > 0: # menor que 1 pq així cal un gir prou gran per tallar el shake
+	if abs(mouse_movement.y) > 0.5:# or abs(cam_yaw_at_last_shot - rotation.x) > deg_to_rad(5):#if mouse_movement.length() > 1:#input_movement.length() > 0: # menor que 1 pq així cal un gir prou gran per tallar el shake
 		wants_to_stabilize = false
 		shaking = false
 	
@@ -135,7 +135,7 @@ func process_shake() -> void:
 	
 	if shaking:
 		var to = rotation.x + shake_amount.x
-		rotation.x = clamp(lerp(rotation.x, to, 0.05), deg2rad(CAMERA_X_ROT_MIN), deg2rad(CAMERA_X_ROT_MAX))
+		rotation.x = clamp(lerp(rotation.x, to, 0.05), deg_to_rad(CAMERA_X_ROT_MIN), deg_to_rad(CAMERA_X_ROT_MAX))
 		shake_amount.x = lerp(shake_amount.x, 0, 0.15)
 		rotation.y = lerp(rotation.y, rotation.y + shake_amount.y, 0.15)
 		original_cam_rot.y = rotation.y - shake_amount.y
@@ -157,18 +157,18 @@ func _on_StabilizeTimer_timeout():
 
 
 func move_camera() -> void:
-	var current_h_offset = $PuppetCamPos.translation.x
+	var current_h_offset = $PuppetCamPos.position.x
 	if current_h_offset > 0:
-		var _new_x = tween.interpolate_property($PuppetCamPos, "translation:x", current_h_offset, -init_h_offset, 0.2, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+		var _new_x = tween.interpolate_property($PuppetCamPos, "position:x", current_h_offset, -init_h_offset, 0.2, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	else:
-		var _new_x = tween.interpolate_property($PuppetCamPos, "translation:x", current_h_offset, init_h_offset, 0.2, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+		var _new_x = tween.interpolate_property($PuppetCamPos, "position:x", current_h_offset, init_h_offset, 0.2, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	var _start = tween.start()
 
 
 func check_collisions(): # hauria de ser diferent per a quan mor
-	if $RayCast.is_colliding():
-		#print($RayCast.get_collider(), randi())
-		$CameraPosition.translation = $CameraPosition.translation.linear_interpolate(to_local($RayCast.get_collision_point()), 0.2)
-		$CameraPosition.global_translation += Vector3.ONE / 10 * $CameraPosition.global_translation.direction_to(translation)
+	if $RayCast3D.is_colliding():
+		#print($RayCast3D.get_collider(), randi())
+		$CameraPosition.position = $CameraPosition.position.lerp(to_local($RayCast3D.get_collision_point()), 0.2)
+		$CameraPosition.global_translation += Vector3.ONE / 10 * $CameraPosition.global_translation.direction_to(position)
 	else:
-		$CameraPosition.translation = $PuppetCamPos.translation
+		$CameraPosition.position = $PuppetCamPos.position

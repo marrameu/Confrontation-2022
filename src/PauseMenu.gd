@@ -1,7 +1,11 @@
 extends CanvasLayer
 
 
-var is_paused = false setget set_is_paused
+var is_paused = false :
+	get:
+		return is_paused # TODOConverter40 Non existent get function 
+	set(mod_value):
+		mod_value  # TODOConverter40 Copy here content of set_is_paused
 
 
 # Called when the node enters the scene tree for the first time.

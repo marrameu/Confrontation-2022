@@ -6,7 +6,7 @@ func enter():
 	owner.can_shoot = false
 	owner.can_change_weapon = false
 	owner.get_node("AnimationTree").get("parameters/StateMachine/walk/OneShotStateMachine/playback").start("reload")
-	owner.get_node("AnimationTree").set("parameters/StateMachine/walk/oneshot/active", true)
+	owner.get_node("AnimationTree").set("parameters/StateMachine/walk/one_shot/active", true)
 	owner.get_node("AnimationPlayer").play("Reload")
 
 

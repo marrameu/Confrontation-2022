@@ -12,7 +12,7 @@ func enter():
 
 
 func update(delta):
-	if owner.translation.distance_to(owner.input.target) < 30:
+	if owner.position.distance_to(owner.input.target) < 30:
 		owner.input.ignore_collisions = true
 		owner.input.des_throttle = 0.7 # 0.4 abans
 		ind += 1

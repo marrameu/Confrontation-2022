@@ -1,17 +1,17 @@
 extends CanvasLayer
 
-onready var lock_target_info := $LockTargetInfo
-onready var lock_target_nickname := $LockTargetInfo/Nickname
-onready var lock_target_dist := $LockTargetInfo/Distance
-onready var lock_target_life_bar := $LockTargetInfo/LifeBar
-onready var lock_target_info_center_pos : Vector2 = Vector2(ProjectSettings.get_setting("display/window/size/width"), ProjectSettings.get_setting("display/window/size/height"))/2 - lock_target_info.rect_size/2
+@onready var lock_target_info := $LockTargetInfo
+@onready var lock_target_nickname := $LockTargetInfo/Nickname
+@onready var lock_target_dist := $LockTargetInfo/Distance
+@onready var lock_target_life_bar := $LockTargetInfo/LifeBar
+@onready var lock_target_info_center_pos : Vector2 = Vector2(ProjectSettings.get_setting("display/window/size/width"), ProjectSettings.get_setting("display/window/size/height"))/2 - lock_target_info.size/2
 
-onready var cursor := $Center/Cursor
-onready var crosshair := $Center/Crosshair
-onready var cursor_center_pos : Vector2 = $Center.rect_size / 2 - cursor.rect_size / 2
-onready var crosshair_center_pos : Vector2 = $Center.rect_size / 2 - crosshair.rect_size / 2
+@onready var cursor := $Center/Cursor
+@onready var crosshair := $Center/Crosshair
+@onready var cursor_center_pos : Vector2 = $Center.size / 2 - cursor.size / 2
+@onready var crosshair_center_pos : Vector2 = $Center.size / 2 - crosshair.size / 2
 
-onready var damage_indicators := $Center/DamageIndicators
+@onready var damage_indicators := $Center/DamageIndicators
 
 const damage_indicator_scene : PackedScene = preload("res://src/HUD/ShipDamageIndicator.tscn")
 
@@ -27,29 +27,29 @@ var mouse_movement : Vector2
 
 
 func _ready() -> void:
-	make_visible(false)
+	_make_visible(false)
 	"""
 	if LocalMultiplayer.number_of_players > 1:
 		# Canviar l'escala d'alguns objectes
-		$Center/CursorPivot/Cursor.rect_scale = Vector2(1.5, 1.5)
-		$Center/Crosshair.rect_scale = Vector2(1.5, 1.5)
-		$LifeBar.rect_scale = Vector2(2.25, 2.25) # No coincideix amb la del jugador
-		$Indicators/LeaveIndicator.rect_scale = Vector2(2, 2)
-		$Indicators/LandingIndicator.rect_scale = Vector2(2, 2)
+		$Center/CursorPivot/Cursor.scale = Vector2(1.5, 1.5)
+		$Center/Crosshair.scale = Vector2(1.5, 1.5)
+		$LifeBar.scale = Vector2(2.25, 2.25) # No coincideix amb la del jugador
+		$Indicators/LeaveIndicator.scale = Vector2(2, 2)
+		$Indicators/LandingIndicator.scale = Vector2(2, 2)
 		
 		# Variable per a la sensibilitat en el mode multijugador, aquesta es multiplica per 2?
 	"""
 
 
 func _process(delta : float) -> void:
-	if get_tree().has_network_peer():
+	if get_tree().has_multiplayer_peer():
 		if get_parent().is_player:
-			if get_parent().player_id != get_tree().get_network_unique_id():
+			if get_parent().player_id != get_tree().get_unique_id():
 				return
 	
 	$DieInfo.visible = owner.dead
 	if owner.dead or owner.is_player_or_ai != 1:
-		make_visible(false)
+		_make_visible(false)
 		return
 	
 	#Utilities.canvas_scaler(get_parent().number_of_player, self)
@@ -69,11 +69,11 @@ func _process(delta : float) -> void:
 	update_center(delta)
 	
 	
-	var target : Spatial = owner.shooting.lock_target
+	var target : Node3D = owner.shooting.lock_target
 	if target and weakref(target).get_ref():
 		lock_target_info.show()
 		lock_target_nickname.text = target.name
-		lock_target_dist.text = str(int(owner.translation.distance_to(target.translation)))
+		lock_target_dist.text = str(int(owner.position.distance_to(target.position)))
 		if target.is_in_group("BigShips") and not target.get_node("HealthSystem").shield:
 			var time_left = target.get_node("HealthSystem/ShieldTimer").time_left
 			var wait_time = target.get_node("HealthSystem/ShieldTimer").wait_time
@@ -82,21 +82,21 @@ func _process(delta : float) -> void:
 			lock_target_life_bar.value = (float(target.get_node("HealthSystem").shield) / float(target.get_node("HealthSystem").MAX_SHIELD)) * 100
 		lock_target_life_bar.get_node("LifeBar").value = (float(target.get_node("HealthSystem").health) / float(target.get_node("HealthSystem").MAX_HEALTH)) * 100
 		
-		if not (owner.cam as Camera).is_position_behind(target.translation):
-			lock_target_info.rect_position = (owner.cam as Camera).unproject_position(target.global_transform.origin) - Vector2(lock_target_info.rect_size / 2) + Vector2.UP * 80
-			lock_target_info.rect_position = (lock_target_info.rect_position - lock_target_info_center_pos).clamped(500) + lock_target_info_center_pos
+		if not (owner.cam as Camera3D).is_position_behind(target.position):
+			lock_target_info.position = (owner.cam as Camera3D).unproject_position(target.global_transform.origin) - Vector2(lock_target_info.size / 2) + Vector2.UP * 80
+			lock_target_info.position = (lock_target_info.position - lock_target_info_center_pos).clamp(500) + lock_target_info_center_pos
 		else:
-			var direction := Vector3(target.translation - owner.translation).normalized()
+			var direction := Vector3(target.position - owner.position).normalized()
 			var x = direction.dot(owner.global_transform.basis.x)
 			var y = direction.dot(owner.global_transform.basis.y)
 			var prova = Vector2(-x, -y).normalized()
-			lock_target_info.rect_position = (prova * 500 - lock_target_info_center_pos).clamped(500) + lock_target_info_center_pos
+			lock_target_info.position = (prova * 500 - lock_target_info_center_pos).clamp(500) + lock_target_info_center_pos
 			
 			# així 100% q no
-			#lock_target_info.rect_position = (owner.cam as Camera).unproject_position(target.translation) - Vector2(lock_target_info.rect_size / 2) + Vector2.UP * 80
-			#lock_target_info.rect_position = (lock_target_info.rect_position - lock_target_info_center_pos).clamped(500) + lock_target_info_center_pos
+			#lock_target_info.position = (owner.cam as Camera3D).unproject_position(target.position) - Vector2(lock_target_info.size / 2) + Vector2.UP * 80
+			#lock_target_info.position = (lock_target_info.position - lock_target_info_center_pos).clamp(500) + lock_target_info_center_pos
 			
-			#lock_target_info.rect_position = (lock_target_info_center_pos + Vector2(x, y)*80000000).clamped(500) + lock_target_info_center_pos
+			#lock_target_info.position = (lock_target_info_center_pos + Vector2(x, y)*80000000).clamp(500) + lock_target_info_center_pos
 		
 		# ES POT FER MILLOR?
 		if owner.shooting.locking_target_to_missile or owner.shooting.target_locked:
@@ -104,14 +104,14 @@ func _process(delta : float) -> void:
 			if not $AnimationPlayer.is_playing() and owner.shooting.locking_target_to_missile:
 				$AnimationPlayer.playback_speed = 1/owner.shooting.locking_time
 				$AnimationPlayer.play("LockingTarget")
-			if not (owner.cam as Camera).is_position_behind(target.translation):
-				$LockingTarget.rect_position = (owner.cam as Camera).unproject_position(target.translation) - Vector2($LockingTarget.rect_size / 2)
+			if not (owner.cam as Camera3D).is_position_behind(target.position):
+				$LockingTarget.position = (owner.cam as Camera3D).unproject_position(target.position) - Vector2($LockingTarget.size / 2)
 		else:
-			#$LockingTarget.rect_size.x = 140 # sembla q no cal
+			#$LockingTarget.size.x = 140 # sembla q no cal
 			$LockingTarget.hide()
 			$AnimationPlayer.stop(true)
 	else:
-			#$LockingTarget.rect_size.x = 140 # sembla q no cal
+			#$LockingTarget.size.x = 140 # sembla q no cal
 			lock_target_info.hide()
 			$LockingTarget.hide()
 			$AnimationPlayer.stop(true)
@@ -192,20 +192,20 @@ func update_center(delta):
 		crosshair.get_node("Parts").visible = !owner.input.turboing
 		if not Settings.controller_input:
 			cursor.visible = true
-			cursor.rect_position += mouse_movement * delta * Settings.mouse_sensitivity
-			crosshair.rect_position = cursor.rect_position - cursor_center_pos + crosshair_center_pos
-			cursor.rect_position = (cursor.rect_position -  cursor_center_pos).clamped(_cursor_limit) + cursor_center_pos
-			crosshair.rect_position = (crosshair.rect_position - crosshair_center_pos).clamped(_crosshair_limit) + crosshair_center_pos
+			cursor.position += mouse_movement * delta * Settings.mouse_sensitivity
+			crosshair.position = cursor.position - cursor_center_pos + crosshair_center_pos
+			cursor.position = (cursor.position -  cursor_center_pos).clamp(_cursor_limit) + cursor_center_pos
+			crosshair.position = (crosshair.position - crosshair_center_pos).clamp(_crosshair_limit) + crosshair_center_pos
 			# tots aquests calculs pq al mig no és 0,0 sinó la meitat del pare :/
 			
-			if (cursor.rect_position - cursor_center_pos).length() > _min_position:
-				cursor_input.x = (cursor.rect_position.x - cursor_center_pos.x) / _cursor_limit
-				cursor_input.y = -(cursor.rect_position.y - cursor_center_pos.y) / _cursor_limit
+			if (cursor.position - cursor_center_pos).length() > _min_position:
+				cursor_input.x = (cursor.position.x - cursor_center_pos.x) / _cursor_limit
+				cursor_input.y = -(cursor.position.y - cursor_center_pos.y) / _cursor_limit
 			else:
 				cursor_input = Vector2()
 		else:
 			cursor.visible = false
-			crosshair.rect_position = (owner.cam as Camera).unproject_position(owner.global_transform.basis.z * owner.shooting.shoot_range + owner.translation) - $Center.rect_position - crosshair.rect_size/2
+			crosshair.position = (owner.cam as Camera3D).unproject_position(owner.global_transform.basis.z * owner.shooting.shoot_range + owner.position) - $Center.position - crosshair.size/2
 
 
 func _on_Shooting_shot():
@@ -227,7 +227,7 @@ func _on_HealthSystem_die(attacker):
 	$DieInfo.text = "Heu estat mort per " + attacker.name if attacker else "Heu estat mort"
 
 
-func _on_HealthSystem_damage_taken(attacker : Spatial):
+func _on_HealthSystem_damage_taken(attacker : Node3D):
 	if not attacker or not weakref(attacker).get_ref():
 		return
 	
@@ -236,13 +236,13 @@ func _on_HealthSystem_damage_taken(attacker : Spatial):
 			child.restart_timer()
 			return
 	
-	var damage_indicator = damage_indicator_scene.instance()
+	var damage_indicator = damage_indicator_scene.instantiate()
 	damage_indicator.myself = owner
 	damage_indicator.attacker = attacker
 	damage_indicators.add_child(damage_indicator)
 
 
-func make_visible(value : bool) -> void:
+func _make_visible(value : bool) -> void:
 	# fer un node alive, com el diescreen
 	for child in get_children():
 		if child == $Points:

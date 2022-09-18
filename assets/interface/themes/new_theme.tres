@@ -57,10 +57,10 @@ corner_radius_bottom_left = 12
 content_margin_right = 15.0
 bg_color = Color( 1, 0.866667, 0, 0 )
 
-[sub_resource type="DynamicFontData" id=1]
+[sub_resource type="FontFile" id=1]
 font_path = "res://assets/interface/Fonts/Manrope/static/Manrope-Bold.ttf"
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="FontFile" id=2]
 size = 21
 font_data = SubResource( 1 )
 

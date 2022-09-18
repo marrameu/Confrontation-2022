@@ -11,58 +11,58 @@ input_name = "time"
 output_port_for_preview = 0
 input_name = "uv"
 
-[sub_resource type="VisualShaderNodeScalarConstant" id=69]
+[sub_resource type="VisualShaderNodeFloatConstant" id=69]
 constant = 0.5
 
-[sub_resource type="VisualShaderNodeScalarUniform" id=70]
+[sub_resource type="VisualShaderNodeFloatParameter" id=70]
 uniform_name = "Degrees"
 
 [sub_resource type="VisualShaderNodeVectorOp" id=71]
 operator = 1
 
-[sub_resource type="VisualShaderNodeScalarFunc" id=72]
+[sub_resource type="VisualShaderNodeFloatFunc" id=72]
 function = 27
 
 [sub_resource type="VisualShaderNodeVectorDecompose" id=73]
 
-[sub_resource type="VisualShaderNodeScalarFunc" id=74]
+[sub_resource type="VisualShaderNodeFloatFunc" id=74]
 function = 0
 
-[sub_resource type="VisualShaderNodeScalarFunc" id=75]
+[sub_resource type="VisualShaderNodeFloatFunc" id=75]
 function = 1
 
 [sub_resource type="VisualShaderNodeCustom" id=54]
 initialized = true
 script = ExtResource( 1 )
 
-[sub_resource type="VisualShaderNodeScalarOp" id=76]
+[sub_resource type="VisualShaderNodeFloatOp" id=76]
 operator = 2
 
-[sub_resource type="VisualShaderNodeScalarOp" id=77]
+[sub_resource type="VisualShaderNodeFloatOp" id=77]
 operator = 2
 
-[sub_resource type="VisualShaderNodeScalarOp" id=78]
+[sub_resource type="VisualShaderNodeFloatOp" id=78]
 operator = 2
 
-[sub_resource type="VisualShaderNodeScalarOp" id=79]
+[sub_resource type="VisualShaderNodeFloatOp" id=79]
 operator = 2
 
-[sub_resource type="VisualShaderNodeScalarOp" id=80]
+[sub_resource type="VisualShaderNodeFloatOp" id=80]
 
-[sub_resource type="VisualShaderNodeScalarOp" id=81]
+[sub_resource type="VisualShaderNodeFloatOp" id=81]
 operator = 1
 
-[sub_resource type="VisualShaderNodeScalarOp" id=82]
+[sub_resource type="VisualShaderNodeFloatOp" id=82]
 default_input_values = [ 0, 0.0, 1, 0.5 ]
 
-[sub_resource type="VisualShaderNodeScalarOp" id=83]
+[sub_resource type="VisualShaderNodeFloatOp" id=83]
 default_input_values = [ 0, 0.0, 1, 0.5 ]
 
 [sub_resource type="VisualShaderNodeVectorCompose" id=84]
 
 [sub_resource type="Gradient" id=85]
 
-[sub_resource type="GradientTexture" id=86]
+[sub_resource type="GradientTexture2D" id=86]
 gradient = SubResource( 85 )
 
 [sub_resource type="VisualShaderNodeTexture" id=87]
@@ -78,29 +78,29 @@ operator = 2
 [sub_resource type="VisualShaderNodeVectorOp" id=119]
 operator = 2
 
-[sub_resource type="VisualShaderNodeScalarUniform" id=120]
+[sub_resource type="VisualShaderNodeFloatParameter" id=120]
 uniform_name = "Energy"
 
-[sub_resource type="VisualShaderNodeScalarOp" id=121]
+[sub_resource type="VisualShaderNodeFloatOp" id=121]
 default_input_values = [ 0, 0.0, 1, 1.0 ]
 operator = 2
 
-[sub_resource type="VisualShaderNodeScalarUniform" id=122]
+[sub_resource type="VisualShaderNodeFloatParameter" id=122]
 uniform_name = "Speed"
 
-[sub_resource type="VisualShaderNodeTextureUniform" id=123]
+[sub_resource type="VisualShaderNodeTexture2DParameter" id=123]
 uniform_name = "Length"
 
-[sub_resource type="VisualShaderNodeTextureUniform" id=124]
+[sub_resource type="VisualShaderNodeTexture2DParameter" id=124]
 uniform_name = "Particle_Amount"
 
-[sub_resource type="VisualShaderNodeScalarConstant" id=56]
+[sub_resource type="VisualShaderNodeFloatConstant" id=56]
 constant = 30.0
 
-[sub_resource type="VisualShaderNodeScalarConstant" id=57]
+[sub_resource type="VisualShaderNodeFloatConstant" id=57]
 constant = 1.0
 
-[sub_resource type="VisualShaderNodeScalarConstant" id=58]
+[sub_resource type="VisualShaderNodeFloatConstant" id=58]
 constant = 1.0
 
 [sub_resource type="VisualShaderNodeVectorOp" id=59]
@@ -108,10 +108,10 @@ default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 3, -0.09, 3 ) ]
 operator = 2
 
 [sub_resource type="Gradient" id=60]
-offsets = PoolRealArray( 0, 0.60199 )
-colors = PoolColorArray( 0.803922, 0.945098, 1, 1, 0, 0, 0, 1 )
+offsets = PackedFloat32Array( 0, 0.60199 )
+colors = PackedColorArray( 0.803922, 0.945098, 1, 1, 0, 0, 0, 1 )
 
-[sub_resource type="GradientTexture" id=61]
+[sub_resource type="GradientTexture2D" id=61]
 gradient = SubResource( 60 )
 
 [sub_resource type="VisualShaderNodeTexture" id=62]
@@ -129,13 +129,13 @@ operator = 3
 [sub_resource type="VisualShaderNodeInput" id=104]
 input_name = "time"
 
-[sub_resource type="VisualShaderNodeScalarUniform" id=115]
+[sub_resource type="VisualShaderNodeFloatParameter" id=115]
 uniform_name = "Intensity"
 
-[sub_resource type="VisualShaderNodeScalarFunc" id=117]
+[sub_resource type="VisualShaderNodeFloatFunc" id=117]
 function = 25
 
-[sub_resource type="VisualShaderNodeScalarOp" id=118]
+[sub_resource type="VisualShaderNodeFloatOp" id=118]
 default_input_values = [ 0, 0.0, 1, 10.0 ]
 operator = 2
 
@@ -152,13 +152,13 @@ texture = SubResource( 107 )
 
 [sub_resource type="VisualShaderNodeVectorDecompose" id=109]
 
-[sub_resource type="VisualShaderNodeScalarOp" id=110]
+[sub_resource type="VisualShaderNodeFloatOp" id=110]
 operator = 2
 
-[sub_resource type="VisualShaderNodeScalarOp" id=111]
+[sub_resource type="VisualShaderNodeFloatOp" id=111]
 operator = 2
 
-[sub_resource type="VisualShaderNodeScalarOp" id=112]
+[sub_resource type="VisualShaderNodeFloatOp" id=112]
 operator = 2
 
 [sub_resource type="VisualShaderNodeVectorCompose" id=113]
@@ -168,7 +168,7 @@ default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 3, 3, 3 ) ]
 
 [resource]
 code = "shader_type spatial;
-render_mode depth_draw_alpha_prepass, cull_disabled, specular_schlick_ggx, async_visible;
+render_mode depth_draw_opaque, cull_disabled, specular_schlick_ggx, async_visible;
 
 uniform sampler2D tex_vtx_3;
 uniform float Intensity;
@@ -258,7 +258,7 @@ void vertex() {
 // VectorOp:11
 	vec3 n_out11p0 = n_out2p0 + vec3(n_out12p0);
 
-// Texture:3
+// Texture2D:3
 	vec4 tex_vtx_3_read = texture(tex_vtx_3, n_out11p0.xy);
 	vec3 n_out3p0 = tex_vtx_3_read.rgb;
 	float n_out3p1 = tex_vtx_3_read.a;
@@ -461,7 +461,7 @@ nodes/vertex/15/node = SubResource( 117 )
 nodes/vertex/15/position = Vector2( -780, 540 )
 nodes/vertex/16/node = SubResource( 118 )
 nodes/vertex/16/position = Vector2( -600, 480 )
-nodes/vertex/connections = PoolIntArray( 2, 0, 4, 0, 4, 0, 5, 0, 4, 1, 6, 0, 4, 2, 7, 0, 5, 0, 8, 0, 8, 0, 0, 0, 6, 0, 8, 1, 7, 0, 8, 2, 9, 0, 10, 0, 3, 0, 9, 0, 10, 0, 5, 1, 10, 0, 6, 1, 10, 0, 7, 1, 2, 0, 11, 0, 11, 0, 3, 0, 12, 0, 11, 1, 13, 0, 15, 0, 15, 0, 16, 0, 16, 0, 9, 1, 16, 0, 10, 1, 2, 0, 4, 0, 4, 0, 5, 0, 4, 1, 6, 0, 4, 2, 7, 0, 5, 0, 8, 0, 8, 0, 0, 0, 6, 0, 8, 1, 7, 0, 8, 2, 9, 0, 10, 0, 3, 0, 9, 0, 10, 0, 5, 1, 10, 0, 6, 1, 10, 0, 7, 1, 2, 0, 11, 0, 11, 0, 3, 0, 12, 0, 11, 1, 13, 0, 15, 0, 15, 0, 16, 0, 16, 0, 9, 1, 16, 0, 10, 1 )
+nodes/vertex/connections = PackedInt32Array( 2, 0, 4, 0, 4, 0, 5, 0, 4, 1, 6, 0, 4, 2, 7, 0, 5, 0, 8, 0, 8, 0, 0, 0, 6, 0, 8, 1, 7, 0, 8, 2, 9, 0, 10, 0, 3, 0, 9, 0, 10, 0, 5, 1, 10, 0, 6, 1, 10, 0, 7, 1, 2, 0, 11, 0, 11, 0, 3, 0, 12, 0, 11, 1, 13, 0, 15, 0, 15, 0, 16, 0, 16, 0, 9, 1, 16, 0, 10, 1, 2, 0, 4, 0, 4, 0, 5, 0, 4, 1, 6, 0, 4, 2, 7, 0, 5, 0, 8, 0, 8, 0, 0, 0, 6, 0, 8, 1, 7, 0, 8, 2, 9, 0, 10, 0, 3, 0, 9, 0, 10, 0, 5, 1, 10, 0, 6, 1, 10, 0, 7, 1, 2, 0, 11, 0, 11, 0, 3, 0, 12, 0, 11, 1, 13, 0, 15, 0, 15, 0, 16, 0, 16, 0, 9, 1, 16, 0, 10, 1 )
 nodes/fragment/0/position = Vector2( 1140, 20 )
 nodes/fragment/2/node = SubResource( 54 )
 nodes/fragment/2/position = Vector2( -220, 220 )
@@ -533,4 +533,4 @@ nodes/fragment/35/node = SubResource( 123 )
 nodes/fragment/35/position = Vector2( 580, 520 )
 nodes/fragment/36/node = SubResource( 124 )
 nodes/fragment/36/position = Vector2( 20, 200 )
-nodes/fragment/connections = PoolIntArray( 4, 0, 2, 1, 5, 0, 2, 2, 6, 0, 2, 3, 7, 0, 2, 0, 2, 0, 8, 0, 3, 0, 9, 0, 9, 0, 7, 0, 10, 0, 9, 1, 13, 0, 15, 1, 12, 0, 15, 0, 14, 0, 16, 0, 15, 0, 17, 0, 16, 0, 19, 0, 16, 0, 18, 0, 17, 0, 20, 0, 17, 0, 23, 0, 17, 1, 21, 0, 17, 1, 22, 0, 19, 0, 20, 1, 19, 0, 22, 1, 18, 0, 21, 1, 18, 0, 23, 1, 20, 0, 24, 0, 21, 0, 24, 1, 22, 0, 25, 0, 23, 0, 25, 1, 24, 0, 26, 0, 25, 0, 27, 0, 26, 0, 28, 0, 27, 0, 28, 1, 28, 0, 29, 0, 8, 0, 30, 0, 29, 0, 30, 1, 30, 0, 0, 1, 32, 0, 31, 1, 8, 0, 31, 0, 31, 0, 0, 5, 11, 0, 33, 0, 33, 0, 10, 1, 34, 0, 33, 1, 4, 0, 2, 1, 5, 0, 2, 2, 6, 0, 2, 3, 7, 0, 2, 0, 3, 0, 9, 0, 9, 0, 7, 0, 10, 0, 9, 1, 13, 0, 15, 1, 12, 0, 15, 0, 14, 0, 16, 0, 15, 0, 17, 0, 16, 0, 19, 0, 16, 0, 18, 0, 17, 0, 20, 0, 17, 0, 23, 0, 17, 1, 21, 0, 17, 1, 22, 0, 19, 0, 20, 1, 19, 0, 22, 1, 18, 0, 21, 1, 18, 0, 23, 1, 20, 0, 24, 0, 21, 0, 24, 1, 22, 0, 25, 0, 23, 0, 25, 1, 24, 0, 26, 0, 25, 0, 27, 0, 26, 0, 28, 0, 27, 0, 28, 1, 30, 0, 0, 1, 32, 0, 31, 1, 31, 0, 0, 5, 11, 0, 33, 0, 33, 0, 10, 1, 34, 0, 33, 1, 28, 0, 35, 0, 35, 0, 30, 1, 2, 0, 36, 0, 36, 0, 31, 0, 36, 0, 30, 0 )
+nodes/fragment/connections = PackedInt32Array( 4, 0, 2, 1, 5, 0, 2, 2, 6, 0, 2, 3, 7, 0, 2, 0, 2, 0, 8, 0, 3, 0, 9, 0, 9, 0, 7, 0, 10, 0, 9, 1, 13, 0, 15, 1, 12, 0, 15, 0, 14, 0, 16, 0, 15, 0, 17, 0, 16, 0, 19, 0, 16, 0, 18, 0, 17, 0, 20, 0, 17, 0, 23, 0, 17, 1, 21, 0, 17, 1, 22, 0, 19, 0, 20, 1, 19, 0, 22, 1, 18, 0, 21, 1, 18, 0, 23, 1, 20, 0, 24, 0, 21, 0, 24, 1, 22, 0, 25, 0, 23, 0, 25, 1, 24, 0, 26, 0, 25, 0, 27, 0, 26, 0, 28, 0, 27, 0, 28, 1, 28, 0, 29, 0, 8, 0, 30, 0, 29, 0, 30, 1, 30, 0, 0, 1, 32, 0, 31, 1, 8, 0, 31, 0, 31, 0, 0, 5, 11, 0, 33, 0, 33, 0, 10, 1, 34, 0, 33, 1, 4, 0, 2, 1, 5, 0, 2, 2, 6, 0, 2, 3, 7, 0, 2, 0, 3, 0, 9, 0, 9, 0, 7, 0, 10, 0, 9, 1, 13, 0, 15, 1, 12, 0, 15, 0, 14, 0, 16, 0, 15, 0, 17, 0, 16, 0, 19, 0, 16, 0, 18, 0, 17, 0, 20, 0, 17, 0, 23, 0, 17, 1, 21, 0, 17, 1, 22, 0, 19, 0, 20, 1, 19, 0, 22, 1, 18, 0, 21, 1, 18, 0, 23, 1, 20, 0, 24, 0, 21, 0, 24, 1, 22, 0, 25, 0, 23, 0, 25, 1, 24, 0, 26, 0, 25, 0, 27, 0, 26, 0, 28, 0, 27, 0, 28, 1, 30, 0, 0, 1, 32, 0, 31, 1, 31, 0, 0, 5, 11, 0, 33, 0, 33, 0, 10, 1, 34, 0, 33, 1, 28, 0, 35, 0, 35, 0, 30, 1, 2, 0, 36, 0, 36, 0, 31, 0, 36, 0, 30, 0 )

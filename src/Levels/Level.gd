@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 signal battle_started
 signal ship_added
@@ -33,12 +33,12 @@ var red_take_over := false
 func _ready():
 	for big_ship in $BigShips.get_children():
 		emit_signal("ship_added", big_ship)
-		big_ship.connect("shields_down", self, "_on_BigShip_shields_down")
-		big_ship.connect("destroyed", self, "_on_BigShip_destroyed")
+		big_ship.connect("shields_down",Callable(self,"_on_BigShip_shields_down"))
+		big_ship.connect("destroyed",Callable(self,"_on_BigShip_destroyed"))
 	
 	if get_node_or_null("%CommandPosts"): # debug espai
 		for cp in $"%CommandPosts".get_children():
-			cp.connect("add_points", self, "_on_cp_add_points")
+			cp.connect("add_points",Callable(self,"_on_cp_add_points"))
 
 	$PilotManagers/PlayerMan.blue_team = PlayerInfo.player_blue_team
 	
@@ -62,12 +62,12 @@ func update_middle_point(delta):
 	var total_num_of_ships : int = 0
 	
 	for ship in get_tree().get_nodes_in_group("Ships"):
-		if ship.pilot_man and ship.translation.y > 700:
+		if ship.pilot_man and ship.position.y > 700:
 			total_num_of_ships += 1
 			if not ship.blue_team:
-				red_point += (ship.translation.x - RED_LIMIT + 2000) # la distància des de la seva nau capital
+				red_point += (ship.position.x - RED_LIMIT + 2000) # la distància des de la seva nau capital
 			else:
-				blue_point += (ship.translation.x - BLUE_LIMIT - 2000) # el 2000 és la penalització dels morts, potser és massa alta
+				blue_point += (ship.position.x - BLUE_LIMIT - 2000) # el 2000 és la penalització dels morts, potser és massa alta
 	
 	if total_num_of_ships != 0:
 		red_point /= total_num_of_ships
@@ -83,9 +83,9 @@ func update_middle_point(delta):
 	
 	var des_middle_point = (red_point + blue_point) / 2
 	middle_point = lerp(middle_point, des_middle_point, 0.3 * delta)
-	$RedPoint.translation.x = red_point
-	$BluePoint.translation.x = blue_point
-	$MiddlePoint.translation.x = clamp(middle_point, RED_LIMIT, BLUE_LIMIT)
+	$RedPoint.position.x = red_point
+	$BluePoint.position.x = blue_point
+	$MiddlePoint.position.x = clamp(middle_point, RED_LIMIT, BLUE_LIMIT)
 	#$Label.text = "MIDDLE_POINT = " + str(int(middle_point), "    ", str(int(des_middle_point)))
 	
 	if middle_point > 1250 and not red_take_over:
@@ -99,20 +99,20 @@ func update_middle_point(delta):
 		red_take_over = false
 
 
-func spawn_player(pos := Vector3(0, 2, 0)) -> Spatial:
-	var new_player = player_scenes[$SpawnHUD.selected_class_ind].instance()
-	new_player.translation = pos
+func spawn_player(pos := Vector3(0, 2, 0)) -> Node3D:
+	var new_player = player_scenes[$SpawnHUD.selected_class_ind].instantiate()
+	new_player.position = pos
 	new_player.pilot_man = $PilotManagers/PlayerMan
 	add_child(new_player)
 	$CameraBase.player_path = new_player.get_path()
-	new_player.connect("entered_ship", $PlayerShipCam, "_on_player_entered_ship")
-	new_player.connect("entered_vehicle", $PlayerVehicleCam, "_on_player_entered_vehicle")
-	new_player.connect("died", self, "_on_player_died")
+	new_player.connect("entered_ship",Callable($PlayerShipCam,"_on_player_entered_ship"))
+	new_player.connect("entered_vehicle",Callable($PlayerVehicleCam,"_on_player_entered_vehicle"))
+	new_player.connect("died",Callable(self,"_on_player_died"))
 	$CameraBase.get_node("%PlayerTroopCam").make_current()
 	return new_player
 
 
-func spawn_ai_troop(ai_num : int, blue_team := false, spawn_in_space := false, pos := Vector3()) -> Spatial:
+func spawn_ai_troop(ai_num : int, blue_team := false, spawn_in_space := false, pos := Vector3()) -> Node3D:
 	var new_troop_man : AIPilotManager = get_node_or_null("PilotManagers/AIManager" + str(ai_num))
 	# crea'n un de nou
 	if not new_troop_man:
@@ -140,18 +140,18 @@ func spawn_ai_troop(ai_num : int, blue_team := false, spawn_in_space := false, p
 	if own_cps:
 		my_cp = own_cps[randi() % own_cps.size()]
 	else:
-		get_tree().create_timer(5).connect("timeout", self, "spawn_ai_troop", [ai_num])
+		get_tree().create_timer(5).connect("timeout",Callable(self,"spawn_ai_troop").bind(ai_num))
 		return null
 	
-	var new_troop = ai_troop_scene.instance()
+	var new_troop = ai_troop_scene.instantiate()
 	
 	new_troop.pilot_man = new_troop_man
 	# ES POT FER MILLOR, COM AMB EL PLAYER
 	if not pos:
-		new_troop.translation = my_cp.global_transform.origin + Vector3(rand_range(-15, 15), 2, rand_range(-15, 15))
+		new_troop.position = my_cp.global_transform.origin + Vector3(randf_range(-15, 15), 2, randf_range(-15, 15))
 	else:
-		new_troop.translation = pos
-	new_troop.connect("died", self, "_on_ai_troop_died", [ai_num])
+		new_troop.position = pos
+	new_troop.connect("died",Callable(self,"_on_ai_troop_died").bind(ai_num))
 	add_child(new_troop)
 	
 	return new_troop
@@ -223,8 +223,8 @@ func _on_ai_troop_died(ai_num : int):
 	t.set_one_shot(true)
 	self.add_child(t)
 	t.start()
-	t.connect("timeout", self, "spawn_ai_troop", [ai_num])
-	t.connect("timeout", t, "queue_free")
+	t.connect("timeout",Callable(self,"spawn_ai_troop").bind(ai_num))
+	t.connect("timeout",Callable(t,"queue_free"))
 	
 	var is_blue : bool = get_node_or_null("PilotManagers/AIManager" + str(ai_num)).blue_team
 	if is_blue:
@@ -242,7 +242,7 @@ func _on_BigShip_shields_down(ship):
 	emit_signal("match_msg", ship.name + " HA PERDUT ELS ESCUTS", msg_blue)
 
 
-func _on_BigShip_destroyed(ship : Spatial):
+func _on_BigShip_destroyed(ship : Node3D):
 	emit_signal("match_msg", ship.name + " HA ESTAT DESTRUÏDA", !ship.blue_team)
 	if ship.is_in_group("CapitalShips"):
 		if ship.blue_team:

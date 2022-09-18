@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/Troops/PlayerHUD.gd" type="Script" id=1]
-[ext_resource path="res://assets/interface/ship_cursor.png" type="Texture" id=2]
+[ext_resource path="res://assets/interface/ship_cursor.png" type="Texture2D" id=2]
 [ext_resource path="res://assets/interface/themes/new_theme.tres" type="Theme" id=3]
 [ext_resource path="res://src/Troops/Player/HUD/EnemyLifeBar.gd" type="Script" id=4]
 [ext_resource path="res://src/Troops/Player/HUD/LifeBar.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/interface/life_bar.png" type="Texture" id=6]
-[ext_resource path="res://assets/interface/grenade.png" type="Texture" id=7]
+[ext_resource path="res://assets/interface/life_bar.png" type="Texture2D" id=6]
+[ext_resource path="res://assets/interface/grenade.png" type="Texture2D" id=7]
 [ext_resource path="res://src/HUD/Points.tscn" type="PackedScene" id=8]
 
 [node name="PlayerHUD" type="CanvasLayer"]
@@ -18,10 +18,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -182.0
-margin_top = -211.0
-margin_right = 182.0
-margin_bottom = -167.0
+offset_left = -182.0
+offset_top = -211.0
+offset_right = 182.0
+offset_bottom = -167.0
 theme = ExtResource( 3 )
 text = "HEU ESTAT MORT PER JAUMA"
 align = 1
@@ -39,16 +39,16 @@ expand = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="InteractionProgress" type="TextureProgress" parent="Alive"]
+[node name="InteractionProgress" type="TextureProgressBar" parent="Alive"]
 unique_name_in_owner = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 40.0
-margin_top = 44.0
-margin_right = 98.0
-margin_bottom = 102.0
+offset_left = 40.0
+offset_top = 44.0
+offset_right = 98.0
+offset_bottom = 102.0
 value = 25.0
 texture_under = ExtResource( 2 )
 texture_progress = ExtResource( 2 )
@@ -62,30 +62,30 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -124.0
-margin_top = -78.0
-margin_right = 124.0
-margin_bottom = -56.0
+offset_left = -124.0
+offset_top = -78.0
+offset_right = 124.0
+offset_bottom = -56.0
 value = 60.0
 nine_patch_stretch = true
 
 [node name="LifeBarEnemy" type="VBoxContainer" parent="Alive"]
-margin_right = 131.0
-margin_bottom = 31.0
+offset_right = 131.0
+offset_bottom = 31.0
 script = ExtResource( 4 )
 
 [node name="LifeBar" parent="Alive/LifeBarEnemy" instance=ExtResource( 5 )]
-margin_right = 131.0
-margin_bottom = 13.0
+offset_right = 131.0
+offset_bottom = 13.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 value = 60.0
 nine_patch_stretch = true
 
 [node name="Nickname" type="Label" parent="Alive/LifeBarEnemy"]
-margin_top = 17.0
-margin_right = 131.0
-margin_bottom = 31.0
+offset_top = 17.0
+offset_right = 131.0
+offset_bottom = 31.0
 text = "JUSEP"
 align = 1
 
@@ -96,10 +96,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -267.0
-margin_top = -124.0
-margin_right = -67.0
-margin_bottom = -52.0
+offset_left = -267.0
+offset_top = -124.0
+offset_right = -67.0
+offset_bottom = -52.0
 theme = ExtResource( 3 )
 alignment = 2
 __meta__ = {
@@ -107,10 +107,10 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="Alive/SpeiclaWeapons"]
-margin_left = 136.0
-margin_right = 200.0
-margin_bottom = 72.0
-rect_min_size = Vector2( 64, 64 )
+offset_left = 136.0
+offset_right = 200.0
+offset_bottom = 72.0
+minimum_size = Vector2( 64, 64 )
 texture = ExtResource( 6 )
 expand = true
 
@@ -120,10 +120,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -16.5
-margin_top = -36.0
-margin_right = 16.5
-margin_bottom = 36.0
+offset_left = -16.5
+offset_top = -36.0
+offset_right = 16.5
+offset_bottom = 36.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 7 )
@@ -136,9 +136,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -15.0
-margin_top = -30.0
-margin_right = -3.0
+offset_left = -15.0
+offset_top = -30.0
+offset_right = -3.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 3
@@ -151,9 +151,9 @@ valign = 1
 modulate = Color( 0.133333, 0.133333, 0.133333, 1 )
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 3.0
-margin_top = -30.0
-margin_right = 15.0
+offset_left = 3.0
+offset_top = -30.0
+offset_right = 15.0
 grow_vertical = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -163,9 +163,9 @@ valign = 1
 
 [node name="Label2" type="Label" parent="Alive/SpeiclaWeapons"]
 visible = false
-margin_left = 68.0
-margin_right = 200.0
-margin_bottom = 72.0
+offset_left = 68.0
+offset_right = 200.0
+offset_bottom = 72.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "---"
@@ -174,9 +174,9 @@ valign = 1
 
 [node name="Label3" type="Label" parent="Alive/SpeiclaWeapons"]
 visible = false
-margin_left = 136.0
-margin_right = 200.0
-margin_bottom = 72.0
+offset_left = 136.0
+offset_right = 200.0
+offset_bottom = 72.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "---"

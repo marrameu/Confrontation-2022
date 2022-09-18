@@ -1,4 +1,4 @@
-extends TextureProgress
+extends TextureProgressBar
 
 
 var cp : CommandPost
@@ -15,28 +15,28 @@ func _process(delta):
 		return
 	
 	if cp.m_team == 0:
-		tint_progress = Color.white
-		$TextureRect.modulate = Color.white
+		tint_progress = Color.WHITE
+		$TextureRect.modulate = Color.WHITE
 	elif cp.m_team == 1:
-		tint_progress = Color.red
-		$TextureRect.modulate = Color.red
+		tint_progress = Color.RED
+		$TextureRect.modulate = Color.RED
 	elif cp.m_team == 2:
-		tint_progress = Color.blue
-		$TextureRect.modulate = Color.blue
+		tint_progress = Color.BLUE
+		$TextureRect.modulate = Color.BLUE
 	
 	var max_valor = 0
 	for valor in cp.team_count:
 		if valor > max_valor:
 			max_valor = valor
 			if valor == cp.team_count[0]:
-				tint_progress = Color.red
+				tint_progress = Color.RED
 				if cp.m_team == 1:
-					$TextureRect.modulate = Color.red
+					$TextureRect.modulate = Color.RED
 				value = valor
 			elif valor == cp.team_count[1]:
-				tint_progress = Color.blue
+				tint_progress = Color.BLUE
 				if cp.m_team == 2:
-					$TextureRect.modulate = Color.blue
+					$TextureRect.modulate = Color.BLUE
 				value = valor
 			else:
 				value = 0

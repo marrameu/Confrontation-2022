@@ -1,13 +1,13 @@
-extends Spatial
+extends Node3D
 
 
 var emitting = true
 #onready var emission = $Fire.emitting
 
-onready var linear_accel = $Fire.get_process_material().linear_accel
-onready var damping = $Fire.get_process_material().damping
-onready var radial_accel = $Fire.get_process_material().radial_accel
-onready var Tangent_accel = $Fire.get_process_material().tangential_accel
+@onready var linear_accel = $Fire.get_process_material().linear_accel
+@onready var damping = $Fire.get_process_material().damping
+@onready var radial_accel = $Fire.get_process_material().radial_accel
+@onready var Tangent_accel = $Fire.get_process_material().tangential_accel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

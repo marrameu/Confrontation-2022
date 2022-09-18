@@ -23,13 +23,13 @@ func _on_NavigationAgent_target_reached():
 			conquering_a_cp = true
 			going_to_cp_to_conquer = false
 			if ($ConquestTimer as Timer).is_stopped(): # aquesta comprovació es podria obviar
-				$ConquestTimer.wait_time = rand_range(7.0, 13.0)
+				$ConquestTimer.wait_time = randf_range(7.0, 13.0)
 				# millor, en lloc de temps, senyal quan s'ha conquerit
 				$ConquestTimer.start() # SI MOR CONQUERINT, REPAEREIX CONQUERINT? AL DISABLE CCOMPONENTS S'HAURIA DE RESTABLIR TMB
 
 
 func search_cp_and_conquer(): # àlies terra
-	# Update Path: Command Posts
+	# Update Path3D: Command Posts
 	# Cercar els CP enemics
 	var enemy_command_posts := []
 	for command_post in get_tree().current_scene.get_node("%CommandPosts").get_children(): # get_tree().get_nodes_in_group("CommandPosts"): així no pq tmb busca els de les cs
@@ -46,16 +46,16 @@ func search_cp_and_conquer(): # àlies terra
 		# NEAREST CP
 		nearest_command_post = enemy_command_posts[0]
 		for command_post in enemy_command_posts:
-			var nearest_distance =  nearest_command_post.global_transform.origin.distance_to(translation)
-			if command_post.global_transform.origin.distance_to(translation) <= nearest_distance:
+			var nearest_distance =  nearest_command_post.global_transform.origin.distance_to(position)
+			if command_post.global_transform.origin.distance_to(position) <= nearest_distance:
 				nearest_command_post = command_post
 		"""
 		
 		# RANDOM CP
 		nearest_command_post = enemy_command_posts[randi()%enemy_command_posts.size()]
 		
-		var begin : Vector3 = owner.get_node("PathMaker").navigation_node.get_closest_point(owner.get_translation())
-		var end := Vector3(rand_range(nearest_command_post.translation.x - 7, nearest_command_post.translation.x - 7), nearest_command_post.translation.y, rand_range(nearest_command_post.translation.z - 5, nearest_command_post.translation.z + 5))
+		var begin : Vector3 = owner.get_node("PathMaker").navigation_node.get_closest_point(owner.get_position())
+		var end := Vector3(randf_range(nearest_command_post.position.x - 7, nearest_command_post.position.x - 7), nearest_command_post.position.y, randf_range(nearest_command_post.position.z - 5, nearest_command_post.position.z + 5))
 		owner.agent.set_target_location(end)
 		print(owner, " ha update path?")
 		
@@ -65,8 +65,8 @@ func search_cp_and_conquer(): # àlies terra
 	# Si no hi han CP enemics
 	else:
 		idle = true
-		var begin : Vector3 = owner.get_node("PathMaker").navigation_node.get_closest_point(owner.get_translation())
-		var end := Vector3(rand_range(-200, 200), 0, rand_range(-200, 200))
+		var begin : Vector3 = owner.get_node("PathMaker").navigation_node.get_closest_point(owner.get_position())
+		var end := Vector3(randf_range(-200, 200), 0, randf_range(-200, 200))
 		owner.get_node("PathMaker").update_path(begin, end)
 
 
@@ -78,9 +78,9 @@ func _on_ConquestTimer_timeout():
 func _on_CheckCurrentEnemyTimer_timeout() -> void:
 	if not get_parent().current_state == self:
 		return
-	._on_CheckCurrentEnemyTimer_timeout()
+	super._on_CheckCurrentEnemyTimer_timeout()
 	if owner.current_enemy: # ha de calcular dues veagdes la distància, tot plegat es podria fer millor
-		if owner.translation.distance_to(owner.current_enemy.translation) < 150:
+		if owner.position.distance_to(owner.current_enemy.position) < 150:
 			emit_signal("finished", "attack_enemy")
 
 

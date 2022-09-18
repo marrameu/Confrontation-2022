@@ -83,18 +83,18 @@ input_name = "vertex"
 size = Vector2( 950, 371 )
 expression = "Fac = waveTexture(Vector, Scale, int(Type), Distortion, Phase, int(Profile));"
 
-[sub_resource type="VisualShaderNodeScalarConstant" id=6]
+[sub_resource type="VisualShaderNodeFloatConstant" id=6]
 constant = 1.0
 
-[sub_resource type="VisualShaderNodeScalarConstant" id=7]
+[sub_resource type="VisualShaderNodeFloatConstant" id=7]
 
-[sub_resource type="VisualShaderNodeScalarConstant" id=8]
+[sub_resource type="VisualShaderNodeFloatConstant" id=8]
 constant = 8.3
 
-[sub_resource type="VisualShaderNodeScalarConstant" id=9]
+[sub_resource type="VisualShaderNodeFloatConstant" id=9]
 constant = 1.0
 
-[sub_resource type="VisualShaderNodeScalarConstant" id=10]
+[sub_resource type="VisualShaderNodeFloatConstant" id=10]
 
 [resource]
 code = "shader_type spatial;
@@ -179,7 +179,7 @@ void vertex() {
 
 void fragment() {
 // Input:12
-	mat4 n_out12p0 = CAMERA_MATRIX;
+	mat4 n_out12p0 = INV_VIEW_MATRIX;
 
 // Input:13
 	vec3 n_out13p0 = VERTEX;
@@ -316,4 +316,4 @@ nodes/fragment/16/output_ports = "0,0,Fac;"
 nodes/fragment/16/expression = "Fac = waveTexture(Vector, Scale, int(Type), Distortion, Phase, int(Profile));"
 nodes/fragment/17/node = SubResource( 6 )
 nodes/fragment/17/position = Vector2( -1420, 640 )
-nodes/fragment/connections = PoolIntArray( 12, 0, 11, 0, 13, 0, 11, 1, 9, 0, 16, 5, 8, 0, 16, 4, 7, 0, 16, 3, 6, 0, 16, 2, 11, 0, 16, 0, 17, 0, 16, 1, 16, 0, 0, 0 )
+nodes/fragment/connections = PackedInt32Array( 12, 0, 11, 0, 13, 0, 11, 1, 9, 0, 16, 5, 8, 0, 16, 4, 7, 0, 16, 3, 6, 0, 16, 2, 11, 0, 16, 0, 17, 0, 16, 1, 16, 0, 0, 0 )

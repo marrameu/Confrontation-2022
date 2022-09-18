@@ -12,7 +12,7 @@
 [ext_resource path="res://assets/audio/gustav_holst_mercury.ogg" type="AudioStream" id=10]
 [ext_resource path="res://DestructionBattle.gd" type="Script" id=11]
 [ext_resource path="res://assets/interface/themes/new_theme.tres" type="Theme" id=12]
-[ext_resource path="res://assets/interface/Fonts/Manrope/Manrope-VariableFont_wght.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://assets/interface/Fonts/Manrope/Manrope-VariableFont_wght.ttf" type="FontFile" id=13]
 [ext_resource path="res://MatchUI.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/HUDMap/Map.tscn" type="PackedScene" id=15]
 [ext_resource path="res://SpawnHUD.tscn" type="PackedScene" id=16]
@@ -22,133 +22,133 @@
 [ext_resource path="res://AttackShip.tscn" type="PackedScene" id=20]
 [ext_resource path="res://WaitingCam.gd" type="Script" id=21]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="FontFile" id=4]
 size = 64
 font_data = ExtResource( 13 )
 
-[sub_resource type="CubeMesh" id=6]
+[sub_resource type="BoxMesh" id=6]
 
-[sub_resource type="SpatialMaterial" id=7]
+[sub_resource type="StandardMaterial3D" id=7]
 albedo_color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="SpatialMaterial" id=8]
+[sub_resource type="StandardMaterial3D" id=8]
 albedo_color = Color( 0, 0.0745098, 1, 1 )
 
-[sub_resource type="SpatialMaterial" id=9]
+[sub_resource type="StandardMaterial3D" id=9]
 albedo_color = Color( 1, 0.0745098, 1, 1 )
 
-[node name="Level" type="Spatial"]
+[node name="Level" type="Node3D"]
 script = ExtResource( 11 )
 
-[node name="BigShips" type="Spatial" parent="."]
+[node name="BigShips" type="Node3D" parent="."]
 
 [node name="CapitalShipRed" parent="BigShips" instance=ExtResource( 4 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3000, 0, 0 )
+transform = Transform3D( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3000, 0, 0 )
 
 [node name="CapitalShipBlue" parent="BigShips" instance=ExtResource( 4 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2996, 0, 0 )
+transform = Transform3D( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2996, 0, 0 )
 blue_team = true
 
 [node name="SuportShip" parent="BigShips" instance=ExtResource( 1 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2000, 0, 715.452 )
+transform = Transform3D( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2000, 0, 715.452 )
 
 [node name="SuportShip2" parent="BigShips" instance=ExtResource( 1 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2000, 0, -790.848 )
+transform = Transform3D( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2000, 0, -790.848 )
 
 [node name="AttackShip2" parent="BigShips" instance=ExtResource( 20 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2696.04, 431.208, -726.323 )
+transform = Transform3D( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2696.04, 431.208, -726.323 )
 
 [node name="SuportShip3" parent="BigShips" instance=ExtResource( 1 )]
-transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 2000, 0, -643.399 )
+transform = Transform3D( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 2000, 0, -643.399 )
 blue_team = true
 
 [node name="SuportShip4" parent="BigShips" instance=ExtResource( 1 )]
-transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 2000, 0, 787.622 )
+transform = Transform3D( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 2000, 0, 787.622 )
 blue_team = true
 
 [node name="AttackShip3" parent="BigShips" instance=ExtResource( 20 )]
-transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 2748.31, -300.505, -963.107 )
+transform = Transform3D( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 2748.31, -300.505, -963.107 )
 blue_team = true
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 far = 7000.0
 script = ExtResource( 2 )
 
-[node name="motion_blur" parent="Camera" instance=ExtResource( 19 )]
+[node name="motion_blur" parent="Camera3D" instance=ExtResource( 19 )]
 
-[node name="Environment" type="Spatial" parent="."]
+[node name="Environment" type="Node3D" parent="."]
 
-[node name="Asteroids" type="Spatial" parent="Environment"]
+[node name="Asteroids" type="Node3D" parent="Environment"]
 
 [node name="Asteroide" parent="Environment/Asteroids" instance=ExtResource( 3 )]
-transform = Transform( 0.488834, 0, 0.872377, 0.0738027, 0.996415, -0.0413552, -0.869249, 0.0845996, 0.487082, -1947.09, -64.5744, 0 )
+transform = Transform3D( 0.488834, 0, 0.872377, 0.0738027, 0.996415, -0.0413552, -0.869249, 0.0845996, 0.487082, -1947.09, -64.5744, 0 )
 
 [node name="Asteroide2" parent="Environment/Asteroids" instance=ExtResource( 3 )]
-transform = Transform( -0.161337, 0.664988, 0.72922, 0.748138, 0.564302, -0.349074, -0.64363, 0.489239, -0.588546, -2030.66, 0.462402, 103.677 )
+transform = Transform3D( -0.161337, 0.664988, 0.72922, 0.748138, 0.564302, -0.349074, -0.64363, 0.489239, -0.588546, -2030.66, 0.462402, 103.677 )
 
 [node name="Asteroide3" parent="Environment/Asteroids" instance=ExtResource( 3 )]
-transform = Transform( -0.161337, 0.664988, 0.72922, 0.748138, 0.564302, -0.349074, -0.64363, 0.489239, -0.588546, -2030.66, 128.879, -250.502 )
+transform = Transform3D( -0.161337, 0.664988, 0.72922, 0.748138, 0.564302, -0.349074, -0.64363, 0.489239, -0.588546, -2030.66, 128.879, -250.502 )
 
 [node name="Asteroide4" parent="Environment/Asteroids" instance=ExtResource( 3 )]
-transform = Transform( 0.340301, -0.546066, 0.765512, 0.371643, 0.825923, 0.423949, -0.863757, 0.140227, 0.484004, 1134.3, -432.988, -5.52795 )
+transform = Transform3D( 0.340301, -0.546066, 0.765512, 0.371643, 0.825923, 0.423949, -0.863757, 0.140227, 0.484004, 1134.3, -432.988, -5.52795 )
 
 [node name="Asteroide5" parent="Environment/Asteroids" instance=ExtResource( 3 )]
-transform = Transform( -0.566409, 0.259076, 0.782343, 0.564158, 0.813896, 0.13892, -0.600755, 0.520051, -0.607158, 1031.98, -429.751, 101.626 )
+transform = Transform3D( -0.566409, 0.259076, 0.782343, 0.564158, 0.813896, 0.13892, -0.600755, 0.520051, -0.607158, 1031.98, -429.751, 101.626 )
 
 [node name="Asteroide6" parent="Environment/Asteroids" instance=ExtResource( 3 )]
-transform = Transform( -1.69923, 0.777228, 2.34703, 1.69247, 2.44169, 0.416761, -1.80226, 1.56015, -1.82147, 950.332, -306.265, -244.812 )
+transform = Transform3D( -1.69923, 0.777228, 2.34703, 1.69247, 2.44169, 0.416761, -1.80226, 1.56015, -1.82147, 950.332, -306.265, -244.812 )
 
 [node name="Asteroide7" parent="Environment/Asteroids" instance=ExtResource( 3 )]
-transform = Transform( 1.0209, -1.6382, 2.29653, 1.11493, 2.47777, 1.27185, -2.59127, 0.420682, 1.45201, 296.23, 215.6, -851.632 )
+transform = Transform3D( 1.0209, -1.6382, 2.29653, 1.11493, 2.47777, 1.27185, -2.59127, 0.420682, 1.45201, 296.23, 215.6, -851.632 )
 
 [node name="Asteroide8" parent="Environment/Asteroids" instance=ExtResource( 3 )]
-transform = Transform( -0.801373, -0.974383, 2.72183, 0.99387, 2.55946, 1.20887, -2.71478, 1.22464, -0.360891, -1345.67, 121.499, -712.09 )
+transform = Transform3D( -0.801373, -0.974383, 2.72183, 0.99387, 2.55946, 1.20887, -2.71478, 1.22464, -0.360891, -1345.67, 121.499, -712.09 )
 
 [node name="Asteroide9" parent="Environment/Asteroids" instance=ExtResource( 3 )]
-transform = Transform( -0.801373, -0.974383, 2.72183, 0.99387, 2.55946, 1.20887, -2.71478, 1.22464, -0.360891, -1251.03, 208.773, -1066.15 )
+transform = Transform3D( -0.801373, -0.974383, 2.72183, 0.99387, 2.55946, 1.20887, -2.71478, 1.22464, -0.360891, -1251.03, 208.773, -1066.15 )
 
 [node name="Asteroide10" parent="Environment/Asteroids" instance=ExtResource( 3 )]
-transform = Transform( 0.0874492, -1.67745, 2.48566, 0.93886, 2.37701, 1.5711, -2.84796, 0.732098, 0.594255, 8.63742, -157.085, 742.443 )
+transform = Transform3D( 0.0874492, -1.67745, 2.48566, 0.93886, 2.37701, 1.5711, -2.84796, 0.732098, 0.594255, 8.63742, -157.085, 742.443 )
 
 [node name="Asteroide11" parent="Environment/Asteroids" instance=ExtResource( 3 )]
-transform = Transform( -2.65359, 1.39932, -0.0196697, 1.38331, 2.62911, 0.417426, 0.211942, 0.360156, -2.97075, -283.319, -130.569, 757.127 )
+transform = Transform3D( -2.65359, 1.39932, -0.0196697, 1.38331, 2.62911, 0.417426, 0.211942, 0.360156, -2.97075, -283.319, -130.569, 757.127 )
 
 [node name="Asteroide12" parent="Environment/Asteroids" instance=ExtResource( 3 )]
-transform = Transform( -0.884529, 0.466439, -0.00655684, 0.461104, 0.876369, 0.139142, 0.0706472, 0.120052, -0.990251, -647.281, 57.1254, 371.157 )
+transform = Transform3D( -0.884529, 0.466439, -0.00655684, 0.461104, 0.876369, 0.139142, 0.0706472, 0.120052, -0.990251, -647.281, 57.1254, 371.157 )
 
 [node name="Asteroide13" parent="Environment/Asteroids" instance=ExtResource( 3 )]
-transform = Transform( -4.11319, 2.84236, 0.0511441, 2.82079, 4.06948, 0.694602, 0.353236, 0.60026, -4.95125, -532.109, -324.668, -127.898 )
+transform = Transform3D( -4.11319, 2.84236, 0.0511441, 2.82079, 4.06948, 0.694602, 0.353236, 0.60026, -4.95125, -532.109, -324.668, -127.898 )
 
 [node name="Asteroide14" parent="Environment/Asteroids" instance=ExtResource( 3 )]
-transform = Transform( -2.04727, 0.185975, 2.18497, -0.329797, 2.92908, -0.558322, -2.16793, -0.621211, -1.97843, 260.231, 81.1223, 450.892 )
+transform = Transform3D( -2.04727, 0.185975, 2.18497, -0.329797, 2.92908, -0.558322, -2.16793, -0.621211, -1.97843, 260.231, 81.1223, 450.892 )
 
 [node name="Asteroide15" parent="Environment/Asteroids" instance=ExtResource( 3 )]
-transform = Transform( -2.04727, 0.185975, 2.18497, 1.24921, 2.55565, 0.952958, -1.80226, 1.56015, -1.82147, -509.83, 982.862, -559.227 )
+transform = Transform3D( -2.04727, 0.185975, 2.18497, 1.24921, 2.55565, 0.952958, -1.80226, 1.56015, -1.82147, -509.83, 982.862, -559.227 )
 
 [node name="Asteroide16" parent="Environment/Asteroids" instance=ExtResource( 3 )]
-transform = Transform( -1.39638, -0.688038, 2.56451, 1.11493, 2.47777, 1.27185, -2.40978, 1.54508, -0.897596, 1486.99, 372.367, 235.518 )
+transform = Transform3D( -1.39638, -0.688038, 2.56451, 1.11493, 2.47777, 1.27185, -2.40978, 1.54508, -0.897596, 1486.99, 372.367, 235.518 )
 
 [node name="Asteroide17" parent="Environment/Asteroids" instance=ExtResource( 3 )]
-transform = Transform( -2.46792, 1.70542, 0.0306865, 1.69247, 2.44169, 0.416761, 0.211942, 0.360156, -2.97075, 805.191, 481.693, 757.127 )
+transform = Transform3D( -2.46792, 1.70542, 0.0306865, 1.69247, 2.44169, 0.416761, 0.211942, 0.360156, -2.97075, 805.191, 481.693, 757.127 )
 
 [node name="Asteroide18" parent="Environment/Asteroids" instance=ExtResource( 3 )]
-transform = Transform( -0.822639, 0.568473, 0.0102285, 0.564158, 0.813896, 0.13892, 0.0706472, 0.120052, -0.990251, 466.45, 711.807, 371.157 )
+transform = Transform3D( -0.822639, 0.568473, 0.0102285, 0.564158, 0.813896, 0.13892, 0.0706472, 0.120052, -0.990251, 466.45, 711.807, 371.157 )
 
 [node name="Asteroide19" parent="Environment/Asteroids" instance=ExtResource( 3 )]
-transform = Transform( -4.11319, 2.84236, 0.0511441, 2.82079, 4.06948, 0.694602, 0.353236, 0.60026, -4.95125, 577.669, 327.103, -127.898 )
+transform = Transform3D( -4.11319, 2.84236, 0.0511441, 2.82079, 4.06948, 0.694602, 0.353236, 0.60026, -4.95125, 577.669, 327.103, -127.898 )
 
 [node name="PauseMenu" parent="." instance=ExtResource( 5 )]
 layer = 9
 
-[node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 0.70866, 0.457789, 0.53687, -0.635008, 0.0821853, 0.768122, 0.307515, -0.885254, 0.348941, 0, 57.0278, 0 )
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D( 0.70866, 0.457789, 0.53687, -0.635008, 0.0821853, 0.768122, 0.307515, -0.885254, 0.348941, 0, 57.0278, 0 )
 light_energy = 2.0
 shadow_enabled = true
 directional_shadow_max_distance = 200.0
 
-[node name="DirectionalLight2" type="DirectionalLight" parent="."]
-transform = Transform( 0.279008, -0.793125, -0.541394, -0.464626, 0.381903, -0.79892, 0.840403, 0.47445, -0.261952, 0, 61.3448, 0 )
+[node name="DirectionalLight2" type="DirectionalLight3D" parent="."]
+transform = Transform3D( 0.279008, -0.793125, -0.541394, -0.464626, 0.381903, -0.79892, 0.840403, 0.47445, -0.261952, 0, 61.3448, 0 )
 light_energy = 0.4
 shadow_enabled = true
 
@@ -184,10 +184,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -253.0
-margin_top = -325.0
-margin_right = 253.0
-margin_bottom = -152.0
+offset_left = -253.0
+offset_top = -325.0
+offset_right = 253.0
+offset_bottom = -152.0
 custom_fonts/font = SubResource( 4 )
 text = "VICTORY"
 align = 1
@@ -200,10 +200,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -253.0
-margin_top = -325.0
-margin_right = 253.0
-margin_bottom = -152.0
+offset_left = -253.0
+offset_top = -325.0
+offset_right = 253.0
+offset_bottom = -152.0
 custom_fonts/font = SubResource( 4 )
 text = "DEFEAT"
 align = 1
@@ -220,8 +220,8 @@ red_support_ship2 = NodePath("../BigShips/SuportShip2")
 layer = 3
 battle_state_path = NodePath("..")
 
-[node name="WaitingCam" type="Camera" parent="."]
-transform = Transform( 0.967628, -0.173311, 0.183468, 0.0746351, 0.890927, 0.447971, -0.241094, -0.419776, 0.875021, 1060.39, 1512.45, 2512.19 )
+[node name="WaitingCam" type="Camera3D" parent="."]
+transform = Transform3D( 0.967628, -0.173311, 0.183468, 0.0746351, 0.890927, 0.447971, -0.241094, -0.419776, 0.875021, 1060.39, 1512.45, 2512.19 )
 cull_mask = 1048571
 current = true
 far = 6000.0
@@ -235,38 +235,38 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -44.0
-margin_top = -24.0
-margin_bottom = 24.0
+offset_left = -44.0
+offset_top = -24.0
+offset_bottom = 24.0
 grow_horizontal = 0
 grow_vertical = 2
 text = "asddsa
 asddas
 "
 
-[node name="Ships" type="Spatial" parent="."]
+[node name="Ships" type="Node3D" parent="."]
 
 [node name="PilotManagers" type="Node" parent="."]
 
 [node name="PlayerManager" type="Node" parent="PilotManagers"]
 script = ExtResource( 18 )
 
-[node name="RedPoint" type="MeshInstance" parent="."]
-transform = Transform( 7.13262, 0, 0, 0, 0.3, 0, 0, 0, 3000, -21.9825, 0.0344696, 0.0334425 )
+[node name="RedPoint" type="MeshInstance3D" parent="."]
+transform = Transform3D( 7.13262, 0, 0, 0, 0.3, 0, 0, 0, 3000, -21.9825, 0.0344696, 0.0334425 )
 visible = false
 mesh = SubResource( 6 )
 skeleton = NodePath("")
 material/0 = SubResource( 7 )
 
-[node name="BluePoint" type="MeshInstance" parent="."]
-transform = Transform( 5.19245, 0, 0, 0, 0.3, 0, 0, 0, 3000, 2.29866, 0, 0 )
+[node name="BluePoint" type="MeshInstance3D" parent="."]
+transform = Transform3D( 5.19245, 0, 0, 0, 0.3, 0, 0, 0, 3000, 2.29866, 0, 0 )
 visible = false
 mesh = SubResource( 6 )
 skeleton = NodePath("")
 material/0 = SubResource( 8 )
 
-[node name="MiddlePoint" type="MeshInstance" parent="."]
-transform = Transform( 5.19245, 0, 0, 0, 0.3, 0, 0, 0, 3000, 46.9043, 0, 0 )
+[node name="MiddlePoint" type="MeshInstance3D" parent="."]
+transform = Transform3D( 5.19245, 0, 0, 0, 0.3, 0, 0, 0, 3000, 46.9043, 0, 0 )
 mesh = SubResource( 6 )
 skeleton = NodePath("")
 material/0 = SubResource( 9 )
@@ -274,8 +274,8 @@ material/0 = SubResource( 9 )
 [node name="Label" type="Label" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -114.0
-margin_bottom = 14.0
+offset_left = -114.0
+offset_bottom = 14.0
 grow_horizontal = 0
 text = "MIDDLE_POINT = "
 

@@ -24,4 +24,4 @@ func _change_state(state_name):
 		states_map[state_name].initialize(current_state.velocity)
 	if state_name == "jump" and current_state is MoveState:
 		$Jump.MAX_SPEED = current_state.MAX_SPEED
-	._change_state(state_name)
+	super._change_state(state_name)

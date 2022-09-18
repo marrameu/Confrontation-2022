@@ -1,13 +1,13 @@
-extends KinematicBody
+extends CharacterBody3D
 
 signal destroyed
 signal shields_down
 signal shields_recovered
 
-export var red_mat : Material
-export var blue_mat : Material
+@export var red_mat : Material
+@export var blue_mat : Material
 
-export var blue_team : bool = 0
+@export var blue_team : bool = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

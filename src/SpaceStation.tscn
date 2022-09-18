@@ -9,7 +9,7 @@
 script = ExtResource( 3 )
 
 [node name="SketchUp001" parent="." index="0"]
-transform = Transform( 0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.16, -1483, 0, 1274.24 )
+transform = Transform3D( 0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.16, -1483, 0, 1274.24 )
 
 [node name="skp_camera_Last_Saved_SketchUp_View001" parent="SketchUp001" index="0"]
 visible = false
@@ -299,7 +299,7 @@ material_override = ExtResource( 4 )
 [node name="instance_6017" parent="SketchUp001" index="95"]
 material_override = ExtResource( 4 )
 
-[node name="Turrets" type="Spatial" parent="." index="2"]
+[node name="Turrets" type="Node3D" parent="." index="2"]
 
 [node name="Turret" parent="Turrets" index="0" instance=ExtResource( 1 )]
-transform = Transform( 0.792779, -2.66425e-08, -0.609509, -0.609509, -3.46535e-08, -0.792779, 0, 1, -4.37114e-08, -792.622, 440.639, 555.21 )
+transform = Transform3D( 0.792779, -2.66425e-08, -0.609509, -0.609509, -3.46535e-08, -0.792779, 0, 1, -4.37114e-08, -792.622, 440.639, 555.21 )

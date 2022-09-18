@@ -3,7 +3,7 @@
 [ext_resource path="res://ManualTurret.gd" type="Script" id=1]
 [ext_resource path="res://src/Vehicles/Input.gd" type="Script" id=2]
 [ext_resource path="res://src/Vehicles/Physics.gd" type="Script" id=3]
-[ext_resource path="res://assets/interface/point.png" type="Texture" id=4]
+[ext_resource path="res://assets/interface/point.png" type="Texture2D" id=4]
 [ext_resource path="res://src/Vehicles/PlayerHUD.gd" type="Script" id=5]
 [ext_resource path="res://ShipInteraction.gd" type="Script" id=6]
 [ext_resource path="res://src/Vehicles/GroundVehicleShooting.gd" type="Script" id=7]
@@ -12,8 +12,8 @@
 [ext_resource path="res://assets/audio/no_ammo.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/audio/turret_overamplified.wav" type="AudioStream" id=11]
 [ext_resource path="res://src/HUD/HitMarkerParts.tscn" type="PackedScene" id=12]
-[ext_resource path="res://assets/interface/crosshair_ammo.png" type="Texture" id=13]
-[ext_resource path="res://assets/interface/crosshair_part.png" type="Texture" id=14]
+[ext_resource path="res://assets/interface/crosshair_ammo.png" type="Texture2D" id=13]
+[ext_resource path="res://assets/interface/crosshair_part.png" type="Texture2D" id=14]
 
 [sub_resource type="CylinderMesh" id=1]
 
@@ -21,26 +21,26 @@
 resource_name = "Idle"
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_size")
+tracks/0/path = NodePath(".:size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ Vector2( 70, 40 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath(".:rect_position")
+tracks/1/path = NodePath(".:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ Vector2( 25, 40 ) ]
 }
@@ -50,41 +50,41 @@ resource_name = "Shoot"
 length = 0.1
 step = 0.01
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_size")
+tracks/0/path = NodePath(".:size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.05, 0.1 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 70, 40 ), Vector2( 58, 40 ), Vector2( 70, 40 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath(".:rect_position")
+tracks/1/path = NodePath(".:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.05, 0.1 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 25, 40 ), Vector2( 31, 40 ), Vector2( 25, 40 ) ]
 }
 
-[sub_resource type="CubeMesh" id=2]
+[sub_resource type="BoxMesh" id=2]
 size = Vector3( 0.5, 0.5, 2 )
 
-[sub_resource type="BoxShape" id=3]
+[sub_resource type="BoxShape3D" id=3]
 extents = Vector3( 2.72284, 2.81553, 2.2909 )
 
-[node name="ManualTurret" type="StaticBody" groups=["Vehicle"]]
+[node name="ManualTurret" type="StaticBody3D" groups=["Vehicle"]]
 script = ExtResource( 1 )
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
 mesh = SubResource( 1 )
 
 [node name="Physics" type="Node" parent="."]
@@ -93,7 +93,7 @@ script = ExtResource( 3 )
 [node name="Input" type="Node" parent="."]
 script = ExtResource( 2 )
 
-[node name="Shooting" type="Spatial" parent="."]
+[node name="Shooting" type="Node3D" parent="."]
 script = ExtResource( 7 )
 
 [node name="Audio1" type="AudioStreamPlayer3D" parent="Shooting"]
@@ -129,7 +129,7 @@ stream = ExtResource( 8 )
 volume_db = 15.0
 bus = "Sounds"
 
-[node name="RayCast" type="RayCast" parent="Shooting"]
+[node name="RayCast3D" type="RayCast3D" parent="Shooting"]
 enabled = true
 cast_to = Vector3( 0, 0, 1500 )
 debug_shape_custom_color = Color( 1, 0, 0, 1 )
@@ -144,10 +144,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 20.0
-margin_bottom = 20.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 texture = ExtResource( 4 )
 expand = true
 
@@ -158,11 +158,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -60.0
-margin_top = -60.0
-margin_right = 60.0
-margin_bottom = 60.0
-rect_pivot_offset = Vector2( 27, 27 )
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = 60.0
+pivot_offset = Vector2( 27, 27 )
 
 [node name="Ammos" type="TextureRect" parent="PlayerHUD/Crosshair"]
 visible = false
@@ -171,11 +171,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -60.0
-margin_top = -60.0
-margin_right = 60.0
-margin_bottom = 60.0
-rect_pivot_offset = Vector2( 27, 27 )
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = 60.0
+pivot_offset = Vector2( 27, 27 )
 texture = ExtResource( 13 )
 expand = true
 
@@ -184,17 +184,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -35.0
-margin_top = -20.0
-margin_right = 35.0
-margin_bottom = 20.0
+offset_left = -35.0
+offset_top = -20.0
+offset_right = 35.0
+offset_bottom = 20.0
 
 [node name="TextureRect" type="TextureRect" parent="PlayerHUD/Crosshair/Parts"]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_top = -12.0
-margin_right = 24.0
-margin_bottom = 12.0
+offset_top = -12.0
+offset_right = 24.0
+offset_bottom = 12.0
 texture = ExtResource( 14 )
 
 [node name="TextureRect2" type="TextureRect" parent="PlayerHUD/Crosshair/Parts"]
@@ -202,9 +202,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -24.0
-margin_top = -12.0
-margin_bottom = 12.0
+offset_left = -24.0
+offset_top = -12.0
+offset_bottom = 12.0
 texture = ExtResource( 14 )
 flip_h = true
 
@@ -214,28 +214,28 @@ anims/Shoot = SubResource( 5 )
 
 [node name="HitMarkerParts" parent="PlayerHUD/Crosshair" instance=ExtResource( 12 )]
 
-[node name="Pivot" type="Spatial" parent="."]
+[node name="Pivot" type="Node3D" parent="."]
 
-[node name="MeshInstance2" type="MeshInstance" parent="Pivot"]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 1.60687 )
+[node name="MeshInstance2" type="MeshInstance3D" parent="Pivot"]
+transform = Transform3D( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 1.60687 )
 mesh = SubResource( 2 )
 skeleton = NodePath("../..")
 
-[node name="CameraPosition" type="Position3D" parent="Pivot"]
+[node name="CameraPosition" type="Marker3D" parent="Pivot"]
 unique_name_in_owner = true
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 5.1167, -7.56692 )
+transform = Transform3D( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 5.1167, -7.56692 )
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="InteractArea" type="Area" parent="."]
+[node name="InteractArea" type="Area3D" parent="."]
 collision_layer = 32768
 collision_mask = 0
 monitoring = false
 script = ExtResource( 6 )
 
-[node name="CollisionShape2" type="CollisionShape" parent="InteractArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.533578 )
+[node name="CollisionShape2" type="CollisionShape3D" parent="InteractArea"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.533578 )
 shape = SubResource( 3 )
 
 [node name="ExitTimer" type="Timer" parent="."]

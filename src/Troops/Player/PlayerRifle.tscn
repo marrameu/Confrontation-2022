@@ -8,14 +8,14 @@
 
 [node name="PlayerRifle" instance=ExtResource( 1 )]
 
-[node name="Skeleton" parent="Model" index="0"]
+[node name="Skeleton3D" parent="Model" index="0"]
 bones/36/bound_children = [  ]
 
-[node name="BoneAttachment" parent="Model/Skeleton" index="2"]
-transform = Transform( -0.0499011, -0.984934, -0.16557, -0.313792, -0.14192, 0.938825, -0.948179, 0.098804, -0.301983, -0.209683, 1.1097, 0.194679 )
+[node name="BoneAttachment3D" parent="Model/Skeleton3D" index="2"]
+transform = Transform3D( -0.0499011, -0.984934, -0.16557, -0.313792, -0.14192, 0.938825, -0.948179, 0.098804, -0.301983, -0.209683, 1.1097, 0.194679 )
 
-[node name="Riffle" parent="Model/Skeleton/BoneAttachment/Weapons" index="0" instance=ExtResource( 2 )]
-transform = Transform( 1, -9.31323e-10, 0, -1.86265e-09, 1, 0, 0, 0, 1, 0, 0, 0 )
+[node name="Riffle" parent="Model/Skeleton3D/BoneAttachment3D/Weapons" index="0" instance=ExtResource( 2 )]
+transform = Transform3D( 1, -9.31323e-10, 0, -1.86265e-09, 1, 0, 0, 0, 1, 0, 0, 0 )
 bullet_scene = ExtResource( 3 )
 
 [node name="AnimationTree" parent="." index="9"]

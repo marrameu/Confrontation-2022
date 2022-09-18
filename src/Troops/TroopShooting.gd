@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 var current_weapon_ind : int = 0
 

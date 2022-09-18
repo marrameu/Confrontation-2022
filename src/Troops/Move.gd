@@ -7,14 +7,14 @@ var velocity := Vector3()
 # Walk
 # var can_run := true
 var gravity := -9.8 * 4
-export var MAX_SPEED : float = 5.0
+@export var MAX_SPEED : float = 5.0
 const ACCEL := 2
 const DEACCEL := 6
 
 # Jump
 var jump_height := 14
 var has_contact := false
-onready var tail : RayCast = owner.get_node("Tail")
+@onready var tail : RayCast3D = owner.get_node("Tail")
 
 # Slope
 const MAX_SLOPE_ANGLE := 35
@@ -41,7 +41,7 @@ func move(delta : float, speed : float, direction : Vector3) -> void:
 	if owner.is_on_floor():
 		has_contact = true
 		var n = tail.get_collision_normal()
-		var floor_angle := rad2deg(acos(n.dot(Vector3(0, 1, 0))))
+		var floor_angle := rad_to_deg(acos(n.dot(Vector3(0, 1, 0))))
 		if floor_angle > MAX_SLOPE_ANGLE:
 			velocity.y += gravity * delta
 	else:
@@ -56,7 +56,7 @@ func move(delta : float, speed : float, direction : Vector3) -> void:
 	temp_velocity.y = 0
 	
 	# Max velocity
-	var target = direction * speed #(owner.get_global_transform().basis.xform(speed)) # solució temporal
+	var target = direction * speed #(owner.get_global_transform().basis * speed) # solució temporal
 	
 	var acceleration
 	if direction.dot(temp_velocity) > 0:
@@ -65,10 +65,16 @@ func move(delta : float, speed : float, direction : Vector3) -> void:
 		acceleration = DEACCEL
 	
 	# Increase the velocity
-	temp_velocity = temp_velocity.linear_interpolate(target, acceleration * delta)
+	temp_velocity = temp_velocity.lerp(target, acceleration * delta)
 	
 	velocity.x = temp_velocity.x
 	velocity.z = temp_velocity.z
 	
 	# Move
-	velocity = owner.move_and_slide(velocity, Vector3(0, 1, 0), false, 4, deg2rad(MAX_SLOPE_ANGLE))
+	owner.set_velocity(velocity)
+	owner.set_up_direction(Vector3(0, 1, 0))
+	owner.set_floor_stop_on_slope_enabled(false)
+	owner.set_max_slides(4)
+	owner.set_floor_max_angle(deg_to_rad(MAX_SLOPE_ANGLE))
+	owner.move_and_slide()
+	velocity = owner.velocity

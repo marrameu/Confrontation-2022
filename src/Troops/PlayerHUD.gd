@@ -3,8 +3,8 @@ extends CanvasLayer
 
 const damage_indicator_scene : PackedScene = preload("res://src/HUD/TroopDamageIndicator.tscn")
 
-export var launch_grenade_path : NodePath
-onready var launch_grenade : Spatial = get_node(launch_grenade_path)
+@export var launch_grenade_path : NodePath
+@onready var launch_grenade : Node3D = get_node(launch_grenade_path)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -18,7 +18,7 @@ func _process(delta):
 	$Alive/SpeiclaWeapons/TextureRect/Label.text = str(launch_grenade.ammo)
 
 
-func _on_HealthSystem_damage_taken(attacker : Spatial):
+func _on_HealthSystem_damage_taken(attacker : Node3D):
 	if not attacker or not weakref(attacker).get_ref():
 		return
 	
@@ -27,7 +27,7 @@ func _on_HealthSystem_damage_taken(attacker : Spatial):
 			child.restart_timer()
 			return
 	
-	var damage_indicator = damage_indicator_scene.instance()
+	var damage_indicator = damage_indicator_scene.instantiate()
 	damage_indicator.attacker = attacker
 	damage_indicator.myself = owner
 	$"%DamageIndicators".add_child(damage_indicator)

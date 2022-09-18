@@ -8,7 +8,7 @@ func enter():
 	var clos_dist := INF
 	for support_ship in get_tree().get_nodes_in_group("SupportShips"):
 		if support_ship.blue_team == owner.blue_team:
-			var dist = support_ship.translation.distance_to(owner.translation)
+			var dist = support_ship.position.distance_to(owner.position)
 			if dist < clos_dist:
 				target_support_ship = support_ship
 				clos_dist = dist
@@ -22,6 +22,6 @@ func update(_delta):
 		emit_signal("finished", "choose_objective")
 		return
 	owner.input.target = target_support_ship.get_node("SupportArea").global_transform.origin
-	owner.input.wants_turbo = owner.translation.distance_to(owner.input.target) > 700
+	owner.input.wants_turbo = owner.position.distance_to(owner.input.target) > 700
 	if owner.get_node("HealthSystem").health > 700:
 		emit_signal("finished", "choose_objective")

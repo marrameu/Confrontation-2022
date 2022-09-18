@@ -10,7 +10,7 @@ func update(delta):
 	direction.y = 0
 	direction = direction.normalized()
 	
-	if Input.is_action_pressed("run") and aim.xform_inv(direction).z == 1: # > 0 ?
+	if Input.is_action_pressed("run") and direction * aim.z == 1: # > 0 ?
 		emit_signal("finished", "run")
 		return
 	

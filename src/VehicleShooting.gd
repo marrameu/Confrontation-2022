@@ -30,7 +30,7 @@ var lock_missile_timer : Timer # no va, pq onready pq lscript canvia
 var locking_target_to_missile := false
 var target_locked := false
 var locking_time : float = 1/fire_rates[1]
-var lock_target : Spatial
+var lock_target : Node3D
 
 
 func _process(delta : float) -> void:
@@ -43,7 +43,7 @@ func _process(delta : float) -> void:
 		check_to_cancel_locking()
 
 
-sync func shoot_bullet(current_bullet : int, shoot_target := Vector3.ZERO) -> void:
+@rpc(any_peer, call_local) func shoot_bullet(current_bullet : int, shoot_target := Vector3.ZERO) -> void:
 	if owner.dead or owner.state != owner.States.FLYING:
 		return
 	
@@ -60,7 +60,7 @@ sync func shoot_bullet(current_bullet : int, shoot_target := Vector3.ZERO) -> vo
 	
 	# instance
 	var bullet : Bullet
-	bullet = bullets_scenes[current_bullet].instance()
+	bullet = bullets_scenes[current_bullet].instantiate()
 	
 	bullet.init(owner, owner.blue_team)
 	
@@ -86,9 +86,9 @@ sync func shoot_bullet(current_bullet : int, shoot_target := Vector3.ZERO) -> vo
 		bullet.look_at(owner.global_transform.origin + owner.global_transform.basis.z, Vector3.UP)
 
 
-func most_frontal_enenmy(big_ships := false) -> Spatial: # poder rutllar es +o- fàcil (comparar si concorda amb l'histoiral)
+func most_frontal_enenmy(big_ships := false) -> Node3D: # poder rutllar es +o- fàcil (comparar si concorda amb l'histoiral)
 	var closest_dist := -INF
-	var most_frontal_enenmy : Spatial = null
+	var most_frontal_enenmy : Node3D = null
 	
 	var enemies := []
 	for ship in get_tree().get_nodes_in_group("Ships"):
@@ -101,7 +101,7 @@ func most_frontal_enenmy(big_ships := false) -> Spatial: # poder rutllar es +o- 
 				enemies.append(big_ship)
 	
 	for body in enemies:
-		var direction := Vector3(body.global_transform.origin - owner.translation).normalized()
+		var direction := Vector3(body.global_transform.origin - owner.position).normalized()
 		var a = direction.dot(owner.global_transform.basis.z)
 		
 		if a > closest_dist:
@@ -126,7 +126,7 @@ func lock_target_to_missile():
 
 func check_to_cancel_locking():
 	if weakref(lock_target).get_ref():
-		var direction := Vector3(lock_target.translation - owner.translation).normalized()
+		var direction := Vector3(lock_target.position - owner.position).normalized()
 		var a = direction.dot(owner.global_transform.basis.z)
 		if a < 0 or not can_shoots[1]:
 			cancel_locking_target()

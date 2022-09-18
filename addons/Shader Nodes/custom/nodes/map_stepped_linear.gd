@@ -1,4 +1,4 @@
-tool
+@tool
 extends VisualShaderNodeCustom
 class_name VisualShaderMapSteppedLinear
 
@@ -12,7 +12,7 @@ func _get_category():
 
 
 func _get_description():
-	return "Map Range (Stepped Linear) (based on the Blender Foundation Map Range)"
+	return "Map Range (Stepped Linear) (based checked the Blender Foundation Map Range)"
 
 
 func _get_return_icon_type():
@@ -69,7 +69,7 @@ func _get_output_port_type(port):
 
 func _get_global_code(mode):
 	return """
-		/* === Based on The Blender Foundation shader
+		/* === Based checked The Blender Foundation shader
 		@ https://git.blender.org/gitweb/gitweb.cgi/blender.git/blob/HEAD:/source/blender/gpu/shaders/material/gpu_shader_material_map_range.glsl
 		_______________________________________________________________________________________________________________________________________*/
 

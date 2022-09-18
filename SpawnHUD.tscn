@@ -2,10 +2,10 @@
 
 [ext_resource path="res://assets/interface/themes/new_theme.tres" type="Theme" id=1]
 [ext_resource path="res://SpawnHUD.gd" type="Script" id=2]
-[ext_resource path="res://assets/interface/Fonts/Manrope/Manrope-VariableFont_wght.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/interface/Fonts/Manrope/Manrope-VariableFont_wght.ttf" type="FontFile" id=3]
 [ext_resource path="res://src/Troops/Player/HUD/CPButtons.gd" type="Script" id=4]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="FontFile" id=1]
 size = 30
 use_mipmaps = true
 use_filter = true
@@ -29,27 +29,27 @@ unique_name_in_owner = true
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -147.0
+offset_top = -147.0
 
 [node name="Button" type="Button" parent="Control/ChooseClass/ClassesButtons"]
-margin_right = 637.0
-margin_bottom = 147.0
+offset_right = 637.0
+offset_bottom = 147.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "RIFLE"
 
 [node name="Button2" type="Button" parent="Control/ChooseClass/ClassesButtons"]
-margin_left = 641.0
-margin_right = 1278.0
-margin_bottom = 147.0
+offset_left = 641.0
+offset_right = 1278.0
+offset_bottom = 147.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "LLANÇA-MÍSSILS"
 
 [node name="Button3" type="Button" parent="Control/ChooseClass/ClassesButtons"]
-margin_left = 1282.0
-margin_right = 1920.0
-margin_bottom = 147.0
+offset_left = 1282.0
+offset_right = 1920.0
+offset_bottom = 147.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 disabled = true
@@ -57,9 +57,9 @@ text = "TÈCNIC"
 
 [node name="Button4" type="Button" parent="Control/ChooseClass/ClassesButtons"]
 visible = false
-margin_left = 1443.0
-margin_right = 1920.0
-margin_bottom = 147.0
+offset_left = 1443.0
+offset_right = 1920.0
+offset_bottom = 147.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 disabled = true
@@ -69,10 +69,10 @@ text = "FRANCTIRADOR"
 visible = false
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -210.0
-margin_top = 12.0
-margin_right = -18.0
-margin_bottom = 53.0
+offset_left = -210.0
+offset_top = 12.0
+offset_right = -18.0
+offset_bottom = 53.0
 grow_horizontal = 0
 custom_fonts/font = SubResource( 1 )
 text = "MANQUEN 20\""
@@ -83,136 +83,136 @@ valign = 1
 visible = false
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_left = 74.0
-margin_top = -136.0
-margin_right = 291.0
-margin_bottom = 136.0
+offset_left = 74.0
+offset_top = -136.0
+offset_right = 291.0
+offset_bottom = 136.0
 
 [node name="Label" type="Label" parent="Control/Spectate"]
-margin_right = 217.0
-margin_bottom = 30.0
+offset_right = 217.0
+offset_bottom = 30.0
 text = "ESPECTA:"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/Spectate"]
-margin_top = 34.0
-margin_right = 217.0
-margin_bottom = 90.0
+offset_top = 34.0
+offset_right = 217.0
+offset_bottom = 90.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Left" type="Button" parent="Control/Spectate/HBoxContainer"]
 visible = false
-margin_right = 43.0
-margin_bottom = 56.0
+offset_right = 43.0
+offset_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "<-"
 
 [node name="Button2" type="Button" parent="Control/Spectate/HBoxContainer"]
-margin_right = 217.0
-margin_bottom = 56.0
+offset_right = 217.0
+offset_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "NAU CAPITAL"
 
 [node name="Right" type="Button" parent="Control/Spectate/HBoxContainer"]
 visible = false
-margin_left = 139.0
-margin_right = 230.0
-margin_bottom = 56.0
+offset_left = 139.0
+offset_right = 230.0
+offset_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "->"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Control/Spectate"]
-margin_top = 94.0
-margin_right = 217.0
-margin_bottom = 151.0
+offset_top = 94.0
+offset_right = 217.0
+offset_bottom = 151.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Left" type="Button" parent="Control/Spectate/HBoxContainer2"]
 visible = false
-margin_right = 74.0
-margin_bottom = 77.0
+offset_right = 74.0
+offset_bottom = 77.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "<-"
 
 [node name="Button2" type="Button" parent="Control/Spectate/HBoxContainer2"]
-margin_right = 217.0
-margin_bottom = 57.0
+offset_right = 217.0
+offset_bottom = 57.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "NAUS D'ATAC"
 
 [node name="Right" type="Button" parent="Control/Spectate/HBoxContainer2"]
 visible = false
-margin_left = 143.0
-margin_right = 217.0
-margin_bottom = 77.0
+offset_left = 143.0
+offset_right = 217.0
+offset_bottom = 77.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "->"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="Control/Spectate"]
-margin_top = 155.0
-margin_right = 217.0
-margin_bottom = 211.0
+offset_top = 155.0
+offset_right = 217.0
+offset_bottom = 211.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Left" type="Button" parent="Control/Spectate/HBoxContainer3"]
 visible = false
-margin_right = 22.0
-margin_bottom = 56.0
+offset_right = 22.0
+offset_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "<-"
 
 [node name="Button3" type="Button" parent="Control/Spectate/HBoxContainer3"]
-margin_right = 217.0
-margin_bottom = 56.0
+offset_right = 217.0
+offset_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "NAUS DE SUPORT"
 
 [node name="Right" type="Button" parent="Control/Spectate/HBoxContainer3"]
 visible = false
-margin_left = 182.0
-margin_right = 217.0
-margin_bottom = 56.0
+offset_left = 182.0
+offset_right = 217.0
+offset_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "->"
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="Control/Spectate"]
-margin_top = 215.0
-margin_right = 217.0
-margin_bottom = 272.0
+offset_top = 215.0
+offset_right = 217.0
+offset_bottom = 272.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Left" type="Button" parent="Control/Spectate/HBoxContainer4"]
 visible = false
-margin_right = 22.0
-margin_bottom = 57.0
+offset_right = 22.0
+offset_bottom = 57.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "<-"
 
 [node name="Button4" type="Button" parent="Control/Spectate/HBoxContainer4"]
-margin_right = 217.0
-margin_bottom = 57.0
+offset_right = 217.0
+offset_bottom = 57.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "NAUS NORMALS"
 
 [node name="Right" type="Button" parent="Control/Spectate/HBoxContainer4"]
 visible = false
-margin_left = 168.0
-margin_right = 217.0
-margin_bottom = 57.0
+offset_left = 168.0
+offset_right = 217.0
+offset_bottom = 57.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "->"
@@ -220,13 +220,13 @@ text = "->"
 [node name="ChooseCP" type="Control" parent="Control"]
 unique_name_in_owner = true
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="CPButtons" type="Control" parent="Control/ChooseCP"]
 unique_name_in_owner = true
-margin_right = 40.0
-margin_bottom = 40.0
+offset_right = 40.0
+offset_bottom = 40.0
 script = ExtResource( 4 )
 
 [node name="ChangeCamButton" type="Button" parent="Control/ChooseCP"]
@@ -235,10 +235,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1678.0
-margin_top = 787.0
-margin_right = 1837.0
-margin_bottom = 824.0
+offset_left = 1678.0
+offset_top = 787.0
+offset_right = 1837.0
+offset_bottom = 824.0
 text = "Espai"
 
 [node name="ChangeClassButton" type="Button" parent="Control/ChooseCP"]
@@ -246,10 +246,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1450.0
-margin_top = 787.0
-margin_right = 1659.0
-margin_bottom = 824.0
+offset_left = 1450.0
+offset_top = 787.0
+offset_right = 1659.0
+offset_bottom = 824.0
 text = "Canvia la classe"
 
 [node name="PlayerRespawnTimer" type="Timer" parent="."]

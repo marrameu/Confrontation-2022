@@ -19,7 +19,7 @@
 [ext_resource path="res://assets/animations/grenadethrow.tres" type="Animation" id=17]
 
 [node name="TroopModel" instance=ExtResource( 1 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.77, 0 )
+transform = Transform3D( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.77, 0 )
 script = ExtResource( 3 )
 
 [node name="AnimationPlayer" parent="." index="1"]

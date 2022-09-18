@@ -1,11 +1,11 @@
-extends KinematicBody
+extends CharacterBody3D
 
 signal entered_ship
 signal entered_vehicle
 signal died
 signal points_added
 
-onready var shooting := $Shooting
+@onready var shooting := $Shooting
 
 var pilot_man : PilotManager
 var blue_team : bool
@@ -25,12 +25,12 @@ func _ready():
 
 
 func _physics_process(delta):
-	if get_viewport().get_camera().owner.zooming:
+	if get_viewport().get_camera_3d().owner.zooming:
 		$AnimationTree.set("parameters/StateMachine/walk/move/4/aim/blend_amount", lerp($AnimationTree.get("parameters/StateMachine/walk/move/4/aim/blend_amount"), 1, 20 * delta))
 	else:
 		$AnimationTree.set("parameters/StateMachine/walk/move/4/aim/blend_amount", lerp($AnimationTree.get("parameters/StateMachine/walk/move/4/aim/blend_amount"), 0, 20 * delta))
 	if can_rotate:
-		var des_transform := global_transform.basis.slerp(get_tree().current_scene.get_node("%CameraBase").global_transform.basis.rotated(Vector3(0, 1, 0), deg2rad(180)), 0.15 * delta * 60)
+		var des_transform := global_transform.basis.slerp(get_tree().current_scene.get_node("%CameraBase").global_transform.basis.rotated(Vector3(0, 1, 0), deg_to_rad(180)), 0.15 * delta * 60)
 		rotation.y = des_transform.get_euler().y
 		orthonormalize()
 		#inverse kinematics
@@ -41,7 +41,7 @@ func _on_HealthSystem_die(attacker):
 	t.set_wait_time(5)
 	self.add_child(t)
 	t.start()
-	t.connect("timeout", self, "die")
+	t.connect("timeout",Callable(self,"die"))
 	$StateMachine._change_state("dead") # mirar com ho fa el gdquest
 	get_tree().current_scene.get_node("%CameraBase").killer = attacker
 
@@ -64,7 +64,7 @@ func _on_headshot():
 
 func _on_enemy_died(attacker):
 	if attacker == self:
-		yield(get_tree(), "idle_frame") # pq no se'l mengi el headshot
+		await get_tree().idle_frame # pq no se'l mengi el headshot
 		$"%Weapons".get_child($Shooting.current_weapon_ind).get_node("HUD/Pivot/HitMarkerParts/AnimationPlayer").play("red_hitmarker")
 		add_points(100)
 	else:

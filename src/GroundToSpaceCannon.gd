@@ -1,9 +1,9 @@
 extends "res://Turret.gd"
 
-export var cp_path : NodePath
-onready var cp : CommandPost = get_node(cp_path)
+@export var cp_path : NodePath
+@onready var cp : CommandPost = get_node(cp_path)
 
-var target : Spatial
+var target : Node3D
 
 
 func _ready():
@@ -18,7 +18,7 @@ func _process(delta):
 			target = update_target(cp.m_team == 2)
 			wants_shoot = false
 		else:
-			$Spatial.look_at(target.translation, Vector3.UP)
+			$Node3D.look_at(target.position, Vector3.UP)
 	elif cp.m_team == 0 and not $Timer.is_stopped():
 		$Timer.stop()
 		target = null
@@ -30,10 +30,10 @@ func shoot():
 
 
 func shoot_anim():
-	.shoot()
+	super.shoot()
 
 
-func update_target(blue : bool) -> Spatial:
+func update_target(blue : bool) -> Node3D:
 	#for support_ship in get_tree().get_nodes_in_group("SupportShips"):
 	#	if support_ship.blue_team != blue:
 	#		return support_ship

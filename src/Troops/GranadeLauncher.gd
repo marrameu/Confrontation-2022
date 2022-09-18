@@ -1,12 +1,12 @@
-extends Spatial
+extends Node3D
 
 
-export var granade_scene : PackedScene = preload("res://src/Troops/Weapons/Granade.tscn")
+@export var granade_scene : PackedScene = preload("res://src/Troops/Weapons/Granade.tscn")
 
-export var MAX_AMMO : int = 3
+@export var MAX_AMMO : int = 3
 var ammo := MAX_AMMO
 
-export var fire_rate := 0.5
+@export var fire_rate := 0.5
 var _next_time_to_fire := 0.0
 var time := 0.0
 
@@ -22,10 +22,10 @@ func _process(delta):
 
 func launch_granade():
 	ammo -= 1
-	var new_granade : RigidBody = granade_scene.instance()
-	new_granade.rotation = get_viewport().get_camera().global_rotation
+	var new_granade : RigidBody3D = granade_scene.instantiate()
+	new_granade.rotation = get_viewport().get_camera_3d().global_rotation
 	get_tree().current_scene.add_child(new_granade)
-	new_granade.translation = owner.translation
+	new_granade.position = owner.position
 	$Throw.play()
 
 

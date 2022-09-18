@@ -1,10 +1,10 @@
-extends Camera
+extends Camera3D
 
 # var current_location_index : int = 0
-var target : Spatial
+var target : Node3D
 
-onready var original_pos := translation
-onready var original_rot := rotation
+@onready var original_pos := position
+@onready var original_rot := rotation
 
 
 # Called when the node enters the scene tree for the first time.
@@ -14,10 +14,10 @@ func _ready():
 
 func _process(delta):
 	if target and weakref(target).get_ref():
-		translation = target.global_transform.origin
+		position = target.global_transform.origin
 		rotation = target.global_transform.basis.get_euler()
 		
-		var pivot : Spatial = target.get_parent()
+		var pivot : Node3D = target.get_parent()
 		pivot.rotation += Vector3((Input.get_action_strength("camera_up") - Input.get_action_strength("camera_down")), (Input.get_action_strength("camera_right") - Input.get_action_strength("camera_left")), 0) * delta
 		
 		if target.owner.is_in_group("Ships"):
@@ -31,7 +31,7 @@ func _on_SpawnHUD_change_spectate(location : int, index : int = 0):
 	match location:
 		0:
 			target = null
-			translation = Vector3(1060, 1512, 2512)
+			position = Vector3(1060, 1512, 2512)
 			rotation_degrees = Vector3(-26.6, 11.842, 4.789)
 			return
 		1:
@@ -58,9 +58,9 @@ func _on_SpawnHUD_change_spectate(location : int, index : int = 0):
 
 
 func _on_SpawnHUD_change_cam():
-	if translation == original_pos:
-		translation = Vector3(0, 5000, 0)
+	if position == original_pos:
+		position = Vector3(0, 5000, 0)
 		rotation_degrees = Vector3(-90, 180, 0)
 	else:
-		translation = original_pos
+		position = original_pos
 		rotation = original_rot

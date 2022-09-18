@@ -5,7 +5,7 @@
 [node name="CSMin" instance=ExtResource( 1 )]
 
 [node name="TextureRect" parent="." index="0"]
-margin_left = 102.5
-margin_top = -157.5
-margin_right = 479.5
-margin_bottom = 77.503
+offset_left = 102.5
+offset_top = -157.5
+offset_right = 479.5
+offset_bottom = 77.503

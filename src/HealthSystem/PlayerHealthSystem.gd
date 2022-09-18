@@ -2,13 +2,13 @@ extends "res://src/HealthSystem/HealthSystem.gd"
 
 
 func _on_HealthSystem_die() -> void:
-	if get_tree().has_network_peer():
-		if is_network_master():
+	if get_tree().has_multiplayer_peer():
+		if is_multiplayer_authority():
 			get_node("../RespawnTimer").start()
 	else:
 		get_node("../RespawnTimer").start()
 	
-	if get_tree().has_network_peer():
+	if get_tree().has_multiplayer_peer():
 		rpc("die")
 	else:
 		die()
@@ -30,26 +30,26 @@ func _on_RespawnTimer_timeout() -> void:
 			i = true
 
 
-sync func die() -> void:
+@rpc(any_peer, call_local) func die() -> void:
 	health = 0 # Per al HUD (temporal)
 	get_node("../TroopManager").is_alive = false
 	
-	if get_tree().has_network_peer(): # Per al mode un jugador
-		if is_network_master():
+	if get_tree().has_multiplayer_peer(): # Per al mode un jugador
+		if is_multiplayer_authority():
 			get_parent().update_network_info()
 	
 	update_components(false)
 	
-	var scene_camera : Camera = get_node("/root/Main").players_cameras[get_parent().number_of_player - 1].scene_camera
+	var scene_camera : Camera3D = get_node("/root/Main").players_cameras[get_parent().number_of_player - 1].scene_camera
 	if scene_camera:
-		if get_tree().has_network_peer():
-			if is_network_master():
+		if get_tree().has_multiplayer_peer():
+			if is_multiplayer_authority():
 				scene_camera.make_current()
 		else:
 			scene_camera.make_current()
 
 
-sync func respawn() -> void:
+@rpc(any_peer, call_local) func respawn() -> void:
 	get_node("../TroopManager").is_alive = true
 	
 	# comprova si hi ha posts dissponibles, sols cal que ho faça el servidor
@@ -59,7 +59,7 @@ sync func respawn() -> void:
 			command_posts.push_back(command_post)
 		if command_posts.size() < 1:
 			# No hi ha cps del teu equip
-			get_parent().global_transform.origin = Vector3(rand_range(-200, 200), 2, rand_range(-200, 200))
+			get_parent().global_transform.origin = Vector3(randf_range(-200, 200), 2, randf_range(-200, 200))
 		else:
 			get_parent().global_transform.origin = get_parent().spawn_position
 	
@@ -67,10 +67,10 @@ sync func respawn() -> void:
 	
 	update_components(true)
 	
-	var scene_camera : Camera = get_node("/root/Main").players_cameras[get_parent().number_of_player - 1].scene_camera
+	var scene_camera : Camera3D = get_node("/root/Main").players_cameras[get_parent().number_of_player - 1].scene_camera
 	if scene_camera:
-		if get_tree().has_network_peer():
-			if is_network_master():
+		if get_tree().has_multiplayer_peer():
+			if is_multiplayer_authority():
 				scene_camera.clear_current()
 		else:
 			scene_camera.clear_current()
@@ -78,7 +78,7 @@ sync func respawn() -> void:
 	heal(MAX_HEALTH)
 
 
-sync func update_components(var enable : bool, var update_interaction := true) -> void:
+@rpc(any_peer, call_local) func update_components(enable : bool, update_interaction := true) -> void:
 	# si no és el network master es podria obviar de fer moltes coses
 	# perquè no es mogui, oi?
 	get_parent().set_process(enable)
@@ -97,7 +97,7 @@ sync func update_components(var enable : bool, var update_interaction := true) -
 	if update_interaction:
 		get_node("../Interaction").set_process(enable)
 	
-	get_node("../CollisionShape").disabled = !enable
+	get_node("../CollisionShape3D").disabled = !enable
 	
 	for weapon in get_node("../Weapons").get_children():
 		weapon.shooting = false
@@ -111,14 +111,14 @@ sync func update_components(var enable : bool, var update_interaction := true) -
 	
 	for child in get_parent().get_children():
 		# print("uwu")
-		if child is Spatial:
+		if child is Node3D:
 			child.visible = enable
 	
-	if get_tree().has_network_peer():
-		if not is_network_master():
+	if get_tree().has_multiplayer_peer():
+		if not is_multiplayer_authority():
 			return
 	
 	if enable:
-		get_node("/root/Main/Splitscreen").get_player(get_parent().number_of_player - 1).viewport.get_node("PuppetCam").target = get_node("../CameraBase/Camera")
-	get_node("../CameraBase/Camera").current = enable
-	get_node("../Listener").current = enable
+		get_node("/root/Main/Splitscreen").get_player(get_parent().number_of_player - 1).viewport.get_node("PuppetCam").target = get_node("../CameraBase/Camera3D")
+	get_node("../CameraBase/Camera3D").current = enable
+	get_node("../AudioListener3D").current = enable

@@ -24,7 +24,7 @@ func search_ship(): # comprovar que no hi hagi ningú a la nau
 	
 	#var begin : Vector3 = owner.get_node("PathMaker").navigation_node.get_closest_point(owner.global_transform.origin) # s'ha de fer amb la pos. global de la tropa pq, si no, malament rai
 	# get_Closest_point perquè no es passi
-	var end := Vector3.ZERO #$PathMaker.navigation_node.get_closest_point(begin + Vector3(rand_range(-200, 200), 0, rand_range(-200, 200)))
+	var end := Vector3.ZERO #$PathMaker.navigation_node.get_closest_point(begin + Vector3(randf_range(-200, 200), 0, randf_range(-200, 200)))
 	
 	
 	if weakref(desired_ship).get_ref():
@@ -68,8 +68,8 @@ func _on_WaitTimer_timeout():
 func _on_CheckCurrentEnemyTimer_timeout() -> void:
 	if not get_parent().current_state == self:
 		return
-	._on_CheckCurrentEnemyTimer_timeout()
+	super._on_CheckCurrentEnemyTimer_timeout()
 	if owner.current_enemy: # ha de calcular dues veagdes la distància, tot plegat es podria fer millor
-		if owner.translation.distance_to(owner.current_enemy.translation) < 150:
+		if owner.position.distance_to(owner.current_enemy.position) < 150:
 			emit_signal("finished", "attack_enemy")
 

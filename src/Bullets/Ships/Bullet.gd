@@ -1,16 +1,16 @@
-extends Spatial
+extends Node3D
 class_name Bullet
 
 signal damagable_hit
 
-export var damage := 100
-export var bullet_velocity := 700.0
+@export var damage := 100
+@export var bullet_velocity := 700.0
 
 var direction : Vector3
 var shooter
 
 var _hit := false
-export var _time_alive := 3.5 #7.0
+@export var _time_alive := 3.5 #7.0
 var _old_translation : Vector3
 
 var m_blue_team := false
@@ -23,11 +23,11 @@ func init(new_shooter, new_team):
 
 func _ready():
 	if shooter.has_method("_on_damagable_hit"):
-		connect("damagable_hit", shooter, "_on_damagable_hit")
+		connect("damagable_hit",Callable(shooter,"_on_damagable_hit"))
 	var m_hurtbox = shooter.get_node_or_null("HurtBox")
-	$RayCast.add_exception(shooter)
+	$RayCast3D.add_exception(shooter)
 	if m_hurtbox:
-		$RayCast.add_exception(m_hurtbox)
+		$RayCast3D.add_exception(m_hurtbox)
 
 
 func _physics_process(delta):
@@ -41,26 +41,26 @@ func _physics_process(delta):
 	if _time_alive < 0:
 		queue_free()
 	
-	_old_translation = translation
+	_old_translation = position
 
 
 func move(delta):
-	translation += delta * direction * bullet_velocity
+	position += delta * direction * bullet_velocity
 
 
 func check_collisions():
-	var long = translation.distance_to(_old_translation)
-	var ray := $RayCast
+	var long = position.distance_to(_old_translation)
+	var ray := $RayCast3D
 	if ray.is_colliding():
-		var body : Spatial = ray.get_collider()
+		var body : Node3D = ray.get_collider()
 		if body.is_in_group("HurtBox"):
 			body = body.owner
 			_hit(body)
 		
-		translation = ray.get_collision_point()
+		position = ray.get_collision_point()
 		$HitParticles.hide()
 		$Explosion.show()
-		$HitAudio.pitch_scale = rand_range(1, 1.7)
+		$HitAudio.pitch_scale = randf_range(1, 1.7)
 		$HitAudio.play()
 		$AnimationPlayer.play("hit")
 		_hit = true
@@ -77,8 +77,8 @@ func _hit(body) -> bool:
 	if not weakref(shooter).get_ref():
 		return false
 	if shooter.has_method("_on_enemy_died"):
-		if not body.get_node("HealthSystem").is_connected("die", shooter, "_on_enemy_died"):
-			body.get_node("HealthSystem").connect("die", shooter, "_on_enemy_died")
+		if not body.get_node("HealthSystem").is_connected("die",Callable(shooter,"_on_enemy_died")):
+			body.get_node("HealthSystem").connect("die",Callable(shooter,"_on_enemy_died"))
 	body.get_node("HealthSystem").take_damage(damage, false, shooter)
 	return true
 
@@ -94,4 +94,4 @@ func _on_VisibilityNotifier_screen_exited():
 
 
 func add_exception(body):
-	$RayCast.add_exception(body)
+	$RayCast3D.add_exception(body)

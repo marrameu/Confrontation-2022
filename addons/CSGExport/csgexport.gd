@@ -5,7 +5,7 @@
 
 #This script is created by: mohammedzero43 (Xtremezero), please give credits if remixed or shared
 #feel free to report bugs and suggest improvements at mohammedzero43@gmail.com
-tool
+@tool
 extends EditorPlugin
 
 var button_csg = Button.new()
@@ -24,8 +24,8 @@ func _enter_tree():
 	setupButtons()
 	
 func _ready():
-	button_csg.connect("pressed",self,"_on_csg_pressed")
-	button_mesh.connect("pressed",self,"_on_mesh_pressed")
+	button_csg.connect("pressed",Callable(self,"_on_csg_pressed"))
+	button_mesh.connect("pressed",Callable(self,"_on_mesh_pressed"))
 	
 func _exit_tree():
 	button_csg.queue_free()
@@ -34,7 +34,7 @@ func _exit_tree():
 	remove_control_from_container(CONTAINER_SPATIAL_EDITOR_MENU,button_mesh)
 
 func setupButtons():
-	get_editor_interface().get_selection().connect("selection_changed",self,"_selectionchanged")
+	get_editor_interface().get_selection().connect("selection_changed",Callable(self,"_selectionchanged"))
 	add_control_to_container(CONTAINER_SPATIAL_EDITOR_MENU,button_csg)
 	button_csg.text = "Export CSG to .obj"
 	add_control_to_container(CONTAINER_SPATIAL_EDITOR_MENU,button_mesh)
@@ -46,7 +46,7 @@ func _selectionchanged():
 	var isConversionAvailable = false
 
 	if selected.size() == 1:
-		if selected[0] is CSGCombiner:
+		if selected[0] is CSGCombiner3D:
 			selectedCombiner = selected[0]
 			object_name= selected[0].name
 			obj = selected[0]
@@ -56,7 +56,7 @@ func _selectionchanged():
 	button_mesh.visible = isConversionAvailable
 
 func handles(obj):
-	if obj is CSGCombiner:
+	if obj is CSGCombiner3D:
 		return true
 
 
@@ -77,7 +77,7 @@ func exportcsg(convertToMesh: bool = false):
 	objcont+="o " + object_name + "\n";#CHANGE WITH SELECTION NAME";
 	
 	#Blank material
-	var blank_material = SpatialMaterial.new()
+	var blank_material = StandardMaterial3D.new()
 	blank_material.resource_name = "BlankMaterial"
 	
 	var material
@@ -90,7 +90,7 @@ func exportcsg(convertToMesh: bool = false):
 		var verts = surface[0]
 		UVs = surface[4]
 		var normals = surface[1]
-		var mat:SpatialMaterial = csgMesh[-1].surface_get_material(t)
+		var mat:StandardMaterial3D = csgMesh[-1].surface_get_material(t)
 		var faces = []
 		
 		#create_faces_from_verts (Triangles)
@@ -143,7 +143,7 @@ func exportcsg(convertToMesh: bool = false):
 	# Lx
 	
 	if !selectedCombiner.visible:
-		print("CSGCombiner node needs to be visible")
+		print("CSGCombiner3D node needs to be visible")
 		return
 	if convertToMesh:
 		# Create new mesh
@@ -170,7 +170,7 @@ func exportcsg(convertToMesh: bool = false):
 			oldNode = parent.get_node(nodeName)
 		var addPhysics = false
 		
-		# check use collisions on combiner or previous static body
+		# check use collisions checked combiner or previous static body
 		if selectedCombiner.use_collision:
 			addPhysics = true
 		
@@ -180,7 +180,7 @@ func exportcsg(convertToMesh: bool = false):
 		if oldNode:
 			if oldNode.get_child_count() > 0:
 				var firstChild = oldNode.get_child(0)
-				if firstChild is StaticBody:
+				if firstChild is StaticBody3D:
 					addPhysics = true
 					physicsMaterial = firstChild.physics_material_override
 			# set old node material if available or changed
@@ -189,7 +189,7 @@ func exportcsg(convertToMesh: bool = false):
 			oldNode.free()
 		
 		# Add Mesh Instance node with Mesh data
-		var meshInstance = MeshInstance.new()
+		var meshInstance = MeshInstance3D.new()
 		meshInstance.mesh = mesh
 		meshInstance.name = nodeName
 		meshInstance.material_override = meshMaterial
@@ -205,32 +205,32 @@ func exportcsg(convertToMesh: bool = false):
 			
 			# Reassign previous physics material override
 			var firstChild = meshInstance.get_child(0)
-			if firstChild is StaticBody:
-				firstChild.name = "StaticBody"
+			if firstChild is StaticBody3D:
+				firstChild.name = "StaticBody3D"
 				firstChild.physics_material_override = physicsMaterial
 		
 		# Log 
 		var timeInfo = OS.get_time()
 		var time = "%02d:%02d:%02d" % [timeInfo.hour, timeInfo.minute, timeInfo.second]
-		print("[", time, "] CSGCombiner Converted")
+		print("[", time, "] CSGCombiner3D Converted")
 		
-		# Hide CSGCombiner
+		# Hide CSGCombiner3D
 #		selectedCombiner.visible = false
-		#print("CSGCombiner hidden")
+		#print("CSGCombiner3D hidden")
 		
 		return
 	
 	#Select file destination
 	fdialog = FileDialog.new()
-	fdialog.mode = FileDialog.MODE_OPEN_DIR
+	fdialog.mode = FileDialog.FILE_MODE_OPEN_DIR
 	fdialog.access = FileDialog.ACCESS_RESOURCES
 	##fdialog.add_filter("*.obj; Wavefront File")
 	fdialog.show_hidden_files = false
-	fdialog.window_title = "Export CSGMesh"
+	fdialog.window_title = "Export CSGMesh3D"
 	fdialog.resizable = true
 	
-	get_editor_interface().get_editor_viewport().add_child(fdialog)
-	fdialog.connect("dir_selected", self, "onFileDialogOK", [])
+	get_editor_interface().get_editor_main_screen().add_child(fdialog)
+	fdialog.connect("dir_selected",Callable(self,"onFileDialogOK").bind())
 	# Lx
 	# Retina displays
 	var backingScaleFactor = OS.get_screen_scale()

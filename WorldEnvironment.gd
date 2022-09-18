@@ -8,8 +8,8 @@ extends WorldEnvironment
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Settings.connect("bloom_toggled", self, "_on_bloom_toggled")
-	Settings.connect("set_brightness", self, "_on_set_brightness")
+	Settings.connect("bloom_toggled",Callable(self,"_on_bloom_toggled"))
+	Settings.connect("set_brightness",Callable(self,"_on_set_brightness"))
 
 
 func _on_bloom_toggled(value):

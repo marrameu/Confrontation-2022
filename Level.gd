@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 signal battle_started
 signal ship_added
@@ -32,8 +32,8 @@ var red_take_over := false
 func _ready():
 	for big_ship in $BigShips.get_children():
 		emit_signal("ship_added", big_ship)
-		big_ship.connect("shields_down", self, "_on_BigShip_shields_down")
-		big_ship.connect("destroyed", self, "_on_BigShip_destroyed")
+		big_ship.connect("shields_down",Callable(self,"_on_BigShip_shields_down"))
+		big_ship.connect("destroyed",Callable(self,"_on_BigShip_destroyed"))
 	
 	$PilotManagers/PlayerManager.blue_team = PlayerInfo.player_blue_team
 	
@@ -59,9 +59,9 @@ func update_middle_point(delta):
 	
 	for ship in $Ships.get_children():
 		if not ship.blue_team:
-			red_point += (ship.translation.x - RED_LIMIT + 2000) # la distància des de la seva nau capital
+			red_point += (ship.position.x - RED_LIMIT + 2000) # la distància des de la seva nau capital
 		else:
-			blue_point += (ship.translation.x - BLUE_LIMIT - 2000) # el 2000 és la penalització dels morts, potser és massa alta
+			blue_point += (ship.position.x - BLUE_LIMIT - 2000) # el 2000 és la penalització dels morts, potser és massa alta
 	
 	red_point /= num_of_players + num_of_temp_ai
 	blue_point /= num_of_players + num_of_temp_ai
@@ -76,9 +76,9 @@ func update_middle_point(delta):
 	
 	var des_middle_point = (red_point + blue_point) / 2
 	middle_point = lerp(middle_point, des_middle_point, 0.3 * delta)
-	$RedPoint.translation.x = red_point
-	$BluePoint.translation.x = blue_point
-	$MiddlePoint.translation.x = clamp(middle_point, RED_LIMIT, BLUE_LIMIT)
+	$RedPoint.position.x = red_point
+	$BluePoint.position.x = blue_point
+	$MiddlePoint.position.x = clamp(middle_point, RED_LIMIT, BLUE_LIMIT)
 	$Label.text = "MIDDLE_POINT = " + str(int(middle_point), "    ", str(int(des_middle_point)))
 	
 	if middle_point > 1250 and not red_take_over:
@@ -92,7 +92,7 @@ func update_middle_point(delta):
 		red_take_over = false
 
 
-func _on_BigShip_destroyed(ship : Spatial):
+func _on_BigShip_destroyed(ship : Node3D):
 	emit_signal("match_msg", ship.name + " HA ESTAT DESTRUÏDA", !ship.blue_team)
 	if ship.is_in_group("CapitalShips"):
 		$Results/Control.show()
@@ -118,36 +118,36 @@ func _on_AIShip_tree_exited(num):
 	t.set_one_shot(true)
 	self.add_child(t)
 	t.start()
-	t.connect("timeout", self, "spawn_AI", [num])
-	t.connect("timeout", t, "queue_free")
+	t.connect("timeout",Callable(self,"spawn_AI").bind(num))
+	t.connect("timeout",Callable(t,"queue_free"))
 	
 	var msg_blue : bool = !get_node_or_null("PilotManagers/AIManager" + str(num)).blue_team
 	emit_signal("match_msg", "SHIP " + str(num) + " HA ESTAT ELIMINADA", msg_blue)
 
 
 func spawn_player():
-	var ship = player_ship_scene.instance()
+	var ship = player_ship_scene.instantiate()
 	ship.pilot_man = $PilotManagers/PlayerManager
-	ship.translation = choose_spawn_position(ship.blue_team)
+	ship.position = choose_spawn_position(ship.blue_team)
 	ship.rotation_degrees.y = -90 if ship.blue_team else 90
 	$Ships.add_child(ship)
 	
-	ship.connect("tree_exited", self, "_on_PlayerShip_tree_exited")
+	ship.connect("tree_exited",Callable(self,"_on_PlayerShip_tree_exited"))
 	
 	$SpawnHUD/Control.hide()
 	
 	# cam
-	#ship.get_node("Input").connect("activated_turboing", $Camera, "_on_Input_activated_turboing")
-	$Camera.ship = ship
-	ship.cam = $Camera
-	$Camera.make_current()
-	$Camera.init_cam()
+	#ship.get_node("Input").connect("activated_turboing",Callable($Camera3D,"_on_Input_activated_turboing"))
+	$Camera3D.ship = ship
+	ship.cam = $Camera3D
+	$Camera3D.make_current()
+	$Camera3D.init_cam()
 	
 	emit_signal("ship_added", ship)
 
 
 func spawn_AI(number, blue_team : bool = false):
-	var ship = ai_ship_scene.instance()
+	var ship = ai_ship_scene.instantiate()
 	
 	var pilot_man : PilotManager = get_node_or_null("PilotManagers/AIManager" + str(number))
 	# crea'n un de nou
@@ -159,18 +159,18 @@ func spawn_AI(number, blue_team : bool = false):
 	
 	ship.pilot_man = pilot_man
 	ship.battle_man = self
-	connect("big_ship_shields_down", ship, "_on_BigShip_shields_down")
+	connect("big_ship_shields_down",Callable(ship,"_on_BigShip_shields_down"))
 	
-	ship.translation = choose_spawn_position(blue_team)
+	ship.position = choose_spawn_position(blue_team)
 	ship.rotation_degrees.y = -90 if blue_team else 90
 	$Ships.add_child(ship)
 	
-	ship.connect("ship_died", self, "_on_AIShip_tree_exited", [number])
+	ship.connect("ship_died",Callable(self,"_on_AIShip_tree_exited").bind(number))
 	
 	var b = true if blue_team else false
 	var r = false if blue_team else true
-	#$BigShips/CapitalShipBlue/HealthSystem.connect("shield_die", ship.get_node("StateMachine"), "capital_ship_shield_died", [b])
-	#$BigShips/CapitalShipRed/HealthSystem.connect("shield_die", ship.get_node("StateMachine"), "capital_ship_shield_died", [r])
+	#$BigShips/CapitalShipBlue/HealthSystem.connect("shield_die",Callable(ship.get_node("StateMachine"),"capital_ship_shield_died").bind(b))
+	#$BigShips/CapitalShipRed/HealthSystem.connect("shield_die",Callable(ship.get_node("StateMachine"),"capital_ship_shield_died").bind(r))
 	
 	emit_signal("ship_added", ship)
 
@@ -178,18 +178,18 @@ func spawn_AI(number, blue_team : bool = false):
 # això?! endaya. q dius?
 func choose_spawn_position(blue_team : bool) -> Vector3:
 	if blue_team:
-		return(Vector3(rand_range(BLUE_LIMIT - 50, BLUE_LIMIT + 50), rand_range(-250, -350), rand_range(-500, 500)))
+		return(Vector3(randf_range(BLUE_LIMIT - 50, BLUE_LIMIT + 50), randf_range(-250, -350), randf_range(-500, 500)))
 	else:
-		return(Vector3(rand_range(RED_LIMIT - 50, RED_LIMIT + 50), rand_range(-250, -350), rand_range(-500, 500)))
+		return(Vector3(randf_range(RED_LIMIT - 50, RED_LIMIT + 50), randf_range(-250, -350), randf_range(-500, 500)))
 	
 	"""
 		# POTSER cal fer algun clamp
 	if blue_team:
 		var blue_spawn = (BLUE_LIMIT + middle_point) / 2
-		return(Vector3(rand_range(blue_spawn - 50, blue_spawn + 50), rand_range(-50, 50), rand_range(-500, 500)))
+		return(Vector3(randf_range(blue_spawn - 50, blue_spawn + 50), randf_range(-50, 50), randf_range(-500, 500)))
 	else:
 		var red_spawn = (RED_LIMIT + middle_point) / 2
-		return(Vector3(rand_range(red_spawn - 50, red_spawn + 50), rand_range(-50, 50), rand_range(-500, 500)))
+		return(Vector3(randf_range(red_spawn - 50, red_spawn + 50), randf_range(-50, 50), randf_range(-500, 500)))
 	"""
 
 

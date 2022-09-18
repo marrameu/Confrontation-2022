@@ -1,4 +1,4 @@
-tool
+@tool
 extends VisualShaderNodeCustom
 class_name VisualShaderFBMWarpTexture
 
@@ -12,7 +12,7 @@ func _get_category():
 
 
 func _get_description():
-	return "fBm-warp Texture"
+	return "fBm-warp Texture2D"
 
 
 func _get_return_icon_type():

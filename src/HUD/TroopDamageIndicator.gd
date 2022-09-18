@@ -14,4 +14,4 @@ func _process(delta):
 	var z_cross = direction.cross(t.basis_xform(Vector2(0, 1)))
 	var prova = Vector2(-z_dot, z_cross).normalized()
 	var rot : float = Vector2().angle_to_point(prova)
-	rect_rotation = rad2deg(rot)
+	rotation = rad_to_deg(rot)

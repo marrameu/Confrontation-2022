@@ -1,7 +1,7 @@
 extends "AIShipState.gd"
 
 
-var target_ship : Spatial
+var target_ship : Node3D
 
 
 func update(_delta):
@@ -13,9 +13,9 @@ func update(_delta):
 		emit_signal("finished", "choose_objective")
 		return
 	
-	owner.input.target = target_ship.translation
+	owner.input.target = target_ship.position
 	owner.input.des_throttle = 1.0 # turbo tmb
-	if owner.translation.distance_to(target_ship.translation) < 1000:
+	if owner.position.distance_to(target_ship.position) < 1000:
 		var closest_enemy = closest_enemy()
 		if closest_enemy:
 			owner.shooting.target = closest_enemy

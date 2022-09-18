@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/Asteroid1/Meteorit_baked_001.material" type="Material" id=1]
 
-[sub_resource type="CapsuleShape" id=5]
+[sub_resource type="CapsuleShape3D" id=5]
 radius = 12.8902
 height = 17.249
 
@@ -21,13 +21,13 @@ surfaces/0 = {
 "vertex_count": 5016
 }
 
-[node name="Asteroid_Debug" type="StaticBody"]
+[node name="Asteroid_Debug" type="StaticBody3D"]
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 5 )
 
-[node name="Meteoritlod1" type="MeshInstance" parent="."]
+[node name="Meteoritlod1" type="MeshInstance3D" parent="."]
 mesh = SubResource( 3 )
 skeleton = NodePath("../..")
 material/0 = null

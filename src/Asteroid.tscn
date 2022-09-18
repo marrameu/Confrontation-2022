@@ -22,26 +22,26 @@ surfaces/0 = {
 "vertex_count": 5016
 }
 
-[sub_resource type="CapsuleShape" id=6]
+[sub_resource type="CapsuleShape3D" id=6]
 radius = 10.9704
 height = 13.8872
 
-[sub_resource type="CapsuleShape" id=7]
+[sub_resource type="CapsuleShape3D" id=7]
 radius = 16.0021
 height = 18.583
 
-[node name="Asteroid" type="StaticBody" groups=["Asteroids", "Damagable"]]
+[node name="Asteroid" type="StaticBody3D" groups=["Asteroids", "Damagable"]]
 collision_mask = 0
 script = ExtResource( 2 )
 
-[node name="Meteoritlod1" type="MeshInstance" parent="."]
+[node name="Meteoritlod1" type="MeshInstance3D" parent="."]
 mesh = SubResource( 5 )
 
 [node name="HealthSystem" parent="." instance=ExtResource( 1 )]
 MAX_HEALTH = 1200
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 6 )
 
 [node name="Destruction" type="Node" parent="."]
@@ -49,13 +49,13 @@ script = ExtResource( 4 )
 shard_template = ExtResource( 6 )
 shard_scene = ExtResource( 5 )
 
-[node name="DamageArea" type="Area" parent="."]
+[node name="DamageArea" type="Area3D" parent="."]
 collision_layer = 256
 collision_mask = 0
 monitoring = false
 
-[node name="CollisionShape2" type="CollisionShape" parent="DamageArea"]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
+[node name="CollisionShape2" type="CollisionShape3D" parent="DamageArea"]
+transform = Transform3D( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 7 )
 
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]

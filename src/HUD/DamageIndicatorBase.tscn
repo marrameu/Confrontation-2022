@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/interface/damage_indicator.png" type="Texture" id=1]
+[ext_resource path="res://assets/interface/damage_indicator.png" type="Texture2D" id=1]
 [ext_resource path="res://src/HUD/DamageIndicator.gd" type="Script" id=2]
 
 [node name="DamageIndicator" type="Control"]
@@ -15,9 +15,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -19.0
-margin_top = -40.0
-margin_right = 21.0
+offset_left = -19.0
+offset_top = -40.0
+offset_right = 21.0
 
 [node name="TextureRect" type="TextureRect" parent="TexturePivot"]
 modulate = Color( 0.627451, 0.27451, 0.27451, 1 )
@@ -25,11 +25,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -30.0
-margin_top = -19.0
-margin_right = 10.0
-margin_bottom = 21.0
-rect_rotation = -38.2
+offset_left = -30.0
+offset_top = -19.0
+offset_right = 10.0
+offset_bottom = 21.0
+rotation = -38.2
 texture = ExtResource( 1 )
 expand = true
 

@@ -1,4 +1,4 @@
-tool
+@tool
 extends VisualShaderNodeCustom
 class_name VisualShaderWaveTexture
 
@@ -12,7 +12,7 @@ func _get_category():
 
 
 func _get_description():
-	return "Wave-noise Texture (based on the Blender Foundation Wave texture)"
+	return "Wave-noise Texture2D (based checked the Blender Foundation Wave texture)"
 
 
 func _get_return_icon_type():
@@ -96,13 +96,13 @@ func _get_global_code(mode):
 		}
 
 
-		/* === Based on The Blender Foundation shader
+		/* === Based checked The Blender Foundation shader
 		@ https://git.blender.org/gitweb/gitweb.cgi/blender.git/blob/HEAD:/source/blender/gpu/shaders/material/gpu_shader_material_tex_wave.glsl
 		______________________________________________________________________________________________________________________________________*/
 
 		/* [ type = 0 (rings) | type = 1 (bands) ], [ profile = 0 (sine) | profile = 1 (saw) | profile = 2 (triangle) ] */
 		float waveTexture(vec3 point_in, float scale, int type, float distortion, float phase, int profile) {
-			point_in = (point_in + 0.000001) * 0.999999; //prevent precision issues on unit coordinates
+			point_in = (point_in + 0.000001) * 0.999999; //prevent precision issues checked unit coordinates
 			point_in = (scale != 0.0) ? (point_in * scale) : point_in;
 			float n = 0.0;
 

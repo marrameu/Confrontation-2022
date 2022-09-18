@@ -76,7 +76,7 @@ func _process(delta):
 func set_player_input() -> void:
 	pass
 	
-	var ship_camera : Camera = get_node("/root/Main").players_cameras[get_parent().number_of_player - 1].ship_camera
+	var ship_camera : Camera3D = get_node("/root/Main").players_cameras[get_parent().number_of_player - 1].ship_camera
 	var player = get_node("/root/Main").local_players[get_parent().number_of_player - 1]
 	if not player: # Mirar si es pot treure aquesta comporvació
 		return

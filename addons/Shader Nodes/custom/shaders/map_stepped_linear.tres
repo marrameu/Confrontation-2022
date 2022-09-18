@@ -25,17 +25,17 @@ float steppedLinear(float value, float from_min, float from_max, float to_min, f
 size = Vector2( 886, 351 )
 expression = "Fac = steppedLinear(Value, From_Min, From_Max, To_Min, To_Max, Steps);"
 
-[sub_resource type="VisualShaderNodeScalarConstant" id=4]
+[sub_resource type="VisualShaderNodeFloatConstant" id=4]
 
-[sub_resource type="VisualShaderNodeScalarConstant" id=5]
+[sub_resource type="VisualShaderNodeFloatConstant" id=5]
 constant = 1.0
 
-[sub_resource type="VisualShaderNodeScalarConstant" id=6]
+[sub_resource type="VisualShaderNodeFloatConstant" id=6]
 
-[sub_resource type="VisualShaderNodeScalarConstant" id=7]
+[sub_resource type="VisualShaderNodeFloatConstant" id=7]
 constant = 1.0
 
-[sub_resource type="VisualShaderNodeScalarConstant" id=8]
+[sub_resource type="VisualShaderNodeFloatConstant" id=8]
 constant = 3.0
 
 [resource]
@@ -141,4 +141,4 @@ nodes/fragment/9/node = SubResource( 8 )
 nodes/fragment/9/position = Vector2( -920, 500 )
 nodes/fragment/10/node = SubResource( 1 )
 nodes/fragment/10/position = Vector2( -900, 20 )
-nodes/fragment/connections = PoolIntArray( 5, 0, 3, 1, 6, 0, 3, 2, 7, 0, 3, 3, 8, 0, 3, 4, 3, 0, 0, 0, 9, 0, 3, 5, 10, 0, 3, 0 )
+nodes/fragment/connections = PackedInt32Array( 5, 0, 3, 1, 6, 0, 3, 2, 7, 0, 3, 3, 8, 0, 3, 4, 3, 0, 0, 0, 9, 0, 3, 5, 10, 0, 3, 0 )

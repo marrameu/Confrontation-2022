@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 class_name ShipPhysics
 
@@ -36,7 +36,7 @@ func _process(delta : float) -> void:
 	match state:
 		States.FLYING:
 			if owner.dead:
-				add_torque(Vector3(0, 0, 10), delta)
+				apply_torque(Vector3(0, 0, 10), delta)
 				return
 			
 			drifting = owner.input.drifting
@@ -46,33 +46,33 @@ func _process(delta : float) -> void:
 			# fan força per a frenar (aquí en egeuixen fent (si no, no pararia), però més a poc a poc)
 			
 			if not drifting:
-				add_force(applied_linear_force, delta)
+				apply_force(delta, applied_linear_force)
 			else:
-				add_force(Vector3.ZERO, delta) # apaga els motors del tot, sols roman la inèrcia
+				apply_force(delta, Vector3.ZERO) # apaga els motors del tot, sols roman la inèrcia
 			
-			add_torque(applied_angular_force, delta)
+			apply_torque(applied_angular_force, delta)
 		
 		States.LEAVING:
 			owner.set_linear_velocity(Vector3(0, 2.5, 0)) 
 		
 		States.LANDING:
 			# primer que abaixi la velocitat
-			owner.linear_velocity = owner.linear_velocity.linear_interpolate(Vector3(0, -10, 0), 10 * delta)
+			owner.linear_velocity = owner.linear_velocity.lerp(Vector3(0, -10, 0), 10 * delta)
 			var rot_y := Vector3(0, rotation.y, 0)
 			var rot_diff_y = rot_y - owner.rotation
 			var target_angular_velocity_y = rot_diff_y * 0.1
 			print(target_angular_velocity_y)
-			owner.angular_velocity = owner.angular_velocity.linear_interpolate(rot_diff_y, 10 * delta)
-			# ship.set_mode(RigidBody.MODE_KINEMATIC)
+			owner.angular_velocity = owner.angular_velocity.lerp(rot_diff_y, 10 * delta)
+			# ship.set_mode(RigidBody3D.FREEZE_MODE_KINEMATIC)
 			"""
 			if not stabilized and not stabilizing:
 				_stabilize_rotation()
 				ascense_vel = lerp(ascense_vel, DESIRED_ASCENSE_VEL, 0.1)
-				ship.translation += Vector3(0, ascense_vel * delta, 0)
+				ship.position += Vector3(0, ascense_vel * delta, 0)
 				
 			elif stabilized:
 				descense_vel = lerp(descense_vel, DESIRED_DESCENSE_VEL, 0.1)
-				ship.translation += Vector3(0, -descense_vel * delta, 0)
+				ship.position += Vector3(0, -descense_vel * delta, 0)
 			"""
 			if get_node("Tail").is_colliding():
 				owner.state = States.LANDED
@@ -81,7 +81,7 @@ func _process(delta : float) -> void:
 				stabilized = false
 		
 		States.LANDED:
-			owner.set_mode(RigidBody.MODE_RIGID)
+			owner.set_mode(RigidBody3D.MODE_RIGID)
 
 
 func set_physics_input(linear_input : Vector3, angular_input : Vector3, delta):
@@ -113,17 +113,17 @@ func set_physics_input(linear_input : Vector3, angular_input : Vector3, delta):
 	applied_angular_force = angular_input * angular_force * multiplier
 	# lerp per a derrapar
 	#var a = linear_input * linear_force
-	#applied_linear_force = applied_linear_force.linear_interpolate(ship.global_transform.basis.xform(a), delta)
+	#applied_linear_force = applied_linear_force.lerp(ship.global_transform.basis * a, delta)
 	
 	var a = linear_input * linear_force
-	applied_linear_force = a #applied_linear_force.linear_interpolate(ship.global_transform.basis.xform(a), delta)
+	applied_linear_force = a #applied_linear_force.lerp(ship.global_transform.basis * a, delta)
 
 
-func add_force(force : Vector3, delta : float):
+func apply_force(delta : float, force : Vector3):
 	# lerp per a derrapar
-	desired_linear_force = desired_linear_force.linear_interpolate(owner.global_transform.basis.xform(force), delta / linear_drag * 10)
+	desired_linear_force = desired_linear_force.lerp(owner.global_transform.basis * force, delta / linear_drag * 10)
 	# lerp per a accelerar/frenar
-	# desired_linear_force = desired_linear_force.linear_interpolate(desired_linear_force, delta / linear_drag * 10)
+	# desired_linear_force = desired_linear_force.lerp(desired_linear_force, delta / linear_drag * 10)
 	owner.linear_velocity = desired_linear_force
 	
 	var b = owner.transform.basis
@@ -133,15 +133,15 @@ func add_force(force : Vector3, delta : float):
 	vel.z = b.z.dot(v_nor) * v_len
 	vel.x = b.x.dot(v_nor) * v_len
 	vel.y = b.y.dot(v_nor) * v_len
-	get_node("../Debug/Pito").translation = vel
+	get_node("../Debug/Pito").position = vel
 
 
-func add_torque(torque : Vector3, delta : float):
+func apply_torque(torque : Vector3, delta : float):
 	#if drifting:
 	#	torque *= DRIFTING_TORQUE_MULTIPLIER
 	
-	desired_angular_force = desired_angular_force.linear_interpolate(torque, delta / angular_drag * 10)
-	owner.angular_velocity = owner.global_transform.basis.xform(desired_angular_force)
+	desired_angular_force = desired_angular_force.lerp(torque, delta / angular_drag * 10)
+	owner.angular_velocity = owner.global_transform.basis * desired_angular_force
 
 
 func _stabilize_rotation(time : float = 2.0) -> void:

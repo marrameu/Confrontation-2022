@@ -1,9 +1,9 @@
-extends Area
+extends Area3D
 
 
-func can_interact(troop : Spatial) -> bool:
+func can_interact(troop : Node3D) -> bool:
 	return false
 
 
-func interact(troop : Spatial) -> void: # : Troop
+func interact(troop : Node3D) -> void: # : Troop
 	pass

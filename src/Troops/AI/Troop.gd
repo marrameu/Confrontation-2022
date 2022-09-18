@@ -1,17 +1,17 @@
-extends KinematicBody
+extends CharacterBody3D
 
 class_name Troop
 
 signal died
 
 # Materials
-export var body : NodePath
+@export var body : NodePath
 
 var pilot_man : PilotManager
 var blue_team : bool
 
 # Atack
-var current_enemy : Spatial
+var current_enemy : Node3D
 
 var dead := false
 
@@ -32,14 +32,14 @@ var wait_to_init := true
 
 var wait_to_shoot := false
 
-export var red_mat : Material
-export var blue_mat : Material
+@export var red_mat : Material
+@export var blue_mat : Material
 
-onready var agent: NavigationAgent = $NavigationAgent
+@onready var agent: NavigationAgent3D = $NavigationAgent3D
 
 
 func _ready():
-	$CheckCurrentEnemyTimer.wait_time = rand_range(2.5, 3.5)
+	$CheckCurrentEnemyTimer.wait_time = randf_range(2.5, 3.5)
 	$AnimationTree.set("parameters/StateMachine/walk/move/3/blend_position", 1)
 	blue_team = pilot_man.blue_team
 	$TeamIndicator.material_override = blue_mat if blue_team else red_mat
@@ -47,8 +47,8 @@ func _ready():
 
 func _physics_process(delta):
 	#$PlayerMesh.moving = !$PathMaker.finished
-	if get_tree().has_network_peer():
-		if not get_tree().is_network_server():
+	if get_tree().has_multiplayer_peer():
+		if not get_tree().is_server():
 			return
 	
 	if wait_to_init:
@@ -56,8 +56,8 @@ func _physics_process(delta):
 
 
 func _on_HealthSystem_die(attacker) -> void:
-	if get_tree().has_network_peer():
-		if get_tree().is_network_server():
+	if get_tree().has_multiplayer_peer():
+		if get_tree().is_server():
 			($RespawnTimer as Timer).start()
 			rpc("die")
 	else:
@@ -69,9 +69,9 @@ func _on_HealthSystem_die(attacker) -> void:
 
 func set_material() -> void:
 	if get_node("TroopManager").m_team == get_node("/root/Main").local_players[0].get_node("TroopManager").m_team:
-		get_node(body).set_surface_material(2, load("res://assets/models/mannequiny/Azul_R.material"))
+		get_node(body).set_surface_override_material(2, load("res://assets/models/mannequiny/Azul_R.material"))
 	else:
-		get_node(body).set_surface_material(4, load("res://assets/models/mannequiny/Azul_L.material"))
+		get_node(body).set_surface_override_material(4, load("res://assets/models/mannequiny/Azul_L.material"))
 
 
 func _on_InitTimer_timeout():

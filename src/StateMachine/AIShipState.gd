@@ -1,11 +1,11 @@
-tool
+@tool
 extends "res://src/StateMachine/State.gd"
 
 var my_team_big_ships_wo_shields : Array
 var enemy_big_ships_wo_shields : Array
 
 
-func _get_configuration_warning() -> String:
+func _get_configuration_warnings() -> String:
 	var warning := ""
 	if owner != Ship:
 		warning = "L''owner' de l'estat no és una nau"
@@ -22,7 +22,7 @@ func closest_enemy(min_dist : float = 750.0) -> Ship:
 	for ship in get_tree().get_nodes_in_group("Ships"):
 		if ship.pilot_man:
 			if ship.blue_team != owner.blue_team:
-				var dist = owner.translation.distance_to(ship.translation)
+				var dist = owner.position.distance_to(ship.position)
 				if dist < clos_dist:
 					clos_dist = dist
 					clos_enemy = ship
@@ -31,15 +31,15 @@ func closest_enemy(min_dist : float = 750.0) -> Ship:
 
 
 func closest_enemy_to_cs(plus_dist : float = 500.0) -> Ship:
-	var own_cs : Spatial = get_node_or_null("/root/Level/BigShips/CapitalShipBlue") if owner.blue_team else get_node_or_null("/root/Level/BigShips/CapitalShipRed")
+	var own_cs : Node3D = get_node_or_null("/root/Level/BigShips/CapitalShipBlue") if owner.blue_team else get_node_or_null("/root/Level/BigShips/CapitalShipRed")
 	if not own_cs:
 		return null
-	var closest_dsit : float = owner.translation.distance_to(own_cs.translation) + plus_dist
+	var closest_dsit : float = owner.position.distance_to(own_cs.position) + plus_dist
 	var clos_enemy : Ship
 	for ship in get_tree().get_nodes_in_group("Ships"):
 		if ship.pilot_man:
 			if ship.blue_team != owner.blue_team:
-				var dist = ship.translation.distance_to(own_cs.translation)
+				var dist = ship.position.distance_to(own_cs.position)
 				if dist < closest_dsit:
 					closest_dsit = dist
 					clos_enemy = ship
@@ -48,12 +48,12 @@ func closest_enemy_to_cs(plus_dist : float = 500.0) -> Ship:
 
 
 func closest_big_ship(type : String):
-	# var own_cs : Spatial = get_node("/root/Level/BigShips/CapitalShipBlue") if owner.blue_team else get_node("/root/Level/BigShips/CapitalShipRed")
+	# var own_cs : Node3D = get_node("/root/Level/BigShips/CapitalShipBlue") if owner.blue_team else get_node("/root/Level/BigShips/CapitalShipRed")
 	var closest_dsit := INF
-	var clos_enemy : Spatial
+	var clos_enemy : Node3D
 	for ship in get_tree().get_nodes_in_group(type):
 		if ship.blue_team != owner.blue_team:
-			var dist = ship.translation.distance_to(owner.translation)
+			var dist = ship.position.distance_to(owner.position)
 			if dist < closest_dsit:
 				closest_dsit = dist
 				clos_enemy = ship
@@ -91,15 +91,15 @@ func _on_big_ship_shields_down(ship):
 func clean_bigships_w_shields(ships_array) -> Array:
 	var pos : int = 0
 	while pos < ships_array.size():
-		var remove := false
+		var remove_at := false
 		if not ships_array[pos]:
-			remove = true
+			remove_at = true
 		elif not weakref(ships_array[pos]).get_ref():
-			remove = true
+			remove_at = true
 		elif ships_array[pos].get_node("HealthSystem").shield:
-			remove = true
-		if remove:
-			ships_array.remove(pos)
+			remove_at = true
+		if remove_at:
+			ships_array.remove_at(pos)
 			pos -= 1
 		pos += 1
 	return ships_array

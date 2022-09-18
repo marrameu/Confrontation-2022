@@ -70,13 +70,13 @@ float smoothVoronoi(vec3 coords, float scale, float randomness, float smoothness
 size = Vector2( 685, 342 )
 expression = "Fac = smoothVoronoi(Vector, Scale, Randomness, Smoothness);"
 
-[sub_resource type="VisualShaderNodeScalarConstant" id=4]
+[sub_resource type="VisualShaderNodeFloatConstant" id=4]
 constant = 3.0
 
-[sub_resource type="VisualShaderNodeScalarConstant" id=5]
+[sub_resource type="VisualShaderNodeFloatConstant" id=5]
 constant = 50.0
 
-[sub_resource type="VisualShaderNodeScalarConstant" id=6]
+[sub_resource type="VisualShaderNodeFloatConstant" id=6]
 constant = 0.03
 
 [sub_resource type="VisualShaderNodeTransformVecMult" id=7]
@@ -159,7 +159,7 @@ void vertex() {
 
 void fragment() {
 // Input:10
-	mat4 n_out10p0 = CAMERA_MATRIX;
+	mat4 n_out10p0 = INV_VIEW_MATRIX;
 
 // Input:9
 	vec3 n_out9p0 = VERTEX;
@@ -278,4 +278,4 @@ nodes/fragment/9/node = SubResource( 8 )
 nodes/fragment/9/position = Vector2( -1280, 560 )
 nodes/fragment/10/node = SubResource( 1 )
 nodes/fragment/10/position = Vector2( -1242, 475.5 )
-nodes/fragment/connections = PoolIntArray( 3, 0, 0, 0, 7, 0, 3, 3, 6, 0, 3, 2, 5, 0, 3, 1, 8, 0, 3, 0, 9, 0, 8, 1, 10, 0, 8, 0 )
+nodes/fragment/connections = PackedInt32Array( 3, 0, 0, 0, 7, 0, 3, 3, 6, 0, 3, 2, 5, 0, 3, 1, 8, 0, 3, 0, 9, 0, 8, 1, 10, 0, 8, 0 )

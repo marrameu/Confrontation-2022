@@ -38,42 +38,42 @@
 [sub_resource type="PhysicsMaterial" id=6]
 bounce = 0.5
 
-[sub_resource type="BoxShape" id=1]
+[sub_resource type="BoxShape3D" id=1]
 extents = Vector3( 3.70997, 1.34271, 7.36319 )
 
-[sub_resource type="BoxShape" id=7]
+[sub_resource type="BoxShape3D" id=7]
 extents = Vector3( 7.10742, 4.44127, 10.355 )
 
-[sub_resource type="GradientTexture" id=8]
+[sub_resource type="GradientTexture2D" id=8]
 gradient = ExtResource( 16 )
 
-[sub_resource type="CubeMesh" id=4]
+[sub_resource type="BoxMesh" id=4]
 
 [sub_resource type="SphereMesh" id=5]
 
-[node name="Ship" type="RigidBody" groups=["Damagable", "Ships"]]
+[node name="Ship" type="RigidBody3D" groups=["Damagable", "Ships"]]
 collision_layer = 4
 mass = 5000.0
 physics_material_override = SubResource( 6 )
 continuous_cd = true
-contacts_reported = 1
+max_contacts_reported = 1
 contact_monitor = true
 script = ExtResource( 1 )
 red_mat = ExtResource( 13 )
 blue_mat = ExtResource( 12 )
 grey_mat = ExtResource( 33 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51836 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51836 )
 shape = SubResource( 1 )
 
-[node name="HurtBox" type="Area" parent="." groups=["HurtBox"]]
+[node name="HurtBox" type="Area3D" parent="." groups=["HurtBox"]]
 collision_layer = 256
 collision_mask = 0
 monitoring = false
 
-[node name="CollisionShape" type="CollisionShape" parent="HurtBox"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51836 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51836 )
 shape = SubResource( 7 )
 
 [node name="HealthSystem" parent="." instance=ExtResource( 9 )]
@@ -83,7 +83,7 @@ time_before_shield_repair = 10.0
 shield_repair_per_sec = 100.0
 MAX_HEALTH = 1500
 
-[node name="Input" type="Spatial" parent="."]
+[node name="Input" type="Node3D" parent="."]
 script = ExtResource( 4 )
 
 [node name="ReloadTurboTimer" type="Timer" parent="Input"]
@@ -125,26 +125,26 @@ attenuation_filter_db = -5.0
 stream = ExtResource( 18 )
 bus = "Sounds"
 
-[node name="Physics" type="Spatial" parent="."]
+[node name="Physics" type="Node3D" parent="."]
 script = ExtResource( 2 )
 
 [node name="Tween" type="Tween" parent="Physics"]
 
-[node name="Tail" type="RayCast" parent="Physics"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.7079, 0 )
+[node name="Tail" type="RayCast3D" parent="Physics"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.7079, 0 )
 enabled = true
 cast_to = Vector3( 0, -1.5, 0 )
 debug_shape_custom_color = Color( 1, 0, 0, 1 )
 debug_shape_thickness = 5
 
-[node name="CameraPosition" type="Position3D" parent="."]
-transform = Transform( -1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 0, 5, -15 )
+[node name="CameraPosition" type="Marker3D" parent="."]
+transform = Transform3D( -1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 0, 5, -15 )
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="FPCameraPosition" type="Position3D" parent="."]
-transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.01986, 3.31544 )
+[node name="FPCameraPosition" type="Marker3D" parent="."]
+transform = Transform3D( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.01986, 3.31544 )
 
 [node name="ShipMesh" parent="." instance=ExtResource( 5 )]
 
@@ -155,19 +155,19 @@ material_override = ExtResource( 34 )
 material_override = ExtResource( 34 )
 
 [node name="ThrusterFlame" parent="ShipMesh" instance=ExtResource( 6 )]
-transform = Transform( 0.00949448, 0, 0.999955, 0, 1, 0, -0.999955, 0, 0.00949448, 0, 0.62, -11.2598 )
+transform = Transform3D( 0.00949448, 0, 0.999955, 0, 1, 0, -0.999955, 0, 0.00949448, 0, 0.62, -11.2598 )
 visible = false
 Speed = 0.1
 Energy = 0.1
 TextureUniform2 = SubResource( 8 )
 
 [node name="Thuster" parent="ShipMesh" instance=ExtResource( 32 )]
-transform = Transform( -8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -0.0449913, 0.768863, -8.47611 )
+transform = Transform3D( -8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -0.0449913, 0.768863, -8.47611 )
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Shooting" type="Spatial" parent="."]
+[node name="Shooting" type="Node3D" parent="."]
 script = ExtResource( 3 )
 
 [node name="Audio1" type="AudioStreamPlayer3D" parent="Shooting"]
@@ -203,17 +203,17 @@ stream = ExtResource( 21 )
 volume_db = 15.0
 bus = "Sounds"
 
-[node name="RayCast" type="RayCast" parent="Shooting"]
+[node name="RayCast3D" type="RayCast3D" parent="Shooting"]
 enabled = true
 cast_to = Vector3( 0, 0, 1500 )
 debug_shape_custom_color = Color( 1, 0, 0, 1 )
 debug_shape_thickness = 5
 
-[node name="SpectateCamPivot" type="Spatial" parent="."]
+[node name="SpectateCamPivot" type="Node3D" parent="."]
 script = ExtResource( 17 )
 
-[node name="SpectateCamPos" type="Position3D" parent="SpectateCamPivot"]
-transform = Transform( -0.982648, 0.0210385, -0.184281, -9.91625e-09, 0.993546, 0.113429, 0.185478, 0.11146, -0.976307, -5.0953, 10.1634, -29.3627 )
+[node name="SpectateCamPos" type="Marker3D" parent="SpectateCamPivot"]
+transform = Transform3D( -0.982648, 0.0210385, -0.184281, -9.91625e-09, 0.993546, 0.113429, 0.185478, 0.11146, -0.976307, -5.0953, 10.1634, -29.3627 )
 
 [node name="LeaveTimer" type="Timer" parent="."]
 wait_time = 2.5
@@ -222,10 +222,10 @@ one_shot = true
 [node name="PlayerHUD" parent="." instance=ExtResource( 19 )]
 
 [node name="PlayerShipInterior" parent="." instance=ExtResource( 20 )]
-transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 3.7104 )
+transform = Transform3D( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 3.7104 )
 visible = false
 
-[node name="Listener" type="Listener" parent="."]
+[node name="AudioListener3D" type="AudioListener3D" parent="."]
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 25 )
@@ -252,48 +252,48 @@ script = ExtResource( 29 )
 [node name="PushForward" type="Node" parent="StateMachine"]
 script = ExtResource( 28 )
 
-[node name="ColDetects" type="Spatial" parent="."]
+[node name="ColDetects" type="Node3D" parent="."]
 
-[node name="ColDetectLeft" type="RayCast" parent="ColDetects"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 0 )
+[node name="ColDetectLeft" type="RayCast3D" parent="ColDetects"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 0 )
 enabled = true
 cast_to = Vector3( 150, 0, 300 )
 collision_mask = 13
 
-[node name="ColDetectRight" type="RayCast" parent="ColDetects"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, 0 )
+[node name="ColDetectRight" type="RayCast3D" parent="ColDetects"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, 0 )
 enabled = true
 cast_to = Vector3( -150, 0, 300 )
 collision_mask = 13
 
-[node name="ColDetectForward" type="RayCast" parent="ColDetects"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.5584 )
+[node name="ColDetectForward" type="RayCast3D" parent="ColDetects"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.5584 )
 enabled = true
 cast_to = Vector3( 0, 0, 300 )
 collision_mask = 13
 
-[node name="ColDetectUp" type="RayCast" parent="ColDetects"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+[node name="ColDetectUp" type="RayCast3D" parent="ColDetects"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
 enabled = true
 cast_to = Vector3( 0, 150, 300 )
 collision_mask = 13
 
-[node name="ColDetectDown" type="RayCast" parent="ColDetects"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0 )
+[node name="ColDetectDown" type="RayCast3D" parent="ColDetects"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0 )
 enabled = true
 cast_to = Vector3( 0, -150, 300 )
 collision_mask = 13
 
-[node name="Debug" type="Spatial" parent="."]
+[node name="Debug" type="Node3D" parent="."]
 visible = false
 
-[node name="Pito" type="MeshInstance" parent="Debug"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.75062, 0 )
+[node name="Pito" type="MeshInstance3D" parent="Debug"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.75062, 0 )
 mesh = SubResource( 4 )
 skeleton = NodePath("../..")
 
-[node name="CPUParticles" type="CPUParticles" parent="Debug"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.85104 )
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Debug"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.85104 )
 local_coords = false
 mesh = SubResource( 5 )
 gravity = Vector3( 0, 0, 0 )
@@ -301,14 +301,14 @@ gravity = Vector3( 0, 0, 0 )
 [node name="ExitTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Interaction" type="Area" parent="."]
+[node name="Interaction" type="Area3D" parent="."]
 collision_layer = 32768
 collision_mask = 0
 monitoring = false
 script = ExtResource( 30 )
 
-[node name="CollisionShape2" type="CollisionShape" parent="Interaction"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51836 )
+[node name="CollisionShape2" type="CollisionShape3D" parent="Interaction"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51836 )
 shape = SubResource( 1 )
 
 [node name="EnginesAudio" type="AudioStreamPlayer3D" parent="."]

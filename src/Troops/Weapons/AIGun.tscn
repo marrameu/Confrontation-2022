@@ -4,7 +4,7 @@
 [ext_resource path="res://src/Troops/Weapons/AIGun.gd" type="Script" id=2]
 [ext_resource path="res://assets/models/weapons/Rifle/RifleModel.tscn" type="PackedScene" id=3]
 
-[sub_resource type="CubeMesh" id=1]
+[sub_resource type="BoxMesh" id=1]
 size = Vector3( 0.1, 0.1, 20 )
 
 [node name="AIGun" instance=ExtResource( 1 )]
@@ -13,11 +13,11 @@ offset = Vector2( 15, 15 )
 
 [node name="Rifle" parent="Mesh" index="0" instance=ExtResource( 3 )]
 
-[node name="RayCast" parent="." index="1"]
+[node name="RayCast3D" parent="." index="1"]
 collision_mask = 769
 
-[node name="MeshInstance" type="MeshInstance" parent="RayCast" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.255 )
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RayCast3D" index="0"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.255 )
 visible = false
 mesh = SubResource( 1 )
 

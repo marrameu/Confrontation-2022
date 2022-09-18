@@ -39,12 +39,12 @@ func _on_HealthSystem_die(attacker : Node):
 	t.set_wait_time(20)
 	self.add_child(t)
 	t.start()
-	t.connect("timeout", self, "die")
+	t.connect("timeout",Callable(self,"die"))
 
 
 func die():
-	$ExplosionArea/CollisionShape.disabled = false
-	yield(get_tree().create_timer(1), "timeout")
+	$ExplosionArea/CollisionShape3D.disabled = false
+	await get_tree().create_timer(1).timeout
 	emit_signal("destroyed")
 	queue_free()
 

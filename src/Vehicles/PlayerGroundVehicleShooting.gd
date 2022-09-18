@@ -54,9 +54,9 @@ func _process(delta):
 
 
 func shoot_target() -> Vector3:
-	# Camera
-	var current_cam : Camera = owner.cam
-	var space_state = get_parent().get_world().direct_space_state
+	# Camera3D
+	var current_cam : Camera3D = owner.cam
+	var space_state = get_parent().get_world_3d().direct_space_state
 	
 	var camera_width_center := 0.0
 	var camera_height_center := 0.0
@@ -65,9 +65,9 @@ func shoot_target() -> Vector3:
 	var shoot_target := Vector3()
 	
 	if current_cam:
-		var viewport : Viewport = get_viewport()
+		var viewport : SubViewport = get_viewport()
 		"""
-		if get_tree().has_network_peer():
+		if get_tree().has_multiplayer_peer():
 			viewport = get_node("/root/Main/Splitscreen")._renders[0].viewport
 		else:
 			viewport = get_node("/root/Main/Splitscreen")._renders[get_parent().number_of_player - 1].viewport
@@ -76,7 +76,7 @@ func shoot_target() -> Vector3:
 		camera_height_center = viewport.get_visible_rect().size.y / 2
 		
 		# TEST
-		var cursor_pos = owner.get_node("PlayerHUD").get_node("%Crosshair").rect_position - owner.get_node("PlayerHUD").crosshair_center_pos# .clamped(350)
+		var cursor_pos = owner.get_node("PlayerHUD").get_node("%Crosshair").position - owner.get_node("PlayerHUD").crosshair_center_pos# super.clamp(350)
 		"""
 		if LocalMultiplayer.number_of_players > 1:
 			cursor_pos /= 2
@@ -89,7 +89,7 @@ func shoot_target() -> Vector3:
 		shoot_normal = shoot_origin + current_cam.project_ray_normal(Vector2(camera_width_center, camera_height_center)) * shoot_range
 		
 		var result = space_state.intersect_ray(shoot_origin, shoot_normal, [get_parent()])
-		if result.empty():
+		if result.is_empty():
 			var ray_dir = current_cam.project_ray_normal(Vector2(camera_width_center, camera_height_center))
 			shoot_target = shoot_origin + ray_dir * shoot_range
 		else:

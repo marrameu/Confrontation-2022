@@ -7,14 +7,14 @@
 
 [node name="PlayerMissileLauncher" instance=ExtResource( 1 )]
 
-[node name="Skeleton" parent="Model" index="0"]
+[node name="Skeleton3D" parent="Model" index="0"]
 bones/36/bound_children = [  ]
 
-[node name="BoneAttachment" parent="Model/Skeleton" index="2"]
-transform = Transform( -0.0504965, -0.987391, -0.150033, -0.31561, -0.12675, 0.940385, -0.947543, 0.0948383, -0.30523, -0.20309, 1.08448, 0.192637 )
+[node name="BoneAttachment3D" parent="Model/Skeleton3D" index="2"]
+transform = Transform3D( -0.0504965, -0.987391, -0.150033, -0.31561, -0.12675, 0.940385, -0.947543, 0.0948383, -0.30523, -0.20309, 1.08448, 0.192637 )
 
-[node name="MissileLauncher" parent="Model/Skeleton/BoneAttachment/Weapons" index="0" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 2.23517e-08, -2.79397e-09, 1, -1.49012e-08, -7.45058e-09, 1.49012e-08, 1, 0, 0, 0 )
+[node name="MissileLauncher" parent="Model/Skeleton3D/BoneAttachment3D/Weapons" index="0" instance=ExtResource( 2 )]
+transform = Transform3D( 1, 0, 2.23517e-08, -2.79397e-09, 1, -1.49012e-08, -7.45058e-09, 1.49012e-08, 1, 0, 0, 0 )
 
 [node name="AnimationTree" parent="." index="9"]
 parameters/StateMachine/playback = SubResource( 1 )

@@ -1,18 +1,18 @@
 # Copyright © 2020 Hugo Locurcio and contributors - MIT License
 # See `LICENSE.md` included in the source distribution for details.
-extends Particles
+extends GPUParticles3D
 class_name LODParticles, "lod_particles.svg"
 
 # If `false`, LOD won't update anymore. This can be used for performance comparison
 # purposes.
-export var enable_lod := true
+@export var enable_lod := true
 
 # The maximum particle emitting distance in units. Past this distance, particles will no longer emit.
-export(float, 0.0, 1000.0, 0.1) var max_emit_distance := 50
+@export var max_emit_distance := 50 # (float, 0.0, 1000.0, 0.1)
 
 # The rate at which LODs will be updated (in seconds). Lower values are more reactive
 # but use more CPU, which is especially noticeable with large amounts of LOD-enabled nodes.
-# Set this accordingly depending on your camera movement speed.
+# Set this accordingly depending checked your camera movement speed.
 # The default value should suit most projects already.
 # Note: Slow cameras don't need to have LOD-enabled objects update their status often.
 # This can overridden by setting the project setting `lod/refresh_rate`.
@@ -36,7 +36,7 @@ func _ready() -> void:
 
 	# Add random jitter to the timer to ensure LODs don't all swap at the same time.
 	randomize()
-	timer += rand_range(0, refresh_rate)
+	timer += randf_range(0, refresh_rate)
 
 # Despite LOD not being related to physics, we chose to run in `_physics_process()`
 # to minimize the amount of method calls per second (and therefore decrease CPU usage).
@@ -45,7 +45,7 @@ func _physics_process(delta: float) -> void:
 		return
 
 	# We need a camera to do the rest.
-	var camera := get_viewport().get_camera()
+	var camera := get_viewport().get_camera_3d()
 	if camera == null:
 		return
 

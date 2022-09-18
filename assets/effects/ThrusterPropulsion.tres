@@ -1,10 +1,10 @@
 [gd_resource type="VisualShader" load_steps=54 format=2]
 
 [sub_resource type="Gradient" id=19]
-offsets = PoolRealArray( 0.41791, 0.552239, 0.646766, 0.676617 )
-colors = PoolColorArray( 0.388235, 0.509804, 0.996078, 1, 0, 0, 0, 1, 0.47451, 0.6, 0.835294, 1, 1, 1, 1, 1 )
+offsets = PackedFloat32Array( 0.41791, 0.552239, 0.646766, 0.676617 )
+colors = PackedColorArray( 0.388235, 0.509804, 0.996078, 1, 0, 0, 0, 1, 0.47451, 0.6, 0.835294, 1, 1, 1, 1, 1 )
 
-[sub_resource type="GradientTexture" id=20]
+[sub_resource type="GradientTexture2D" id=20]
 gradient = SubResource( 19 )
 
 [sub_resource type="VisualShaderNodeTexture" id=21]
@@ -16,16 +16,16 @@ input_name = "uv"
 
 [sub_resource type="Gradient" id=33]
 
-[sub_resource type="GradientTexture" id=34]
+[sub_resource type="GradientTexture2D" id=34]
 gradient = SubResource( 33 )
 
 [sub_resource type="VisualShaderNodeTexture" id=35]
 texture = SubResource( 34 )
 
-[sub_resource type="VisualShaderNodeScalarConstant" id=36]
+[sub_resource type="VisualShaderNodeFloatConstant" id=36]
 constant = 0.5
 
-[sub_resource type="VisualShaderNodeScalarUniform" id=37]
+[sub_resource type="VisualShaderNodeFloatParameter" id=37]
 uniform_name = "Degrees"
 
 [sub_resource type="VisualShaderNodeVectorOp" id=38]
@@ -34,7 +34,7 @@ operator = 1
 
 [sub_resource type="VisualShaderNodeVectorDecompose" id=39]
 
-[sub_resource type="VisualShaderNodeScalarFunc" id=40]
+[sub_resource type="VisualShaderNodeFloatFunc" id=40]
 function = 27
 
 [sub_resource type="OpenSimplexNoise" id=22]
@@ -47,36 +47,36 @@ noise = SubResource( 22 )
 [sub_resource type="VisualShaderNodeTexture" id=24]
 texture = SubResource( 23 )
 
-[sub_resource type="VisualShaderNodeScalarFunc" id=41]
+[sub_resource type="VisualShaderNodeFloatFunc" id=41]
 function = 0
 
-[sub_resource type="VisualShaderNodeScalarFunc" id=42]
+[sub_resource type="VisualShaderNodeFloatFunc" id=42]
 function = 1
 
-[sub_resource type="VisualShaderNodeScalarOp" id=43]
+[sub_resource type="VisualShaderNodeFloatOp" id=43]
 operator = 2
 
-[sub_resource type="VisualShaderNodeScalarOp" id=44]
+[sub_resource type="VisualShaderNodeFloatOp" id=44]
 operator = 2
 
-[sub_resource type="VisualShaderNodeScalarOp" id=45]
+[sub_resource type="VisualShaderNodeFloatOp" id=45]
 operator = 2
 
-[sub_resource type="VisualShaderNodeScalarOp" id=46]
+[sub_resource type="VisualShaderNodeFloatOp" id=46]
 operator = 2
 
-[sub_resource type="VisualShaderNodeScalarOp" id=47]
+[sub_resource type="VisualShaderNodeFloatOp" id=47]
 output_port_for_preview = 0
 operator = 1
 
-[sub_resource type="VisualShaderNodeScalarOp" id=48]
+[sub_resource type="VisualShaderNodeFloatOp" id=48]
 output_port_for_preview = 0
 
-[sub_resource type="VisualShaderNodeScalarOp" id=49]
+[sub_resource type="VisualShaderNodeFloatOp" id=49]
 output_port_for_preview = 0
 default_input_values = [ 0, 0.0, 1, 0.5 ]
 
-[sub_resource type="VisualShaderNodeScalarOp" id=50]
+[sub_resource type="VisualShaderNodeFloatOp" id=50]
 output_port_for_preview = 0
 default_input_values = [ 0, 0.0, 1, 0.5 ]
 
@@ -95,19 +95,19 @@ input_name = "time"
 output_port_for_preview = 0
 operator = 2
 
-[sub_resource type="VisualShaderNodeScalarUniform" id=106]
+[sub_resource type="VisualShaderNodeFloatParameter" id=106]
 uniform_name = "Energy"
 
-[sub_resource type="VisualShaderNodeScalarOp" id=107]
+[sub_resource type="VisualShaderNodeFloatOp" id=107]
 operator = 2
 
-[sub_resource type="VisualShaderNodeScalarUniform" id=108]
+[sub_resource type="VisualShaderNodeFloatParameter" id=108]
 uniform_name = "Speed"
 
-[sub_resource type="VisualShaderNodeTextureUniform" id=109]
+[sub_resource type="VisualShaderNodeTexture2DParameter" id=109]
 uniform_name = "TextureUniform"
 
-[sub_resource type="VisualShaderNodeTextureUniform" id=110]
+[sub_resource type="VisualShaderNodeTexture2DParameter" id=110]
 uniform_name = "TextureUniform2"
 
 [sub_resource type="VisualShaderNodeInput" id=26]
@@ -115,7 +115,7 @@ input_name = "uv"
 
 [sub_resource type="VisualShaderNodeVectorOp" id=27]
 
-[sub_resource type="VisualShaderNodeScalarOp" id=89]
+[sub_resource type="VisualShaderNodeFloatOp" id=89]
 default_input_values = [ 0, 0.0, 1, 2.0 ]
 operator = 2
 
@@ -131,13 +131,13 @@ operator = 3
 [sub_resource type="VisualShaderNodeInput" id=101]
 input_name = "time"
 
-[sub_resource type="VisualShaderNodeScalarUniform" id=102]
+[sub_resource type="VisualShaderNodeFloatParameter" id=102]
 uniform_name = "Intensity"
 
-[sub_resource type="VisualShaderNodeScalarFunc" id=103]
+[sub_resource type="VisualShaderNodeFloatFunc" id=103]
 function = 25
 
-[sub_resource type="VisualShaderNodeScalarOp" id=104]
+[sub_resource type="VisualShaderNodeFloatOp" id=104]
 default_input_values = [ 0, 0.0, 1, 10.0 ]
 operator = 2
 
@@ -157,16 +157,16 @@ input_name = "vertex"
 
 [sub_resource type="VisualShaderNodeVectorDecompose" id=97]
 
-[sub_resource type="VisualShaderNodeScalarOp" id=98]
+[sub_resource type="VisualShaderNodeFloatOp" id=98]
 default_input_values = [ 0, 0.0, 1, 2.0 ]
 operator = 2
 
-[sub_resource type="VisualShaderNodeScalarOp" id=99]
+[sub_resource type="VisualShaderNodeFloatOp" id=99]
 operator = 2
 
 [resource]
 code = "shader_type spatial;
-render_mode depth_draw_alpha_prepass, cull_disabled, specular_schlick_ggx, async_visible;
+render_mode depth_draw_opaque, cull_disabled, specular_schlick_ggx, async_visible;
 
 uniform sampler2D tex_vtx_2;
 uniform float Intensity;
@@ -194,7 +194,7 @@ void vertex() {
 // VectorOp:13
 	vec3 n_out13p0 = n_out3p0 + vec3(n_out15p0);
 
-// Texture:2
+// Texture2D:2
 	vec4 tex_vtx_2_read = texture(tex_vtx_2, n_out13p0.xy);
 	vec3 n_out2p0 = tex_vtx_2_read.rgb;
 	float n_out2p1 = tex_vtx_2_read.a;
@@ -322,7 +322,7 @@ void fragment() {
 	vec3 n_in3p1 = vec3(3.00000, -0.03000, 3.00000);
 	vec3 n_out3p0 = n_out5p0 * n_in3p1;
 
-// Texture:2
+// Texture2D:2
 	vec4 tex_frg_2_read = texture(tex_frg_2, n_out3p0.xy);
 	vec3 n_out2p0 = tex_frg_2_read.rgb;
 	float n_out2p1 = tex_frg_2_read.a;
@@ -384,7 +384,7 @@ nodes/vertex/17/node = SubResource( 103 )
 nodes/vertex/17/position = Vector2( -1160, 620 )
 nodes/vertex/18/node = SubResource( 104 )
 nodes/vertex/18/position = Vector2( -940, 560 )
-nodes/vertex/connections = PoolIntArray( 3, 0, 7, 0, 7, 0, 8, 0, 8, 0, 4, 0, 7, 1, 9, 0, 9, 0, 4, 1, 7, 2, 10, 0, 10, 0, 4, 2, 2, 0, 11, 0, 11, 0, 12, 0, 12, 0, 8, 1, 12, 0, 9, 1, 12, 0, 10, 1, 4, 0, 0, 0, 3, 0, 13, 0, 13, 0, 2, 0, 15, 0, 13, 1, 16, 0, 17, 0, 17, 0, 18, 0, 18, 0, 12, 1, 18, 0, 11, 1, 3, 0, 7, 0, 7, 0, 8, 0, 8, 0, 4, 0, 7, 1, 9, 0, 9, 0, 4, 1, 7, 2, 10, 0, 10, 0, 4, 2, 2, 0, 11, 0, 11, 0, 12, 0, 12, 0, 8, 1, 12, 0, 9, 1, 12, 0, 10, 1, 4, 0, 0, 0, 3, 0, 13, 0, 13, 0, 2, 0, 15, 0, 13, 1, 16, 0, 17, 0, 17, 0, 18, 0, 18, 0, 12, 1, 18, 0, 11, 1, 3, 0, 7, 0, 7, 0, 8, 0, 8, 0, 4, 0, 7, 1, 9, 0, 9, 0, 4, 1, 7, 2, 10, 0, 10, 0, 4, 2, 2, 0, 11, 0, 11, 0, 12, 0, 12, 0, 8, 1, 12, 0, 9, 1, 12, 0, 10, 1, 4, 0, 0, 0, 3, 0, 13, 0, 13, 0, 2, 0, 15, 0, 13, 1, 16, 0, 17, 0, 17, 0, 18, 0, 18, 0, 12, 1, 18, 0, 11, 1, 3, 0, 7, 0, 7, 0, 8, 0, 8, 0, 4, 0, 7, 1, 9, 0, 9, 0, 4, 1, 7, 2, 10, 0, 10, 0, 4, 2, 2, 0, 11, 0, 11, 0, 12, 0, 12, 0, 8, 1, 12, 0, 9, 1, 12, 0, 10, 1, 4, 0, 0, 0, 3, 0, 13, 0, 13, 0, 2, 0, 15, 0, 13, 1, 16, 0, 17, 0, 17, 0, 18, 0, 18, 0, 12, 1, 18, 0, 11, 1 )
+nodes/vertex/connections = PackedInt32Array( 3, 0, 7, 0, 7, 0, 8, 0, 8, 0, 4, 0, 7, 1, 9, 0, 9, 0, 4, 1, 7, 2, 10, 0, 10, 0, 4, 2, 2, 0, 11, 0, 11, 0, 12, 0, 12, 0, 8, 1, 12, 0, 9, 1, 12, 0, 10, 1, 4, 0, 0, 0, 3, 0, 13, 0, 13, 0, 2, 0, 15, 0, 13, 1, 16, 0, 17, 0, 17, 0, 18, 0, 18, 0, 12, 1, 18, 0, 11, 1, 3, 0, 7, 0, 7, 0, 8, 0, 8, 0, 4, 0, 7, 1, 9, 0, 9, 0, 4, 1, 7, 2, 10, 0, 10, 0, 4, 2, 2, 0, 11, 0, 11, 0, 12, 0, 12, 0, 8, 1, 12, 0, 9, 1, 12, 0, 10, 1, 4, 0, 0, 0, 3, 0, 13, 0, 13, 0, 2, 0, 15, 0, 13, 1, 16, 0, 17, 0, 17, 0, 18, 0, 18, 0, 12, 1, 18, 0, 11, 1, 3, 0, 7, 0, 7, 0, 8, 0, 8, 0, 4, 0, 7, 1, 9, 0, 9, 0, 4, 1, 7, 2, 10, 0, 10, 0, 4, 2, 2, 0, 11, 0, 11, 0, 12, 0, 12, 0, 8, 1, 12, 0, 9, 1, 12, 0, 10, 1, 4, 0, 0, 0, 3, 0, 13, 0, 13, 0, 2, 0, 15, 0, 13, 1, 16, 0, 17, 0, 17, 0, 18, 0, 18, 0, 12, 1, 18, 0, 11, 1, 3, 0, 7, 0, 7, 0, 8, 0, 8, 0, 4, 0, 7, 1, 9, 0, 9, 0, 4, 1, 7, 2, 10, 0, 10, 0, 4, 2, 2, 0, 11, 0, 11, 0, 12, 0, 12, 0, 8, 1, 12, 0, 9, 1, 12, 0, 10, 1, 4, 0, 0, 0, 3, 0, 13, 0, 13, 0, 2, 0, 15, 0, 13, 1, 16, 0, 17, 0, 17, 0, 18, 0, 18, 0, 12, 1, 18, 0, 11, 1 )
 nodes/fragment/0/position = Vector2( 1500, 100 )
 nodes/fragment/2/node = SubResource( 24 )
 nodes/fragment/2/position = Vector2( -600, 140 )
@@ -448,4 +448,4 @@ nodes/fragment/38/node = SubResource( 109 )
 nodes/fragment/38/position = Vector2( 1080, 520 )
 nodes/fragment/39/node = SubResource( 110 )
 nodes/fragment/39/position = Vector2( -340, 400 )
-nodes/fragment/connections = PoolIntArray( 15, 0, 17, 1, 11, 0, 17, 0, 17, 0, 18, 0, 16, 0, 19, 0, 19, 0, 21, 0, 19, 0, 20, 0, 18, 0, 22, 0, 18, 0, 24, 0, 18, 1, 23, 0, 18, 1, 25, 0, 21, 0, 22, 1, 21, 0, 25, 1, 20, 0, 23, 1, 20, 0, 24, 1, 22, 0, 27, 0, 23, 0, 27, 1, 25, 0, 26, 0, 24, 0, 26, 1, 27, 0, 29, 0, 26, 0, 28, 0, 29, 0, 30, 0, 28, 0, 30, 1, 30, 0, 14, 0, 14, 0, 0, 1, 3, 0, 2, 0, 2, 0, 10, 0, 5, 0, 3, 0, 4, 0, 5, 0, 31, 0, 5, 1, 10, 0, 33, 0, 33, 0, 0, 5, 35, 0, 33, 1, 36, 0, 31, 1, 32, 0, 36, 0, 37, 0, 36, 1, 15, 0, 17, 1, 11, 0, 17, 0, 17, 0, 18, 0, 16, 0, 19, 0, 19, 0, 21, 0, 19, 0, 20, 0, 18, 0, 22, 0, 18, 0, 24, 0, 18, 1, 23, 0, 18, 1, 25, 0, 21, 0, 22, 1, 21, 0, 25, 1, 20, 0, 23, 1, 20, 0, 24, 1, 22, 0, 27, 0, 23, 0, 27, 1, 25, 0, 26, 0, 24, 0, 26, 1, 27, 0, 29, 0, 26, 0, 28, 0, 29, 0, 30, 0, 28, 0, 30, 1, 30, 0, 14, 0, 14, 0, 0, 1, 3, 0, 2, 0, 2, 0, 10, 0, 5, 0, 3, 0, 4, 0, 5, 0, 31, 0, 5, 1, 10, 0, 33, 0, 33, 0, 0, 5, 35, 0, 33, 1, 36, 0, 31, 1, 32, 0, 36, 0, 37, 0, 36, 1, 15, 0, 17, 1, 11, 0, 17, 0, 17, 0, 18, 0, 16, 0, 19, 0, 19, 0, 21, 0, 19, 0, 20, 0, 18, 0, 22, 0, 18, 0, 24, 0, 18, 1, 23, 0, 18, 1, 25, 0, 21, 0, 22, 1, 21, 0, 25, 1, 20, 0, 23, 1, 20, 0, 24, 1, 22, 0, 27, 0, 23, 0, 27, 1, 25, 0, 26, 0, 24, 0, 26, 1, 27, 0, 29, 0, 26, 0, 28, 0, 29, 0, 30, 0, 28, 0, 30, 1, 3, 0, 2, 0, 2, 0, 10, 0, 5, 0, 3, 0, 4, 0, 5, 0, 31, 0, 5, 1, 33, 0, 0, 5, 35, 0, 33, 1, 36, 0, 31, 1, 32, 0, 36, 0, 37, 0, 36, 1, 15, 0, 17, 1, 11, 0, 17, 0, 17, 0, 18, 0, 16, 0, 19, 0, 19, 0, 21, 0, 19, 0, 20, 0, 18, 0, 22, 0, 18, 0, 24, 0, 18, 1, 23, 0, 18, 1, 25, 0, 21, 0, 22, 1, 21, 0, 25, 1, 20, 0, 23, 1, 20, 0, 24, 1, 22, 0, 27, 0, 23, 0, 27, 1, 25, 0, 26, 0, 24, 0, 26, 1, 27, 0, 29, 0, 26, 0, 28, 0, 29, 0, 30, 0, 28, 0, 30, 1, 3, 0, 2, 0, 2, 0, 10, 0, 5, 0, 3, 0, 4, 0, 5, 0, 31, 0, 5, 1, 33, 0, 0, 5, 35, 0, 33, 1, 36, 0, 31, 1, 32, 0, 36, 0, 37, 0, 36, 1, 30, 0, 38, 0, 38, 0, 0, 1, 2, 0, 39, 0, 39, 0, 33, 0 )
+nodes/fragment/connections = PackedInt32Array( 15, 0, 17, 1, 11, 0, 17, 0, 17, 0, 18, 0, 16, 0, 19, 0, 19, 0, 21, 0, 19, 0, 20, 0, 18, 0, 22, 0, 18, 0, 24, 0, 18, 1, 23, 0, 18, 1, 25, 0, 21, 0, 22, 1, 21, 0, 25, 1, 20, 0, 23, 1, 20, 0, 24, 1, 22, 0, 27, 0, 23, 0, 27, 1, 25, 0, 26, 0, 24, 0, 26, 1, 27, 0, 29, 0, 26, 0, 28, 0, 29, 0, 30, 0, 28, 0, 30, 1, 30, 0, 14, 0, 14, 0, 0, 1, 3, 0, 2, 0, 2, 0, 10, 0, 5, 0, 3, 0, 4, 0, 5, 0, 31, 0, 5, 1, 10, 0, 33, 0, 33, 0, 0, 5, 35, 0, 33, 1, 36, 0, 31, 1, 32, 0, 36, 0, 37, 0, 36, 1, 15, 0, 17, 1, 11, 0, 17, 0, 17, 0, 18, 0, 16, 0, 19, 0, 19, 0, 21, 0, 19, 0, 20, 0, 18, 0, 22, 0, 18, 0, 24, 0, 18, 1, 23, 0, 18, 1, 25, 0, 21, 0, 22, 1, 21, 0, 25, 1, 20, 0, 23, 1, 20, 0, 24, 1, 22, 0, 27, 0, 23, 0, 27, 1, 25, 0, 26, 0, 24, 0, 26, 1, 27, 0, 29, 0, 26, 0, 28, 0, 29, 0, 30, 0, 28, 0, 30, 1, 30, 0, 14, 0, 14, 0, 0, 1, 3, 0, 2, 0, 2, 0, 10, 0, 5, 0, 3, 0, 4, 0, 5, 0, 31, 0, 5, 1, 10, 0, 33, 0, 33, 0, 0, 5, 35, 0, 33, 1, 36, 0, 31, 1, 32, 0, 36, 0, 37, 0, 36, 1, 15, 0, 17, 1, 11, 0, 17, 0, 17, 0, 18, 0, 16, 0, 19, 0, 19, 0, 21, 0, 19, 0, 20, 0, 18, 0, 22, 0, 18, 0, 24, 0, 18, 1, 23, 0, 18, 1, 25, 0, 21, 0, 22, 1, 21, 0, 25, 1, 20, 0, 23, 1, 20, 0, 24, 1, 22, 0, 27, 0, 23, 0, 27, 1, 25, 0, 26, 0, 24, 0, 26, 1, 27, 0, 29, 0, 26, 0, 28, 0, 29, 0, 30, 0, 28, 0, 30, 1, 3, 0, 2, 0, 2, 0, 10, 0, 5, 0, 3, 0, 4, 0, 5, 0, 31, 0, 5, 1, 33, 0, 0, 5, 35, 0, 33, 1, 36, 0, 31, 1, 32, 0, 36, 0, 37, 0, 36, 1, 15, 0, 17, 1, 11, 0, 17, 0, 17, 0, 18, 0, 16, 0, 19, 0, 19, 0, 21, 0, 19, 0, 20, 0, 18, 0, 22, 0, 18, 0, 24, 0, 18, 1, 23, 0, 18, 1, 25, 0, 21, 0, 22, 1, 21, 0, 25, 1, 20, 0, 23, 1, 20, 0, 24, 1, 22, 0, 27, 0, 23, 0, 27, 1, 25, 0, 26, 0, 24, 0, 26, 1, 27, 0, 29, 0, 26, 0, 28, 0, 29, 0, 30, 0, 28, 0, 30, 1, 3, 0, 2, 0, 2, 0, 10, 0, 5, 0, 3, 0, 4, 0, 5, 0, 31, 0, 5, 1, 33, 0, 0, 5, 35, 0, 33, 1, 36, 0, 31, 1, 32, 0, 36, 0, 37, 0, 36, 1, 30, 0, 38, 0, 38, 0, 0, 1, 2, 0, 39, 0, 39, 0, 33, 0 )

@@ -10,9 +10,9 @@ func _ready():
 
 
 func spawn_player(pos := Vector3()):
-	var new_ship : Ship = ship_scene.instance()
+	var new_ship : Ship = ship_scene.instantiate()
 	add_child(new_ship)
-	new_ship.translation = Vector3(0, 2000, 0)
+	new_ship.position = Vector3(0, 2000, 0)
 	new_ship.init($PilotManagers/PlayerMan)
 	new_ship.leave()
 	$PlayerShipCam._on_player_entered_ship(new_ship)
