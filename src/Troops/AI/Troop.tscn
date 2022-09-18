@@ -5690,7 +5690,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ) ]
+"values": [ Vector3( 0, 1.7749, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("CollisionShape:shape:height")
@@ -5760,7 +5760,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.4, 1.5, 1.8 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, -0.769913, 0 ), Vector3( 0, -0.769913, 0 ), Vector3( 0, 0, 0 ) ]
+"values": [ Vector3( 0, 1.7961, 0 ), Vector3( 0, 0.941721, 0 ), Vector3( 0, 0.941721, 0 ), Vector3( 0, 1.7961, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("CollisionShape:shape:height")
@@ -5956,7 +5956,6 @@ height = 2.4
 [node name="Troop" type="KinematicBody" groups=["AI", "Damagable", "Troops"]]
 pause_mode = 1
 collision_layer = 2
-collision_mask = 0
 script = ExtResource( 1 )
 body = NodePath("PlayerMesh/rig/body")
 red_mat = ExtResource( 7 )
@@ -5966,7 +5965,7 @@ blue_mat = ExtResource( 9 )
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.0153644, 0 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Model/Skeleton" index="2"]
-transform = Transform( -0.0549361, -0.983106, -0.174597, -0.315433, -0.148819, 0.937206, -0.947356, 0.10656, -0.301929, -0.301956, 1.04733, 0.188911 )
+transform = Transform( -0.0532959, -0.983794, -0.171195, -0.314857, -0.146138, 0.937821, -0.947642, 0.103884, -0.301966, -0.290444, 1.0772, 0.209014 )
 bone_name = "mixamorig_RightHand"
 
 [node name="Weapons" type="Spatial" parent="Model/Skeleton/BoneAttachment"]
@@ -6010,7 +6009,7 @@ shape = SubResource( 20 )
 disabled = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.7749, 0 )
 shape = SubResource( 1 )
 
 [node name="Shooting" type="Spatial" parent="."]
@@ -6054,7 +6053,6 @@ mesh = SubResource( 3 )
 [node name="NavigationAgent" type="NavigationAgent" parent="."]
 path_max_distance = 4.0
 max_speed = 6.0
-ignore_y = false
 
 [node name="AIStateMachine" type="Node" parent="."]
 script = ExtResource( 10 )
@@ -6158,6 +6156,11 @@ monitoring = false
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 95 )
 
+[node name="Tail" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.4, 0 )
+
 [connection signal="timeout" from="EnemyDetection/Timer" to="EnemyDetection" method="_on_Timer_timeout"]
 [connection signal="damage_taken" from="HealthSystem" to="EnemyDetection" method="_on_HealthSystem_damage_taken"]
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
@@ -6170,5 +6173,6 @@ shape = SubResource( 95 )
 [connection signal="timeout" from="CheckCurrentEnemyTimer" to="AIStateMachine/ConquerGroundCPs" method="_on_CheckCurrentEnemyTimer_timeout"]
 [connection signal="timeout" from="CheckCurrentEnemyTimer" to="AIStateMachine/EnterShip" method="_on_CheckCurrentEnemyTimer_timeout"]
 [connection signal="timeout" from="CheckCurrentEnemyTimer" to="AIStateMachine/AttackEnemy" method="_on_CheckCurrentEnemyTimer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine" method="_on_animation_finished"]
 
 [editable path="Model"]

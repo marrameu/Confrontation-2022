@@ -38,6 +38,10 @@ export var blue_mat : Material
 onready var agent: NavigationAgent = $NavigationAgent
 
 
+var can_shoot = false
+var can_rotate = false
+
+
 func _ready():
 	$CheckCurrentEnemyTimer.wait_time = rand_range(2.5, 3.5)
 	$AnimationTree.set("parameters/StateMachine/walk/move/3/blend_position", 1)
@@ -96,3 +100,5 @@ func _on_enemy_died(attacker):
 		pilot_man.points += 50
 
 
+func _on_MeleeHitBox_area_entered(area):
+	pass # Replace with function body.

@@ -23,6 +23,7 @@ func _process(delta):
 func launch_granade():
 	ammo -= 1
 	var new_granade : RigidBody = granade_scene.instance()
+	new_granade.shooter = owner
 	new_granade.rotation = get_viewport().get_camera().global_rotation
 	get_tree().current_scene.add_child(new_granade)
 	new_granade.translation = owner.translation

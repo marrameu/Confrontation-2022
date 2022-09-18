@@ -75,3 +75,4 @@ max_db = -5.0
 max_distance = 250.0
 
 [node name="ExplosiveArea" parent="." index="10" instance=ExtResource( 5 )]
+collision_mask = 7936

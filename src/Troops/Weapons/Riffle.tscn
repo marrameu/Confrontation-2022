@@ -13,10 +13,10 @@ offset = Vector2( 10, 10 )
 [node name="RayCast" parent="." index="1"]
 cast_to = Vector3( 0, 0, 500 )
 
-[node name="AnimationTree" parent="HUD/Crosshair" index="4"]
-parameters/playback = SubResource( 1 )
-
 [node name="HitMarkerParts" parent="HUD/Pivot" index="0"]
 modulate = Color( 1, 1, 1, 0 )
+
+[node name="AnimationTree" parent="HUD/Pivot/Crosshair" index="4"]
+parameters/playback = SubResource( 1 )
 
 [editable path="HUD/Pivot/HitMarkerParts"]

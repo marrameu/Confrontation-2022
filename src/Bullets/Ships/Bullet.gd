@@ -15,6 +15,8 @@ var _old_translation : Vector3
 
 var m_blue_team := false
 
+var long := 0.0
+
 
 func init(new_shooter, new_team):
 	shooter = new_shooter
@@ -34,14 +36,16 @@ func _physics_process(delta):
 	if _hit: # Per l'animació d'explosió
 		return
 	
+	_old_translation = global_translation
+	
 	move(delta)
-	check_collisions()
 	
 	_time_alive -= delta
 	if _time_alive < 0:
 		queue_free()
 	
-	_old_translation = translation
+	
+	check_collisions()
 
 
 func move(delta):
@@ -49,15 +53,21 @@ func move(delta):
 
 
 func check_collisions():
-	var long = translation.distance_to(_old_translation)
-	var ray := $RayCast
-	if ray.is_colliding():
-		var body : Spatial = ray.get_collider()
+	
+	long = translation.distance_to(_old_translation)
+	var result  := get_world().direct_space_state.intersect_ray(_old_translation, global_translation, [shooter], $RayCast.collision_mask, true, true) # més d'un?
+	
+	
+	
+	#var ray := $RayCast
+	#if ray.is_colliding():
+	if result:
+		var body : Spatial = result.collider
 		if body.is_in_group("HurtBox"):
 			body = body.owner
 			_hit(body)
 		
-		translation = ray.get_collision_point()
+		global_translation = result.position
 		$HitParticles.hide()
 		$Explosion.show()
 		$HitAudio.pitch_scale = rand_range(1, 1.7)
@@ -65,7 +75,7 @@ func check_collisions():
 		$AnimationPlayer.play("hit")
 		_hit = true
 		return
-	ray.cast_to = Vector3(0, 0, -long)
+	#ray.cast_to = Vector3(0, 0, -long)
 
 
 func _hit(body) -> bool:
