@@ -4,6 +4,7 @@ extends "res://src/StateMachine/StateMachine.gd"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	super()
 	states_map = {
 		"walk": $Walk,
 		"run": $Run,

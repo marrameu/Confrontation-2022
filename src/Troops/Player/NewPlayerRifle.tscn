@@ -10,6 +10,9 @@
 
 [node name="PlayerRifle" instance=ExtResource("1")]
 
+[node name="BoneAttachment3D" parent="Model/Skeleton3d" index="2"]
+transform = Transform3D(-0.857838, -0.431962, 0.278424, 0.36423, -0.128816, 0.922357, -0.362557, 0.892645, 0.267837, -0.0726406, 1.15854, 0.269701)
+
 [node name="Riffle" parent="Model/Skeleton3d/BoneAttachment3D/Weapons" index="0" instance=ExtResource("3")]
 transform = Transform3D(0.271617, 1.9621, 0.276331, -0.332856, -0.22977, 1.95867, 1.95331, -0.311994, 0.295345, 0.0763595, -0.113004, 0.517383)
 bullet_scene = ExtResource("2")
@@ -17,6 +20,48 @@ bullet_scene = ExtResource("2")
 [node name="AnimationTree" parent="." index="6"]
 parameters/StateMachine/playback = SubResource("1")
 parameters/StateMachine/walk/OneShotStateMachine/playback = SubResource("2")
+
+[node name="TextureRect" parent="PlayerHUD/DieInfo" index="0"]
+layout_mode = 1
+
+[node name="InteractionProgress" parent="PlayerHUD/Alive" index="0"]
+layout_mode = 1
+
+[node name="MyLifeBar" parent="PlayerHUD/Alive" index="1"]
+layout_mode = 1
+
+[node name="LifeBarEnemy" parent="PlayerHUD/Alive" index="2"]
+layout_mode = 0
+
+[node name="LifeBar" parent="PlayerHUD/Alive/LifeBarEnemy" index="0"]
+layout_mode = 2
+
+[node name="Nickname" parent="PlayerHUD/Alive/LifeBarEnemy" index="1"]
+layout_mode = 2
+
+[node name="SpeiclaWeapons" parent="PlayerHUD/Alive" index="3"]
+layout_mode = 1
+
+[node name="TextureRect" parent="PlayerHUD/Alive/SpeiclaWeapons" index="0"]
+layout_mode = 2
+
+[node name="TextureRect2" parent="PlayerHUD/Alive/SpeiclaWeapons/TextureRect" index="0"]
+layout_mode = 1
+
+[node name="Label" parent="PlayerHUD/Alive/SpeiclaWeapons/TextureRect" index="1"]
+layout_mode = 1
+
+[node name="Label2" parent="PlayerHUD/Alive/SpeiclaWeapons/TextureRect" index="2"]
+layout_mode = 1
+
+[node name="Label2" parent="PlayerHUD/Alive/SpeiclaWeapons" index="1"]
+layout_mode = 2
+
+[node name="Label3" parent="PlayerHUD/Alive/SpeiclaWeapons" index="2"]
+layout_mode = 2
+
+[node name="DamageIndicators" parent="PlayerHUD/Alive" index="4"]
+layout_mode = 1
 
 [editable path="Model"]
 [editable path="PlayerHUD"]

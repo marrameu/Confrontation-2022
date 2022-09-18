@@ -67,7 +67,6 @@ sky_material = SubResource("ProceduralSkyMaterial_n1sxi")
 background_mode = 2
 background_color = Color(0.352941, 0.513726, 0.368627, 1)
 sky = SubResource("Sky_8mys4")
-sky_custom_fov = 115.2
 ambient_light_source = 3
 
 [node name="Level" type="Node3D"]

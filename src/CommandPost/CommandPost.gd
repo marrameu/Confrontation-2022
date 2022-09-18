@@ -112,26 +112,26 @@ func _physics_process(delta : float) -> void:
 	if bodies[0] > 0 and bodies[1] + bodies[2] == 0:
 		# Team 1 Conquering
 		if team_count[1] + team_count[2] > 0:
-			team_count[1] = clamp(team_count[1] - delta * bodies[0], 0, 10)
-			team_count[2] = clamp(team_count[2] - delta * bodies[0], 0, 10)
+			team_count[1] = clamp(team_count[1] - delta * bodies[0], 0.0, 10.0)
+			team_count[2] = clamp(team_count[2] - delta * bodies[0], 0.0, 10.0)
 		else:
-			team_count[0] = clamp(team_count[0] + delta * bodies[0], 0, 10)
+			team_count[0] = clamp(team_count[0] + delta * bodies[0], 0.0, 10.0)
 		
 	elif bodies[1] > 0 and bodies[0] + bodies[2] == 0:
 		# Team 2 Conquering
 		if team_count[0] + team_count[2] > 0:
-			team_count[0] = clamp(team_count[0] - delta * bodies[1], 0, 10)
-			team_count[2] = clamp(team_count[2] - delta * bodies[1], 0, 10)
+			team_count[0] = clamp(team_count[0] - delta * bodies[1], 0.0, 10.0)
+			team_count[2] = clamp(team_count[2] - delta * bodies[1], 0.0, 10.0)
 		else:
-			team_count[1] = clamp(team_count[1] + delta * bodies[1], 0, 10)
+			team_count[1] = clamp(team_count[1] + delta * bodies[1], 0.0, 10.0)
 		
 	elif bodies[2] > 0 and bodies[0] + bodies[1] == 0:
 		# Team 3 Conquering
 		if team_count[0] + team_count[1] > 0:
-			team_count[0] = clamp(team_count[0] - delta * bodies[2], 0, 10)
-			team_count[1] = clamp(team_count[1] - delta * bodies[2], 0, 10)
+			team_count[0] = clamp(team_count[0] - delta * bodies[2], 0.0, 10.0)
+			team_count[1] = clamp(team_count[1] - delta * bodies[2], 0.0, 10.0)
 		else:
-			team_count[2] = clamp(team_count[2] + delta * bodies[2], 0, 10)
+			team_count[2] = clamp(team_count[2] + delta * bodies[2], 0.0, 10.0)
 	
 	var max_value = 0
 	for value in team_count:

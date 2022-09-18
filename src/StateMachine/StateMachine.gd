@@ -38,7 +38,7 @@ var active = false :
 
 func _ready():
 	for child in get_children():
-		child.connect("finished",Callable(self,"_change_state"))
+		child.finished.connect(_change_state)
 	#set_active(true)
 
 
