@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/not_a_drill.wav-f889a4cc3f49fd0523c1d016bc99d0fe.sample"
+type="AudioStreamWAV"
+uid="uid://cv5ybpxpjexc8"
+path="res://.godot/imported/not_a_drill.wav-f889a4cc3f49fd0523c1d016bc99d0fe.sample"
 
 [deps]
 
 source_file="res://assets/audio/not_a_drill.wav"
-dest_files=[ "res://.import/not_a_drill.wav-f889a4cc3f49fd0523c1d016bc99d0fe.sample" ]
+dest_files=["res://.godot/imported/not_a_drill.wav-f889a4cc3f49fd0523c1d016bc99d0fe.sample"]
 
 [params]
 

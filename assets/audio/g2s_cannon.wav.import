@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/g2s_cannon.wav-e8f0c1529be4bbf455ec43beaf4d58a2.sample"
+type="AudioStreamWAV"
+uid="uid://bcrh3saln06j"
+path="res://.godot/imported/g2s_cannon.wav-e8f0c1529be4bbf455ec43beaf4d58a2.sample"
 
 [deps]
 
 source_file="res://assets/audio/g2s_cannon.wav"
-dest_files=[ "res://.import/g2s_cannon.wav-e8f0c1529be4bbf455ec43beaf4d58a2.sample" ]
+dest_files=["res://.godot/imported/g2s_cannon.wav-e8f0c1529be4bbf455ec43beaf4d58a2.sample"]
 
 [params]
 

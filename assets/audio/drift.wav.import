@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/drift.wav-b8255ef12db4ece4b1533c67b18789ee.sample"
+type="AudioStreamWAV"
+uid="uid://ct6h6x724qxr"
+path="res://.godot/imported/drift.wav-b8255ef12db4ece4b1533c67b18789ee.sample"
 
 [deps]
 
 source_file="res://assets/audio/drift.wav"
-dest_files=[ "res://.import/drift.wav-b8255ef12db4ece4b1533c67b18789ee.sample" ]
+dest_files=["res://.godot/imported/drift.wav-b8255ef12db4ece4b1533c67b18789ee.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

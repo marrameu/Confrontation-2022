@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/ship_secondary_shoot.wav-7f69c8957323a64c54edb5e33228c455.sample"
+type="AudioStreamWAV"
+uid="uid://dy1nvdb6t74my"
+path="res://.godot/imported/ship_secondary_shoot.wav-7f69c8957323a64c54edb5e33228c455.sample"
 
 [deps]
 
 source_file="res://assets/audio/ship_secondary_shoot.wav"
-dest_files=[ "res://.import/ship_secondary_shoot.wav-7f69c8957323a64c54edb5e33228c455.sample" ]
+dest_files=["res://.godot/imported/ship_secondary_shoot.wav-7f69c8957323a64c54edb5e33228c455.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=true
 edit/normalize=true
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

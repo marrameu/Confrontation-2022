@@ -1,152 +1,88 @@
-; Project was converted by built-in tool to Godot 4.0
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
 config_version=5
+
 _global_script_classes=[{
 "base": "PilotManager",
-"class": "AIPilotManager",
-"language": "GDScript",
+"class": &"AIPilotManager",
+"language": &"GDScript",
 "path": "res://AIPilotManager.gd"
 }, {
 "base": "Node",
-"class": "AITroopState",
-"language": "GDScript",
-"path": "res://src/Troops/AI/AITroopState.gd"
-}, {
-"base": "Spatial",
-"class": "Bullet",
-"language": "GDScript",
-"path": "res://src/Bullets/Ships/Bullet.gd"
-}, {
-"base": "Spatial",
-"class": "CommandPost",
-"language": "GDScript",
-"path": "res://src/CommandPost/CommandPost.gd"
-}, {
-"base": "Spatial",
-"class": "Gun",
-"language": "GDScript",
-"path": "res://src/Troops/Weapons/Gun.gd"
-}, {
-"base": "Node",
-"class": "HealthSystem",
-"language": "GDScript",
+"class": &"HealthSystem",
+"language": &"GDScript",
 "path": "res://src/HealthSystem/HealthSystem.gd"
 }, {
-"base": "CPUParticles",
-"class": "LODCPUParticles",
-"language": "GDScript",
-"path": "res://addons/lod/lod_cpu_particles.gd"
-}, {
-"base": "OmniLight",
-"class": "LODOmniLight",
-"language": "GDScript",
-"path": "res://addons/lod/lod_omni_light.gd"
-}, {
-"base": "Particles",
-"class": "LODParticles",
-"language": "GDScript",
-"path": "res://addons/lod/lod_particles.gd"
-}, {
-"base": "Spatial",
-"class": "LODSpatial",
-"language": "GDScript",
-"path": "res://addons/lod/lod_spatial.gd"
-}, {
-"base": "SpotLight",
-"class": "LODSpotLight",
-"language": "GDScript",
-"path": "res://addons/lod/lod_spot_light.gd"
-}, {
 "base": "Bullet",
-"class": "MissileBullet",
-"language": "GDScript",
+"class": &"MissileBullet",
+"language": &"GDScript",
 "path": "res://src/Bullets/Ships/MissileBullet.gd"
 }, {
 "base": "State",
-"class": "MoveState",
-"language": "GDScript",
+"class": &"MoveState",
+"language": &"GDScript",
 "path": "res://src/Troops/Move.gd"
 }, {
-"base": "MoveState",
-"class": "OnGroundState",
-"language": "GDScript",
-"path": "res://src/Troops/OnGroundState.gd"
-}, {
 "base": "Node",
-"class": "PilotManager",
-"language": "GDScript",
+"class": &"PilotManager",
+"language": &"GDScript",
 "path": "res://PilotManager.gd"
 }, {
-"base": "RigidBody",
-"class": "Ship",
-"language": "GDScript",
+"base": "RigidBody3D",
+"class": &"Ship",
+"language": &"GDScript",
 "path": "res://Ship.gd"
 }, {
-"base": "Spatial",
-"class": "ShipPhysics",
-"language": "GDScript",
+"base": "Node3D",
+"class": &"ShipPhysics",
+"language": &"GDScript",
 "path": "res://src/Ships/ShipPhysics.gd"
 }, {
-"base": "Position3D",
-"class": "ShipSpawn",
-"language": "GDScript",
+"base": "Marker3D",
+"class": &"ShipSpawn",
+"language": &"GDScript",
 "path": "res://src/BigShips/Hangar/ShipSpawn.gd"
 }, {
 "base": "Node",
-"class": "State",
-"language": "GDScript",
-"path": "res://src/StateMachine/State.gd"
-}, {
-"base": "KinematicBody",
-"class": "Troop",
-"language": "GDScript",
-"path": "res://src/Troops/AI/Troop.gd"
-}, {
-"base": "Node",
-"class": "VehicleShooting",
-"language": "GDScript",
+"class": &"VehicleShooting",
+"language": &"GDScript",
 "path": "res://src/VehicleShooting.gd"
 }, {
 "base": "VisualShaderNodeCustom",
-"class": "VisualShaderFBMWarpTexture",
-"language": "GDScript",
+"class": &"VisualShaderFBMWarpTexture",
+"language": &"GDScript",
 "path": "res://addons/Shader Nodes/custom/nodes/fBm_warp_texture.gd"
 }, {
 "base": "VisualShaderNodeCustom",
-"class": "VisualShaderMapSteppedLinear",
-"language": "GDScript",
+"class": &"VisualShaderMapSteppedLinear",
+"language": &"GDScript",
 "path": "res://addons/Shader Nodes/custom/nodes/map_stepped_linear.gd"
 }, {
 "base": "VisualShaderNodeCustom",
-"class": "VisualShaderVoronoiTexture",
-"language": "GDScript",
+"class": &"VisualShaderVoronoiTexture",
+"language": &"GDScript",
 "path": "res://addons/Shader Nodes/custom/nodes/voronoi_texture.gd"
 }, {
 "base": "VisualShaderNodeCustom",
-"class": "VisualShaderWaveTexture",
-"language": "GDScript",
+"class": &"VisualShaderWaveTexture",
+"language": &"GDScript",
 "path": "res://addons/Shader Nodes/custom/nodes/wave_texture.gd"
 }]
 _global_script_class_icons={
 "AIPilotManager": "",
-"AITroopState": "",
-"Bullet": "",
-"CommandPost": "",
-"Gun": "",
 "HealthSystem": "",
-"LODCPUParticles": "res://addons/lod/lod_cpu_particles.svg",
-"LODOmniLight": "res://addons/lod/lod_omni_light.svg",
-"LODParticles": "res://addons/lod/lod_particles.svg",
-"LODSpatial": "res://addons/lod/lod_spatial.svg",
-"LODSpotLight": "res://addons/lod/lod_spot_light.svg",
 "MissileBullet": "",
 "MoveState": "",
-"OnGroundState": "",
 "PilotManager": "",
 "Ship": "",
 "ShipPhysics": "",
 "ShipSpawn": "",
-"State": "",
-"Troop": "",
 "VehicleShooting": "",
 "VisualShaderFBMWarpTexture": "",
 "VisualShaderMapSteppedLinear": "",
@@ -158,6 +94,7 @@ _global_script_class_icons={
 
 config/name="Confrontation 2022"
 run/main_scene="res://src/Levels/Level.tscn"
+config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
 
 [audio]
@@ -173,16 +110,16 @@ Csgexport="*res://addons/CSGExport/csgexport.gd"
 
 [display]
 
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
 window/size/width=1920
 window/size/height=1080
 window/size/test_width=1280
 window/size/test_height=720
-window/stretch/mode="2d"
-window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/destruction/plugin.cfg", "res://addons/lod/plugin.cfg", "res://addons/silicon.vfx.lens_flare/plugin.cfg")
+enabled=PackedStringArray("res://addons/destruction/plugin.cfg", "res://addons/lod/plugin.cfg")
 
 [input]
 

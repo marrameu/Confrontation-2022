@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/turret_overamplified.wav-51fbf2476daea31020ffcb291436fa1c.sample"
+type="AudioStreamWAV"
+uid="uid://b2s53ttbodrcc"
+path="res://.godot/imported/turret_overamplified.wav-51fbf2476daea31020ffcb291436fa1c.sample"
 
 [deps]
 
 source_file="res://assets/audio/turret_overamplified.wav"
-dest_files=[ "res://.import/turret_overamplified.wav-51fbf2476daea31020ffcb291436fa1c.sample" ]
+dest_files=["res://.godot/imported/turret_overamplified.wav-51fbf2476daea31020ffcb291436fa1c.sample"]
 
 [params]
 

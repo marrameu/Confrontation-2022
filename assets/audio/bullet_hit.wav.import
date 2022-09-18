@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/bullet_hit.wav-aae9b43324a471aa83ca1b02bfa66bdf.sample"
+type="AudioStreamWAV"
+uid="uid://83kplhhrrnca"
+path="res://.godot/imported/bullet_hit.wav-aae9b43324a471aa83ca1b02bfa66bdf.sample"
 
 [deps]
 
 source_file="res://assets/audio/bullet_hit.wav"
-dest_files=[ "res://.import/bullet_hit.wav-aae9b43324a471aa83ca1b02bfa66bdf.sample" ]
+dest_files=["res://.godot/imported/bullet_hit.wav-aae9b43324a471aa83ca1b02bfa66bdf.sample"]
 
 [params]
 

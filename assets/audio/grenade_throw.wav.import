@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/grenade_throw.wav-f275133624b97ba94a1de75c2911e1d1.sample"
+type="AudioStreamWAV"
+uid="uid://dmlm38jgifa15"
+path="res://.godot/imported/grenade_throw.wav-f275133624b97ba94a1de75c2911e1d1.sample"
 
 [deps]
 
 source_file="res://assets/audio/grenade_throw.wav"
-dest_files=[ "res://.import/grenade_throw.wav-f275133624b97ba94a1de75c2911e1d1.sample" ]
+dest_files=["res://.godot/imported/grenade_throw.wav-f275133624b97ba94a1de75c2911e1d1.sample"]
 
 [params]
 

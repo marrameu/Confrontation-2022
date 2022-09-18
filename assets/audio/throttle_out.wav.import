@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/throttle_out.wav-ee5766fbf3773628c0b7decd236b15e2.sample"
+type="AudioStreamWAV"
+uid="uid://b3e8y45sqb8iw"
+path="res://.godot/imported/throttle_out.wav-ee5766fbf3773628c0b7decd236b15e2.sample"
 
 [deps]
 
 source_file="res://assets/audio/throttle_out.wav"
-dest_files=[ "res://.import/throttle_out.wav-ee5766fbf3773628c0b7decd236b15e2.sample" ]
+dest_files=["res://.godot/imported/throttle_out.wav-ee5766fbf3773628c0b7decd236b15e2.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

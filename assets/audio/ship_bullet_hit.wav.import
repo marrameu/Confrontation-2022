@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/ship_bullet_hit.wav-f1e6cfeca4f94530b918e12f680a995f.sample"
+type="AudioStreamWAV"
+uid="uid://ctacfkqkex3re"
+path="res://.godot/imported/ship_bullet_hit.wav-f1e6cfeca4f94530b918e12f680a995f.sample"
 
 [deps]
 
 source_file="res://assets/audio/ship_bullet_hit.wav"
-dest_files=[ "res://.import/ship_bullet_hit.wav-f1e6cfeca4f94530b918e12f680a995f.sample" ]
+dest_files=["res://.godot/imported/ship_bullet_hit.wav-f1e6cfeca4f94530b918e12f680a995f.sample"]
 
 [params]
 

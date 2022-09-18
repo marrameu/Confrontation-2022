@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/interaction.wav-337dfa9f0cb4a86626d278639cc92bac.sample"
+type="AudioStreamWAV"
+uid="uid://cbrcnwf17gbcv"
+path="res://.godot/imported/interaction.wav-337dfa9f0cb4a86626d278639cc92bac.sample"
 
 [deps]
 
 source_file="res://assets/audio/interaction.wav"
-dest_files=[ "res://.import/interaction.wav-337dfa9f0cb4a86626d278639cc92bac.sample" ]
+dest_files=["res://.godot/imported/interaction.wav-337dfa9f0cb4a86626d278639cc92bac.sample"]
 
 [params]
 
