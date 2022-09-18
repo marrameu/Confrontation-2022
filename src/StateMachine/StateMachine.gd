@@ -18,11 +18,20 @@ var states_map = {}
 
 var states_stack = []
 var current_state = null
-var _active = false :
+var active = false :
 	get:
-		return _active # TODOConverter40 Non existent get function 
-	set(mod_value):
-		mod_value  # TODOConverter40 Copy here content of set_active
+		return active # TODOConverter40 Non existent get function 
+	set(value):
+		active = value
+		set_physics_process(value)
+		set_process_input(value)
+		set_process(value)
+		if active:
+			initialize(START_STATE)
+		elif current_state:
+			current_state.exit()
+			states_stack = []
+			current_state = null  # TODOConverter40 Copy here content of set_active
 
 @onready var point_of_change := randf_range(1000, 1500)
 
@@ -39,19 +48,6 @@ func initialize(start_state):
 	current_state.enter()
 
 
-func set_active(value):
-	_active = value
-	set_physics_process(value)
-	set_process_input(value)
-	set_process(value)
-	if _active:
-		initialize(START_STATE)
-	elif current_state:
-		current_state.exit()
-		states_stack = []
-		current_state = null
-
-
 func _input(event):
 	"""
 	If you make a shooter game, you may want the player to be able to
@@ -66,7 +62,7 @@ func _input(event):
 
 func _physics_process(delta):
 	if not current_state:
-		pass
+		return
 	current_state.update(delta)
 
 
@@ -78,13 +74,13 @@ func _on_animation_finished(anim_name):
 	interface, that is to say access to the same base methods, including
 	_on_animation_finished. See state.gd
 	"""
-	if not _active:
+	if not active:
 		return
 	current_state._on_animation_finished(anim_name)
 
 
 func _change_state(state_name):
-	if not _active:
+	if not active:
 		return
 	current_state.exit()
 	

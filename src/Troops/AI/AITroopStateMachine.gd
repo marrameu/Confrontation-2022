@@ -9,7 +9,7 @@ func _ready():
 		"enter_ship": $EnterShip,
 		"attack_enemy": $AttackEnemy
 	}
-	set_active(false)
+	active.set(false)
 
 
 func _change_state(state_name):

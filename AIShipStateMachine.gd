@@ -5,7 +5,7 @@ extends "res://src/StateMachine/StateMachine.gd"
 func _ready():
 	# si no és el servidor que es desactivi l'state machine (active) o crear un estat Client
 	set_states_map()
-	set_active(false)
+	active = false
 
 
 func _process(_delta):

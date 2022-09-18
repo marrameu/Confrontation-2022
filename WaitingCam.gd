@@ -57,14 +57,10 @@ func _on_SpawnHUD_change_spectate(location : int, index : int = 0):
 		target.get_parent().rotation = Vector3.ZERO
 
 
-func _on_SpawnHUD_change_cam():
+func _on_spawn_hud_change_cam():
 	if position == original_pos:
 		position = Vector3(0, 5000, 0)
 		rotation = Vector3(deg_to_rad(-90), deg_to_rad(180), deg_to_rad(0))
 	else:
 		position = original_pos
 		rotation = original_rot
-
-
-func change_cam():
-	pass # Replace with function body.

@@ -14,12 +14,12 @@ func _ready():
 		"dead": $Dead,
 		"throw_grenade": $ThrowGrenade
 	}
-	set_active(false)
+	active = false
 
 
 func _change_state(state_name):
 	print(state_name)
-	if not _active:
+	if not active:
 		return
 	if states_map[state_name] is MoveState and current_state is MoveState:
 		states_map[state_name].initialize(current_state.velocity)

@@ -59,7 +59,7 @@ func _physics_process(delta):
 		var cam := get_viewport().get_camera_3d()
 		var cam_basis : Basis = cam.global_transform.basis
 		$Mesh.global_transform.basis = Basis(cam_basis.get_euler() + Vector3(0, 0, deg_to_rad(180)), 0)
-		$Mesh.rotation_degrees.z += 180
+		$Mesh.rotation.z += deg_to_rad(180)
 
 
 func set_active(value : bool) -> void:

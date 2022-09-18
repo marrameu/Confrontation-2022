@@ -25,7 +25,8 @@ func _physics_process(delta):
 		var shoot_origin := current_cam.project_ray_origin(Vector2(camera_width_center, camera_height_center))
 		var shoot_normal := shoot_origin + current_cam.project_ray_normal(Vector2(camera_width_center, camera_height_center)) * ray_range
 		
-		var result = space_state.intersect_ray(shoot_origin, shoot_normal, [get_parent().owner])
+		var query := PhysicsRayQueryParameters3D.create(shoot_origin, shoot_normal, 1, [get_parent().owner])
+		var result = space_state.intersect_ray(query)
 		if result:
 			if result.collider.is_in_group("Damagable"):
 				target = result.collider

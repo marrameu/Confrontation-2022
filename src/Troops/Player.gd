@@ -27,19 +27,22 @@ var max_y := 0
 func _ready():
 	max_y = position.y
 	blue_team = pilot_man.blue_team
-	$StateMachine.set_active(true)
+	$StateMachine.active = true
 
 
 func _physics_process(delta):
 	if get_viewport().get_camera_3d().owner.zooming:
-		$AnimationTree.set("parameters/StateMachine/walk/move/4/aim/blend_amount", lerp($AnimationTree.get("parameters/StateMachine/walk/move/4/aim/blend_amount"), 1, 20 * delta))
+		$AnimationTree.set("parameters/StateMachine/walk/move/4/aim/blend_amount", lerp($AnimationTree.get("parameters/StateMachine/walk/move/4/aim/blend_amount"), 1.0, 20 * delta))
 	else:
-		$AnimationTree.set("parameters/StateMachine/walk/move/4/aim/blend_amount", lerp($AnimationTree.get("parameters/StateMachine/walk/move/4/aim/blend_amount"), 0, 20 * delta))
+		$AnimationTree.set("parameters/StateMachine/walk/move/4/aim/blend_amount", lerp($AnimationTree.get("parameters/StateMachine/walk/move/4/aim/blend_amount"), 0.0, 20 * delta))
 	if can_rotate:
 		var des_transform := global_transform.basis.slerp(get_tree().current_scene.get_node("%CameraBase").global_transform.basis.rotated(Vector3(0, 1, 0), deg_to_rad(180)), 0.15 * delta * 60)
 		rotation.y = des_transform.get_euler().y
 		orthonormalize()
 		#inverse kinematics
+	
+	if not $StateMachine.current_state:
+		return
 	
 	if "has_contact" in $StateMachine.current_state:
 		if is_on_floor() and $StateMachine.current_state.has_contact:

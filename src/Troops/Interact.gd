@@ -25,10 +25,6 @@ var action := ""
 
 
 func _process(delta : float) -> void:
-	if get_tree().has_multiplayer_peer():
-		if not is_multiplayer_authority():
-			return
-	
 	current_camera = get_viewport().get_camera_3d()
 	interaction_progress.value = ($Timer.wait_time - $Timer.time_left) / $Timer.wait_time * 100
 	interaction_progress.visible = true if target_collider else false

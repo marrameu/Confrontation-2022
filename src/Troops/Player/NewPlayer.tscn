@@ -1,64 +1,310 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=17 format=3 uid="uid://1xsdx7asfkeq"]
 
-[ext_resource path="res://src/Troops/TroopBase.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Troops/Weapons/Pistol.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Bullets/HeadshotBullet.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/Troops/PlayerTroopShooting.gd" type="Script" id=4]
-[ext_resource path="res://src/Troops/Interact.gd" type="Script" id=5]
-[ext_resource path="res://src/HUD/PlayerHUD.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/Troops/Player.gd" type="Script" id=7]
-[ext_resource path="res://src/Troops/Walk.gd" type="Script" id=8]
+[ext_resource type="PackedScene" uid="uid://bdurwr0lwd8oq" path="res://src/Troops/TroopBase.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://src/Troops/Weapons/Pistol.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://src/Bullets/HeadshotBullet.tscn" id="3"]
+[ext_resource type="Script" path="res://src/Troops/PlayerTroopShooting.gd" id="4"]
+[ext_resource type="Script" path="res://src/Troops/Interact.gd" id="5"]
+[ext_resource type="PackedScene" path="res://src/HUD/PlayerHUD.tscn" id="6"]
+[ext_resource type="Script" path="res://src/Troops/Player.gd" id="7"]
+[ext_resource type="Script" path="res://src/Troops/Walk.gd" id="8"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+[sub_resource type="Animation" id="82"]
+resource_name = "Melee"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model/MeleeHitBox/CollisionShape3D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine/Melee")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"impulse"
+}]
+}
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
+[sub_resource type="Animation" id="83"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.7749, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:shape:height")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape3D:shape:radius")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.6]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Model/MeleeHitBox/CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
 
-[node name="Player" instance=ExtResource( 1 )]
+[sub_resource type="Animation" id="84"]
+resource_name = "Reload"
+length = 4.2
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shooting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(3.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"reload_current_weapon"
+}]
+}
+
+[sub_resource type="Animation" id="85"]
+resource_name = "Roll"
+length = 2.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.5, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.7961, 0), Vector3(0, 0.941721, 0), Vector3(0, 0.941721, 0), Vector3(0, 1.7961, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:shape:height")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.5, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [2.4, 0.8, 0.8, 2.4]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StateMachine/Roll")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"impulse"
+}]
+}
+
+[sub_resource type="Animation" id="86"]
+resource_name = "ThrowGrenade"
+length = 2.767
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shooting/LaunchGrenade")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"launch_granade"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j3age"]
+_data = {
+"Melee": SubResource("82"),
+"RESET": SubResource("83"),
+"Reload": SubResource("84"),
+"Roll": SubResource("85"),
+"ThrowGrenade": SubResource("86")
+}
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="1"]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="2"]
+
+[node name="Player" instance=ExtResource("1")]
 collision_mask = 11
-script = ExtResource( 7 )
+script = ExtResource("7")
 
-[node name="BoneAttachment3D" parent="Model/Skeleton3D" index="2"]
-transform = Transform3D( -0.0516359, -0.984104, -0.169921, -0.316209, -0.145282, 0.937499, -0.947283, 0.102139, -0.303681, -0.287911, 1.01654, 0.223721 )
-
-[node name="Pistol" parent="Model/Skeleton3D/BoneAttachment3D/Weapons" index="0" instance=ExtResource( 2 )]
+[node name="Pistol" parent="Model/Skeleton3d/BoneAttachment3D/Weapons" index="0" instance=ExtResource("2")]
+transform = Transform3D(0.271617, 1.9621, 0.276331, -0.332856, -0.22977, 1.95867, 1.95331, -0.311994, 0.295345, 0.0763595, -0.113004, 0.517383)
 visible = false
-bullet_scene = ExtResource( 3 )
+bullet_scene = ExtResource("3")
 
 [node name="Shooting" parent="." index="2"]
-script = ExtResource( 4 )
+script = ExtResource("4")
 
 [node name="HealthSystem" parent="." index="3"]
 MAX_HEALTH = 300
 
 [node name="Walk" parent="StateMachine" index="0"]
-script = ExtResource( 8 )
+script = ExtResource("8")
 MAX_SPEED = 5.0
 
-[node name="AnimationTree" parent="." index="6"]
-parameters/StateMachine/playback = SubResource( 1 )
-parameters/StateMachine/walk/OneShotStateMachine/playback = SubResource( 2 )
+[node name="AnimationPlayer" parent="." index="5"]
+libraries = {
+"": SubResource("AnimationLibrary_j3age")
+}
 
-[node name="Interact" type="Node" parent="." index="10"]
-script = ExtResource( 5 )
+[node name="AnimationTree" parent="." index="6"]
+parameters/StateMachine/playback = SubResource("1")
+parameters/StateMachine/walk/OneShotStateMachine/playback = SubResource("2")
+
+[node name="Interact" type="Node" parent="." index="9"]
+script = ExtResource("5")
 interaction_progress_path = NodePath("../PlayerHUD/Alive/InteractionProgress")
 
 [node name="Timer" type="Timer" parent="Interact" index="0"]
 one_shot = true
 
-[node name="PlayerHUD" parent="." index="11" instance=ExtResource( 6 )]
+[node name="PlayerHUD" parent="." index="10" instance=ExtResource("6")]
 launch_grenade_path = NodePath("../Shooting/LaunchGrenade")
+
+[node name="RedRect" parent="PlayerHUD" index="0"]
+anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DieInfo" parent="PlayerHUD" index="1"]
+anchors_preset = 7
+offset_top = -44.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TextureRect" parent="PlayerHUD/DieInfo" index="0"]
+anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Alive" parent="PlayerHUD" index="2"]
+layout_mode = 3
+anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InteractionProgress" parent="PlayerHUD/Alive" index="0"]
+anchors_preset = 8
+offset_left = -29.0
+offset_top = -29.0
+offset_right = 29.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MyLifeBar" parent="PlayerHUD/Alive" index="1"]
+anchors_preset = 7
+offset_top = -22.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="LifeBar" parent="PlayerHUD/Alive/LifeBarEnemy" index="0"]
+offset_bottom = 1.0
+
+[node name="Nickname" parent="PlayerHUD/Alive/LifeBarEnemy" index="1"]
+offset_top = 5.0
+
+[node name="SpeiclaWeapons" parent="PlayerHUD/Alive" index="3"]
+anchors_preset = 3
+offset_left = -200.0
+offset_top = -72.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="TextureRect" parent="PlayerHUD/Alive/SpeiclaWeapons" index="0"]
+offset_left = 75.0
+
+[node name="TextureRect2" parent="PlayerHUD/Alive/SpeiclaWeapons/TextureRect" index="0"]
+anchors_preset = 8
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" parent="PlayerHUD/Alive/SpeiclaWeapons/TextureRect" index="1"]
+anchors_preset = 3
+offset_left = -12.0
+offset_right = 0.0
+
+[node name="Label2" parent="PlayerHUD/Alive/SpeiclaWeapons/TextureRect" index="2"]
+anchors_preset = 2
+offset_left = 0.0
+offset_right = 12.0
+
+[node name="DamageIndicators" parent="PlayerHUD/Alive" index="4"]
+layout_mode = 3
+anchors_preset = 8
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Points" parent="PlayerHUD" index="3"]
 offset_right = 1160.0
 offset_bottom = 846.0
 
-[node name="CamPos" type="Marker3D" parent="." index="12"]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
-__meta__ = {
-"_editor_description_": "Bones bonding pq segueixi la camera"
-}
+[node name="CamPos" type="Marker3D" parent="." index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
-[node name="AudioListener3D" type="AudioListener3D" parent="." index="13"]
+[node name="AudioListener3D" type="AudioListener3D" parent="." index="12"]
 current = true
 
 [connection signal="timeout" from="Interact/Timer" to="Interact" method="_on_Timer_timeout"]

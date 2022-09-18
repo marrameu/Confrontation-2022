@@ -32,8 +32,11 @@ func _physics_process(delta):
 
 func update_button_color() -> void:
 	if cp.m_team == 0:
-		add_theme_color_override("font_color", Color.WHITE)
+		#add_theme_color_override("font_color", Color.WHITE)
+		modulate = Color.WHITE
 	elif cp.m_team == 2:
 		add_theme_color_override("font_color", Color("b4c7dc"))
+		modulate = Color("b4c7dc")
 	elif cp.m_team == 1:
 		add_theme_color_override("font_color", Color("dcb4b4"))
+		modulate = Color("dcb4b4")

@@ -32,8 +32,10 @@ func _ready() -> void:
 	#PQ 3 EQUIPS?
 	for value in team_count:
 		value = 0
-	if start_team != 0:
-		team_count[start_team - 1] = 10
+	if start_team == 1:
+		team_count = [10.0, 0.0, 0.0]
+	elif start_team == 2:
+		team_count = [0.0, 10.0, 0.0]
 
 
 func _process(delta : float) -> void:
