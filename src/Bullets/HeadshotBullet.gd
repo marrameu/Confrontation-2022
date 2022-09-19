@@ -5,6 +5,7 @@ signal headshot
 @onready var headshot_damage : int = damage * 2
 
 func _ready():
+	super()
 	if shooter.has_method("_on_headshot"):
 		connect("headshot",Callable(shooter,"_on_headshot"))
 

@@ -1,15 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://uvvffdmkg3ds"]
 
-[ext_resource path="res://src/Bullets/Bullet.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Bullets/HeadshotBullet.gd" type="Script" id=2]
+[ext_resource type="PackedScene" uid="uid://bu330wqullnl7" path="res://src/Bullets/Bullet.tscn" id="1"]
+[ext_resource type="Script" path="res://src/Bullets/HeadshotBullet.gd" id="2"]
 
-[node name="HeadshotBullet" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
+[node name="HeadshotBullet" instance=ExtResource("1")]
+script = ExtResource("2")
 bullet_velocity = 400.0
 _time_alive = 2.0
 
-[node name="RayCast3D" parent="." index="6"]
-collision_mask = 5905
+[node name="HitParticles" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+local_coords = true
 
 [node name="HitAudio" parent="." index="7"]
 max_db = -5.0

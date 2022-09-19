@@ -57,18 +57,9 @@ func _ready() -> void:
 	ammo = MAX_AMMO
 	not_eased_ammo = MAX_AMMO
 	ammo_to_reload = MAX_RELOAD_AMMO
-	
-	#m_team = 0
-	if get_tree().has_multiplayer_peer():
-		if not is_multiplayer_authority():
-			$HUD/Crosshair.queue_free()
 
 
 func _process(delta : float) -> void:
-	if get_tree().has_multiplayer_peer():
-		if not is_multiplayer_authority():
-			return
-	
 	if not active:
 		return
 	

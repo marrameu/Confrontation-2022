@@ -189,8 +189,8 @@ func update_center(delta):
 			cursor.visible = true
 			cursor.position += mouse_movement * delta * Settings.mouse_sensitivity
 			crosshair.position = cursor.position - cursor_center_pos + crosshair_center_pos
-			cursor.position = (cursor.position -  cursor_center_pos).clamp(_cursor_limit) + cursor_center_pos
-			crosshair.position = (crosshair.position - crosshair_center_pos).clamp(_crosshair_limit) + crosshair_center_pos
+			cursor.position = (cursor.position -  cursor_center_pos).limit_length(_cursor_limit) + cursor_center_pos
+			crosshair.position = (crosshair.position - crosshair_center_pos).limit_length(_crosshair_limit) + crosshair_center_pos
 			# tots aquests calculs pq al mig no és 0,0 sinó la meitat del pare :/
 			
 			if (cursor.position - cursor_center_pos).length() > _min_position:

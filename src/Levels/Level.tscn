@@ -142,14 +142,14 @@ shape = SubResource("20")
 unique_name_in_owner = true
 
 [node name="CommandPost" parent="Map/CommandPosts" instance=ExtResource("3")]
-transform = Transform3D(0.00961666, 0, -0.999954, 0, 1, 0, 0.999954, 0, 0.00961666, -222.258, 36.7097, -142.667)
+transform = Transform3D(0.00961666, 0, -0.999954, 0, 1, 0, 0.999954, 0, 0.00961666, -222.258, 29.4675, -142.667)
 start_team = 1
 
 [node name="ShipSpawn" parent="Map/CommandPosts/CommandPost" instance=ExtResource("6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71.562, -17.9794, 159.007)
+transform = Transform3D(-0.0666222, 0, -0.997778, 0, 1, 0, 0.997778, 0, -0.0666222, -4.76601, 2.38845, 87.7735)
 
 [node name="ShipSpawn2" parent="Map/CommandPosts/CommandPost" instance=ExtResource("6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 136.039, -17.9794, 159.007)
+transform = Transform3D(-0.0666222, 0, -0.997778, 0, 1, 0, 0.997778, 0, -0.0666222, -9.0616, 2.38845, 152.107)
 
 [node name="CommandPost2" parent="Map/CommandPosts" groups=["OrbitalCannonCP"] instance=ExtResource("3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -243.122, 19.3536, 136.986)

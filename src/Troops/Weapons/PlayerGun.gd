@@ -13,6 +13,8 @@ func _ready():
 	$"%Reload".visible = !reload_per_sec
 	init_offset = offset
 	connect("shoot",Callable(get_tree().current_scene.get_node("CameraBase"),"shake_camera").bind(self))
+	
+	super()
 
 
 func _process(delta):
@@ -39,6 +41,8 @@ func _process(delta):
 	
 	$RayCast3D.global_transform.origin = cam.global_transform.origin #- cam.global_transform.basis.z * 5 # distància fins al jugador
 	$RayCast3D.global_transform.basis = Basis(Quaternion(cam_basis.get_euler()))
+	
+	super(delta)
 
 
 func _physics_process(delta):

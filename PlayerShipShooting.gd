@@ -62,7 +62,7 @@ func shoot_target() -> Vector3:
 	var shoot_target := Vector3()
 	
 	if current_cam:
-		var viewport : SubViewport = get_viewport()
+		var viewport = get_viewport()
 		"""
 		if get_tree().has_multiplayer_peer():
 			viewport = get_node("/root/Main/Splitscreen")._renders[0].viewport
@@ -85,7 +85,8 @@ func shoot_target() -> Vector3:
 		shoot_origin = current_cam.project_ray_origin(Vector2(camera_width_center, camera_height_center))
 		shoot_normal = shoot_origin + current_cam.project_ray_normal(Vector2(camera_width_center, camera_height_center)) * shoot_range
 		
-		var result = space_state.intersect_ray(shoot_origin, shoot_normal, [get_parent()])
+		var query := PhysicsRayQueryParameters3D.create(shoot_origin, shoot_normal, 1, [get_parent()]) # manca establir els layers
+		var result = space_state.intersect_ray(query)
 		if result.is_empty():
 			var ray_dir = current_cam.project_ray_normal(Vector2(camera_width_center, camera_height_center))
 			shoot_target = shoot_origin + ray_dir * shoot_range

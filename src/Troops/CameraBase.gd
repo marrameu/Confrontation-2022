@@ -136,10 +136,10 @@ func process_shake() -> void:
 	if shaking:
 		var to = rotation.x + shake_amount.x
 		rotation.x = clamp(lerp(rotation.x, to, 0.05), deg_to_rad(CAMERA_X_ROT_MIN), deg_to_rad(CAMERA_X_ROT_MAX))
-		shake_amount.x = lerp(shake_amount.x, 0, 0.15)
+		shake_amount.x = lerp(shake_amount.x, 0.0, 0.15)
 		rotation.y = lerp(rotation.y, rotation.y + shake_amount.y, 0.15)
 		original_cam_rot.y = rotation.y - shake_amount.y
-		shake_amount.y = lerp(shake_amount.y, 0, 0.15)
+		shake_amount.y = lerp(shake_amount.y, 0.0, 0.15)
 	elif wants_to_stabilize: 
 		if recoil_amount.x < 0.001: # ja s'ha estabilitzat
 			wants_to_stabilize = false
@@ -147,8 +147,8 @@ func process_shake() -> void:
 		var to = rotation.x + recoil_amount.x
 		rotation.x = lerp(rotation.x, to, 0.15)
 		rotation.y = lerp(rotation.y, rotation.y - recoil_amount.y, 0.15)
-		recoil_amount.y = lerp(recoil_amount.y, 0, 0.15)
-		recoil_amount.x = lerp(recoil_amount.x, 0, 0.15)
+		recoil_amount.y = lerp(recoil_amount.y, 0.0, 0.15)
+		recoil_amount.x = lerp(recoil_amount.x, 0.0, 0.15)
 
 
 func _on_StabilizeTimer_timeout():

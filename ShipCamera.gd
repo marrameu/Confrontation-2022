@@ -83,15 +83,15 @@ func _process(delta):
 
 func _physics_process(delta : float) -> void:
 	if not ship or not weakref(ship).get_ref() or ship.dead:
-		fov = 70
+		fov = 70.0
 		return
 	
 	zooming = Input.is_action_pressed(zoom_action) and not ship.input.turboing
 	if zooming:
-		fov = lerp(fov, 40, .15)
+		fov = lerp(fov, 40.0, .15)
 	else:
 		#zooming = false TF?
-		fov = lerp(fov, 70, .15)
+		fov = lerp(fov, 70.0, .15)
 	
 	move_camera(delta)
 
@@ -140,11 +140,11 @@ func shake_cam():
 func move_camera(delta : float) -> void:
 	global_transform.origin = target.global_transform.origin
 	
-	target.rotation_degrees = Vector3(0, 180, 0)
+	target.rotation = Vector3(0, deg_to_rad(180), 0)
 	global_transform.basis = Basis(target.global_transform.basis.get_euler(), 0)
 	
 	# té cap effecte açò?, potser s'hauria de fer diferent l'acció de mirar enrere
-	global_transform.basis = Quaternion(global_transform.basis).slerp(Quaternion(target.global_transform.basis), rotate_speed * delta)
+	global_transform.basis = Basis(Quaternion(global_transform.basis).slerp(Quaternion(target.global_transform.basis), rotate_speed * delta))
 	update_target(delta)
 
 
@@ -191,8 +191,8 @@ func update_target(delta : float):
 
 
 func horizontal_lean(target : Node3D, x_input : float, lean_limit : float = 45.0 , time : float = 0.03) -> void:
-	var target_rotation : Vector3 = target.rotation_degrees
-	target.rotation_degrees = Vector3(target_rotation.x, target_rotation.y, lerp(target_rotation.z, x_input * lean_limit, time))
+	var target_rotation : Vector3 = target.rotation
+	target.rotation = Vector3(target_rotation.x, target_rotation.y, lerp(target_rotation.z, x_input * lean_limit, time))
 
 
 func _on_player_entered_ship(new_ship : Node3D):

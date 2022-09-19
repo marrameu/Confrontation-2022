@@ -347,7 +347,7 @@ collision_mask = 9
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.0153644, 0)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Model/Skeleton3d" index="2"]
-transform = Transform3D(-0.896398, -0.356441, 0.263472, 0.322696, -0.117295, 0.939207, -0.303868, 0.926926, 0.220166, -0.939353, 4.35701, 1.19135)
+transform = Transform3D(-0.857838, -0.431963, 0.278424, 0.364231, -0.128815, 0.922357, -0.362559, 0.892645, 0.267837, -0.0726402, 1.15854, 0.269701)
 bone_name = "mixamorig_RightHand"
 bone_idx = 36
 
