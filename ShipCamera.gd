@@ -140,8 +140,8 @@ func shake_cam():
 func move_camera(delta : float) -> void:
 	global_transform.origin = target.global_transform.origin
 	
-	target.rotation = Vector3(0, deg_to_rad(180), 0)
-	global_transform.basis = Basis(target.global_transform.basis.get_euler(), 0)
+	target.rotation = Vector3(0, deg_to_rad(180.0), 0)
+	global_transform.basis = Basis(Quaternion(target.global_transform.basis.get_euler()))
 	
 	# té cap effecte açò?, potser s'hauria de fer diferent l'acció de mirar enrere
 	global_transform.basis = Basis(Quaternion(global_transform.basis).slerp(Quaternion(target.global_transform.basis), rotate_speed * delta))
@@ -190,7 +190,7 @@ func update_target(delta : float):
 """
 
 
-func horizontal_lean(target : Node3D, x_input : float, lean_limit : float = 45.0 , time : float = 0.03) -> void:
+func horizontal_lean(target : Node3D, x_input : float, lean_limit : float = deg_to_rad(45.0) , time : float = 0.03) -> void:
 	var target_rotation : Vector3 = target.rotation
 	target.rotation = Vector3(target_rotation.x, target_rotation.y, lerp(target_rotation.z, x_input * lean_limit, time))
 

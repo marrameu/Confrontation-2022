@@ -164,7 +164,7 @@ func _on_enemy_died(attacker : Node): # passar tmb l'enemic
 
 
 func leave() -> void:
-	#set_mode(RigidBody3D.MODE_RIGID)
+	freeze = false
 	state = States.LEAVING
 	$LeaveTimer.start()
 	$EnginesAudio.pitch_scale = 0.001

@@ -81,8 +81,8 @@ func _process(delta : float) -> void:
 				stabilizing = false
 				stabilized = false
 		
-		#States.LANDED:
-		#	#owner.set_mode(RigidBody3D.MODE_RIGID)
+		States.LANDED:
+			owner.freeze = true
 
 
 func set_physics_input(linear_input : Vector3, angular_input : Vector3, delta):
