@@ -79,7 +79,7 @@ func _process(delta : float) -> void:
 		
 		if not (owner.cam as Camera3D).is_position_behind(target.position):
 			lock_target_info.position = (owner.cam as Camera3D).unproject_position(target.global_transform.origin) - Vector2(lock_target_info.size / 2) + Vector2.UP * 80
-			lock_target_info.position = (lock_target_info.position - lock_target_info_center_pos).clamp(500) + lock_target_info_center_pos
+			lock_target_info.position = (lock_target_info.position - lock_target_info_center_pos).limit_length(500) + lock_target_info_center_pos
 		else:
 			var direction := Vector3(target.position - owner.position).normalized()
 			var x = direction.dot(owner.global_transform.basis.x)

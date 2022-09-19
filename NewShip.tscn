@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cjuvkn47nggnc" path="res://assets/CombatShip1/CombatShip1.glb" id="5"]
 [ext_resource type="AudioStream" uid="uid://cpxtqpbote56u" path="res://assets/audio/laser.wav" id="7"]
 [ext_resource type="AudioStream" uid="uid://dctoxll353pba" path="res://assets/audio/turret_overamplified.wav" id="8"]
-[ext_resource type="PackedScene" path="res://src/HealthSystem/HealthSystem.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://nnjjw6vhbk1j" path="res://src/HealthSystem/HealthSystem.tscn" id="9"]
 [ext_resource type="Script" path="res://src/HealthSystem/AutorepairHealthSystem.gd" id="10"]
 [ext_resource type="AudioStream" uid="uid://d0xgfuy61twed" path="res://assets/audio/engines.ogg" id="11"]
 [ext_resource type="Material" path="res://assets/Materials/blue_ship_mat.tres" id="12"]

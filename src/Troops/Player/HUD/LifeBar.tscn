@@ -1,15 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://b6ilv5yx86mya"]
 
-[ext_resource path="res://assets/interface/life_bar.png" type="Texture2D" id=1]
+[ext_resource type="Texture2D" uid="uid://blanc81spi77k" path="res://assets/interface/life_bar.png" id="1"]
 
 [node name="LifeBar" type="TextureProgressBar"]
 offset_right = 125.0
 offset_bottom = 20.0
 value = 100.0
-texture_under = ExtResource( 1 )
-texture_progress = ExtResource( 1 )
-tint_under = Color( 0.337255, 0.337255, 0.337255, 0.392157 )
-tint_progress = Color( 1, 0, 0, 0.588235 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture_under = ExtResource("1")
+texture_progress = ExtResource("1")
+tint_under = Color(0.337255, 0.337255, 0.337255, 0.392157)
+tint_progress = Color(1, 0, 0, 0.588235)
+metadata/_edit_use_anchors_ = true

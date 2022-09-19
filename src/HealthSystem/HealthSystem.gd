@@ -7,13 +7,13 @@ signal shield_started_recovering
 signal shield_recovered
 signal damage_taken
 
-@export var MAX_SHIELD : int = 0 # no caldria perquè l'escut, se suposa que no es pot regenerar -ah, calla, amb les caus sí-, però per a les health bars potser convindria
+@export var MAX_SHIELD : float = 0 # no caldria perquè l'escut, se suposa que no es pot regenerar -ah, calla, amb les caus sí-, però per a les health bars potser convindria
 var shield : float = 0
 
 @export var time_before_shield_repair : float= 5
 @export var shield_repair_per_sec : float = 20
 
-@export var MAX_HEALTH : int = 150 
+@export var MAX_HEALTH : float = 150 
 # 150 Tropes d'assalt, 1200 Caces estelars, 800 Interceptors, 2100 Bombarders, 3600 Naus de transport, 600000 Creuers 
 var health : int = 0
 

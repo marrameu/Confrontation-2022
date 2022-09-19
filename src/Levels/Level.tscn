@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://WaitingCam.gd" id="14"]
 [ext_resource type="PackedScene" uid="uid://cxfscyd4kdcs1" path="res://src/Troops/Player/CameraBase.tscn" id="15"]
 [ext_resource type="AudioStream" uid="uid://n1m40wc4not8" path="res://assets/audio/five_armies.ogg" id="16"]
-[ext_resource type="PackedScene" path="res://MatchUI.tscn" id="17"]
+[ext_resource type="PackedScene" uid="uid://clcc4m2nh2me3" path="res://MatchUI.tscn" id="17"]
 [ext_resource type="PackedScene" path="res://src/PauseMenu.tscn" id="18"]
 [ext_resource type="PackedScene" path="res://src/GroundToSpaceCannon.tscn" id="19"]
 [ext_resource type="Script" path="res://WorldEnvironment.gd" id="21"]

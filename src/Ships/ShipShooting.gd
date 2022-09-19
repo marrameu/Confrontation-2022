@@ -1,6 +1,10 @@
 extends VehicleShooting
 
 
+func _process(delta):
+	super(delta)
+
+
 func update_can_shoots():
 	if owner.landing_areas > 0:
 		var ind : int = 0

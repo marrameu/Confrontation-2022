@@ -51,12 +51,12 @@ func update_lifebars(ship_path : NodePath, shield_life_bar):
 	var wait_time = ship.get_node("HealthSystem/ShieldTimer").wait_time
 	
 	
-	
-	shield_life_bar.get_node("LifeBar").value = ship_health / ship_max_health * 100
+	print(ship_health)
+	shield_life_bar.get_node("LifeBar").value = ship_health / ship_max_health * 100.0
 	if ship_shield:
-		shield_life_bar.value = ship_shield / ship_max_shield * 100
+		shield_life_bar.value = ship_shield / ship_max_shield * 100.0
 	else:
-		shield_life_bar.value = (1.0 - (time_left / wait_time)) * 100
+		shield_life_bar.value = (1.0 - (time_left / wait_time)) * 100.0
 
 
 func _on_big_ship_shields_down(ship):

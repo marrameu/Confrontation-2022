@@ -47,6 +47,7 @@ func _process(delta):
 						rpc("shoot", target.position)
 					else:
 						shoot_bullet(value, target.position)
+	super(delta)
 
 
 func _on_ShootingArea_body_entered(body):

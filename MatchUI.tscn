@@ -1,22 +1,24 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=10 format=3 uid="uid://clcc4m2nh2me3"]
 
-[ext_resource path="res://src/Troops/Player/HUD/ShieldLifeBar.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/interface/pilot-bw.png" type="Texture2D" id=2]
-[ext_resource path="res://MatchUI.gd" type="Script" id=3]
-[ext_resource path="res://assets/interface/pilot.png" type="Texture2D" id=4]
-[ext_resource path="res://assets/interface/life_bar.png" type="Texture2D" id=5]
-[ext_resource path="res://assets/interface/themes/default_theme.tres" type="Theme" id=6]
-[ext_resource path="res://src/HUD/MatchMessage.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/interface/themes/new_theme.tres" type="Theme" id=8]
-[ext_resource path="res://src/HUD/CPIndicator.tscn" type="PackedScene" id=10]
+[ext_resource type="PackedScene" uid="uid://b3noqp4mtdq1n" path="res://src/Troops/Player/HUD/ShieldLifeBar.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://ctukidmkkx108" path="res://assets/interface/pilot-bw.png" id="2"]
+[ext_resource type="Script" path="res://MatchUI.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://bkk4wsdf4874j" path="res://assets/interface/pilot.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://blanc81spi77k" path="res://assets/interface/life_bar.png" id="5"]
+[ext_resource type="Theme" uid="uid://bj7vy7exo3hyj" path="res://assets/interface/themes/default_theme.tres" id="6"]
+[ext_resource type="PackedScene" path="res://src/HUD/MatchMessage.tscn" id="7"]
+[ext_resource type="Theme" uid="uid://b65jnbsqtygei" path="res://assets/interface/themes/new_theme.tres" id="8"]
+[ext_resource type="PackedScene" path="res://src/HUD/CPIndicator.tscn" id="10"]
 
 [node name="MatchUI" type="CanvasLayer"]
 layer = 4
-script = ExtResource( 3 )
+script = ExtResource("3")
 blue_ship = NodePath("../BigShips/CapitalShipBlue")
 red_ship = NodePath("../BigShips/CapitalShipRed")
 
 [node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -276.0
@@ -24,31 +26,35 @@ offset_top = 82.0
 offset_right = 276.0
 offset_bottom = 149.0
 
-[node name="LifeBarRedShield" parent="Control" instance=ExtResource( 1 )]
+[node name="LifeBarRedShield" parent="Control" instance=ExtResource("1")]
+anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -38.0
 offset_bottom = -18.0
+value = 48.0
 
 [node name="RedSupportShips" type="HBoxContainer" parent="Control"]
+anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -14.0
 offset_right = 125.0
 
-[node name="LifeBarRedShield" parent="Control/RedSupportShips" instance=ExtResource( 1 )]
+[node name="LifeBarRedShield" parent="Control/RedSupportShips" instance=ExtResource("1")]
 offset_right = 60.0
 offset_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="LifeBarRedShield2" parent="Control/RedSupportShips" instance=ExtResource( 1 )]
+[node name="LifeBarRedShield2" parent="Control/RedSupportShips" instance=ExtResource("1")]
 offset_left = 64.0
 offset_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="LifeBarBlueShield" parent="Control" instance=ExtResource( 1 )]
+[node name="LifeBarBlueShield" parent="Control" instance=ExtResource("1")]
+anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -59,6 +65,7 @@ offset_right = 0.0
 offset_bottom = -18.0
 
 [node name="BlueSupportShips" type="HBoxContainer" parent="Control"]
+anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -66,13 +73,13 @@ anchor_bottom = 1.0
 offset_left = -125.0
 offset_top = -14.0
 
-[node name="LifeBarBluedShield" parent="Control/BlueSupportShips" instance=ExtResource( 1 )]
+[node name="LifeBarBluedShield" parent="Control/BlueSupportShips" instance=ExtResource("1")]
 offset_right = 60.0
 offset_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="LifeBarBlueShield2" parent="Control/BlueSupportShips" instance=ExtResource( 1 )]
+[node name="LifeBarBlueShield2" parent="Control/BlueSupportShips" instance=ExtResource("1")]
 offset_left = 64.0
 offset_bottom = 14.0
 size_flags_horizontal = 3
@@ -84,6 +91,7 @@ offset_bottom = 14.0
 text = "RED:"
 
 [node name="Label2" type="Label" parent="Control"]
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -40.0
@@ -91,20 +99,22 @@ offset_bottom = 14.0
 text = "BLUE:"
 
 [node name="MiddlePointBar" type="TextureProgressBar" parent="Control"]
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -88.0
 offset_right = 88.0
 offset_bottom = 14.0
 min_value = -100.0
-texture_under = ExtResource( 5 )
-texture_progress = ExtResource( 5 )
-tint_under = Color( 0.47451, 0.47451, 1, 1 )
-tint_progress = Color( 1, 0.454902, 0.454902, 1 )
 nine_patch_stretch = true
+texture_under = ExtResource("5")
+texture_progress = ExtResource("5")
+tint_under = Color(0.47451, 0.47451, 1, 1)
+tint_progress = Color(1, 0.454902, 0.454902, 1)
 
 [node name="CPIndicators" type="HBoxContainer" parent="Control"]
 unique_name_in_owner = true
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -113,26 +123,26 @@ offset_left = -79.0
 offset_top = -25.0
 offset_right = 79.0
 
-[node name="CPIndicator" parent="Control/CPIndicators" instance=ExtResource( 10 )]
+[node name="CPIndicator" parent="Control/CPIndicators" instance=ExtResource("10")]
 offset_right = 23.0
 
-[node name="CPIndicator2" parent="Control/CPIndicators" instance=ExtResource( 10 )]
+[node name="CPIndicator2" parent="Control/CPIndicators" instance=ExtResource("10")]
 offset_left = 27.0
 offset_right = 50.0
 
-[node name="CPIndicator3" parent="Control/CPIndicators" instance=ExtResource( 10 )]
+[node name="CPIndicator3" parent="Control/CPIndicators" instance=ExtResource("10")]
 offset_left = 54.0
 offset_right = 77.0
 
-[node name="CPIndicator4" parent="Control/CPIndicators" instance=ExtResource( 10 )]
+[node name="CPIndicator4" parent="Control/CPIndicators" instance=ExtResource("10")]
 offset_left = 81.0
 offset_right = 104.0
 
-[node name="CPIndicator5" parent="Control/CPIndicators" instance=ExtResource( 10 )]
+[node name="CPIndicator5" parent="Control/CPIndicators" instance=ExtResource("10")]
 offset_left = 108.0
 offset_right = 131.0
 
-[node name="CPIndicator6" parent="Control/CPIndicators" instance=ExtResource( 10 )]
+[node name="CPIndicator6" parent="Control/CPIndicators" instance=ExtResource("10")]
 offset_left = 135.0
 offset_right = 158.0
 
@@ -149,10 +159,10 @@ offset_bottom = 49.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 value = 100.0
-texture_under = ExtResource( 2 )
-texture_progress = ExtResource( 4 )
 fill_mode = 4
 nine_patch_stretch = true
+texture_under = ExtResource("2")
+texture_progress = ExtResource("4")
 
 [node name="TextureProgress2" type="TextureProgressBar" parent="Control2"]
 offset_left = 62.0
@@ -161,10 +171,10 @@ offset_bottom = 49.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 value = 70.0
-texture_under = ExtResource( 2 )
-texture_progress = ExtResource( 4 )
 fill_mode = 4
 nine_patch_stretch = true
+texture_under = ExtResource("2")
+texture_progress = ExtResource("4")
 
 [node name="TextureProgress3" type="TextureProgressBar" parent="Control2"]
 offset_left = 124.0
@@ -173,10 +183,10 @@ offset_bottom = 49.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 value = 50.0
-texture_under = ExtResource( 2 )
-texture_progress = ExtResource( 4 )
 fill_mode = 4
 nine_patch_stretch = true
+texture_under = ExtResource("2")
+texture_progress = ExtResource("4")
 
 [node name="TextureProgress4" type="TextureProgressBar" parent="Control2"]
 offset_left = 187.0
@@ -185,10 +195,10 @@ offset_bottom = 49.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 value = 30.0
-texture_under = ExtResource( 2 )
-texture_progress = ExtResource( 4 )
 fill_mode = 4
 nine_patch_stretch = true
+texture_under = ExtResource("2")
+texture_progress = ExtResource("4")
 
 [node name="TextureProgress5" type="TextureProgressBar" parent="Control2"]
 offset_left = 249.0
@@ -197,33 +207,31 @@ offset_bottom = 49.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 value = 10.0
-texture_under = ExtResource( 2 )
-texture_progress = ExtResource( 4 )
 fill_mode = 4
 nine_patch_stretch = true
+texture_under = ExtResource("2")
+texture_progress = ExtResource("4")
 
 [node name="MatchMessages" type="VBoxContainer" parent="."]
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -325.0
 offset_top = 82.0
 offset_right = -118.0
 offset_bottom = 340.0
-theme = ExtResource( 6 )
-__meta__ = {
-"_editor_description_": ""
-}
+theme = ExtResource("6")
 
-[node name="MatchMessage" parent="MatchMessages" instance=ExtResource( 7 )]
+[node name="MatchMessage" parent="MatchMessages" instance=ExtResource("7")]
 visible = false
 
-[node name="MatchMessage2" parent="MatchMessages" instance=ExtResource( 7 )]
+[node name="MatchMessage2" parent="MatchMessages" instance=ExtResource("7")]
 visible = false
 
 [node name="Label" type="Label" parent="."]
 offset_top = 126.0
 offset_right = 212.0
 offset_bottom = 189.0
-theme = ExtResource( 8 )
+theme = ExtResource("8")
 text = "PUNTS VERMELLS : 0
 PUNTS BLAUS: 0"

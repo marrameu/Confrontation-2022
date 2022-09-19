@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/Troops/TroopShooting.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://d11ctvn8fygh8" path="res://assets/models/ybot/TroopModelNew.tscn" id="2"]
 [ext_resource type="Script" path="res://src/Troops/PointsTracker.gd" id="3"]
-[ext_resource type="PackedScene" path="res://src/HealthSystem/HealthSystem.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://nnjjw6vhbk1j" path="res://src/HealthSystem/HealthSystem.tscn" id="6"]
 [ext_resource type="Script" path="res://src/Troops/ThrowGrenade.gd" id="8"]
 [ext_resource type="Script" path="res://src/Troops/Reloading.gd" id="16"]
 [ext_resource type="AudioStream" uid="uid://gaaemekhbnop" path="res://assets/audio/grenade_throw.wav" id="17"]

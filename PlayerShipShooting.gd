@@ -48,6 +48,8 @@ func _process(delta):
 			pass#$LockingAudio.play()
 	else:
 		$LockingAudio.stop()
+	
+	super(delta)
 
 
 func shoot_target() -> Vector3:
