@@ -45,7 +45,6 @@ draw_pass_1 = SubResource("3")
 
 [node name="Explosion" parent="." index="1"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
-local_coords = true
 process_material = ExtResource("3")
 draw_pass_1 = SubResource("9")
 

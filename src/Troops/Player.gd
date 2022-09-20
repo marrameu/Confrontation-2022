@@ -83,7 +83,9 @@ func _on_headshot():
 
 func _on_enemy_died(attacker):
 	if attacker == self:
-		await get_tree().idle_frame # pq no se'l mengi el headshot
+		# if s'està reproduint una animació, await al senyal que s'acabi
+		# i si n'hi ha més duna a la cua?
+		await get_tree().process_frame # pq no se'l mengi el headshot
 		$"%Weapons".get_child($Shooting.current_weapon_ind).get_node("HUD/Pivot/HitMarkerParts/AnimationPlayer").play("red_hitmarker")
 		add_points(100)
 	else:

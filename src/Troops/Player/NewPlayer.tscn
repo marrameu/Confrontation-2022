@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bdurwr0lwd8oq" path="res://src/Troops/TroopBase.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://src/Troops/Weapons/Pistol.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://src/Bullets/HeadshotBullet.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://uvvffdmkg3ds" path="res://src/Bullets/HeadshotBullet.tscn" id="3"]
 [ext_resource type="Script" path="res://src/Troops/PlayerTroopShooting.gd" id="4"]
 [ext_resource type="Script" path="res://src/Troops/Interact.gd" id="5"]
 [ext_resource type="PackedScene" path="res://src/HUD/PlayerHUD.tscn" id="6"]
@@ -183,10 +183,11 @@ _data = {
 
 [node name="Player" instance=ExtResource("1")]
 collision_mask = 11
+platform_wall_layers = 9
 script = ExtResource("7")
 
 [node name="Pistol" parent="Model/Skeleton3d/BoneAttachment3D/Weapons" index="0" instance=ExtResource("2")]
-transform = Transform3D(0.271617, 1.9621, 0.276331, -0.332856, -0.22977, 1.95867, 1.95331, -0.311994, 0.295345, 0.0763595, -0.113004, 0.517383)
+transform = Transform3D(0.271617, 1.9621, 0.276331, -0.332856, -0.22977, 1.95867, 1.95331, -0.311994, 0.295345, 17.712, 3.44883, -6.9678)
 visible = false
 bullet_scene = ExtResource("3")
 
@@ -306,6 +307,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
 [node name="AudioListener3D" type="AudioListener3D" parent="." index="12"]
 current = true
+
+[node name="Tail" parent="." index="13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0681257, 0)
 
 [connection signal="timeout" from="Interact/Timer" to="Interact" method="_on_Timer_timeout"]
 
