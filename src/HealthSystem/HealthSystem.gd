@@ -15,7 +15,7 @@ var shield : float = 0
 
 @export var MAX_HEALTH : float = 150 
 # 150 Tropes d'assalt, 1200 Caces estelars, 800 Interceptors, 2100 Bombarders, 3600 Naus de transport, 600000 Creuers 
-var health : int = 0
+var health : float = 0
 
 
 func _ready() -> void:
