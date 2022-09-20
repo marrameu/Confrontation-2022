@@ -30,6 +30,7 @@ transform = Transform3D(-0.857838, -0.431963, 0.278424, 0.364231, -0.128815, 0.9
 
 [node name="AIGun" parent="Model/Skeleton3d/BoneAttachment3D/Weapons" index="0" instance=ExtResource("3")]
 unique_name_in_owner = true
+transform = Transform3D(0.351531, 0.897547, 0.266149, -0.701629, 0.0643727, 0.709629, 0.619792, -0.436194, 0.652375, 16.9136, 4.26721, -1.71462)
 
 [node name="AnimationTree" parent="." index="6"]
 parameters/StateMachine/playback = SubResource("1")

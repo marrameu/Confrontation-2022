@@ -54,15 +54,10 @@ func _physics_process(delta):
 
 
 func _on_HealthSystem_die(attacker) -> void:
-	if get_tree().has_multiplayer_peer():
-		if get_tree().is_server():
-			($RespawnTimer as Timer).start()
-			rpc("die")
-	else:
-		emit_signal("died")
-		queue_free()
-		# ($RespawnTimer as Timer).start()
-		# die()
+	emit_signal("died")
+	queue_free()
+	# ($RespawnTimer as Timer).start()
+	# die()
 
 
 func set_material() -> void:
