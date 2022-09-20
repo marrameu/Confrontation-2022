@@ -114,7 +114,7 @@ func spawn_player(pos := Vector3(0, 2, 0)) -> Node3D:
 	return new_player
 
 
-func spawn_ai_troop(ai_num : int, blue_team := false, spawn_in_space := false, pos := Vector3()) -> Node3D:
+func spawn_ai_troop(ai_num : int, blue_team := false, spawn_in_space := false, pos := Vector3.ZERO) -> Node3D:
 	var new_troop_man : AIPilotManager = get_node_or_null("PilotManagers/AIManager" + str(ai_num))
 	# crea'n un de nou
 	if not new_troop_man:
@@ -149,10 +149,10 @@ func spawn_ai_troop(ai_num : int, blue_team := false, spawn_in_space := false, p
 	
 	new_troop.pilot_man = new_troop_man
 	# ES POT FER MILLOR, COM AMB EL PLAYER
-	if pos != Vector3.ZERO:
-		new_troop.position = my_cp.global_transform.origin + Vector3(randf_range(-15, 15), 2, randf_range(-15, 15))
-	else:
-		new_troop.position = pos
+	# 4.0 if pos != Vector3.ZERO:
+	new_troop.position = my_cp.global_transform.origin + Vector3(randf_range(-15, 15), 2, randf_range(-15, 15))
+	# 4.0 else:
+	# 4.0 new_troop.position = pos
 	new_troop.connect("died",Callable(self,"_on_ai_troop_died").bind(ai_num))
 	add_child(new_troop)
 	
@@ -160,7 +160,7 @@ func spawn_ai_troop(ai_num : int, blue_team := false, spawn_in_space := false, p
 
 
 func start_battle():
-	if battle_started:
+	if has_battle_started:
 		return
 	
 	var blue_ais : int = num_of_players

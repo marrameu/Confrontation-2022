@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://PilotManager.gd" id="8"]
 [ext_resource type="PackedScene" path="res://src/Ships/LandingArea/LandingArea.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://SupportShip.tscn" id="10"]
-[ext_resource type="PackedScene" path="res://CapitalShip.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://b6vbwq8jkv7uf" path="res://CapitalShip.tscn" id="11"]
 [ext_resource type="PackedScene" path="res://AttackShip.tscn" id="12"]
 [ext_resource type="PackedScene" path="res://SpawnHUD.tscn" id="13"]
 [ext_resource type="Script" path="res://WaitingCam.gd" id="14"]

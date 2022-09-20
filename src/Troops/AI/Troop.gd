@@ -48,9 +48,6 @@ func _ready():
 
 func _physics_process(delta):
 	#$PlayerMesh.moving = !$PathMaker.finished
-	if get_tree().has_multiplayer_peer():
-		if not get_tree().is_server():
-			return
 	
 	if wait_to_init:
 		return
@@ -77,8 +74,8 @@ func set_material() -> void:
 
 func _on_InitTimer_timeout():
 	wait_to_init = false
-	$StateMachine.set_active(true)
-	$AIStateMachine.set_active(true)
+	$StateMachine.active = (true)
+	$AIStateMachine.active = (true)
 
 
 func _on_damagable_hit():
