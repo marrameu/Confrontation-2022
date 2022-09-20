@@ -410,25 +410,30 @@ offset = Vector2(10, 10)
 target_position = Vector3(0, -1, 0)
 
 [node name="HBoxContainer" parent="HUD" index="0"]
-anchors_preset = 2
+offset_left = 0.0
+offset_top = -172.0
+offset_right = 66.0
+offset_bottom = 0.0
+grow_vertical = 0
 
 [node name="Pivot" parent="HUD" index="1"]
-layout_mode = 3
-anchors_preset = 8
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HitMarkerParts" parent="HUD/Pivot" index="0"]
 modulate = Color(1, 1, 1, 0)
-layout_mode = 3
-anchors_preset = 8
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TextureRect2" parent="HUD/Pivot/HitMarkerParts" index="1"]
-anchors_preset = 1
+grow_horizontal = 0
 
 [node name="TextureRect3" parent="HUD/Pivot/HitMarkerParts" index="2"]
-anchors_preset = 2
+grow_vertical = 0
 
 [node name="TextureRect4" parent="HUD/Pivot/HitMarkerParts" index="3"]
-anchors_preset = 3
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="AnimationPlayer" parent="HUD/Pivot/HitMarkerParts" index="4"]
 libraries = {
@@ -436,20 +441,26 @@ libraries = {
 }
 
 [node name="Crosshair" parent="HUD/Pivot" index="1"]
-layout_mode = 3
-anchors_preset = 8
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="CrosshairPart" parent="HUD/Pivot/Crosshair" index="0"]
-anchors_preset = 4
+grow_vertical = 2
 
 [node name="CrosshairPart2" parent="HUD/Pivot/Crosshair" index="1"]
-anchors_preset = 5
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
 
 [node name="CrosshairPart3" parent="HUD/Pivot/Crosshair" index="2"]
-anchors_preset = 7
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="CrosshairPart4" parent="HUD/Pivot/Crosshair" index="3"]
-anchors_preset = 6
+grow_horizontal = 0
+grow_vertical = 2
 
 [node name="AnimationTree" parent="HUD/Pivot/Crosshair" index="4"]
 parameters/playback = SubResource("1")

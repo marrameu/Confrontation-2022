@@ -10,7 +10,6 @@ func update(delta):
 	direction.y = 0
 	direction = direction.normalized()
 	
-	print(direction * aim.z)
 	var ello := (direction * aim.z).z + (direction * aim.z).x + (direction * aim.z).y  #solucio de kk
 	if Input.is_action_pressed("run") and ello >= 0.99:#Vector3.ONE: # > 0 ?
 		emit_signal("finished", "run")

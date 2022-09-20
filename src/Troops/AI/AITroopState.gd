@@ -4,7 +4,6 @@ class_name AITroopState
 
 func update_navigation_node():
 	if owner.position.y < 1000:
-		owner.get_node("PathMaker").navigation_node = get_node("/root/Level/Map/Node3D")
 		owner.agent.set_navigation_map(owner.get_world_3d().navigation_map)
 		#owner.get_parent().remove_child(owner)
 		#owner.get_node("PathMaker").navigation_node.add_child(owner)
@@ -18,7 +17,6 @@ func update_navigation_node():
 				my_cap_ship = cap_ship
 	
 		if my_cap_ship:
-			owner.get_node("PathMaker").navigation_node = my_cap_ship.get_node("Node3D")
 			owner.agent.set_navigation_map(owner.get_world_3d().navigation_map)
 			#owner.get_parent().remove_child(owner)
 			#owner.get_node("PathMaker").navigation_node.add_child(owner)

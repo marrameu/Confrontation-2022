@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://be60qtgixk82q"]
+[gd_scene load_steps=15 format=3 uid="uid://be60qtgixk82q"]
 
 [ext_resource type="PackedScene" uid="uid://bdurwr0lwd8oq" path="res://src/Troops/TroopBase.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://src/Troops/Weapons/AIGun.tscn" id="3"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://src/Troops/AI/ConquerGroundCPs.gd" id="9"]
 [ext_resource type="Script" path="res://src/Troops/AI/TroopEnemyDetection.gd" id="10"]
 [ext_resource type="Script" path="res://src/Troops/AI/ChooseObjective.gd" id="11"]
-[ext_resource type="Script" path="res://src/Troops/AI/PathMakerTemproal.gd" id="12"]
 [ext_resource type="Material" path="res://assets/materials/command_post/blue.tres" id="13"]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="1"]
@@ -26,7 +25,7 @@ red_mat = ExtResource("4")
 blue_mat = ExtResource("13")
 
 [node name="BoneAttachment3D" parent="Model/Skeleton3d" index="2"]
-transform = Transform3D(-0.857838, -0.431963, 0.278424, 0.364231, -0.128815, 0.922357, -0.362559, 0.892645, 0.267837, -0.0726402, 1.15854, 0.269701)
+transform = Transform3D(-0.896398, -0.356442, 0.263473, 0.322697, -0.117294, 0.939206, -0.303868, 0.926926, 0.220165, -0.12208, 1.16277, 0.232931)
 
 [node name="AIGun" parent="Model/Skeleton3d/BoneAttachment3D/Weapons" index="0" instance=ExtResource("3")]
 unique_name_in_owner = true
@@ -82,9 +81,6 @@ script = ExtResource("7")
 
 [node name="CheckCurrentEnemyTimer" type="Timer" parent="." index="15"]
 autostart = true
-
-[node name="PathMaker" type="Node" parent="." index="16"]
-script = ExtResource("12")
 
 [connection signal="timeout" from="EnemyDetection/Timer" to="EnemyDetection" method="_on_Timer_timeout"]
 [connection signal="timeout" from="InitTimer" to="." method="_on_InitTimer_timeout"]

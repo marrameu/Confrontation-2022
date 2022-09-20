@@ -8,8 +8,8 @@ func enter():
 
 func approach_enemy() -> void:
 	approaching_enemy = true
-	var begin : Vector3 = owner.get_node("PathMaker").navigation_node.get_closest_point(owner.get_position())
-	var end : Vector3 = owner.get_node("PathMaker").navigation_node.get_closest_point(owner.current_enemy.get_position())
+	var begin : Vector3 = NavigationServer3D.map_get_closest_point(owner.get_world_3d().navigation_map, (owner.get_position()))
+	var end : Vector3 = NavigationServer3D.map_get_closest_point(owner.get_world_3d().navigation_map, (owner.current_enemy.get_position()))
 	owner.agent.set_target_location(end)
 
 

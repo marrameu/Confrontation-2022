@@ -22,7 +22,6 @@ func update(delta):
 		var target_global_position = owner.agent.get_next_location()
 		var direction = owner.global_transform.origin.direction_to(target_global_position)
 		var desired_velocity = direction * max_speed
-		print(desired_velocity)
 		var steering = (desired_velocity - _velocity) * delta * 4.0
 		_velocity += steering
 		_move(_velocity)

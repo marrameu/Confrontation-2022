@@ -98,48 +98,6 @@ MAX_HEALTH = 150
 parameters/StateMachine/playback = SubResource("1")
 parameters/StateMachine/walk/OneShotStateMachine/playback = SubResource("2")
 
-[node name="TextureRect" parent="PlayerHUD/DieInfo" index="0"]
-layout_mode = 1
-
-[node name="InteractionProgress" parent="PlayerHUD/Alive" index="0"]
-layout_mode = 1
-
-[node name="MyLifeBar" parent="PlayerHUD/Alive" index="1"]
-layout_mode = 1
-
-[node name="LifeBarEnemy" parent="PlayerHUD/Alive" index="2"]
-layout_mode = 0
-
-[node name="LifeBar" parent="PlayerHUD/Alive/LifeBarEnemy" index="0"]
-layout_mode = 2
-
-[node name="Nickname" parent="PlayerHUD/Alive/LifeBarEnemy" index="1"]
-layout_mode = 2
-
-[node name="SpeiclaWeapons" parent="PlayerHUD/Alive" index="3"]
-layout_mode = 1
-
-[node name="TextureRect" parent="PlayerHUD/Alive/SpeiclaWeapons" index="0"]
-layout_mode = 2
-
-[node name="TextureRect2" parent="PlayerHUD/Alive/SpeiclaWeapons/TextureRect" index="0"]
-layout_mode = 1
-
-[node name="Label" parent="PlayerHUD/Alive/SpeiclaWeapons/TextureRect" index="1"]
-layout_mode = 1
-
-[node name="Label2" parent="PlayerHUD/Alive/SpeiclaWeapons/TextureRect" index="2"]
-layout_mode = 1
-
-[node name="Label2" parent="PlayerHUD/Alive/SpeiclaWeapons" index="1"]
-layout_mode = 2
-
-[node name="Label3" parent="PlayerHUD/Alive/SpeiclaWeapons" index="2"]
-layout_mode = 2
-
-[node name="DamageIndicators" parent="PlayerHUD/Alive" index="4"]
-layout_mode = 1
-
 [node name="AudioListener3D" parent="." index="12"]
 current = false
 

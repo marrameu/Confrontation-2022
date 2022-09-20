@@ -2,6 +2,7 @@ extends "res://src/StateMachine/StateMachine.gd"
 
 
 func _ready():
+	super()
 	# si no és el servidor que es desactivi l'state machine (active) o crear un estat Client
 	states_map = {
 		"choose_objective": $ChooseObjective,

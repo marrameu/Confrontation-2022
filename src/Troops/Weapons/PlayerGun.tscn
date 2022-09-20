@@ -440,6 +440,7 @@ offset_left = 60.0
 offset_top = -221.0
 offset_right = 126.0
 offset_bottom = -49.0
+grow_vertical = 0
 
 [node name="Reload" type="TextureProgressBar" parent="HUD/HBoxContainer" index="0"]
 unique_name_in_owner = true
@@ -478,6 +479,8 @@ offset_left = -60.0
 offset_top = -60.0
 offset_right = 60.0
 offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(27, 27)
 
 [node name="HitMarkerParts" parent="HUD/Pivot" index="0" instance=ExtResource("1")]
@@ -487,15 +490,21 @@ offset_left = -28.0
 offset_top = -28.0
 offset_right = 28.0
 offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TextureRect2" parent="HUD/Pivot/HitMarkerParts" index="1"]
 anchors_preset = 1
+grow_horizontal = 0
 
 [node name="TextureRect3" parent="HUD/Pivot/HitMarkerParts" index="2"]
 anchors_preset = 2
+grow_vertical = 0
 
 [node name="TextureRect4" parent="HUD/Pivot/HitMarkerParts" index="3"]
 anchors_preset = 3
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="AnimationPlayer" parent="HUD/Pivot/HitMarkerParts" index="4"]
 libraries = {
@@ -514,6 +523,8 @@ offset_left = 40.0
 offset_top = 40.0
 offset_right = 80.0
 offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="CrosshairPart" type="TextureRect" parent="HUD/Pivot/Crosshair" index="0"]
 anchors_preset = 4
@@ -522,6 +533,7 @@ anchor_bottom = 0.5
 offset_top = -7.0
 offset_right = 14.0
 offset_bottom = 7.0
+grow_vertical = 2
 texture = ExtResource("4")
 
 [node name="CrosshairPart2" type="TextureRect" parent="HUD/Pivot/Crosshair" index="1"]
@@ -531,6 +543,7 @@ anchor_right = 0.5
 offset_left = 6.0
 offset_right = 20.0
 offset_bottom = 14.0
+grow_horizontal = 2
 rotation = 90.0
 texture = ExtResource("4")
 
@@ -543,6 +556,8 @@ anchor_bottom = 1.0
 offset_left = 6.0
 offset_top = -14.0
 offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
 rotation = 90.0
 texture = ExtResource("4")
 flip_h = true
@@ -556,6 +571,8 @@ anchor_bottom = 0.5
 offset_left = -14.0
 offset_top = -7.0
 offset_bottom = 7.0
+grow_horizontal = 0
+grow_vertical = 2
 texture = ExtResource("4")
 flip_h = true
 

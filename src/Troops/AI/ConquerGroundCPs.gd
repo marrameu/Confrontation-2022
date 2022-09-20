@@ -54,7 +54,7 @@ func search_cp_and_conquer(): # àlies terra
 		# RANDOM CP
 		nearest_command_post = enemy_command_posts[randi()%enemy_command_posts.size()]
 		
-		var begin : Vector3 = owner.get_node("PathMaker").navigation_node.get_closest_point(owner.get_position())
+		var begin : Vector3 = NavigationServer3D.map_get_closest_point(owner.get_world_3d().navigation_map, (owner.get_position()))
 		var end := Vector3(randf_range(nearest_command_post.position.x - 7, nearest_command_post.position.x - 7), nearest_command_post.position.y, randf_range(nearest_command_post.position.z - 5, nearest_command_post.position.z + 5))
 		owner.agent.set_target_location(end)
 		print(owner, " ha update path?")
@@ -65,7 +65,7 @@ func search_cp_and_conquer(): # àlies terra
 	# Si no hi han CP enemics
 	else:
 		idle = true
-		var begin : Vector3 = owner.get_node("PathMaker").navigation_node.get_closest_point(owner.get_position())
+		var begin : Vector3 = NavigationServer3D.map_get_closest_point(owner.get_world_3d().navigation_map, (owner.get_position()))
 		var end := Vector3(randf_range(-200, 200), 0, randf_range(-200, 200))
 		owner.get_node("PathMaker").update_path(begin, end)
 

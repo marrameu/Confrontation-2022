@@ -28,7 +28,7 @@ func search_ship(): # comprovar que no hi hagi ningú a la nau
 	
 	
 	if weakref(desired_ship).get_ref():
-		if desired_ship.is_player_or_ai == 0:
+		if desired_ship.is_player_or_ai == 0: # seria != oi?
 			return
 		desired_ship = null
 	else:
@@ -37,13 +37,14 @@ func search_ship(): # comprovar que no hi hagi ningú a la nau
 		for ship in ships:
 			if ship.is_player_or_ai == 0:
 				if owner.global_transform.origin.distance_to(ship.global_transform.origin) < owner.global_transform.origin.distance_to(new_ship_pos):
-					if owner.get_node("PathMaker").navigation_node.get_closest_point(ship.global_transform.origin).distance_to(ship.global_transform.origin) < 30:
+					if NavigationServer3D.map_get_closest_point(owner.get_world_3d().navigation_map, (ship.global_position)).distance_to(ship.global_position) < 30:
 						new_ship_pos = ship.global_transform.origin
 						desired_ship = ship
 		if not weakref(desired_ship).get_ref():
 			$WaitTimer.start()
 		else:
-			end = owner.get_node("PathMaker").navigation_node.get_closest_point(desired_ship.global_transform.origin)
+			end = NavigationServer3D.map_get_closest_point(owner.get_world_3d().navigation_map, (desired_ship.global_position))
+			print(end, "   ", desired_ship.global_position)
 			owner.agent.set_target_location(end)
 
 

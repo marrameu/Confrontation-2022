@@ -6,6 +6,7 @@ func _ready():
 	# si no és el servidor que es desactivi l'state machine (active) o crear un estat Client
 	set_states_map()
 	active = false
+	super()
 
 
 func _process(_delta):
