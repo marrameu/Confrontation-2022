@@ -197,7 +197,7 @@ func exit_ship(): # de moment, sols player
 		cam.ship = null
 		get_tree().current_scene.spawn_player(position) # senyals
 	elif is_player_or_ai == 2:
-		$StateMachine.set_active(false)
+		$StateMachine.active = (false)
 		get_tree().current_scene.spawn_ai_troop(String(pilot_man.name).trim_prefix("AIManager").to_int(), false, false, position) # senyals
 	pilot_man = null
 	input.set_script(preload("res://ShipInput.gd"))

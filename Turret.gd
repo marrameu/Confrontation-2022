@@ -23,9 +23,9 @@ func _physics_process(delta):
 	if enemies:
 		# make it slerp depenent de la dificultat
 		$Node3D.look_at(enemies[0].position, $Node3D.global_transform.basis.y)
-		$Node3D.rotation_degrees.z = 0
-		$Node3D.rotation_degrees.x = clamp($Node3D.rotation_degrees.x, -clamp_rot, clamp_rot)
-		$Node3D.rotation_degrees.y = clamp($Node3D.rotation_degrees.y, -clamp_rot, clamp_rot)
+		$Node3D.rotation.z = 0
+		$Node3D.rotation.x = clamp($Node3D.rotation.x, deg_to_rad(-clamp_rot), deg_to_rad(clamp_rot))
+		$Node3D.rotation.y = clamp($Node3D.rotation.y, deg_to_rad(-clamp_rot), deg_to_rad(clamp_rot))
 
 
 func _process(delta):

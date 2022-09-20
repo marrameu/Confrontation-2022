@@ -43,10 +43,7 @@ func _process(delta):
 		if enemy_in_range:
 			for value in wants_shoots:
 				if wants_shoots[value] and can_shoots[value]:
-					if get_tree().has_multiplayer_peer():
-						rpc("shoot", target.position)
-					else:
-						shoot_bullet(value, target.position)
+					shoot_bullet(value, target.position)
 	super(delta)
 
 
