@@ -10,7 +10,7 @@ func enter():
 	search_cp_and_conquer()
 
 
-func _on_NavigationAgent_target_reached():
+func _on_navigation_agent_3d_navigation_finished():
 	if get_parent().current_state != self:
 		return
 	

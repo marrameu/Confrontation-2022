@@ -22,7 +22,7 @@ func _ready() -> void:
 	if get_node_or_null("ShieldTimer"):
 		$ShieldTimer.wait_time = time_before_shield_repair
 	
-	if health == 0:
+	if health == 0.0:
 		health = MAX_HEALTH
 	
 	shield = MAX_SHIELD

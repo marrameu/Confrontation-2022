@@ -48,7 +48,7 @@ func init(new_pilot_man : PilotManager):
 		input.set_script(preload("res://ShipAIInput.gd"))
 		input.set_physics_process(true) # WTF pq cal?
 		shooting.set_script(preload("res://AIShipShooting.gd"))
-		$StateMachine.set_active(true)
+		$StateMachine.active = true
 	connect("ship_died",Callable(get_tree().current_scene,"_on_ship_died").bind(pilot_man))
 	return true
 

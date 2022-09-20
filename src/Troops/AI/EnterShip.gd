@@ -48,20 +48,6 @@ func search_ship(): # comprovar que no hi hagi ningú a la nau
 			owner.agent.set_target_location(end)
 
 
-func _on_NavigationAgent_target_reached():
-	if get_parent().current_state != self:
-		return
-	
-	if not weakref(desired_ship).get_ref():
-		emit_signal("finished", "enter_ship")
-	else:
-		if desired_ship.get_node("Interaction").can_interact(owner):
-			desired_ship.get_node("Interaction").interact(owner)
-			owner.queue_free()
-		#else:
-		#	emit_signal("finished", "enter_ship")
-
-
 func _on_WaitTimer_timeout():
 	search_ship()
 
@@ -74,3 +60,16 @@ func _on_CheckCurrentEnemyTimer_timeout() -> void:
 		if owner.position.distance_to(owner.current_enemy.position) < 150:
 			emit_signal("finished", "attack_enemy")
 
+
+func _on_navigation_agent_3d_navigation_finished():
+	if get_parent().current_state != self:
+		return
+	
+	if not weakref(desired_ship).get_ref():
+		emit_signal("finished", "enter_ship")
+	else:
+		if desired_ship.get_node("Interaction").can_interact(owner):
+			desired_ship.get_node("Interaction").interact(owner)
+			owner.queue_free()
+		#else:
+		#	emit_signal("finished", "enter_ship")

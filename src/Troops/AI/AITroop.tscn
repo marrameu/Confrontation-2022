@@ -84,6 +84,8 @@ autostart = true
 
 [connection signal="timeout" from="EnemyDetection/Timer" to="EnemyDetection" method="_on_Timer_timeout"]
 [connection signal="timeout" from="InitTimer" to="." method="_on_InitTimer_timeout"]
+[connection signal="navigation_finished" from="NavigationAgent3D" to="AIStateMachine/ConquerGroundCPs" method="_on_navigation_agent_3d_navigation_finished"]
+[connection signal="navigation_finished" from="NavigationAgent3D" to="AIStateMachine/EnterShip" method="_on_navigation_agent_3d_navigation_finished"]
 [connection signal="timeout" from="AIStateMachine/ConquerGroundCPs/ConquestTimer" to="AIStateMachine/ConquerGroundCPs" method="_on_ConquestTimer_timeout"]
 [connection signal="timeout" from="AIStateMachine/EnterShip/WaitTimer" to="AIStateMachine/EnterShip" method="_on_WaitTimer_timeout"]
 

@@ -11,7 +11,7 @@ func _ready():
 
 func _process(_delta):
 	# fer-ho amb senyals
-	if owner.get_node("HealthSystem").health < 700 and current_state != states_map["escape"]:
+	if owner.get_node("HealthSystem").health < 700.0 and current_state != states_map["escape"]:
 		current_state.escape()
 
 
