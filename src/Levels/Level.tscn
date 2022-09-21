@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cxfscyd4kdcs1" path="res://src/Troops/Player/CameraBase.tscn" id="15"]
 [ext_resource type="AudioStream" uid="uid://n1m40wc4not8" path="res://assets/audio/five_armies.ogg" id="16"]
 [ext_resource type="PackedScene" uid="uid://clcc4m2nh2me3" path="res://MatchUI.tscn" id="17"]
-[ext_resource type="PackedScene" path="res://src/PauseMenu.tscn" id="18"]
+[ext_resource type="PackedScene" uid="uid://b2yrxyk7ard5y" path="res://src/PauseMenu.tscn" id="18"]
 [ext_resource type="PackedScene" path="res://src/GroundToSpaceCannon.tscn" id="19"]
 [ext_resource type="Script" path="res://WorldEnvironment.gd" id="21"]
 [ext_resource type="PackedScene" uid="uid://dvh28l43eiryx" path="res://assets/models/autumn_tree/scene.gltf" id="22"]
@@ -357,6 +357,7 @@ transform = Transform3D(1, 0, 0, 0, 0.509342, 0.860564, 0, -0.860564, 0.509342, 
 transform = Transform3D(1, 0, 0, 0, 0.509342, 0.860564, 0, -0.860564, 0.509342, 0, 16.1443, -9.14729)
 
 [node name="PauseMenu" parent="." instance=ExtResource("18")]
+process_mode = 3
 
 [node name="PlayerShipCam" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9301, 12.6019)

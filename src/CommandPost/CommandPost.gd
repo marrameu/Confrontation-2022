@@ -99,7 +99,7 @@ func _physics_process(delta : float) -> void:
 		if not $Timer.is_stopped():
 			$Timer.stop()
 		new_team = 0
-	if m_team != new_team:
+	if m_team != new_team: # FER AIXÒ AMB EL SET_GET
 		m_team = new_team
 		emit_signal("team_changed")
 	
