@@ -48,9 +48,9 @@ func _on_CheckDisplayFps_toggled(button_pressed):
 
 func _on_CheckVsync_toggled(button_pressed):
 	if button_pressed == true:
-		OS.vsync_enabled = true
+		ProjectSettings.set("display/window/vsync/vsync_mode", DisplayServer.VSYNC_ENABLED)
 	else:
-		OS.vsync_enabled = false
+		ProjectSettings.set("display/window/vsync/vsync_mode", DisplayServer.VSYNC_DISABLED)
 
 
 func _on_Atrs_pressed():

@@ -24,18 +24,18 @@ script = ExtResource("5")
 red_mat = ExtResource("4")
 blue_mat = ExtResource("13")
 
-[node name="BoneAttachment3D" parent="Model/Skeleton3d" index="2"]
-transform = Transform3D(-0.896398, -0.356442, 0.263473, 0.322697, -0.117294, 0.939206, -0.303868, 0.926926, 0.220165, -0.12208, 1.16277, 0.232931)
+[node name="BoneAttachment3D" parent="Model/Armature/GeneralSkeleton" index="2"]
+transform = Transform3D(0.604658, 0.611233, -0.509765, 0.429771, -0.789387, -0.437181, -0.670359, 0.0452911, -0.740133, -0.276263, 0.817986, 0.152325)
 
-[node name="AIGun" parent="Model/Skeleton3d/BoneAttachment3D/Weapons" index="0" instance=ExtResource("3")]
+[node name="AIGun" parent="Model/Armature/GeneralSkeleton/BoneAttachment3D/Weapons" index="0" instance=ExtResource("3")]
 unique_name_in_owner = true
-transform = Transform3D(0.351531, 0.897547, 0.266149, -0.701629, 0.0643727, 0.709629, 0.619792, -0.436194, 0.652375, 16.9136, 4.26721, -1.71462)
+transform = Transform3D(-1.27316, 0.375054, 2.69043, -0.67221, 2.83536, -0.713359, -2.63196, -0.905584, -1.11925, 0, 0, 0)
 
 [node name="AnimationTree" parent="." index="6"]
 parameters/StateMachine/playback = SubResource("1")
 parameters/StateMachine/walk/OneShotStateMachine/playback = SubResource("2")
 
-[node name="EnemyDetection" type="Node3D" parent="." index="10"]
+[node name="EnemyDetection" type="Node3D" parent="." index="8"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.78536, 0)
 script = ExtResource("10")
 
@@ -43,19 +43,18 @@ script = ExtResource("10")
 wait_time = 3.0
 autostart = true
 
-[node name="InitTimer" type="Timer" parent="." index="11"]
+[node name="InitTimer" type="Timer" parent="." index="9"]
 one_shot = true
 autostart = true
 
-[node name="TeamIndicator" type="MeshInstance3D" parent="." index="12"]
+[node name="TeamIndicator" type="MeshInstance3D" parent="." index="10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.55491, 0.321415)
 mesh = SubResource("3")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." index="13"]
-path_max_distance = 4.0
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." index="11"]
 max_speed = 6.0
 
-[node name="AIStateMachine" type="Node" parent="." index="14"]
+[node name="AIStateMachine" type="Node" parent="." index="12"]
 script = ExtResource("6")
 START_STATE = NodePath("ChooseObjective")
 
@@ -79,7 +78,7 @@ one_shot = true
 [node name="AttackEnemy" type="Node" parent="AIStateMachine" index="3"]
 script = ExtResource("7")
 
-[node name="CheckCurrentEnemyTimer" type="Timer" parent="." index="15"]
+[node name="CheckCurrentEnemyTimer" type="Timer" parent="." index="13"]
 autostart = true
 
 [connection signal="timeout" from="EnemyDetection/Timer" to="EnemyDetection" method="_on_Timer_timeout"]
