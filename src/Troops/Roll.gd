@@ -13,7 +13,7 @@ func enter():
 	roll_direction.y = 0
 	roll_direction = roll_direction.normalized()
 	
-	if roll_direction != Vector3.ZERO: # potser q no hagi rpemut cal teclat, es a dir, no canvia de direcció
+	if roll_direction == Vector3.ZERO: # potser q no hagi rpemut cal teclat, es a dir, no canvia de direcció
 		roll_direction = aim.z
 	# animació
 	owner.get_node("Model").rotation.y = Vector2(roll_direction.z, roll_direction.x).angle() - owner.rotation.y

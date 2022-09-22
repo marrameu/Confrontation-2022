@@ -1,23 +1,27 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://bdgttn7d3l3l6"]
 
-[ext_resource path="res://assets/interface/themes/new_theme.tres" type="Theme" id=1]
-[ext_resource path="res://src/HUD/Leaderboard.gd" type="Script" id=2]
+[ext_resource type="Theme" uid="uid://b65jnbsqtygei" path="res://assets/interface/themes/new_theme.tres" id="1"]
+[ext_resource type="Script" path="res://src/HUD/Leaderboard.gd" id="2"]
 
 [node name="Leaderboard" type="CanvasLayer"]
 layer = 25
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 1 )
+theme = ExtResource("1")
 
 [node name="BG" type="ColorRect" parent="Control"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.388235 )
+color = Color(0, 0, 0, 0.388235)
 
 [node name="Teams" type="HBoxContainer" parent="Control"]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -26,31 +30,26 @@ offset_left = -800.0
 offset_top = -448.0
 offset_right = 800.0
 offset_bottom = 448.0
-custom_constants/separation = 50
 
 [node name="Red" type="VBoxContainer" parent="Control/Teams"]
-offset_right = 775.0
+offset_right = 798.0
 offset_bottom = 896.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Title" type="Label" parent="Control/Teams/Red"]
-offset_right = 775.0
-offset_bottom = 30.0
+offset_right = 798.0
+offset_bottom = 26.0
 text = "VERMELLS"
-align = 1
-valign = 1
 
 [node name="Blue" type="VBoxContainer" parent="Control/Teams"]
-offset_left = 825.0
+offset_left = 802.0
 offset_right = 1600.0
 offset_bottom = 896.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Title" type="Label" parent="Control/Teams/Blue"]
-offset_right = 775.0
-offset_bottom = 30.0
+offset_right = 798.0
+offset_bottom = 26.0
 text = "BLAUS"
-align = 1
-valign = 1

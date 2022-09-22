@@ -27,6 +27,7 @@ func handle_input(event : InputEvent):
 
 
 func exit():
+	owner.get_node("AnimationTree").set("parameters/StateMachine/walk/one_shot/active", false)
 	owner.can_shoot = true
 
 

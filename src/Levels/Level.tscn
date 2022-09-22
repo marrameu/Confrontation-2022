@@ -26,7 +26,7 @@
 [ext_resource type="Script" path="res://BGMusic.gd" id="25"]
 [ext_resource type="AudioStream" uid="uid://d06khdahbrybc" path="res://assets/audio/gustav_holst_mercury.ogg" id="26"]
 [ext_resource type="PackedScene" uid="uid://dwhf5unhskvn1" path="res://assets/models/container/scene.gltf" id="27"]
-[ext_resource type="PackedScene" path="res://src/HUD/Leaderboard.tscn" id="30"]
+[ext_resource type="PackedScene" uid="uid://bdgttn7d3l3l6" path="res://src/HUD/Leaderboard.tscn" id="30"]
 [ext_resource type="PackedScene" path="res://src/Vehicles/ManualTurret.tscn" id="31"]
 [ext_resource type="Script" path="res://src/Levels/VehicleCamera.gd" id="32"]
 
@@ -352,6 +352,7 @@ script = ExtResource("32")
 [node name="LightmapGi" type="LightmapGI" parent="."]
 environment_mode = 1
 
+[connection signal="battle_started" from="." to="Leaderboard" method="init"]
 [connection signal="change_cam" from="SpawnHUD" to="WaitingCam" method="_on_spawn_hud_change_cam"]
 [connection signal="respawn" from="SpawnHUD" to="." method="spawn_player"]
 [connection signal="start_battle" from="SpawnHUD" to="." method="start_battle"]

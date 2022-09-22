@@ -27,5 +27,5 @@ func _sort_team(container) -> void:
 	for ii in range(1, num_children):
 		for i in range(1, num_children):
 			if i+1 < num_children:
-				if float(container.get_child(i).get_node("Points").text) < float(container.get_child(i+1).get_node("Points").text):
+				if container.get_child(i).get_node("Points").text.to_float() < container.get_child(i+1).get_node("Points").text.to_float():
 					container.move_child(container.get_child(i+1),i)

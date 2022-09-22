@@ -13,7 +13,7 @@ func enter():
 	attack_direction.y = 0
 	attack_direction = attack_direction.normalized()
 	
-	if !attack_direction: # potser q no hagi rpemut cal teclat, es a dir, no canvia de direcció
+	if attack_direction == Vector3.ZERO: # potser q no hagi rpemut cal teclat, es a dir, no canvia de direcció
 		attack_direction = aim.z
 	
 	owner.get_node("Model").rotation.y = Vector2(attack_direction.z, attack_direction.x).angle() - owner.rotation.y

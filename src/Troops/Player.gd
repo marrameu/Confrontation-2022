@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends TroopBase
 
 signal entered_ship
 signal entered_vehicle
@@ -25,6 +25,7 @@ var max_y := 0
 
 
 func _ready():
+	super()
 	max_y = position.y
 	blue_team = pilot_man.blue_team
 	$StateMachine.active = true
