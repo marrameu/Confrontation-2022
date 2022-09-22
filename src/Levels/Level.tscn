@@ -175,10 +175,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 231.874, -41.732, 129.971)
 start_team = 2
 
 [node name="ShipSpawn" parent="Map/CommandPosts/CommandPost3" instance=ExtResource("6")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -147.509, 56.9624, -145.342)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 68.2169, 19.0632, -5.93097)
 
 [node name="ShipSpawn2" parent="Map/CommandPosts/CommandPost3" instance=ExtResource("6")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -147.509, 56.9624, -80.8648)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 68.2169, 19.0632, 58.5462)
 
 [node name="CommandPost4" parent="Map/CommandPosts" instance=ExtResource("3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.7776, -7.68548, 0)
