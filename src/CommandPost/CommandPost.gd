@@ -100,8 +100,9 @@ func _physics_process(delta : float) -> void:
 			$Timer.stop()
 		new_team = 0
 	if m_team != new_team: # FER AIXÒ AMB EL SET_GET
+		var old_team := m_team
 		m_team = new_team
-		emit_signal("team_changed")
+		emit_signal("team_changed", old_team, new_team)
 	
 	update_material()
 	

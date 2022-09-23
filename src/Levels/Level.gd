@@ -27,9 +27,13 @@ var num_of_reds : int = 0
 var RED_LIMIT = -3000
 var BLUE_LIMIT = 3000
 
+# msgs
 var blue_take_over := false
 var red_take_over := false
-# Called when the node enters the scene tree for the first time.
+var red_deads_count : int = 0
+var blue_deads_count : int = 0
+
+
 func _ready():
 	for big_ship in $BigShips.get_children():
 		emit_signal("ship_added", big_ship)
@@ -39,6 +43,7 @@ func _ready():
 	if get_node_or_null("%CommandPosts"): # debug espai
 		for cp in $"%CommandPosts".get_children():
 			cp.connect("add_points",Callable(self,"_on_cp_add_points"))
+			cp.team_changed.connect(_on_cp_team_changed)
 
 	$PilotManagers/PlayerMan.blue_team = PlayerInfo.player_blue_team
 	
@@ -55,6 +60,12 @@ func _physics_process(delta):
 	update_middle_point(delta)
 	if red_points >= 1000 or blue_points >= 1000:
 		get_tree().paused = true
+	if red_deads_count >= 100:
+		emit_signal("match_msg", "RED TEAM IS LOSING UNITS", true)
+		red_deads_count = 0
+	elif blue_deads_count >= 100:
+		emit_signal("match_msg", "BLUE TEAM IS LOSING UNITS", false)
+		blue_deads_count = 0
 
 
 func update_middle_point(delta): 
@@ -92,10 +103,10 @@ func update_middle_point(delta):
 	
 	if middle_point > 1250 and not red_take_over:
 		red_take_over = true
-		emit_signal("match_msg", "ELS BLAUS SÓN REPRIMITS", false)
+		emit_signal("match_msg", "BIG SHIPS ARE BEING ATTACKED", false)
 	elif middle_point < -1250 and not blue_take_over:
 		blue_take_over = true
-		emit_signal("match_msg", "ELS VERMELLS SÓN REPRIMITS", true)
+		emit_signal("match_msg", "BIG SHIPS ARE BEING ATTACKED", true)
 	elif middle_point < 1250 and middle_point > -1250:
 		blue_take_over = false
 		red_take_over = false
@@ -211,14 +222,22 @@ func _on_player_died():
 	$WaitingCam.make_current()
 	$SpawnHUD.enable_spawn(false)
 	$SpawnHUD.show()
+	if PlayerInfo.player_blue_team:
+		red_point += 10
+		blue_deads_count += 10
+	else:
+		blue_point += 10
+		red_deads_count += 10
 
 
 func _on_ship_died(pilot_man : PilotManager) -> void:
 	if pilot_man: # no caldria, però per si un cas
 		if pilot_man.blue_team:
 			red_point += 5
+			blue_deads_count += 5
 		else:
 			blue_points += 5
+			red_deads_count += 10
 		if pilot_man.is_player:
 			_on_player_died()
 		else:
@@ -237,9 +256,10 @@ func _on_ai_troop_died(ai_num : int):
 	var is_blue : bool = get_node_or_null("PilotManagers/AIManager" + str(ai_num)).blue_team
 	if is_blue:
 		red_points += 1 # potser una mica més
+		blue_deads_count += 1
 	else:
 		blue_points += 1
-	# emit_signal("match_msg", "SHIP " + str(num) + " HA ESTAT ELIMINADA", !is_blue)
+		red_deads_count += 1
 
 
 func _on_BigShip_shields_down(ship):
@@ -282,3 +302,13 @@ func _on_cp_added():
 
 func _on_player_entered_vehicle(vehicle):
 	$PauseMenu.respawn.connect(vehicle._on_respawn)
+
+
+func _on_cp_team_changed(old_team : int, new_team : int):
+	var blue_team : bool
+	if new_team == 0:
+		blue_team = true if old_team == 1 else false
+		emit_signal("match_msg", "A CP WAS TAKEN DOWN", blue_team)
+	else:
+		blue_team = true if new_team == 2 else false
+		emit_signal("match_msg", "A CP WAS CAPTURED", blue_team)

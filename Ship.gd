@@ -214,4 +214,5 @@ func add_points(points : int) -> void:
 
 
 func _on_respawn() -> void:
-	$HealthSystem.take_damage(9999999, true)
+	if is_player_or_ai == 1:
+		$HealthSystem.take_damage(9999999, true)

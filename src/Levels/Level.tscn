@@ -91,12 +91,6 @@ script = ExtResource("5")
 [node name="SpawnHUD" parent="." instance=ExtResource("13")]
 battle_state_path = NodePath("..")
 
-[node name="MatchUI" parent="." instance=ExtResource("17")]
-blue_support_ship1 = NodePath("../BigShips/SuportShip")
-blue_support_ship2 = NodePath("../BigShips/SuportShip2")
-red_support_ship1 = NodePath("../BigShips/SuportShip3")
-red_support_ship2 = NodePath("../BigShips/SuportShip4")
-
 [node name="Map" type="Node3D" parent="."]
 
 [node name="Node3D" type="Node3D" parent="Map"]
@@ -188,6 +182,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 84.8109, 8.7182, -139.98)
 
 [node name="CommandPost6" parent="Map/CommandPosts" instance=ExtResource("3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.9971, -31.9711, -229.671)
+
+[node name="MatchUI" parent="." instance=ExtResource("17")]
+blue_support_ship1 = NodePath("../BigShips/SuportShip")
+blue_support_ship2 = NodePath("../BigShips/SuportShip2")
+red_support_ship1 = NodePath("../BigShips/SuportShip3")
+red_support_ship2 = NodePath("../BigShips/SuportShip4")
 
 [node name="Box" parent="." instance=ExtResource("2")]
 transform = Transform3D(1, 0, 0, 0, 0.509342, 0.860564, 0, -0.860564, 0.509342, -8.77946, 8.46034, 0)
@@ -353,6 +353,7 @@ script = ExtResource("32")
 environment_mode = 1
 
 [connection signal="battle_started" from="." to="Leaderboard" method="init"]
+[connection signal="match_msg" from="." to="MatchUI" method="add_match_message"]
 [connection signal="change_cam" from="SpawnHUD" to="WaitingCam" method="_on_spawn_hud_change_cam"]
 [connection signal="respawn" from="SpawnHUD" to="." method="spawn_player"]
 [connection signal="start_battle" from="SpawnHUD" to="." method="start_battle"]

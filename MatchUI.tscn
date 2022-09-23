@@ -1,9 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://clcc4m2nh2me3"]
+[gd_scene load_steps=8 format=3 uid="uid://clcc4m2nh2me3"]
 
 [ext_resource type="PackedScene" uid="uid://b3noqp4mtdq1n" path="res://src/Troops/Player/HUD/ShieldLifeBar.tscn" id="1"]
-[ext_resource type="Texture2D" uid="uid://ctukidmkkx108" path="res://assets/interface/pilot-bw.png" id="2"]
 [ext_resource type="Script" path="res://MatchUI.gd" id="3"]
-[ext_resource type="Texture2D" uid="uid://bkk4wsdf4874j" path="res://assets/interface/pilot.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://blanc81spi77k" path="res://assets/interface/life_bar.png" id="5"]
 [ext_resource type="Theme" uid="uid://bj7vy7exo3hyj" path="res://assets/interface/themes/default_theme.tres" id="6"]
 [ext_resource type="PackedScene" path="res://src/HUD/MatchMessage.tscn" id="7"]
@@ -28,6 +26,7 @@ offset_bottom = 149.0
 grow_horizontal = 2
 
 [node name="LifeBarRedShield" parent="Control" instance=ExtResource("1")]
+layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -37,6 +36,7 @@ grow_vertical = 0
 value = 48.0
 
 [node name="RedSupportShips" type="HBoxContainer" parent="Control"]
+layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -45,18 +45,21 @@ offset_right = 125.0
 grow_vertical = 0
 
 [node name="LifeBarRedShield" parent="Control/RedSupportShips" instance=ExtResource("1")]
+layout_mode = 2
 offset_right = 60.0
 offset_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="LifeBarRedShield2" parent="Control/RedSupportShips" instance=ExtResource("1")]
+layout_mode = 2
 offset_left = 64.0
 offset_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="LifeBarBlueShield" parent="Control" instance=ExtResource("1")]
+layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -70,6 +73,7 @@ grow_horizontal = 0
 grow_vertical = 0
 
 [node name="BlueSupportShips" type="HBoxContainer" parent="Control"]
+layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -81,23 +85,27 @@ grow_horizontal = 0
 grow_vertical = 0
 
 [node name="LifeBarBluedShield" parent="Control/BlueSupportShips" instance=ExtResource("1")]
+layout_mode = 2
 offset_right = 60.0
 offset_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="LifeBarBlueShield2" parent="Control/BlueSupportShips" instance=ExtResource("1")]
+layout_mode = 2
 offset_left = 64.0
 offset_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Control"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 14.0
 text = "RED:"
 
 [node name="Label2" type="Label" parent="Control"]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -107,6 +115,7 @@ grow_horizontal = 0
 text = "BLUE:"
 
 [node name="MiddlePointBar" type="TextureProgressBar" parent="Control"]
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -123,6 +132,7 @@ tint_progress = Color(1, 0.454902, 0.454902, 1)
 
 [node name="CPIndicators" type="HBoxContainer" parent="Control"]
 unique_name_in_owner = true
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -135,93 +145,33 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="CPIndicator" parent="Control/CPIndicators" instance=ExtResource("10")]
+layout_mode = 2
 offset_right = 23.0
 
 [node name="CPIndicator2" parent="Control/CPIndicators" instance=ExtResource("10")]
+layout_mode = 2
 offset_left = 27.0
 offset_right = 50.0
 
 [node name="CPIndicator3" parent="Control/CPIndicators" instance=ExtResource("10")]
+layout_mode = 2
 offset_left = 54.0
 offset_right = 77.0
 
 [node name="CPIndicator4" parent="Control/CPIndicators" instance=ExtResource("10")]
+layout_mode = 2
 offset_left = 81.0
 offset_right = 104.0
 
 [node name="CPIndicator5" parent="Control/CPIndicators" instance=ExtResource("10")]
+layout_mode = 2
 offset_left = 108.0
 offset_right = 131.0
 
 [node name="CPIndicator6" parent="Control/CPIndicators" instance=ExtResource("10")]
+layout_mode = 2
 offset_left = 135.0
 offset_right = 158.0
-
-[node name="Control2" type="HBoxContainer" parent="."]
-visible = false
-offset_left = 89.0
-offset_top = 81.0
-offset_right = 397.0
-offset_bottom = 130.0
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Control2"]
-offset_right = 58.0
-offset_bottom = 49.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-value = 100.0
-fill_mode = 4
-nine_patch_stretch = true
-texture_under = ExtResource("2")
-texture_progress = ExtResource("4")
-
-[node name="TextureProgress2" type="TextureProgressBar" parent="Control2"]
-offset_left = 62.0
-offset_right = 120.0
-offset_bottom = 49.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-value = 70.0
-fill_mode = 4
-nine_patch_stretch = true
-texture_under = ExtResource("2")
-texture_progress = ExtResource("4")
-
-[node name="TextureProgress3" type="TextureProgressBar" parent="Control2"]
-offset_left = 124.0
-offset_right = 183.0
-offset_bottom = 49.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-value = 50.0
-fill_mode = 4
-nine_patch_stretch = true
-texture_under = ExtResource("2")
-texture_progress = ExtResource("4")
-
-[node name="TextureProgress4" type="TextureProgressBar" parent="Control2"]
-offset_left = 187.0
-offset_right = 245.0
-offset_bottom = 49.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-value = 30.0
-fill_mode = 4
-nine_patch_stretch = true
-texture_under = ExtResource("2")
-texture_progress = ExtResource("4")
-
-[node name="TextureProgress5" type="TextureProgressBar" parent="Control2"]
-offset_left = 249.0
-offset_right = 308.0
-offset_bottom = 49.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-value = 10.0
-fill_mode = 4
-nine_patch_stretch = true
-texture_under = ExtResource("2")
-texture_progress = ExtResource("4")
 
 [node name="MatchMessages" type="VBoxContainer" parent="."]
 anchors_preset = 1
@@ -236,9 +186,13 @@ theme = ExtResource("6")
 
 [node name="MatchMessage" parent="MatchMessages" instance=ExtResource("7")]
 visible = false
+layout_mode = 2
+offset_bottom = 26.0
 
 [node name="MatchMessage2" parent="MatchMessages" instance=ExtResource("7")]
 visible = false
+layout_mode = 2
+offset_bottom = 26.0
 
 [node name="Label" type="Label" parent="."]
 offset_top = 126.0
