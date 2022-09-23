@@ -213,7 +213,7 @@ bones/62/rotation = Quaternion(0.0125764, 0.628433, -0.773672, -0.0796551)
 bones/63/rotation = Quaternion(-0.0287785, 0.991707, 0.0310078, -0.121354)
 
 [node name="BoneAttachment3D" parent="Model/Armature/GeneralSkeleton" index="2"]
-transform = Transform3D(0.755473, 0.638796, 0.142956, -0.146918, 0.377899, -0.913491, -0.638242, 0.669273, 0.379332, -0.142639, 1.14694, 0.211989)
+transform = Transform3D(0.755473, 0.638797, 0.142957, -0.146918, 0.3779, -0.913491, -0.638243, 0.669272, 0.379333, -0.142638, 1.14694, 0.211989)
 
 [node name="Pistol" parent="Model/Armature/GeneralSkeleton/BoneAttachment3D/Weapons" index="0" instance=ExtResource("2")]
 bullet_scene = ExtResource("3")

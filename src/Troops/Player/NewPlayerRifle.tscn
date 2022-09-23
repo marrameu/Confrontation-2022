@@ -9,7 +9,6 @@
 [sub_resource type="AnimationNodeStateMachinePlayback" id="2"]
 
 [node name="PlayerRifle" instance=ExtResource("1")]
-min_height = 5
 
 [node name="GeneralSkeleton" parent="Model/Armature" index="0"]
 bones/0/position = Vector3(-0.0234829, 0.874462, 0.0295235)
@@ -77,10 +76,9 @@ bones/60/rotation = Quaternion(-0.123187, 0.385523, 0.905909, 0.124604)
 bones/61/rotation = Quaternion(-0.00822204, 0.772302, -0.633458, 0.0470453)
 bones/62/rotation = Quaternion(-0.0120408, 0.659602, -0.751487, 0.00690838)
 bones/63/rotation = Quaternion(-0.00197633, 0.996466, 0.0667445, -0.0509569)
-bones/64/position = Vector3(0.00141798, 0.0999746, 0.00175009)
 
 [node name="BoneAttachment3D" parent="Model/Armature/GeneralSkeleton" index="2"]
-transform = Transform3D(0.798362, 0.570889, 0.189688, -0.0634496, 0.39306, -0.916683, -0.59855, 0.719994, 0.350011, -0.239974, 1.15663, 0.280884)
+transform = Transform3D(0.798363, 0.570888, 0.18969, -0.0634469, 0.393059, -0.916683, -0.59855, 0.719995, 0.350009, -0.239974, 1.15663, 0.280883)
 
 [node name="Riffle" parent="Model/Armature/GeneralSkeleton/BoneAttachment3D/Weapons" index="0" instance=ExtResource("3")]
 bullet_scene = ExtResource("2")

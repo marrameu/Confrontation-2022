@@ -18,7 +18,8 @@ disable_receive_shadows = true
 
 [sub_resource type="CapsuleMesh" id="9"]
 material = SubResource("11")
-height = 70.0
+radius = 0.25
+height = 17.0
 radial_segments = 4
 rings = 1
 

@@ -25,6 +25,9 @@ body = null
 red_mat = ExtResource("4")
 blue_mat = ExtResource("13")
 
+[node name="BoneAttachment3D" parent="Model/Armature/GeneralSkeleton" index="2"]
+transform = Transform3D(0.758856, 0.6375, 0.130271, -0.153663, 0.369746, -0.915717, -0.632617, 0.675037, 0.378534, -0.153349, 1.16381, 0.24955)
+
 [node name="AIGun" parent="Model/Armature/GeneralSkeleton/BoneAttachment3D/Weapons" index="0" instance=ExtResource("3")]
 unique_name_in_owner = true
 transform = Transform3D(-1.27316, 0.375054, 2.69043, -0.67221, 2.83536, -0.713359, -2.63196, -0.905584, -1.11925, 0, 0, 0)

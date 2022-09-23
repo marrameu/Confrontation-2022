@@ -24,6 +24,7 @@ func init(new_shooter, new_team):
 
 
 func _ready():
+	$HitParticles.show() # solució temporal, el 1r frame les HitParticles de vegades no estan ben col·locades
 	if shooter.has_method("_on_damagable_hit"):
 		connect("damagable_hit",Callable(shooter,"_on_damagable_hit"))
 	var m_hurtbox = shooter.get_node_or_null("HurtBox")
