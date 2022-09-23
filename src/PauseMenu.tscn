@@ -15,12 +15,12 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("3")
 
 [node name="OptionsMenu" parent="Control" instance=ExtResource("2")]
 visible = false
-layout_mode = 3
-anchors_preset = 15
 
 [node name="MenuPrincipal" type="VBoxContainer" parent="Control"]
 anchors_preset = 4
@@ -29,6 +29,7 @@ anchor_bottom = 0.5
 offset_top = -175.0
 offset_right = 404.0
 offset_bottom = 539.0
+grow_vertical = 2
 alignment = 1
 
 [node name="Reprendre" type="Button" parent="Control/MenuPrincipal"]

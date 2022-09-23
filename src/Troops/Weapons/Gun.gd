@@ -97,7 +97,7 @@ func _shoot() -> void:
 	get_tree().current_scene.add_child(bullet)
 	
 	var shoot_from : Vector3 = global_transform.origin # Pistola
-	bullet.global_transform.origin = shoot_from
+	bullet.global_position = shoot_from
 	
 	if $RayCast3D.is_colliding():
 		var shoot_target = $RayCast3D.get_collision_point()
@@ -108,8 +108,9 @@ func _shoot() -> void:
 		bullet.look_at($RayCast3D.to_global($RayCast3D.target_position), Vector3.UP)
 	bullet.direction = -bullet.global_transform.basis.z
 	
-	
 	$RayCast3D.target_position = Vector3(0, 0, shoot_range)
+	
+	#get_tree().current_scene.add_child(bullet)
 
 
 func auto_reload_ammo(delta):
