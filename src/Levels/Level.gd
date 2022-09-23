@@ -107,8 +107,14 @@ func spawn_player(pos := Vector3(0, 2, 0)) -> Node3D:
 	new_player.pilot_man = $PilotManagers/PlayerMan
 	add_child(new_player)
 	$CameraBase.player_path = new_player.get_path()
+	$PauseMenu.respawn.connect(new_player._on_respawn)
+	
 	new_player.connect("entered_ship",Callable($PlayerShipCam,"_on_player_entered_ship"))
 	new_player.connect("entered_vehicle",Callable($PlayerVehicleCam,"_on_player_entered_vehicle"))
+	
+	new_player.entered_ship.connect(_on_player_entered_vehicle) # fer-ho amb Autoload Signals.gd?
+	new_player.entered_vehicle.connect(_on_player_entered_vehicle)
+	
 	new_player.connect("died",Callable(self,"_on_player_died"))
 	$CameraBase.get_node("%PlayerTroopCam").make_current()
 	return new_player
@@ -272,3 +278,7 @@ func _on_cp_add_points(blue_team : bool) -> void:
 
 func _on_cp_added():
 	$SpawnHUD.get_node("%CPButtons").update()
+
+
+func _on_player_entered_vehicle(vehicle):
+	$PauseMenu.respawn.connect(vehicle._on_respawn)

@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal respawn
+
 
 var is_paused = false :
 	get:
@@ -46,7 +48,6 @@ func hide_default():
 	$Control/MenuPrincipal.show()
 
 
-func _on_Button_pressed():
-	if owner.has_node("Ships/PlayerShip") == true:
-		owner.get_node("Ships/PlayerShip/HealthSystem").take_damage(INF, true)
+func _on_respawn_pressed():
+	emit_signal("respawn")
 	_on_Reprendre_pressed()

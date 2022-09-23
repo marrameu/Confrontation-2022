@@ -109,3 +109,7 @@ func _on_MeleeHitBox_area_entered(area):
 func add_points(points : int) -> void:
 	emit_signal("points_added", points)
 	pilot_man.points += points
+
+
+func _on_respawn() -> void:
+	$HealthSystem.take_damage(9999999, true)

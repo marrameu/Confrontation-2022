@@ -211,3 +211,7 @@ func add_points(points : int) -> void:
 	if is_player_or_ai == 1:
 		emit_signal("points_added", points)
 	pilot_man.points += points
+
+
+func _on_respawn() -> void:
+	$HealthSystem.take_damage(9999999, true)
