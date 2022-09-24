@@ -21,6 +21,10 @@ func handle_input(event : InputEvent):
 
 
 func update_walk_anim(delta) -> void:
-	owner.get_node("AnimationTree").set("parameters/StateMachine/walk/Blend2/blend_amount", lerp(owner.get_node("AnimationTree").get("parameters/StateMachine/walk/Blend2/blend_amount"), 0.0, 20 * delta))
 	var walk := Vector2(Input.get_action_strength("move_left") - Input.get_action_strength("move_right"), Input.get_action_strength("move_forward") - Input.get_action_strength("move_backward"))
-	owner.get_node("AnimationTree").set("parameters/StateMachine/walk/move/blend_position", lerp(owner.get_node("AnimationTree").get("parameters/StateMachine/walk/move/blend_position"), walk, 20 * delta))
+	# walk
+	owner.get_node("AnimationTree").set("parameters/StateMachine/move/move/blend_position", lerp(owner.get_node("AnimationTree").get("parameters/StateMachine/move/move/blend_position"), walk, 20 * delta))
+	# crouch
+	owner.get_node("AnimationTree").set("parameters/StateMachine/move/crouch/blend_position", lerp(owner.get_node("AnimationTree").get("parameters/StateMachine/move/crouch/blend_position"), walk, 20 * delta))
+	# aim
+	owner.get_node("AnimationTree").set("parameters/StateMachine/move/Blend2 3/blend_position", lerp(owner.get_node("AnimationTree").get("parameters/StateMachine/move/Blend2 3/blend_position"), walk, 20 * delta))

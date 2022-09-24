@@ -33,9 +33,11 @@ func _ready():
 
 func _physics_process(delta):
 	if get_viewport().get_camera_3d().owner.zooming:
-		$AnimationTree.set("parameters/StateMachine/walk/move/4/aim/blend_amount", lerp($AnimationTree.get("parameters/StateMachine/walk/move/4/aim/blend_amount"), 1.0, 20 * delta))
+		#$AnimationTree.set("parameters/StateMachine/move/move/4/aim/blend_amount", lerp($AnimationTree.get("parameters/StateMachine/move/move/4/aim/blend_amount"), 1.0, 20 * delta))
+		$AnimationTree.set("parameters/StateMachine/move/Blend2 2/blend_amount", lerp(float($AnimationTree.get("parameters/StateMachine/move/Blend2 2/blend_amount")), 1.0, 20 * delta))
 	else:
-		$AnimationTree.set("parameters/StateMachine/walk/move/4/aim/blend_amount", lerp($AnimationTree.get("parameters/StateMachine/walk/move/4/aim/blend_amount"), 0.0, 20 * delta))
+		#$AnimationTree.set("parameters/StateMachine/move/move/4/aim/blend_amount", lerp($AnimationTree.get("parameters/StateMachine/move/move/4/aim/blend_amount"), 0.0, 20 * delta))
+		$AnimationTree.set("parameters/StateMachine/move/Blend2 2/blend_amount", lerp(float($AnimationTree.get("parameters/StateMachine/move/Blend2 2/blend_amount")), 0.0, 20 * delta))
 	if can_rotate:
 		var des_transform := global_transform.basis.slerp(get_tree().current_scene.get_node("%CameraBase").global_transform.basis.rotated(Vector3(0, 1, 0), deg_to_rad(180)), 0.15 * delta * 60)
 		rotation.y = des_transform.get_euler().y

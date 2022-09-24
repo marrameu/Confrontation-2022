@@ -3,8 +3,8 @@ extends OnGroundState
 
 func enter():
 	owner.can_shoot = false
-	owner.get_node("AnimationTree").get("parameters/StateMachine/walk/OneShotStateMachine/playback").start("grenadethrow")
-	owner.get_node("AnimationTree").set("parameters/StateMachine/walk/one_shot/active", true)
+	owner.get_node("AnimationTree").get("parameters/StateMachine/move/OneShotStateMachine/playback").start("grenadethrow")
+	owner.get_node("AnimationTree").set("parameters/StateMachine/move/one_shot/active", true)
 	owner.get_node("AnimationPlayer").play("ThrowGrenade")
 
 
@@ -27,7 +27,7 @@ func handle_input(event : InputEvent):
 
 
 func exit():
-	owner.get_node("AnimationTree").set("parameters/StateMachine/walk/one_shot/active", false)
+	owner.get_node("AnimationTree").set("parameters/StateMachine/move/one_shot/active", false)
 	owner.can_shoot = true
 
 

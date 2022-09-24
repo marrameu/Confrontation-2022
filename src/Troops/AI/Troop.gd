@@ -42,7 +42,7 @@ var can_rotate = false
 func _ready():
 	super()
 	$CheckCurrentEnemyTimer.wait_time = randf_range(2.5, 3.5)
-	$AnimationTree.set("parameters/StateMachine/walk/move/3/blend_position", 1)
+	$AnimationTree.set("parameters/StateMachine/move/move/3/blend_position", 1)
 	blue_team = pilot_man.blue_team
 	$TeamIndicator.material_override = blue_mat if blue_team else red_mat
 

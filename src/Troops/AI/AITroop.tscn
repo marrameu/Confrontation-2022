@@ -14,7 +14,7 @@
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="1"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="2"]
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_jqh8k"]
 
 [sub_resource type="BoxMesh" id="3"]
 size = Vector3(0.5, 0.5, 0.05)
@@ -25,13 +25,17 @@ body = null
 red_mat = ExtResource("4")
 blue_mat = ExtResource("13")
 
+[node name="BoneAttachment3D" parent="Model/Armature/GeneralSkeleton" index="2"]
+transform = Transform3D(-0.158722, 0.982971, 0.0879582, -0.104976, 0.0716896, -0.991279, -0.981434, -0.166253, 0.0919831, 0.0131843, 1.1827, 0.25135)
+
 [node name="AIGun" parent="Model/Armature/GeneralSkeleton/BoneAttachment3D/Weapons" index="0" instance=ExtResource("3")]
 unique_name_in_owner = true
 transform = Transform3D(-1.27316, 0.375054, 2.69043, -0.67221, 2.83536, -0.713359, -2.63196, -0.905584, -1.11925, 0, 0, 0)
 
 [node name="AnimationTree" parent="." index="6"]
 parameters/StateMachine/playback = SubResource("1")
-parameters/StateMachine/walk/OneShotStateMachine/playback = SubResource("2")
+"parameters/StateMachine/move/Blend2 3/blend_position" = Vector2(0, 0)
+parameters/StateMachine/move/OneShotStateMachine/playback = SubResource("AnimationNodeStateMachinePlayback_jqh8k")
 
 [node name="EnemyDetection" type="Node3D" parent="." index="8"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.78536, 0)

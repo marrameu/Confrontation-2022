@@ -29,7 +29,7 @@ func update(delta):
 			if not owner.current_enemy:
 				_orient_character_to_direction(current_direction)
 	else:
-		owner.get_node("AnimationTree").set("parameters/StateMachine/walk/move/blend_position", Vector2.ZERO)
+		owner.get_node("AnimationTree").set("parameters/StateMachine/move/move/blend_position", Vector2.ZERO)
 	
 	# AITroopShooting.gd
 	if owner.current_enemy and weakref(owner.current_enemy).get_ref():
@@ -60,4 +60,4 @@ func _orient_character_to_direction(direction: Vector3) -> void:
 	var left_axis := Vector3.UP.cross(direction)
 	var rotation_basis := Basis(left_axis, Vector3.UP, direction)
 	owner.transform.basis = Basis(owner.transform.basis.get_rotation_quaternion().slerp(rotation_basis.get_rotation_quaternion(), get_physics_process_delta_time() * rotation_speed))
-	owner.get_node("AnimationTree").set("parameters/StateMachine/walk/move/blend_position", Vector2(0, 1))#lerp(owner.get_node("AnimationTree").get("parameters/StateMachine/walk/move/blend_position"), Vector2(left_axis.z, left_axis.x), 20 * get_physics_process_delta_time()))
+	owner.get_node("AnimationTree").set("parameters/StateMachine/move/move/blend_position", Vector2(0, 1))#lerp(owner.get_node("AnimationTree").get("parameters/StateMachine/move/move/blend_position"), Vector2(left_axis.z, left_axis.x), 20 * get_physics_process_delta_time()))

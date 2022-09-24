@@ -21,11 +21,9 @@ shield_repair_per_sec = 250.0
 
 [node name="Mesh" parent="." index="1"]
 visible = false
-gi_mode = 0
 mesh = SubResource("1")
 
 [node name="ShieldMesh" parent="." index="2"]
-gi_mode = 0
 mesh = SubResource("1")
 
 [node name="scene" parent="." index="3" instance=ExtResource("3")]
