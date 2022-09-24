@@ -14,6 +14,9 @@ func update(delta):
 	if Input.is_action_pressed("run") and ello >= 0.99:#Vector3.ONE: # > 0 ?
 		emit_signal("finished", "run")
 		return
+	elif Input.is_action_pressed("crouch"):
+		emit_signal("finished", "crouch")
+		return
 	
 	move(delta, MAX_SPEED, direction)
 	

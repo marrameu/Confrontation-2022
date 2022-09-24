@@ -8,6 +8,7 @@ func _ready():
 	states_map = {
 		"walk": $Walk,
 		"run": $Run,
+		"crouch": $Crouch,
 		"jump": $Jump,
 		"roll": $Roll,
 		"melee": $Melee,
