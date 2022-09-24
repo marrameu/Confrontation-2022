@@ -1,72 +1,71 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://der4d5hsqp566"]
 
-[ext_resource path="res://BigShip.gd" type="Script" id=1]
-[ext_resource path="res://BigShipHealthSystem.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Turret.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/Materials/red_big_ship_mat.tres" type="Material" id=4]
-[ext_resource path="res://assets/Materials/blue_big_ship_mat.tres" type="Material" id=5]
-[ext_resource path="res://assets/Materials/ShieldMat.tres" type="Material" id=6]
+[ext_resource type="Script" path="res://BigShip.gd" id="1"]
+[ext_resource type="PackedScene" path="res://BigShipHealthSystem.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://src/Turret.tscn" id="3"]
+[ext_resource type="Material" path="res://assets/Materials/red_big_ship_mat.tres" id="4"]
+[ext_resource type="Material" path="res://assets/Materials/blue_big_ship_mat.tres" id="5"]
 
-[sub_resource type="PrismMesh" id=1]
-size = Vector3( 200, 500, 100 )
+[sub_resource type="PrismMesh" id="1"]
+size = Vector3(200, 500, 100)
 
-[sub_resource type="ConvexPolygonShape3D" id=2]
-points = PackedVector3Array( -100, -250, -50, -100, -250, 50, 0, 250, -50, 100, -250, -50, 100, -250, 50, 0, 250, 50 )
+[sub_resource type="ConvexPolygonShape3D" id="2"]
+points = PackedVector3Array(-100, -250, -50, -100, -250, 50, 0, 250, -50, 100, -250, -50, 100, -250, 50, 0, 250, 50)
 
-[sub_resource type="SphereMesh" id=5]
-material = ExtResource( 4 )
+[sub_resource type="SphereMesh" id="5"]
+material = ExtResource("4")
 radius = 30.0
 height = 20.0
 
 [node name="BigShip" type="CharacterBody3D" groups=["BigShips", "Damagable"]]
 collision_layer = 8
 collision_mask = 0
-script = ExtResource( 1 )
-red_mat = ExtResource( 4 )
-blue_mat = ExtResource( 5 )
+script = ExtResource("1")
+red_mat = ExtResource("4")
+blue_mat = ExtResource("5")
 
-[node name="HealthSystem" parent="." instance=ExtResource( 2 )]
+[node name="HealthSystem" parent="." instance=ExtResource("2")]
 MAX_SHIELD = 20000
 time_before_shield_repair = 90.0
 MAX_HEALTH = 50000
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
-transform = Transform3D( -1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 4 )
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0)
+gi_mode = 0
+mesh = SubResource("1")
 
 [node name="ShieldMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D( -1.1, 9.61651e-08, 4.20351e-15, 0, -4.80825e-08, 1.1, 9.61651e-08, 1.1, 4.80825e-08, 0, 0, 0 )
-mesh = SubResource( 1 )
-material/0 = ExtResource( 6 )
+transform = Transform3D(-1.1, 9.61651e-08, 4.20351e-15, 0, -4.80825e-08, 1.1, 9.61651e-08, 1.1, 4.80825e-08, 0, 0, 0)
+gi_mode = 0
+mesh = SubResource("1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D( -1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0 )
-shape = SubResource( 2 )
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0)
+shape = SubResource("2")
 
 [node name="Turrets" type="Node3D" parent="."]
-transform = Transform3D( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0 )
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
 
-[node name="Turret" parent="Turrets" instance=ExtResource( 3 )]
-transform = Transform3D( 0.977802, 0, -0.209533, 0, 1, 0, 0.209533, 0, 0.977802, 130.967, 0, -23.566 )
+[node name="Turret" parent="Turrets" instance=ExtResource("3")]
+transform = Transform3D(0.977802, 0, -0.209533, 0, 1, 0, 0.209533, 0, 0.977802, 130.967, 0, -23.566)
 
-[node name="Turret3" parent="Turrets" instance=ExtResource( 3 )]
-transform = Transform3D( 0.978807, 0, -0.204786, 0, 1, 0, 0.204786, 0, 0.978807, -33.3028, 0, -57.0297 )
+[node name="Turret3" parent="Turrets" instance=ExtResource("3")]
+transform = Transform3D(0.978807, 0, -0.204786, 0, 1, 0, 0.204786, 0, 0.978807, -33.3028, 0, -57.0297)
 
-[node name="Turret4" parent="Turrets" instance=ExtResource( 3 )]
-transform = Transform3D( 0.978807, 0, -0.204786, 0, 1, 0, 0.204786, 0, 0.978807, -155.625, 0, -81.3926 )
+[node name="Turret4" parent="Turrets" instance=ExtResource("3")]
+transform = Transform3D(0.978807, 0, -0.204786, 0, 1, 0, 0.204786, 0, 0.978807, -155.625, 0, -81.3926)
 
-[node name="Turret5" parent="Turrets" instance=ExtResource( 3 )]
-transform = Transform3D( -0.950065, 0, -0.312053, 0, 1, 0, 0.312053, 0, -0.950065, -164.085, 0, 82.7064 )
+[node name="Turret5" parent="Turrets" instance=ExtResource("3")]
+transform = Transform3D(-0.950065, 0, -0.312053, 0, 1, 0, 0.312053, 0, -0.950065, -164.085, 0, 82.7064)
 
-[node name="Turret6" parent="Turrets" instance=ExtResource( 3 )]
-transform = Transform3D( -0.950065, 0, -0.312053, 0, 1, 0, 0.312053, 0, -0.950065, -22.1806, 0, 56.0655 )
+[node name="Turret6" parent="Turrets" instance=ExtResource("3")]
+transform = Transform3D(-0.950065, 0, -0.312053, 0, 1, 0, 0.312053, 0, -0.950065, -22.1806, 0, 56.0655)
 
-[node name="Turret2" parent="Turrets" instance=ExtResource( 3 )]
-transform = Transform3D( -0.982336, 0, -0.187124, 0, 1, 0, 0.187124, 0, -0.982336, 130.967, 0, 24.1943 )
+[node name="Turret2" parent="Turrets" instance=ExtResource("3")]
+transform = Transform3D(-0.982336, 0, -0.187124, 0, 1, 0, 0.187124, 0, -0.982336, 130.967, 0, 24.1943)
 
-[node name="Turret7" parent="Turrets" instance=ExtResource( 3 )]
-transform = Transform3D( -0.00408395, 0, -0.999992, 0, 1, 0, 0.999992, 0, -0.00408395, 250.262, 0, 0.200912 )
+[node name="Turret7" parent="Turrets" instance=ExtResource("3")]
+transform = Transform3D(-0.00408395, 0, -0.999992, 0, 1, 0, 0.999992, 0, -0.00408395, 250.262, 0, 0.200912)
 
 [node name="HurtBox" type="Area3D" parent="." groups=["HurtBox"]]
 collision_layer = 2048
@@ -74,17 +73,17 @@ collision_mask = 0
 monitoring = false
 
 [node name="CollisionShape2" type="CollisionShape3D" parent="HurtBox"]
-transform = Transform3D( -1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0, 0, 0 )
-shape = SubResource( 2 )
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0, 0, 0)
+shape = SubResource("2")
 
 [node name="ShieldGenerator" type="MeshInstance3D" parent="."]
-transform = Transform3D( -4.23838e-08, -0.969629, -0.24458, 1, -4.37114e-08, 0, -1.06909e-08, -0.24458, 0.969629, 71.2168, 2.88099, -95.5203 )
-mesh = SubResource( 5 )
+transform = Transform3D(-4.23838e-08, -0.969629, -0.24458, 1, -4.37114e-08, 0, -1.06909e-08, -0.24458, 0.969629, 71.2168, 2.88099, -95.5203)
+mesh = SubResource("5")
 
 [node name="SpectateCamPivot" type="Node3D" parent="."]
 
 [node name="SpectateCamPos" type="Marker3D" parent="SpectateCamPivot"]
-transform = Transform3D( -0.954412, 0.0139672, -0.298164, -4.09074e-09, 0.998905, 0.0467926, 0.298491, 0.0446595, -0.953367, -107.831, 97.3268, -329.539 )
+transform = Transform3D(-0.954412, 0.0139672, -0.298164, -4.09074e-09, 0.998905, 0.0467926, 0.298491, 0.0446595, -0.953367, -107.831, 97.3268, -329.539)
 
 [connection signal="die" from="HealthSystem" to="." method="_on_HealthSystem_die"]
 [connection signal="shield_die" from="HealthSystem" to="." method="_on_HealthSystem_shield_die"]

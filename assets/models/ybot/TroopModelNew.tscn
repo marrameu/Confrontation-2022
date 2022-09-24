@@ -73,6 +73,12 @@ bones/62/rotation = Quaternion(0.0246976, 0.648519, -0.759681, -0.0412119)
 bones/63/rotation = Quaternion(-0.0178525, 0.997674, 0.00713998, -0.0653973)
 bones/64/position = Vector3(0.00141798, 0.0999746, 0.00175009)
 
+[node name="Alpha_Joints" parent="Armature/GeneralSkeleton" index="0"]
+gi_mode = 0
+
+[node name="Alpha_Surface" parent="Armature/GeneralSkeleton" index="1"]
+gi_mode = 0
+
 [node name="FootstepAudio" type="AudioStreamPlayer3D" parent="." index="2"]
 stream = ExtResource("14")
 unit_db = 80.0

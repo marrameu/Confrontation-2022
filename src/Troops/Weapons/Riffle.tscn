@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://cqkp2xt8601ng"]
 
 [ext_resource type="PackedScene" uid="uid://e8jil3ovb3sa" path="res://src/Troops/Weapons/PlayerGun.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://assets/models/weapons/Rifle/RifleModel.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://15qjb2qeawnv" path="res://assets/models/weapons/Rifle/RifleModel.tscn" id="2"]
 
 [sub_resource type="Animation" id="23"]
 resource_name = "hit"
@@ -414,53 +414,22 @@ offset_left = 0.0
 offset_top = -172.0
 offset_right = 66.0
 offset_bottom = 0.0
-grow_vertical = 0
-
-[node name="Pivot" parent="HUD" index="1"]
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="HitMarkerParts" parent="HUD/Pivot" index="0"]
 modulate = Color(1, 1, 1, 0)
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect2" parent="HUD/Pivot/HitMarkerParts" index="1"]
-grow_horizontal = 0
-
-[node name="TextureRect3" parent="HUD/Pivot/HitMarkerParts" index="2"]
-grow_vertical = 0
-
-[node name="TextureRect4" parent="HUD/Pivot/HitMarkerParts" index="3"]
-grow_horizontal = 0
-grow_vertical = 0
 
 [node name="AnimationPlayer" parent="HUD/Pivot/HitMarkerParts" index="4"]
 libraries = {
 "": SubResource("AnimationLibrary_yro6f")
 }
 
-[node name="Crosshair" parent="HUD/Pivot" index="1"]
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CrosshairPart" parent="HUD/Pivot/Crosshair" index="0"]
-grow_vertical = 2
-
 [node name="CrosshairPart2" parent="HUD/Pivot/Crosshair" index="1"]
 offset_left = -7.0
 offset_right = 7.0
-grow_horizontal = 2
 
 [node name="CrosshairPart3" parent="HUD/Pivot/Crosshair" index="2"]
 offset_left = -7.0
 offset_right = 7.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="CrosshairPart4" parent="HUD/Pivot/Crosshair" index="3"]
-grow_horizontal = 0
-grow_vertical = 2
 
 [node name="AnimationTree" parent="HUD/Pivot/Crosshair" index="4"]
 parameters/playback = SubResource("1")

@@ -352,6 +352,8 @@ crouch={
 
 [rendering]
 
+driver/threads/thread_model=2
+global_illumination/sdfgi/frames_to_converge=2
 threads/thread_model=2
 gles3/shaders/shader_compilation_mode=2
 quality/filters/msaa=2
