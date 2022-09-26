@@ -1,32 +1,3 @@
-[gd_scene load_steps=4 format=3 uid="uid://dowj08gy6dh8e"]
-
-[ext_resource type="Theme" uid="uid://bj7vy7exo3hyj" path="res://assets/interface/themes/default_theme.tres" id="1"]
-[ext_resource type="Script" path="res://src/CommandPost/CPButton.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://blanc81spi77k" path="res://assets/interface/life_bar.png" id="3"]
-
-[node name="CPButton" type="Button"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -67.0
-offset_top = -26.0
-offset_right = 67.0
-offset_bottom = 26.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(116.5, 34)
-theme = ExtResource("1")
-text = "POST"
-script = ExtResource("2")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-modulate = Color(0.313726, 0.639216, 0.321569, 0.580392)
-show_behind_parent = true
-offset_left = -21.0
-offset_top = -14.0
-offset_right = 261.0
-offset_bottom = 86.0
-texture = ExtResource("3")
+version https://git-lfs.github.com/spec/v1
+oid sha256:7142c5a097efc7abe6ebdbb7f233bbfc546d142ff9b3e35d626712fc284b08f0
+size 974

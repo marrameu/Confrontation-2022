@@ -1,11 +1,3 @@
-[gd_scene load_steps=2 format=3 uid="uid://nnjjw6vhbk1j"]
-
-[ext_resource type="Script" path="res://src/HealthSystem/HealthSystem.gd" id="1"]
-
-[node name="HealthSystem" type="Node"]
-script = ExtResource("1")
-
-[node name="ShieldTimer" type="Timer" parent="."]
-one_shot = true
-
-[connection signal="timeout" from="ShieldTimer" to="." method="_on_ShieldTimer_timeout"]
+version https://git-lfs.github.com/spec/v1
+oid sha256:545bc22759b123b2ccf22980a8db19f4eec2241ea6c6cbddeda72eb120cbc97d
+size 364

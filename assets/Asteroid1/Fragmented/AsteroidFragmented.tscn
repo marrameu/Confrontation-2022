@@ -1,21 +1,3 @@
-[gd_scene load_steps=3 format=2]
-
-[ext_resource path="res://assets/Asteroid1/Meteorit_baked_001.material" type="Material" id=1]
-[ext_resource path="res://assets/Asteroid1/Fragmented/AsteroidFragmented.glb" type="PackedScene" id=2]
-
-[node name="AsteroidFragmented" instance=ExtResource( 2 )]
-
-[node name="Meteoritlod0_cell" parent="." index="0"]
-material/0 = ExtResource( 1 )
-
-[node name="Meteoritlod0_cell001" parent="." index="1"]
-material/0 = ExtResource( 1 )
-
-[node name="Meteoritlod0_cell002" parent="." index="2"]
-material/0 = ExtResource( 1 )
-
-[node name="Meteoritlod0_cell003" parent="." index="3"]
-material/0 = ExtResource( 1 )
-
-[node name="Meteoritlod0_cell004" parent="." index="4"]
-material/0 = ExtResource( 1 )
+version https://git-lfs.github.com/spec/v1
+oid sha256:9a6e1731cfee50e49a1335c945701f65a940ec02714fbf33e43e3c206c26697e
+size 723

@@ -38,7 +38,7 @@ func change_weapon() -> void:
 
 func fill_all_weapons():
 	for weapon in owner.get_node("%Weapons").get_children():
-		weapon.reload_ammo = weapon.MAX_RELOAD_AMMO
+		weapon.ammo_to_reload = weapon.MAX_RELOAD_AMMO
 	$LaunchGrenade.ammo = $LaunchGrenade.MAX_AMMO
 
 

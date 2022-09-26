@@ -1,27 +1,3 @@
-[gd_scene load_steps=7 format=2]
-
-[ext_resource path="res://NewShip.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Ships/ShipTransport.gd" type="Script" id=2]
-[ext_resource path="res://src/StateMachine/ChooseObjectiveTransport.gd" type="Script" id=3]
-[ext_resource path="res://src/Ships/AITransportShipStateMachine.gd" type="Script" id=4]
-[ext_resource path="res://src/StateMachine/EnterCS.gd" type="Script" id=5]
-
-[sub_resource type="BoxMesh" id=1]
-size = Vector3( 10, 10, 20 )
-
-[node name="ShipTransport" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
-
-[node name="StateMachine" parent="." index="14"]
-script = ExtResource( 4 )
-
-[node name="ChooseObjective" parent="StateMachine" index="0"]
-script = ExtResource( 3 )
-
-[node name="EnterCS" type="Node" parent="StateMachine" index="7"]
-script = ExtResource( 5 )
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="19"]
-mesh = SubResource( 1 )
-
-[editable path="ShipMesh"]
+version https://git-lfs.github.com/spec/v1
+oid sha256:28ff5c5d726d159b3fee8af987cd25a29c0504d0d4cf3f9bdd3426541f53b57c
+size 958

@@ -1,15 +1,3 @@
-[gd_scene load_steps=3 format=2]
-
-[ext_resource path="res://src/Ships/LandingArea/LandingArea.gd" type="Script" id=1]
-
-[sub_resource type="BoxShape3D" id=1]
-extents = Vector3( 191.55, 25.9033, 191.011 )
-
-[node name="LandingArea" type="Area3D"]
-collision_layer = 0
-collision_mask = 4
-monitorable = false
-script = ExtResource( 1 )
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource( 1 )
+version https://git-lfs.github.com/spec/v1
+oid sha256:77aa2689862149bd72083bd6024a28aa0bdb6a50c36b21d169b350bf48e56ac5
+size 421

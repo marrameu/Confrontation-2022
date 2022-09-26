@@ -1,27 +1,3 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://src/HUD/PlayerLeaderboard.gd" type="Script" id=1]
-
-[node name="Player" type="HBoxContainer"]
-offset_top = 34.0
-offset_right = 798.0
-offset_bottom = 64.0
-script = ExtResource( 1 )
-
-[node name="Name" type="Label" parent="."]
-offset_top = 8.0
-offset_right = 397.0
-offset_bottom = 22.0
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "JOSEP"
-
-[node name="Points" type="Label" parent="."]
-offset_left = 401.0
-offset_top = 8.0
-offset_right = 798.0
-offset_bottom = 22.0
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "100"
-align = 2
+version https://git-lfs.github.com/spec/v1
+oid sha256:ee2344f3f430bcb4e491065bad3f7aa0c4fbeeb39d808c61eee54f216ffb52c1
+size 605

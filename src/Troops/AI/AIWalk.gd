@@ -51,7 +51,8 @@ func _move(velocity: Vector3) -> void:
 	owner.set_velocity(velocity)
 	# TODOConverter40 looks that snap in Godot 4.0 is float, not vector like in Godot 3 - previous value `_snap`
 	owner.set_up_direction(Vector3.UP)
-	owner.move_and_slide()
+	owner.position += owner.velocity * get_physics_process_delta_time() # sembla q fer-ho aixi millora molt el rendiment
+	#owner.move_and_slide()
 	_velocity = owner.velocity#, true)
 	current_direction = Vector3(velocity.x, 0, velocity.z).normalized()
 

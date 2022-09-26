@@ -29,3 +29,7 @@ func _sort_team(container) -> void:
 			if i+1 < num_children:
 				if container.get_child(i).get_node("Points").text.to_float() < container.get_child(i+1).get_node("Points").text.to_float():
 					container.move_child(container.get_child(i+1),i)
+
+
+func _on_battle_finished():
+	show()

@@ -1,32 +1,3 @@
-[gd_scene load_steps=4 format=2]
-
-[ext_resource path="res://assets/interface/ship_cursor.png" type="Texture2D" id=1]
-[ext_resource path="res://src/HUD/CPIndicator.gd" type="Script" id=2]
-[ext_resource path="res://assets/interface/ship_min.png" type="Texture2D" id=3]
-
-[node name="CPIndicator" type="TextureProgressBar"]
-offset_right = 28.0
-offset_bottom = 25.0
-size_flags_horizontal = 3
-max_value = 10.0
-step = 0.0
-value = 5.0
-texture_under = ExtResource( 1 )
-texture_progress = ExtResource( 1 )
-fill_mode = 3
-tint_progress = Color( 1, 0, 0, 1 )
-nine_patch_stretch = true
-script = ExtResource( 2 )
-
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -8.0
-offset_top = -7.5
-offset_right = 8.0
-offset_bottom = 7.5
-texture = ExtResource( 3 )
-expand = true
+version https://git-lfs.github.com/spec/v1
+oid sha256:ddaeff6a699fae9f5525fa30ff08d5d5b8b46b592d9061dfca297d72969a73a3
+size 862

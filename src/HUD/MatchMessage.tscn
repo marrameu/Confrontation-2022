@@ -1,31 +1,3 @@
-[gd_scene load_steps=3 format=2]
-
-[ext_resource path="res://assets/interface/life_bar.png" type="Texture2D" id=1]
-[ext_resource path="res://src/HUD/MatchMessage.gd" type="Script" id=2]
-
-[node name="MatchMessage" type="Label"]
-offset_right = 207.0
-offset_bottom = 25.0
-minimum_size = Vector2( 0, 25 )
-size_flags_vertical = 1
-text = "EL JAUMA HA MORT"
-align = 1
-valign = 1
-script = ExtResource( 2 )
-
-[node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color( 0.329412, 0.360784, 0.607843, 1 )
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 1 )
-expand = true
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
-autostart = true
-
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+version https://git-lfs.github.com/spec/v1
+oid sha256:647635e5439d9509e8c1389ed91464cbc2c837fd2ffa557498d57258fdc33e15
+size 834

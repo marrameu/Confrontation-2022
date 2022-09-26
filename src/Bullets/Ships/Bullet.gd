@@ -55,13 +55,14 @@ func move(delta):
 
 func check_collisions():
 	
-	long = position.distance_to(_old_translation)
-	var query := PhysicsRayQueryParameters3D.create(_old_translation, global_position, $RayCast3D.collision_mask, [shooter])  # més d'un?
+	long = global_position.distance_to(_old_translation)
+	var exclude : Array
+	if weakref(shooter).get_ref():
+		exclude = [shooter.get_node("HurtBox")]
+	var query := PhysicsRayQueryParameters3D.create(_old_translation, global_position, $RayCast3D.collision_mask, exclude)  # més d'un?
 	query.collide_with_areas = true
 	query.collide_with_bodies = true
 	var result := get_world_3d().direct_space_state.intersect_ray(query)
-	
-	
 	
 	#var ray := $RayCast3D
 	#if ray.is_colliding():

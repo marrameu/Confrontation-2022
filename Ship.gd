@@ -81,7 +81,7 @@ func set_team_color():
 
 func update_thruster_flame():
 	
-	var Thruster = $ShipMesh/Thuster
+	#var Thruster = $ShipMesh/Thuster
 	
 	# 4.0 $ShipMesh/Thuster/Fire.emitting = !input.drifting
 	

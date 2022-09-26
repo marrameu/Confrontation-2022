@@ -1,22 +1,3 @@
-[gd_scene load_steps=3 format=3 uid="uid://c6kaj8gsdp2am"]
-
-[ext_resource type="Script" path="res://src/Troops/Weapons/Gun.gd" id="1"]
-[ext_resource type="AudioStream" uid="uid://cpxtqpbote56u" path="res://assets/audio/laser.wav" id="2"]
-
-[node name="Gun" type="Node3D"]
-script = ExtResource("1")
-
-[node name="Mesh" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-
-[node name="RayCast3D" type="RayCast3D" parent="."]
-target_position = Vector3(0, 0, -20)
-collision_mask = 15
-
-[node name="ShootAudio" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("2")
-unit_db = 80.0
-unit_size = 100.0
-max_db = 0.0
-max_distance = 75.0
-attenuation_filter_db = -5.0
+version https://git-lfs.github.com/spec/v1
+oid sha256:da00687acb7f93bf5abd0ebd936d49efb62eef3f163144d1fa6c8ceb0b9769c7
+size 720

@@ -1,14 +1,3 @@
-[gd_scene load_steps=3 format=2]
-
-[ext_resource path="res://src/Troops/Weapons/PlayerGun.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/models/weapons/Pistol/PistolModel.tscn" type="PackedScene" id=2]
-
-[node name="Pistol" instance=ExtResource( 1 )]
-offset = Vector2( 15, 15 )
-recoil_force = Vector2( 1.5, 1.5 )
-MAX_AMMO = 20.0
-reload_per_sec = 2.0
-MAX_RELOAD_AMMO = 0.0
-continuous = false
-
-[node name="Pistol" parent="Mesh" index="0" instance=ExtResource( 2 )]
+version https://git-lfs.github.com/spec/v1
+oid sha256:c04dc66f7f9a850db2b2d6135a953e20b52c69135054fa6116cdf189276bf403
+size 478

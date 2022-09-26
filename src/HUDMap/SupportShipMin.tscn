@@ -1,13 +1,3 @@
-[gd_scene load_steps=3 format=2]
-
-[ext_resource path="res://assets/interface/deffend_ship_min.png" type="Texture2D" id=1]
-[ext_resource path="res://src/HUDMap/BigShipMin.tscn" type="PackedScene" id=2]
-
-[node name="SupportShipMin" instance=ExtResource( 2 )]
-
-[node name="TextureRect" parent="." index="0"]
-offset_left = 59.125
-offset_top = -79.1757
-offset_right = 228.125
-offset_bottom = 51.8243
-texture = ExtResource( 1 )
+version https://git-lfs.github.com/spec/v1
+oid sha256:8664946267e84593388aaa78c8689e663b0db97602d86d1be03d1241955e5048
+size 422

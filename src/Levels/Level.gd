@@ -1,6 +1,7 @@
 extends Node3D
 
 signal battle_started
+signal battle_finished
 signal ship_added
 signal big_ship_shields_down
 signal match_msg
@@ -10,7 +11,7 @@ var ai_troop_scene : PackedScene = preload("res://src/Troops/AI/AITroop.tscn")
 
 var blue_points = 0
 var red_points = 0
-var MAX_POINTS = 1000
+var MAX_POINTS = 500
 
 var has_battle_started := false
 
@@ -58,7 +59,8 @@ func _process(delta):
 
 func _physics_process(delta):
 	update_middle_point(delta)
-	if red_points >= 1000 or blue_points >= 1000:
+	if red_points >= MAX_POINTS or blue_points >= MAX_POINTS:
+		emit_signal("battle_finished")
 		get_tree().paused = true
 	if red_deads_count >= 100:
 		emit_signal("match_msg", "RED TEAM IS LOSING UNITS", true)

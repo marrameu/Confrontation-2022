@@ -1,6 +1,3 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://addons/zylann.atmosphere/planet_atmosphere.gd" type="Script" id=2]
-
-[node name="PlanetAthmosphere" type="Node3D"]
-script = ExtResource( 2 )
+version https://git-lfs.github.com/spec/v1
+oid sha256:05471383b25380f0b54eeb4d884ebe4bd0da35ae843263e4044382795e21cd04
+size 200

@@ -1,7 +1,3 @@
-[gd_scene format=2]
-
-[node name="{name}Shard{number}" type="RigidBody3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+version https://git-lfs.github.com/spec/v1
+oid sha256:322283c4954e1d00dc21304b12257b2429363cb7376fde9df7cb8854041b61e8
+size 204

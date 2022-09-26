@@ -1,26 +1,3 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnha8gu8jdlvg"]
-
-[ext_resource type="PackedScene" uid="uid://c6kaj8gsdp2am" path="res://src/Troops/Weapons/Old/Gun.tscn" id="1"]
-[ext_resource type="Script" path="res://src/Troops/Weapons/AIGun.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://15qjb2qeawnv" path="res://assets/models/weapons/Rifle/RifleModel.tscn" id="3"]
-
-[sub_resource type="BoxMesh" id="1"]
-size = Vector3(0.1, 0.1, 20)
-
-[node name="AIGun" instance=ExtResource("1")]
-script = ExtResource("2")
-offset = Vector2(15, 15)
-
-[node name="Rifle" parent="Mesh" index="0" instance=ExtResource("3")]
-
-[node name="RayCast3D" parent="." index="1"]
-collision_mask = 769
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RayCast3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.255)
-visible = false
-mesh = SubResource("1")
-
-[node name="ShootAudio" parent="." index="2"]
-unit_db = 20.0
-max_db = -5.0
+version https://git-lfs.github.com/spec/v1
+oid sha256:6598ceab3646d6d59e9f22c03e891ced4776c56bdf53ce9ac4ae7eec92f6929b
+size 938
